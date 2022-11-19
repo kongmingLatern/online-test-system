@@ -1,9 +1,9 @@
 <template>
-  <header pl-2>
-    <h1>在线考试系统</h1>
-  </header>
+  <Header />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Header from '@/components/Header.vue'
+</script>
 
 <style scoped></style>
