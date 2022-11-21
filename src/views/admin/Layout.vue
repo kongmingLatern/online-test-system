@@ -1,27 +1,5 @@
 <template>
   <a-layout>
-    <a-layout-sider
-      breakpoint="lg"
-      collapsed-width="0"
-      @collapse="onCollapse"
-      @breakpoint="onBreakpoint"
-    >
-      <div class="logo" />
-      <a-menu
-        v-model:selectedKeys="selectedKeys"
-        theme="dark"
-        mode="inline"
-      >
-        <a-menu-item key="1">
-          <user-outlined />
-          <span>nav 1</span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <video-camera-outlined />
-          <span>nav 2</span>
-        </a-menu-item>
-      </a-menu>
-    </a-layout-sider>
     <a-layout>
       <a-layout-header
         :style="{ background: '#fff', padding: 0 }"
@@ -29,17 +7,44 @@
       >
         <slot name="header"></slot>
       </a-layout-header>
-      <a-layout-content :style="{ margin: '24px 16px 0' }">
-        <div
-          :style="{
-            padding: '24px',
-            background: '#fff',
-            minHeight: '360px',
-          }"
+      <a-layout>
+        <a-layout-sider
+          breakpoint="lg"
+          collapsed-width="0"
+          @collapse="onCollapse"
+          @breakpoint="onBreakpoint"
         >
-          content
-        </div>
-      </a-layout-content>
+          <div class="logo" />
+          <a-menu
+            v-model:selectedKeys="selectedKeys"
+            theme="dark"
+            mode="inline"
+          >
+            <a-menu-item key="1">
+              <user-outlined />
+              <span>nav 1</span>
+            </a-menu-item>
+            <a-menu-item key="2">
+              <video-camera-outlined />
+              <span>nav 2</span>
+            </a-menu-item>
+          </a-menu>
+        </a-layout-sider>
+
+        <a-layout-content
+          :style="{ margin: '24px 16px 0' }"
+        >
+          <div
+            :style="{
+              padding: '24px',
+              background: '#fff',
+              minHeight: '360px',
+            }"
+          >
+            content
+          </div>
+        </a-layout-content>
+      </a-layout>
       <a-layout-footer style="text-align: center">
         Ant Design ©2018 Created by Ant UED
       </a-layout-footer>
