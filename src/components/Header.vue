@@ -1,6 +1,6 @@
 <template>
   <header data-test="header">
-    <h1>在线考试系统</h1>
+    <h1 data-test="title">在线考试系统</h1>
   </header>
 </template>
 
