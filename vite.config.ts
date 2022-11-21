@@ -12,6 +12,9 @@ export default defineConfig({
   },
   plugins: [vue(), vueJsx(), Unocss({
     presets: [presetUno(), presetAttributify()],
+    shortcuts: {
+      'header-title': 'color-white font-bold text-5 pl-10 lh-15'
+    }
   })],
   resolve: {
     alias: {
