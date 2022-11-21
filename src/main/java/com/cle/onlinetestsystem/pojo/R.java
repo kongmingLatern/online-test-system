@@ -1,7 +1,6 @@
-package com.cle.common;
+package com.cle.onlinetestsystem.pojo;
 
 import lombok.Data;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
