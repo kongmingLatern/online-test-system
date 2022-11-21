@@ -1,5 +1,4 @@
-import { findComponent } from '@/utils';
-import { mount } from '@vue/test-utils';
+import { findComponent, findTag } from '@/utils';
 import Header from '../Header.vue';
 
 describe('Header', () => {
@@ -8,7 +7,11 @@ describe('Header', () => {
     expect(header.exists()).toBe(true)
   })
   it('we should have a h1 tag', () => {
-    const title = findComponent(Header, "title")
-    expect(title.exists()).toBe(true)
+    const h1 = findTag(Header, "h1")
+    expect(h1.exists()).toBe(true)
+  })
+  it('we should have a h1 tag', () => {
+    const h1 = findTag(Header, "h1")
+    expect(h1.text()).toEqual('在线考试系统');
   })
 });
