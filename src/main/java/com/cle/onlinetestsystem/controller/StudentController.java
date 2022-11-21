@@ -56,26 +56,27 @@ public class StudentController {
         return R.success(studentPage);
     }
     /**
-     * 添加学生（单）
-     * @param studentDto
+     * 添加学生
+     * @param studentDtoList
      * @return
      */
     @PostMapping("/add")
-    public R<String> add(@RequestBody StudentDto studentDto) {
-        //判断有没有班级
-        LambdaQueryWrapper<Clbum> clbumLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        clbumLambdaQueryWrapper.eq(Clbum::getClassNo,studentDto.getClassNo());
-        Clbum clbum = clbumService.getOne(clbumLambdaQueryWrapper);
-        if(clbum==null) {
-            return R.error("没有该班级");
-        }
-        //生成密码
-        String studentNo = studentDto.getStudentNo();
-        String password = DigestUtils.md5DigestAsHex(("S" + studentNo + "@").getBytes(StandardCharsets.UTF_8));
-        studentDto.setPassword(password);
-        //插入学生
-        studentDto.setClassId(clbum.getClassId());
-        studentService.save(studentDto);
+    public R<String> add(@RequestBody List<StudentDto> studentDtoList) {
+        studentService.addStudentWithClbum(studentDtoList);
+//        //判断有没有班级
+//        LambdaQueryWrapper<Clbum> clbumLambdaQueryWrapper = new LambdaQueryWrapper<>();
+//        clbumLambdaQueryWrapper.eq(Clbum::getClassNo,studentDto.getClassNo());
+//        Clbum clbum = clbumService.getOne(clbumLambdaQueryWrapper);
+//        if(clbum==null) {
+//            return R.error("没有该班级");
+//        }
+//        //生成密码
+//        String studentNo = studentDto.getStudentNo();
+//        String password = DigestUtils.md5DigestAsHex(("S" + studentNo + "@").getBytes(StandardCharsets.UTF_8));
+//        studentDto.setPassword(password);
+//        //插入学生
+//        studentDto.setClassId(clbum.getClassId());
+//        studentService.save(studentDto);
         return R.success("添加成功");
     }
     /**
