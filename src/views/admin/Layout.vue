@@ -20,21 +20,14 @@
           <video-camera-outlined />
           <span>nav 2</span>
         </a-menu-item>
-        <a-menu-item key="3">
-          <upload-outlined />
-          <span>nav 3</span>
-        </a-menu-item>
-        <a-menu-item key="4">
-          <user-outlined />
-          <span>nav 4</span>
-        </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
       <a-layout-header
         :style="{ background: '#fff', padding: 0 }"
+        data-test="header"
       >
-        <Header data-test="header" />
+        <slot name="header"></slot>
       </a-layout-header>
       <a-layout-content :style="{ margin: '24px 16px 0' }">
         <div
@@ -57,9 +50,7 @@
 import {
   UserOutlined,
   VideoCameraOutlined,
-  UploadOutlined,
 } from '@ant-design/icons-vue'
-import Header from '@/components/Header.vue'
 import { ref } from 'vue'
 const selectedKeys = ref<string[]>(['1'])
 const onCollapse = (collapsed: boolean, type: string) => {
