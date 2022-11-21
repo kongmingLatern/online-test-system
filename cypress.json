@@ -1,0 +1,4 @@
+{
+  "testFiles": "**/*.spec.[jt]s",
+  "componentFolder": "src"
+}
