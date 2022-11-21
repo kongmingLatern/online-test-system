@@ -7,6 +7,7 @@ import Antd from 'ant-design-vue';
 
 import 'ant-design-vue/dist/antd.css';
 import 'uno.css'
+import '@/assets/global.css'
 
 const app = createApp(App)
 
