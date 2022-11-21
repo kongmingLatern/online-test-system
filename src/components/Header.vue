@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header data-test="header">
     <h1>在线考试系统</h1>
   </header>
 </template>
