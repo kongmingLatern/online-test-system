@@ -2,7 +2,11 @@
   <Layout>
     <template #header>
       <!-- 头部 -->
-      <Header data-test="header" />
+      <Header data-test="adminHeader" />
+    </template>
+
+    <template #aside>
+      <AdminAside data-test="adminAside" />
     </template>
   </Layout>
 </template>

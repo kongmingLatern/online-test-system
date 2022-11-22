@@ -19,15 +19,9 @@
             v-model:selectedKeys="selectedKeys"
             theme="dark"
             mode="inline"
+            data-test="aside"
           >
-            <a-menu-item key="1">
-              <user-outlined />
-              <span>nav 1</span>
-            </a-menu-item>
-            <a-menu-item key="2">
-              <video-camera-outlined />
-              <span>nav 2</span>
-            </a-menu-item>
+            <slot name="aside"></slot>
           </a-menu>
         </a-layout-sider>
 
@@ -52,10 +46,6 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons-vue'
 import { ref } from 'vue'
 const selectedKeys = ref<string[]>(['1'])
 const onCollapse = (collapsed: boolean, type: string) => {
