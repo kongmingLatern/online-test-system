@@ -1,14 +1,14 @@
 import { findComponent, RegistGlobalComponent } from '@/utils';
 import { mount } from '@vue/test-utils';
-import AdminNav from '@/components/AdminNav.vue';
+import AdminAside from '@/components/AdminAside.vue';
 
-let wrapper = mount(AdminNav)
+let wrapper = mount(AdminAside)
 
 beforeEach(() => {
-  wrapper = RegistGlobalComponent(AdminNav)
+  wrapper = RegistGlobalComponent(AdminAside)
 })
 
-describe('AdminNav', () => {
+describe('AdminAside', () => {
   it('shoule have a tab', () => {
     const tab = findComponent(wrapper, "tab")
     expect(tab.exists()).toBe(true)
