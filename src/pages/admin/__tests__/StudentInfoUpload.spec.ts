@@ -1,24 +1,12 @@
+import { globalComponents } from "@/mock/ant-design-vue";
+import { findComponent } from "@/utils";
 import { mount } from "@vue/test-utils";
 import StudentInfoUpload from "../StudentInfoUpload.vue"
 
 vitest.mock('ant-design-vue')
 
-const mockComponent = {
-  template: '<div><slot></slot></div>',
-};
-
 let wrapper
-const globalComponents = {
-  'a-layout': mockComponent,
-  'a-layout-sider': mockComponent,
-  'a-layout-header': mockComponent,
-  'a-layout-content': mockComponent,
-  'a-layout-footer': mockComponent,
-  'a-button': mockComponent,
-  'a-menu': mockComponent,
-  'a-menu-item': mockComponent,
-  'router-link': mockComponent,
-};
+
 beforeEach(() => {
   wrapper = mount(StudentInfoUpload, {
     global: {
@@ -30,7 +18,7 @@ beforeEach(() => {
 })
 describe('Header', () => {
   it('we should have a Header component', () => {
-    const header = wrapper.find('[data-test="header"]')
+    const header = findComponent(wrapper, "header")
     expect(header.exists()).toBe(true)
   })
 })
