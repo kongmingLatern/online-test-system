@@ -51,8 +51,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.2.11</version>
+        </dependency>
     </dependencies>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
