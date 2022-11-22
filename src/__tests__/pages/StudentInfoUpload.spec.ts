@@ -10,11 +10,11 @@ beforeEach(() => {
 })
 describe('Header', () => {
   it('we should have a Header component', () => {
-    const header = findComponent(wrapper, "adminHeader")
+    const header = findComponent(wrapper, "studentHeader")
     expect(header.exists()).toBe(true)
   })
   it('we should have a Aside component', () => {
-    const aside = findComponent(wrapper, "adminAside")
-    expect(aside.exists()).toBe(true)
+    const studentContent = findComponent(wrapper, "studentContent")
+    expect(studentContent.exists()).toBe(true)
   })
 })
