@@ -19,4 +19,8 @@ describe('Layout', () => {
     expect(aside.exists()).toBe(true)
   })
 
+  it('should have a Content component', () => {
+    const content = findComponent(wrapper, "content")
+    expect(content.exists()).toBe(true)
+  })
 })
