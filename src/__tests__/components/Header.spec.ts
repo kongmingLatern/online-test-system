@@ -1,9 +1,12 @@
-import { findComponent, findTag } from '@/utils';
+import { findComponent, findTag, RegistGlobalComponent } from '@/utils';
 import { mount } from '@vue/test-utils';
 import Header from '../../components/Header.vue';
 
-const wrapper = mount(Header)
+let wrapper = mount(Header)
 
+beforeEach(() => {
+  wrapper = RegistGlobalComponent(Header)
+})
 describe('Header', () => {
   it('we should have a Header component', () => {
     const header = findComponent(wrapper, "header")
