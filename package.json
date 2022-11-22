@@ -6,6 +6,7 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
     "test": "vitest --environment jsdom",
+    "e2e": "cypress open",
     "test:e2e": "start-server-and-test preview http://localhost:4173/ 'cypress open --e2e'",
     "test:e2e:ci": "start-server-and-test preview http://localhost:4173/ 'cypress run --e2e'",
     "build-only": "vite build",
@@ -19,6 +20,8 @@
   },
   "devDependencies": {
     "@ant-design/icons-vue": "^6.1.0",
+    "@cypress/vite-dev-server": "^4.0.1",
+    "@cypress/vue": "^3.1.0",
     "@rushstack/eslint-patch": "^1.1.4",
     "@types/jsdom": "^20.0.0",
     "@types/node": "^16.11.56",
