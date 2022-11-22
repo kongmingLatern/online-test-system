@@ -1,6 +1,5 @@
-import { findComponent } from "@/utils"
 import Layout from '@/views/admin/Layout.vue'
-import { mount, VueWrapper } from "@vue/test-utils";
+import { mount } from "@vue/test-utils";
 
 vitest.mock('ant-design-vue')
 
@@ -22,16 +21,16 @@ const globalComponents = {
   'router-link': mockComponent,
 };
 
-beforeEach(() => {
-  wrapper = mount(Layout, {
-    global: {
-      components: globalComponents,
-      // 如果是在文件中注册的组件,需要使用 stubs
-      stubs: globalComponents
-    },
-  })
-})
 describe('Layout', () => {
+  beforeEach(() => {
+    wrapper = mount(Layout, {
+      global: {
+        components: globalComponents,
+        // 如果是在文件中注册的组件,需要使用 stubs
+        stubs: globalComponents
+      },
+    })
+  })
   it('should have a Header', () => {
     const header = wrapper.find('[data-test="header"]')
     expect(header.exists()).toBe(true)
