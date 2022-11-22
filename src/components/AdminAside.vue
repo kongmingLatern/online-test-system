@@ -1,21 +1,29 @@
 <template>
-  <a-sub-menu key="sub1" data-test="sub">
+  <a-sub-menu key="sub1" data-test="sub" @click="goTab">
+    <template #icon>
+      <user-outlined />
+    </template>
+    <template #title>
+      <span>学生信息管理</span>
+    </template>
     <a-menu-item key="1" data-test="tab">
       <user-outlined />
-      <span>nav 1</span>
+      <span>学生信息上传</span>
+    </a-menu-item>
+    <a-menu-item key="2" data-test="tab1">
+      <user-outlined />
+      <span>学生信息管理</span>
     </a-menu-item>
   </a-sub-menu>
-  <a-menu-item key="2">
-    <video-camera-outlined />
-    <span>nav 2</span>
-  </a-menu-item>
 </template>
 
 <script setup lang="ts">
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons-vue'
+import router from '@/router'
+import { UserOutlined } from '@ant-design/icons-vue'
+
+const goTab = () => {
+  router.push('/admin/studentInfoUpload')
+}
 </script>
 
 <style scoped></style>
