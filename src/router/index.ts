@@ -12,11 +12,11 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'admin',
-      redirect: '/admin/studentUpload',
+      redirect: '/admin/studentInfoUpload',
       children: [
         {
-          path: 'studentUpload',
-          name: 'studentUpload',
+          path: 'studentInfoUpload',
+          name: 'studentInfoUpload',
           component: () => import('@/pages/admin/StudentInfoUpload.vue')
         }
       ]
