@@ -16,6 +16,7 @@
         >
           <div class="logo" />
           <a-menu
+            v-model:openKeys="openKeys"
             v-model:selectedKeys="selectedKeys"
             theme="dark"
             mode="inline"
@@ -35,7 +36,7 @@
               minHeight: '360px',
             }"
           >
-            content
+            <router-view data-test="content" />
           </div>
         </a-layout-content>
       </a-layout>
@@ -48,6 +49,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 const selectedKeys = ref<string[]>(['1'])
+const openKeys = ref<string[]>(['sub1'])
 const onCollapse = (collapsed: boolean, type: string) => {
   console.log(collapsed, type)
 }
