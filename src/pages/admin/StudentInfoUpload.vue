@@ -2,11 +2,11 @@
   <Layout>
     <template #header>
       <!-- 头部 -->
-      <Header data-test="adminHeader" />
+      <Header data-test="studentHeader" />
     </template>
-
-    <template #aside>
-      <AdminAside data-test="adminAside" />
+    <template #content>
+      <!-- 头部 -->
+      <StudentContent data-test="studentContent" />
     </template>
   </Layout>
 </template>
@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import Layout from '@/views/admin/Layout.vue'
 import Header from '@/components/Header.vue'
-import AdminAside from '@/components/AdminAside.vue'
+import StudentContent from '@/views/admin/StudentContent.vue'
 </script>
 
 <style scoped></style>

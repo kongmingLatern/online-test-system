@@ -20,14 +20,15 @@
             v-model:selectedKeys="selectedKeys"
             theme="dark"
             mode="inline"
-            data-test="aside"
+            h-100
           >
-            <slot name="aside"></slot>
+            <AdminAside data-test="aside" />
           </a-menu>
         </a-layout-sider>
 
         <a-layout-content
           :style="{ margin: '24px 16px 0' }"
+          data-test="content"
         >
           <div
             :style="{
@@ -36,7 +37,7 @@
               minHeight: '360px',
             }"
           >
-            <router-view data-test="content" />
+            <slot name="content"></slot>
           </div>
         </a-layout-content>
       </a-layout>
@@ -48,6 +49,7 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
+import AdminAside from '@/components/AdminAside.vue'
 const selectedKeys = ref<string[]>(['1'])
 const openKeys = ref<string[]>(['sub1'])
 const onCollapse = (collapsed: boolean, type: string) => {
