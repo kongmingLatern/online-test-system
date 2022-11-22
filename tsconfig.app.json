@@ -5,7 +5,7 @@
     "src/**/*",
     "src/**/*.vue",
     "cypress/support/**/*.ts"
-  ],
+, "src/__tests__/components/.ts"  ],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,
