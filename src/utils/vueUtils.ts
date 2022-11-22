@@ -9,12 +9,13 @@ export function findComponent(wrapper: VueWrapper, element: string): DOMWrapper<
 export function findTag(wrapper: VueWrapper, tag: string): DOMWrapper<Element> {
   return wrapper.find(`${tag}`)
 }
-export function RegistGlobalComponent(component: DefineComponent<any, any, any, any>): any {
+export function RegistGlobalComponent(component: DefineComponent<any, any, any, any>, options?: Record<string, any>): any {
   return mount(component, {
     global: {
       components: globalComponents,
       // 如果是在文件中注册的组件,需要使用 stubs
       stubs: globalComponents
     },
+    ...options
   });
 }
