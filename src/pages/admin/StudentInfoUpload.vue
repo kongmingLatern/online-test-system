@@ -14,6 +14,7 @@
 <script setup lang="ts">
 import Layout from '@/views/admin/Layout.vue'
 import Header from '@/components/Header.vue'
+import AdminAside from '@/components/AdminAside.vue'
 </script>
 
 <style scoped></style>
