@@ -11,10 +11,9 @@ import com.cle.onlinetestsystem.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -60,12 +59,12 @@ public class StudentController {
     }
     /**
      * 添加学生
-     * @param studentDtoList
+     * @param studentDto
      * @return
      */
     @PostMapping("/add")
-    public R<String> add(@RequestBody List<StudentDto> studentDtoList) {
-        studentService.addStudentWithClbum(studentDtoList);
+    public R<String> add(@RequestBody StudentDto studentDto) {
+        studentService.addStudentWithClbum(studentDto);
 //        //判断有没有班级
 //        LambdaQueryWrapper<Clbum> clbumLambdaQueryWrapper = new LambdaQueryWrapper<>();
 //        clbumLambdaQueryWrapper.eq(Clbum::getClassNo,studentDto.getClassNo());
@@ -98,5 +97,10 @@ public class StudentController {
     private R<String> delete(Long studentId){
         studentService.removeById(studentId);
         return R.success("删除成功");
+    }
+    @PostMapping("/importStudent")
+    private R<String> importStudent(MultipartFile file){
+        studentService.improtStudent(file);
+        return R.success("添加成功");
     }
 }
