@@ -9,23 +9,40 @@ beforeEach(() => {
 })
 
 describe('AdminAside tab', () => {
-  it('shoule have a tab', () => {
-    const tab = findComponent(wrapper, "tab")
-    expect(tab.exists()).toBe(true)
-  });
   it('tab shoule have 学生信息上传', () => {
-    const tab = findComponent(wrapper, "tab")
+    const tab = findComponent(wrapper, "studentInfoUpload")
     expect(tab.text()).toBe('学生信息上传');
   });
-  it('tab shoule have 学生信息上传', () => {
-    const tab1 = findComponent(wrapper, "tab1")
+  it('tab shoule have 学生信息管理', () => {
+    const tab1 = findComponent(wrapper, "studentInfoManage")
     expect(tab1.text()).toBe('学生信息管理');
+  });
+
+  it('tab shoule have 试题库管理', () => {
+    const tab = findComponent(wrapper, "taskBase")
+    expect(tab.text()).toBe('试题库管理');
+  });
+  it('tab shoule have 单选题管理', () => {
+    const tab1 = findComponent(wrapper, "radio")
+    expect(tab1.text()).toBe('单选题管理');
+  });
+  it('tab shoule have 多选题管理', () => {
+    const tab1 = findComponent(wrapper, "checkbox")
+    expect(tab1.text()).toBe('多选题管理');
+  });
+  it('tab shoule have 学生信息管理', () => {
+    const tab1 = findComponent(wrapper, "judge")
+    expect(tab1.text()).toBe('判断题管理');
   });
 });
 
 describe('sub', () => {
-  it('shoule have a sub', () => {
-    const sub = findComponent(wrapper, "sub")
-    expect(sub.exists()).toBe(true)
+  it('shoule have a sub called student', () => {
+    const student = findComponent(wrapper, "student")
+    expect(student.exists()).toBe(true)
   });
-});
+  it('shoule have a sub called task', () => {
+    const task = findComponent(wrapper, "task")
+    expect(task.exists()).toBe(true)
+  });
+})

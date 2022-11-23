@@ -22,8 +22,9 @@
             mode="inline"
             h-100
             @openChange="onOpenChange"
+            data-test="aside"
           >
-            <AdminAside data-test="aside" />
+            <AdminAside />
           </a-menu>
         </a-layout-sider>
 
@@ -42,8 +43,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import AdminAside from '@/components/admin/AdminAside.vue'
-const selectedKeys = ref<string[]>(['1'])
-const openKeys = ref<string[]>(['sub1'])
+const selectedKeys = ref<string[]>(['studentInfoUpload'])
+const openKeys = ref<string[]>(['student'])
 const onCollapse = (collapsed: boolean, type: string) => {
   console.log(collapsed, type)
 }

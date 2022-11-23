@@ -1,6 +1,7 @@
 <template>
   <!-- 表格部分 -->
-  <Table :columns="columns" :data="data" />
+  <!-- <Table :columns="columns" :data="data" /> -->
+  <Table />
 </template>
 
 <script setup lang="ts">
