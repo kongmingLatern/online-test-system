@@ -15,13 +15,18 @@
             <Header text="学生信息上传" isTitle="false" />
           </template>
 
+          <!-- 导航 -->
           <template #nav>
-            <!-- 导航 -->
             <Nav>
               <template #breadcrumb>
                 <BreadCrumb />
               </template>
             </Nav>
+          </template>
+
+          <!-- 内容 -->
+          <template #main>
+            <Main />
           </template>
         </Content>
       </div>
@@ -34,6 +39,7 @@ import Layout from '@/views/admin/Layout.vue'
 import Header from '@/components/Header.vue'
 import Content from '@/views/admin/Content.vue'
 import Nav from '@/components/Nav.vue'
+import Main from '@/components/Main.vue'
 import BreadCrumb from '@/components/BreadCrumb.vue'
 </script>
 
