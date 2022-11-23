@@ -1,4 +1,4 @@
-import { findComponent, RegistGlobalComponent } from '@/utils';
+import { findComponent, registGlobalComponent } from '@/utils';
 import Layout from '@/views/admin/Layout.vue'
 
 vitest.mock('ant-design-vue')
@@ -6,7 +6,7 @@ vitest.mock('ant-design-vue')
 let wrapper
 
 beforeEach(() => {
-  wrapper = RegistGlobalComponent(Layout)
+  wrapper = registGlobalComponent(Layout)
 })
 describe('Layout', () => {
   it('should have a Header component', () => {

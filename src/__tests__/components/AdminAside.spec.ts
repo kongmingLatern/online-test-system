@@ -1,11 +1,11 @@
-import { findComponent, RegistGlobalComponent } from '@/utils';
+import { findComponent, registGlobalComponent } from '@/utils';
 import { mount } from '@vue/test-utils';
 import AdminAside from '@/components/admin/AdminAside.vue';
 
 let wrapper = mount(AdminAside)
 
 beforeEach(() => {
-  wrapper = RegistGlobalComponent(AdminAside)
+  wrapper = registGlobalComponent(AdminAside)
 })
 
 describe('AdminAside tab', () => {

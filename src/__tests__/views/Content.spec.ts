@@ -1,11 +1,11 @@
-import { RegistGlobalComponent } from '../../utils/vueUtils';
+import { registGlobalComponent } from '../../utils/vueUtils';
 import { findComponent } from "@/utils";
 import Content from "@/views/admin/Content.vue"
 
 let wrapper
 
 beforeEach(() => {
-  wrapper = RegistGlobalComponent(Content)
+  wrapper = registGlobalComponent(Content)
 })
 
 describe('Content slot', () => {
