@@ -1,6 +1,12 @@
 <template>
   <header data-test="header">
-    <h1 data-test="title" header="title" class="bg-title">
+    <h1
+      data-test="title"
+      header="title"
+      :class="
+        isTitle ? 'color-black font-semibold' : 'bg-title'
+      "
+    >
       {{ text || '在线考试系统' }}
     </h1>
   </header>
@@ -9,6 +15,7 @@
 <script setup lang="ts">
 defineProps<{
   text?: string
+  isTitle?: string
 }>()
 </script>
 
