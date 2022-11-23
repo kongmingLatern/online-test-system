@@ -3,12 +3,12 @@ const mockComponent = {
   template: '<div><slot></slot></div>',
 };
 
-const AntdIcon = {
+const AntdIcons = {
   'video-camera-outlined': mockComponent,
   'user-outlined': mockComponent,
 }
 
-const Antd = {
+const AntdComponents = {
   'a-layout': mockComponent,
   'a-layout-sider': mockComponent,
   'a-layout-header': mockComponent,
@@ -39,20 +39,22 @@ const Antd = {
   'a-checkbox': mockComponent,
   'a-checkbox-group': mockComponent,
   'a-switch': mockComponent,
+  'a-breadcrumb-item': mockComponent,
+  'a-breadcrumb':mockComponent
 }
 
-const vueComponent = {
+const vueComponents = {
   'router-link': mockComponent,
   'router-view': mockComponent,
 }
 
-const customComponent = {
+const customComponents = {
   'AdminAside': mockComponent
 }
 
 export const globalComponents = {
-  ...Antd,
-  ...AntdIcon,
-  ...customComponent,
-  ...vueComponent
+  ...AntdComponents,
+  ...AntdIcons,
+  ...customComponents,
+  ...vueComponents
 };

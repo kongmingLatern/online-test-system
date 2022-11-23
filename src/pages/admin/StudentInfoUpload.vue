@@ -8,14 +8,20 @@
       />
     </template>
     <template #content>
-      <!-- 头部 -->
       <div data-test="studentContent">
         <Content>
+          <!-- 头部 -->
           <template #header>
-            <Header
-              data-test="header"
-              text="学生信息上传"
-            />
+            <Header text="学生信息上传" isTitle="false" />
+          </template>
+
+          <template #nav>
+            <!-- 导航 -->
+            <Nav>
+              <template #breadcrumb>
+                <BreadCrumb />
+              </template>
+            </Nav>
           </template>
         </Content>
       </div>
@@ -27,6 +33,8 @@
 import Layout from '@/views/admin/Layout.vue'
 import Header from '@/components/Header.vue'
 import Content from '@/views/admin/Content.vue'
+import Nav from '@/components/Nav.vue'
+import BreadCrumb from '@/components/BreadCrumb.vue'
 </script>
 
 <style scoped></style>
