@@ -1,6 +1,6 @@
 import { findComponent, RegistGlobalComponent } from '@/utils';
 import { mount } from '@vue/test-utils';
-import AdminAside from '@/components/AdminAside.vue';
+import AdminAside from '@/components/admin/AdminAside.vue';
 
 let wrapper = mount(AdminAside)
 
