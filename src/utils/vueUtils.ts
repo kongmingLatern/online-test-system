@@ -9,7 +9,7 @@ export function findComponent(wrapper: VueWrapper, element: string): DOMWrapper<
 export function findTag(wrapper: VueWrapper, tag: string): DOMWrapper<Element> {
   return wrapper.find(`${tag}`)
 }
-export function registGlobalComponent(component: DefineComponent<any, any, any, any>, options?: Record<string, any>): any {
+export function registGlobalComponent(component: DefineComponent<any, any, any, any>, options?: Record<string, any>): VueWrapper {
   return mount(component, {
     global: {
       components: globalComponents,

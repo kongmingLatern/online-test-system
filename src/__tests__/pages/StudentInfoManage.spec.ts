@@ -2,10 +2,10 @@ import Header from "@/components/Header.vue";
 import Nav from "@/components/Nav.vue";
 import { findComponent, registGlobalComponent } from "@/utils";
 import { h } from "vue";
-import StudentInfoUpload from "../../pages/admin/StudentInfoUpload.vue"
 import Breadcrumb from '@/components/BreadCrumb.vue'
 import Content from "@/views/admin/Content.vue";
 import Main from '@/components/Main.vue'
+import StudentInfoManage from "@/pages/admin/StudentInfoManage.vue";
 import { mount } from "@vue/test-utils";
 
 vitest.mock('ant-design-vue')
@@ -24,7 +24,8 @@ const options = {
       'data-test': 'studentContent',
       slots: {
         header: h(Header, {
-          'data-test': 'header'
+          'data-test': 'header',
+          "text": "学生信息管理"
         }),
         nav: h(Nav, {
           'data-test': 'nav',
@@ -43,7 +44,7 @@ const options = {
 let wrapper
 
 beforeEach(() => {
-  wrapper = registGlobalComponent(StudentInfoUpload, options)
+  wrapper = registGlobalComponent(StudentInfoManage, options)
 })
 describe('component shoule be exists', () => {
   it('we should have a Header component', () => {
@@ -71,14 +72,15 @@ describe('content component', () => {
     expect(breadcrumb.exists()).toBe(true)
   });
 });
-describe('compoent text', () => {
+
+describe('compoent props text', () => {
   it('header text', () => {
     const options = {
       props: {
-        text: '学生信息上传'
+        text: '学生信息管理'
       }
     }
     const header = registGlobalComponent(Header, options)
-    expect(header.find('h1').text()).toEqual('学生信息上传')
+    expect(header.find('h1').text()).toEqual('学生信息管理')
   });
 });

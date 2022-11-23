@@ -18,6 +18,11 @@ const router = createRouter({
           path: 'studentInfoUpload',
           name: 'studentInfoUpload',
           component: () => import('@/pages/admin/StudentInfoUpload.vue')
+        },
+        {
+          path: 'studentInfoManage',
+          name: 'studentInfoManage',
+          component: () => import('@/pages/admin/StudentInfoManage.vue')
         }
       ]
     },
