@@ -1,5 +1,6 @@
 package com.cle.onlinetestsystem.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cle.onlinetestsystem.pojo.R;
 import com.cle.onlinetestsystem.pojo.Teacher;
@@ -30,7 +31,12 @@ public class TeacherController {
     }
 
     @GetMapping("/page")
-    public R<Page> page(){
-return null;
+    public R<Page> page(int size,int pageSize,String teacherNo){
+        LambdaQueryWrapper<Teacher> teacherLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        teacherLambdaQueryWrapper.like(teacherNo!=null,Teacher::getTeacherNo,teacherNo)
+                                 .orderByAsc(Teacher::getTeacherNo);
+     Page<Teacher> page = new Page<>(size,pageSize);
+     teacherService.page(page);
+     return R.success(page);
     }
 }

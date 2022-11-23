@@ -39,6 +39,7 @@ public class StudentController {
        studentLambdaQueryWrapper.like(studentNo!=null,Student::getStudentNo,studentNo)
                                 .orderByAsc(Student::getClassId)
                                 .orderByAsc(Student::getStudentNo);
+       //分页查询
         Page<Student> studentPage = new Page<>(page,pageSize);
         studentService.page(studentPage,studentLambdaQueryWrapper);
         //studentPage转为studentDtoPage
