@@ -15,7 +15,7 @@
             <Header text="学生信息上传" isTitle="false" />
           </template>
 
-          <!-- 导航 -->
+</Content>          <!-- 导航 -->
           <template #nav>
             <Nav>
               <template #breadcrumb>
