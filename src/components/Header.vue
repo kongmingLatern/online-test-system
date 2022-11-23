@@ -4,7 +4,7 @@
       data-test="title"
       header="title"
       :class="
-        isTitle ? 'color-black font-semibold' : 'bg-title'
+        isTitle ? 'color-black font-semibold pl-0' : 'bg-title'
       "
     >
       {{ text || '在线考试系统' }}
