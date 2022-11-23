@@ -49,26 +49,19 @@ describe('component shoule be exists', () => {
     const header = findComponent(wrapper, "studentHeader")
     expect(header.exists()).toBe(true)
   })
+  it('we should have a Nav component', () => {
+    const studentNav = findComponent(wrapper, "studentNav")
+    expect(studentNav.exists()).toBe(true)
+  })
   it('we should have a Content component', () => {
     const studentContent = findComponent(wrapper, "studentContent")
     expect(studentContent.exists()).toBe(true)
   })
+  it('we should have a Content component', () => {
+    const studentMain = findComponent(wrapper, "studentMain")
+    expect(studentMain.exists()).toBe(true)
+  })
 })
-
-describe('Content slot shoule be exists', () => {
-  it('we should have a Header component', () => {
-    const header = findComponent(wrapper, "header")
-    expect(header.exists()).toBe(true)
-  })
-  it('we should have a Nav component', () => {
-    const nav = findComponent(wrapper, "nav")
-    expect(nav.exists()).toBe(true)
-  })
-  it('we should have a Main component', () => {
-    const main = findComponent(wrapper, "main")
-    expect(main.exists()).toBe(true)
-  })
-});
 
 
 describe('content component', () => {
