@@ -12,11 +12,6 @@
   </a-table>
 </template>
 <script lang="ts" setup>
-// defineProps<{
-//   columns?: any[]
-//   data?: any[]
-// }>()
-
 import { inject } from 'vue'
 
 const columns = inject('columns')
