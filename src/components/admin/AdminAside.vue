@@ -7,7 +7,7 @@
       <span>学生信息管理</span>
     </template>
     <a-menu-item
-      key="1"
+      key="studentInfoUpload"
       data-test="studentInfoUpload"
       @click="goPath('/studentInfoUpload')"
     >
@@ -15,7 +15,7 @@
       <span>学生信息上传</span>
     </a-menu-item>
     <a-menu-item
-      key="2"
+      key="studentInfoManage"
       data-test="studentInfoManage"
       @click="goPath('/studentInfoManage')"
     >
