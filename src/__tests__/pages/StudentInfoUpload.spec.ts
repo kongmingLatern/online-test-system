@@ -1,9 +1,11 @@
 import Header from "@/components/Header.vue";
 import Nav from "@/components/Nav.vue";
 import { findComponent, registGlobalComponent } from "@/utils";
-import Content from "@/views/admin/Content.vue";
 import { h } from "vue";
 import StudentInfoUpload from "../../pages/admin/StudentInfoUpload.vue"
+import Breadcrumb from '@/components/BreadCrumb.vue'
+import Content from "@/views/admin/Content.vue";
+import Main from '@/components/Main.vue'
 
 vitest.mock('ant-design-vue')
 
@@ -24,9 +26,12 @@ const options = {
           'data-test': 'header'
         }),
         nav: h(Nav, {
-          'data-test': 'nav'
+          'data-test': 'nav',
+          slots: {
+            breadcrumb: h(Breadcrumb, {})
+          }
         }),
-        main: h('main', {
+        main: h(Main, {
           'data-test': 'main'
         })
       }
