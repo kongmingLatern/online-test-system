@@ -1,17 +1,10 @@
 <template>
-  <a-table
-    :columns="columns"
-    :data-source="data"
-    data-test="table"
-  >
-    <template #bodyCell="{ column, text }">
-      <template v-if="column.dataIndex === 'name'">
-        <a>{{ text }}</a>
-      </template>
-    </template>
-  </a-table>
+  <!-- 表格部分 -->
+  <Table :columns="columns" :data="data" />
 </template>
-<script lang="ts" setup>
+
+<script setup lang="ts">
+import Table from '@/components/Table.vue'
 const columns = [
   {
     title: 'Name',
@@ -49,7 +42,6 @@ const columns = [
     ellipsis: true,
   },
 ]
-
 const data = [
   {
     key: '1',
@@ -77,3 +69,5 @@ const data = [
   },
 ]
 </script>
+
+<style scoped></style>
