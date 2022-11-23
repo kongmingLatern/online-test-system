@@ -1,6 +1,6 @@
 import { findComponent, findTag, RegistGlobalComponent } from '@/utils';
 import { mount } from '@vue/test-utils';
-import Header from '../../components/Header.vue';
+import Header from '@/components/Header.vue';
 
 let wrapper = mount(Header)
 
