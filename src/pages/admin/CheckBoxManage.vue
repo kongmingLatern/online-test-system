@@ -3,12 +3,12 @@
     <template #header>
       <!-- 头部 -->
       <Header
-        data-test="studentHeader"
+        data-test="checkBoxHeader"
         text="在线考试系统"
       />
     </template>
     <template #content>
-      <div data-test="studentContent">
+      <div data-test="checkBoxContent">
         <Content>
           <!-- 头部 -->
           <template #header>
@@ -17,7 +17,7 @@
 
           <!-- 导航 -->
           <template #nav>
-            <Nav data-test="studentNav">
+            <Nav data-test="checkBoxNav">
               <template #breadcrumb>
                 <BreadCrumb />
               </template>
@@ -26,7 +26,7 @@
 
           <!-- 内容 -->
           <template #main>
-            <Main data-test="studentMain" />
+            <Main data-test="checkBoxMain" />
           </template>
         </Content>
       </div>

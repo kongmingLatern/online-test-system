@@ -2,13 +2,10 @@
   <Layout>
     <template #header>
       <!-- 头部 -->
-      <Header
-        data-test="studentHeader"
-        text="在线考试系统"
-      />
+      <Header data-test="radioHeader" text="在线考试系统" />
     </template>
     <template #content>
-      <div data-test="studentContent">
+      <div data-test="radioContent">
         <Content>
           <!-- 头部 -->
           <template #header>
@@ -17,7 +14,7 @@
 
           <!-- 导航 -->
           <template #nav>
-            <Nav data-test="studentNav">
+            <Nav data-test="radioNav">
               <template #breadcrumb>
                 <BreadCrumb />
               </template>
@@ -26,7 +23,7 @@
 
           <!-- 内容 -->
           <template #main>
-            <Main data-test="studentMain" />
+            <Main data-test="radioMain" />
           </template>
         </Content>
       </div>
