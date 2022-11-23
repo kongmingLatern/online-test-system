@@ -27,7 +27,7 @@
         </a-layout-sider>
 
         <a-layout-content data-test="content">
-          <div pl-2>
+          <div p-5>
             <slot name="content"></slot>
           </div>
         </a-layout-content>
