@@ -17,7 +17,7 @@
 
           <!-- 导航 -->
           <template #nav>
-            <Nav>
+            <Nav data-test="studentNav">
               <template #breadcrumb>
                 <BreadCrumb />
               </template>
@@ -26,7 +26,7 @@
 
           <!-- 内容 -->
           <template #main>
-            <Main />
+            <Main data-test="studentMain" />
           </template>
         </Content>
       </div>
