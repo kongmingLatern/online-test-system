@@ -26,7 +26,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
     @Autowired
     private ClbumService clbumService;
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void addStudentWithClbum(StudentDto studentDto) {
         LambdaQueryWrapper<Clbum> clbumLambdaQueryWrapper = new LambdaQueryWrapper<>();
         clbumLambdaQueryWrapper.eq(Clbum::getClassNo, studentDto.getClassNo());
@@ -64,7 +64,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
         }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void improtStudent(MultipartFile file) {
         List<Map<Integer,String>> list;
         try {
@@ -83,8 +83,10 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
                 clbum.setClassNo(integerStringMap.get(0).trim());
                 clbumService.save(clbum);
             }
+            //查询classid
             clbum = clbumService.getOne(clbumLambdaQueryWrapper);
             Long classId = clbum.getClassId();
+            //存储学生
             Student student = new Student();
             student.setStudentNo(integerStringMap.get(1).trim());
             student.setStudentName(integerStringMap.get(2).trim());

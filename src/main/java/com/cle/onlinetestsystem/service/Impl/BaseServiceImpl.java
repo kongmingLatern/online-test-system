@@ -10,10 +10,12 @@ import com.cle.onlinetestsystem.pojo.Question;
 import com.cle.onlinetestsystem.service.BaseService;
 import com.cle.onlinetestsystem.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +23,8 @@ import java.util.Map;
 public class BaseServiceImpl extends ServiceImpl<BaseDao, Base> implements BaseService {
     @Autowired
     QuestionService questionService;
+    @Autowired
+    private DataSourceTransactionManager transactionManager;
     @Override
     @Transactional
     public void baseAdd(MultipartFile file,Long baseId){
@@ -28,29 +32,22 @@ public class BaseServiceImpl extends ServiceImpl<BaseDao, Base> implements BaseS
         List<Question> radioList = null;
         List<Question> selectedList=null;
         List<Question> judgeList = null;
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        TransactionStatus status = transactionManager.getTransaction(def);
         try {
             list = EasyExcel.read(file.getInputStream()).sheet("单选题").doReadSync();
-         radioList = MapToQuestion.RadioAndSelected(list,"Radio",baseId);
-
+            questionService.saveBatch(MapToQuestion.RadioAndSelected(list,"Radio",baseId)) ;
             list=EasyExcel.read(file.getInputStream()).sheet("多选题").doReadSync();
-
-       selectedList = MapToQuestion.RadioAndSelected(list, "Selected", baseId);
-
+            questionService.saveBatch(MapToQuestion.RadioAndSelected(list, "Selected", baseId));
             list=EasyExcel.read(file.getInputStream()).sheet("判断题").doReadSync();
+            questionService.saveBatch(MapToQuestion.Judge(list, baseId));
 
-            judgeList = MapToQuestion.Judge(list, baseId);}
+        }
         catch (Exception e) {
+            transactionManager.rollback(status);
             throw new CustomException("文件有误");
         }
-        radioList.stream().forEach(question -> {
-            questionService.save(question);
-        });
-        selectedList.stream().forEach(question -> {
-            questionService.save(question);
-        });
-        judgeList.stream().forEach(question -> {
-            questionService.save(question);
-        });
+
     }
 
 }
