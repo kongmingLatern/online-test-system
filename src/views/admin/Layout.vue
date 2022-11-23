@@ -21,6 +21,7 @@
             theme="dark"
             mode="inline"
             h-100
+            @openChange="onOpenChange"
           >
             <AdminAside data-test="aside" />
           </a-menu>
@@ -45,6 +46,10 @@ const selectedKeys = ref<string[]>(['1'])
 const openKeys = ref<string[]>(['sub1'])
 const onCollapse = (collapsed: boolean, type: string) => {
   console.log(collapsed, type)
+}
+
+const onOpenChange = (openKeys: string[]) => {
+  console.log(openKeys)
 }
 
 const onBreakpoint = (broken: boolean) => {

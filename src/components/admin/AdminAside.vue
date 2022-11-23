@@ -6,17 +6,21 @@
     <template #title>
       <span>学生信息管理</span>
     </template>
-    <a-menu-item key="1" data-test="tab">
+    <a-menu-item
+      key="1"
+      data-test="tab"
+      @click="goPath('/studentInfoUpload')"
+    >
       <user-outlined />
-      <span @click="goTab('/studentInfoUpload')">
-        学生信息上传
-      </span>
+      <span>学生信息上传</span>
     </a-menu-item>
-    <a-menu-item key="2" data-test="tab1">
+    <a-menu-item
+      key="2"
+      data-test="tab1"
+      @click="goPath('/studentInfoManage')"
+    >
       <user-outlined />
-      <span @click="goTab('/studentInfoManage')">
-        学生信息管理
-      </span>
+      <span>学生信息管理</span>
     </a-menu-item>
   </a-sub-menu>
 </template>
@@ -24,13 +28,9 @@
 <script setup lang="ts">
 import router from '@/router'
 import { UserOutlined } from '@ant-design/icons-vue'
-const emit = defineEmits<{
-  (event: 'openKeys', ...args: any[]): void
-}>()
 
-const goTab = (path: string) => {
-  router.replace('/admin' + path)
-  emit('openKeys', ['sub1'])
+const goPath = (path: string) => {
+  router.push('/admin' + path)
 }
 </script>
 
