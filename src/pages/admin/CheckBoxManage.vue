@@ -42,10 +42,9 @@ import Nav from '@/components/Nav.vue'
 import Main from '@/components/Main.vue'
 import BreadCrumb from '@/components/BreadCrumb.vue'
 import { provide } from 'vue'
-import Checkbox from '../../utils/Checkbox'
 import type { TableColumnsOptions } from '@/type'
-import { setData } from '@/utils'
-import Column from '@/utils/Column'
+import { Checkbox, setData } from '@/utils'
+import Column from '@/utils/Task/Column'
 const options: Partial<TableColumnsOptions> = {
   align: 'center',
 }

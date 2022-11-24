@@ -1,11 +1,15 @@
 import type { TableColumnsOptions } from '../../type'
-import { setColumn, setColumns, setData } from '@/utils'
-import Column from '@/utils/Column'
+import {
+  Checkbox,
+  Column,
+  Judge,
+  Radio,
+  setColumn,
+  setColumns,
+  setData,
+  Task,
+} from '@/utils'
 import Student from '@/utils/Student'
-import Task from '@/utils/Task'
-import Radio from '@/utils/Radio'
-import Checkbox from '@/utils/Checkbox'
-import Judge from '@/utils/Judge'
 
 describe('columns', () => {
   let title: string

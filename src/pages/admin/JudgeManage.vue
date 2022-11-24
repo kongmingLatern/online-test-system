@@ -41,8 +41,8 @@ import BreadCrumb from '@/components/BreadCrumb.vue'
 import { provide } from 'vue'
 import type { TableColumnsOptions } from '@/type'
 import { setData } from '@/utils'
-import Column from '@/utils/Column'
-import Judge from '@/utils/Judge'
+import Column from '@/utils/Task/Column'
+import Judge from '@/utils/Task/Judge'
 
 const options: Partial<TableColumnsOptions> = {
   align: 'center',

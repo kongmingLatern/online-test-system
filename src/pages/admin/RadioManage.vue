@@ -40,9 +40,8 @@ import Main from '@/components/Main.vue'
 import BreadCrumb from '@/components/BreadCrumb.vue'
 import { provide } from 'vue'
 import type { TableColumnsOptions } from '@/type'
-import { setData } from '@/utils'
-import Column from '@/utils/Column'
-import Radio from '@/utils/Radio'
+import { Radio, setData } from '@/utils'
+import Column from '@/utils/Task/Column'
 const options: Partial<TableColumnsOptions> = {
   align: 'center',
 }
