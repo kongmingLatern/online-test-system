@@ -6,7 +6,7 @@ import {
 } from '@/utils'
 import { h } from 'vue'
 import Breadcrumb from '@/components/BreadCrumb.vue'
-import Content from '@/views/admin/Content.vue'
+import Content from '@/components/Content.vue'
 import Main from '@/components/Main.vue'
 import StudentInfoManage from '@/pages/admin/StudentInfoManage.vue'
 
@@ -15,30 +15,6 @@ vitest.mock('ant-design-vue')
 const options = {
   props: {
     text: '',
-  },
-  slots: {
-    header: h(Header, {
-      'data-test': 'studentHeader',
-    }),
-
-    content: h(Content, {
-      'data-test': 'studentContent',
-      slots: {
-        header: h(Header, {
-          'data-test': 'header',
-          text: '学生信息管理',
-        }),
-        nav: h(Nav, {
-          'data-test': 'nav',
-          slots: {
-            breadcrumb: h(Breadcrumb, {}),
-          },
-        }),
-        main: h(Main, {
-          'data-test': 'main',
-        }),
-      },
-    }),
   },
 }
 

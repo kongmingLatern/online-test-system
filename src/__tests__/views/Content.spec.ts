@@ -1,6 +1,6 @@
 import { registGlobalComponent } from '@/utils'
 import { findComponent } from '@/utils'
-import Content from '@/views/admin/Content.vue'
+import Content from '@/components/Content.vue'
 
 let wrapper
 

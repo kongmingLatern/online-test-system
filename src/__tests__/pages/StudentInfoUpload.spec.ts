@@ -5,9 +5,9 @@ import {
   registGlobalComponent,
 } from '@/utils'
 import { h } from 'vue'
-import StudentInfoUpload from '../../pages/admin/StudentInfoUpload.vue'
+import StudentInfoUpload from '@/pages/admin/StudentInfoUpload.vue'
 import Breadcrumb from '@/components/BreadCrumb.vue'
-import Content from '@/views/admin/Content.vue'
+import Content from '@/components/Content.vue'
 import Main from '@/components/Main.vue'
 
 vitest.mock('ant-design-vue')

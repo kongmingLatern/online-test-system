@@ -35,12 +35,6 @@
 </template>
 
 <script setup lang="ts">
-import Layout from '@/views/admin/Layout.vue'
-import Header from '@/components/Header.vue'
-import Content from '@/views/admin/Content.vue'
-import Nav from '@/components/Nav.vue'
-import Main from '@/components/Main.vue'
-import BreadCrumb from '@/components/BreadCrumb.vue'
 import { provide } from 'vue'
 import type { TableColumnsOptions } from '@/type'
 import { setData } from '@/utils'
