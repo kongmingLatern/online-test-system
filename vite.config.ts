@@ -46,4 +46,15 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    host: '127.0.0.1',
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://10.16.20.4:8080', //实际请求地址
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, ''),
+      },
+    },
+  },
 })
