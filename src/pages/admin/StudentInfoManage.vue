@@ -45,19 +45,26 @@ import { provide } from 'vue'
 import Column from '@/utils/Column'
 import Student from '@/utils/Student'
 import { setData } from '@/utils'
+import type { TableColumnsOptions } from '@/type'
 
+const options: Partial<TableColumnsOptions> = {
+  align: 'center',
+}
 const columns = [
-  new Column('编号', 'no', 'no'),
-  new Column('学号', 'sno', 'sno'),
-  new Column('姓名', 'name', 'name'),
-  new Column('班级', 'cno', 'cno'),
-  new Column('操作', 'operation', 'operation'),
+  new Column('编号', 'no', 'no', options),
+  new Column('学号', 'sno', 'sno', options),
+  new Column('姓名', 'name', 'name', options),
+  new Column('班级', 'cno', 'cno', options),
+  new Column('操作', 'student', 'student', {
+    width: 60,
+    ...options,
+  }),
 ]
 
 const data = [
-  new Student('1', '施颖杰', 32, '北京'),
-  new Student('2', '施颖杰', 32, '北京'),
-  new Student('3', '施颖杰', 32, '北京'),
+  new Student('1', '施颖杰', 32, '0922201'),
+  new Student('2', '施颖杰', 32, '0922201'),
+  new Student('3', '施颖杰', 32, '0922201'),
 ]
 const result = setData(data)
 provide('columns', columns)
