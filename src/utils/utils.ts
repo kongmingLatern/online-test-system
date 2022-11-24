@@ -10,7 +10,10 @@ export function setColumn(title: string, name: string, key: string, options?: Re
 export function setColumns(arr: Array<any>, options?: Record<string, any>): Record<string, any> {
   let result: Array<Record<string, any>> = []
   arr.forEach((item: Record<string, any>) => {
-    result.push(item)
+    result.push({
+      ...item,
+      ...options
+    })
   })
   return result
 };
