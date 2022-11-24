@@ -20,7 +20,7 @@ public class BaseController {
     private BaseService baseService;
 
     /**
-     * 还未设置baseid
+     * 导入题库（必须配合addBase使用）
      * @param file
      * @return
      */
@@ -31,7 +31,7 @@ public class BaseController {
     }
 
     /**
-     * 未设置创建人
+     * 添加题库
      * @param base
      * @param session
      * @return

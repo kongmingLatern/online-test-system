@@ -99,6 +99,12 @@ public class StudentController {
         studentService.removeById(studentId);
         return R.success("删除成功");
     }
+
+    /**
+     * excel导入学生
+     * @param file
+     * @return
+     */
     @PostMapping("/importStudent")
     private R<String> importStudent(MultipartFile file){
         studentService.improtStudent(file);

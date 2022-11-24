@@ -24,6 +24,13 @@ public class LoginController {
     private StudentService studentService;
     @Autowired
     private TeacherService teacherService;
+
+    /**
+     * 教师学生登录接口
+     * @param loginDto
+     * @param session
+     * @return
+     */
     @PostMapping
     public R<LoginDto> login(@RequestBody LoginDto loginDto, HttpSession session){
         String username = loginDto.getUsername();
