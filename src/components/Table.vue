@@ -4,9 +4,19 @@
     :data-source="data"
     data-test="table"
   >
-    <template #bodyCell="{ column, text, _, index }">
+    <template #bodyCell="{ column, text, record, index }">
       <template v-if="column.dataIndex === 'no'">
         <span>{{ index + 1 }}</span>
+      </template>
+      <template
+        v-if="column.dataIndex === 'questionAnswer'"
+      >
+        <span>{{ record.questionAnswer }}</span>
+      </template>
+      <template
+        v-if="column.dataIndex === 'questionCorrect'"
+      >
+        <span>{{ record.questionCorrect }}</span>
       </template>
       <template v-if="column.dataIndex === 'detail'">
         <a>点击查看详情</a>
