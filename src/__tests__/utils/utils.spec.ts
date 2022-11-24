@@ -5,6 +5,7 @@ import Student from '@/utils/Student'
 import Task from '@/utils/Task'
 import Radio from '@/utils/Radio'
 import Checkbox from '@/utils/Checkbox'
+import Judge from '@/utils/Judge'
 
 describe('columns', () => {
   let title: string
@@ -254,6 +255,39 @@ describe('class data about table', () => {
           '下列选项属于马克思主义三个组成部分之一的是()',
         questionAnswer: ['1', '2', '3', '4'],
         questionCorrect: ['1', '2'],
+      },
+    ])
+  })
+  it('Judge', () => {
+    const arr = new Array(3).fill(
+      new Judge(
+        '马克思主义',
+        '下列选项属于马克思主义三个组成部分之一的是()',
+        ['对']
+      )
+    )
+    const result = setData(arr)
+    expect(result).toEqual([
+      {
+        key: 0,
+        baseTitle: '马克思主义',
+        questionList:
+          '下列选项属于马克思主义三个组成部分之一的是()',
+        questionCorrect: ['对'],
+      },
+      {
+        key: 1,
+        baseTitle: '马克思主义',
+        questionList:
+          '下列选项属于马克思主义三个组成部分之一的是()',
+        questionCorrect: ['对'],
+      },
+      {
+        key: 2,
+        baseTitle: '马克思主义',
+        questionList:
+          '下列选项属于马克思主义三个组成部分之一的是()',
+        questionCorrect: ['对'],
       },
     ])
   })
