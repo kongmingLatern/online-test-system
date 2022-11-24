@@ -1,31 +1,7 @@
 import type { TableColumnsOptions } from '../../type';
 import { setColumn, setColumns, setData } from "@/utils";
-
-class Column {
-  public title: string = ''
-  public dataIndex: string = ''
-  public key: string = ''
-
-  constructor(title: string, name: string, key: string, options?: Partial<TableColumnsOptions>) {
-    this.title = title
-    this.dataIndex = name
-    this.key = key
-    Object.assign(this, options)
-  }
-}
-
-class Student {
-  public name: string = ''
-  public age: number = 0
-  public address: string = ''
-
-  constructor(name: string, age: number, address: string) {
-    this.name = name
-    this.age = age
-    this.address = address
-  }
-}
-
+import Column from '@/utils/Column';
+import Student from '@/utils/Student';
 
 describe('columns', () => {
   let title: string
@@ -118,23 +94,23 @@ describe('columns', () => {
 });
 describe('data', () => {
   it('should have some params ', () => {
-    const arr = [new Student('施颖杰', 32, '北京'), new Student('施颖杰', 32, '北京'), new Student('施颖杰', 32, '北京')]
+    const arr = [new Student('1', '施颖杰', 32, '0922201'), new Student('2', '施颖杰', 32, '0922201'), new Student('3', '施颖杰', 32, '0922201')]
     const result = setData(arr)
     expect(result).toEqual([{
       key: 0,
       name: '施颖杰',
       age: 32,
-      address: '北京',
+      cno: '0922201',
     }, {
       key: 1,
       name: '施颖杰',
       age: 32,
-      address: '北京',
+      cno: '0922201',
     }, {
       key: 2,
       name: '施颖杰',
       age: 32,
-      address: '北京',
+      cno: '0922201',
     },])
   });
 });
