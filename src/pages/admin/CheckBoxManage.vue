@@ -85,7 +85,6 @@ const data = [
     name: '施颖杰',
     age: 32,
     address: '晒好死啊调式的解耦[]',
-    tags: ['nice', 'developer'],
   },
   {
     key: '2',
@@ -93,7 +92,6 @@ const data = [
     age: 42,
     address:
       'London No. 2 Lake Park, London No. 2 Lake Park',
-    tags: ['loser'],
   },
   {
     key: '3',
@@ -101,7 +99,6 @@ const data = [
     age: 32,
     address:
       'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
   },
 ]
 
