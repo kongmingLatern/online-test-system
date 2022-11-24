@@ -69,7 +69,7 @@ public class BaseController {
      * @return
      */
     @GetMapping("/page")
-    public R<Page> page(int page,int pageSize,String baseTitle){
+    public R<Page> page(Integer page,Integer pageSize,String baseTitle){
         Page<Base> basePage = new Page<>(page,pageSize);
         LambdaUpdateWrapper<Base> baseLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
         baseLambdaUpdateWrapper.like(baseTitle!=null,Base::getBaseTitle,baseTitle)
@@ -83,7 +83,7 @@ public class BaseController {
             BaseDto baseDto = new BaseDto();
             baseDto.setBaseTitle(base.getBaseTitle());
             LambdaUpdateWrapper<Subject> subjectLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
-            subjectLambdaUpdateWrapper.eq(Subject::getSubjectId, base.getSubjectId());
+              subjectLambdaUpdateWrapper.eq(Subject::getSubjectId, base.getSubjectId());
             Subject subject = subjectService.getOne(subjectLambdaUpdateWrapper);
             baseDto.setSubjectName(subject.getSubjectName());
             LambdaUpdateWrapper<Teacher> teacherLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
@@ -94,6 +94,14 @@ public class BaseController {
         }).collect(Collectors.toList());
         baseDtoPage.setRecords(baseDtoList);
         return R.success(baseDtoPage);
+    }
+    /**
+     * 查询所有题库提供筛选
+     */
+    @GetMapping("/list")
+    public R<List<Base>> list(){
+        List<Base> list = baseService.list();
+        return R.success(list);
     }
 
 }
