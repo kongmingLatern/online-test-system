@@ -61,7 +61,12 @@ const columns = [
     'questionCorrect',
     options
   ),
-  new Column('所属试题名称', 'delete', 'delete', options),
+  new Column(
+    '所属试题名称',
+    'baseTitle',
+    'baseTitle',
+    options
+  ),
   new Column('操作', 'delete', 'delete', {
     width: 60,
     ...options,
