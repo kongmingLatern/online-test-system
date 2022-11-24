@@ -6,9 +6,9 @@ import lombok.Data;
 @Data
 public class Subject {
 @TableId
-  private Long subjectId;
-  private Long teacherId;
-  private String subjectName;
+  private Long subjectId;//科目id
+  private Long teacherId;//教师id
+  private String subjectName;//科目名称
 
 
 }

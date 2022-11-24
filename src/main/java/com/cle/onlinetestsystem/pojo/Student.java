@@ -6,10 +6,10 @@ import lombok.Data;
 @Data
 public class Student {
 @TableId
-  private Long studentId;
-  private Long classId;
-  private String studentNo;
-  private String password;
-  private String studentName;
+  private Long studentId;//学生id
+  private Long classId;//班级id
+  private String studentNo;//学生编号
+  private String password;//密码
+  private String studentName;//学生姓名
 
 }

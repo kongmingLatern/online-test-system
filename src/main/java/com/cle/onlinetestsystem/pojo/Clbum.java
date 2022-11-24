@@ -8,6 +8,6 @@ import lombok.Data;
 @TableName("class")
 public class Clbum {
   @TableId
-  private Long classId;
-  private String classNo;
+  private Long classId;//班级id
+  private String classNo;//班级编号
 }

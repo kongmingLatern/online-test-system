@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import org.springframework.context.annotation.Configuration;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKN
  * 将JSON解析为Java对象的过程称为 [从JSON反序列化Java对象]
  * 从Java对象生成JSON的过程称为 [序列化Java对象到JSON]
  */
+@Configuration
 public class JacksonObjectMapper extends ObjectMapper {
 
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";

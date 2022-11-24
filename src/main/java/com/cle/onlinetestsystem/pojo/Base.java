@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class Base {
   @TableId
-  private Long baseId;
-  private Long subjectId;
-  private String baseTitle;
-  private Long createUser;
+  private Long baseId;//题库id
+  private Long subjectId;//科目id
+  private String baseTitle;//题库名称
+  private Long createUser;//创建者
 }

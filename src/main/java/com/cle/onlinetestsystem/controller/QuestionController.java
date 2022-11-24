@@ -37,7 +37,6 @@ public class QuestionController {
      */
     @GetMapping("/page")
     public R<Page> page(Integer page, Integer pageSize, Long baseId, String questionList,Integer questionType){
-        log.info("{},{},{},{},{}",page,pageSize,baseId,questionList,questionType);
         Page<Question> questionPage = new Page<>(page,pageSize);
         LambdaQueryWrapper<Question> questionLambdaQueryWrapper = new LambdaQueryWrapper<>();
         questionLambdaQueryWrapper.eq(baseId!=null,Question::getBaseId,baseId)

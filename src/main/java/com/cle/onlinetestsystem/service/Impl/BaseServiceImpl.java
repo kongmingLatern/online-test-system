@@ -6,7 +6,6 @@ import com.cle.onlinetestsystem.Utils.MapToQuestion;
 import com.cle.onlinetestsystem.common.CustomException;
 import com.cle.onlinetestsystem.dao.BaseDao;
 import com.cle.onlinetestsystem.pojo.Base;
-import com.cle.onlinetestsystem.pojo.Question;
 import com.cle.onlinetestsystem.service.BaseService;
 import com.cle.onlinetestsystem.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author kele
+ */
 @Service
 public class BaseServiceImpl extends ServiceImpl<BaseDao, Base> implements BaseService {
     @Autowired
@@ -29,9 +31,6 @@ public class BaseServiceImpl extends ServiceImpl<BaseDao, Base> implements BaseS
     @Transactional
     public void baseAdd(MultipartFile file,Long baseId){
         List<Map<Integer,String>> list = null;
-        List<Question> radioList = null;
-        List<Question> selectedList=null;
-        List<Question> judgeList = null;
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
         TransactionStatus status = transactionManager.getTransaction(def);
         try {

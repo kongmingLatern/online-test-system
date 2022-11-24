@@ -7,19 +7,19 @@ import java.time.LocalDateTime;
 @Data
 public class Task {
 
-  private Long taskId;
-  private Long baseId;
-  private String taskTerm;
-  private String taskType;
-  private String taskName;
-  private String taskPassword;
-  private LocalDateTime taskTime;
-  private String limitTime;
-  private Integer radioNumber;
-  private Double radioScore;
-  private Integer selectedNumber;
-  private Double selectedScore;
-  private Integer judgeNumber;
-  private Double judgeScore;
+  private Long taskId;//考试id
+  private Long baseId;//题库id
+  private String taskTerm;//考试学期
+  private String taskType;//期中期末
+  private String taskName;//考试名
+  private String taskPassword;//考试密码
+  private LocalDateTime taskTime;//考试时间
+  private String limitTime;//限制时间
+  private Integer radioNumber;//单选数量
+  private Double radioScore;//单选分数
+  private Integer selectedNumber;//多选数量
+  private Double selectedScore;//多选分数
+  private Integer judgeNumber;//判断数量
+  private Double judgeScore;//判断分数
 
 }

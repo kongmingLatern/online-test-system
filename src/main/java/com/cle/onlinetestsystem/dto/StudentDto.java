@@ -5,5 +5,5 @@ import lombok.Data;
 
 @Data
 public class StudentDto extends Student {
-    String classNo;
+    String classNo;//班级编号
 }
