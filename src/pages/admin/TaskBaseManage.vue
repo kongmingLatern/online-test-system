@@ -42,72 +42,58 @@ import Nav from '@/components/Nav.vue'
 import Main from '@/components/Main.vue'
 import BreadCrumb from '@/components/BreadCrumb.vue'
 import { provide } from 'vue'
-
+import type { TableColumnsOptions } from '@/type'
+import { setData } from '@/utils'
+import Column from '@/utils/Column'
+import Task from '@/utils/Task'
+const options: Partial<TableColumnsOptions> = {
+  align: 'center',
+}
 const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-    width: 80,
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address 1',
-    ellipsis: true,
-  },
-  {
-    title: 'Long Column Long Column Long Column',
-    dataIndex: 'address',
-    key: 'address 2',
-    ellipsis: true,
-  },
-  {
-    title: 'Long Column Long Column',
-    dataIndex: 'address',
-    key: 'address 3',
-    ellipsis: true,
-  },
-  {
-    title: 'Long Column',
-    dataIndex: 'address',
-    key: 'address 4',
-    ellipsis: true,
-  },
-]
-const data = [
-  {
-    key: '1',
-    name: 'ckh',
-    age: 32,
-    address: '晒好死啊调式的解耦[]',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Gasdoiajs',
-    age: 42,
-    address:
-      'London No. 2 Lake Park, London No. 2 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address:
-      'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
+  new Column('试卷编号', 'no', 'no', {
+    ...options,
+    width: 90,
+  }),
+  new Column('题库名称', 'baseTitle', 'baseTitle', options),
+  new Column(
+    '所属科目',
+    'subjectName',
+    'subjectName',
+    options
+  ),
+  new Column(
+    '出题老师',
+    'teacherName',
+    'teacherName',
+    options
+  ),
+  new Column('查看详情', 'detail', 'detail', options),
+  new Column('操作', 'delete', 'delete', {
+    width: 60,
+    align: 'center',
+  }),
 ]
 
+const data = [
+  new Task(
+    '马克思主义',
+    '马克思主义与毛泽东思想',
+    '孔祥琦'
+  ),
+  new Task(
+    '马克思主义',
+    '马克思主义与毛泽东思想',
+    '孔祥琦'
+  ),
+  new Task(
+    '马克思主义',
+    '马克思主义与毛泽东思想',
+    '孔祥琦'
+  ),
+]
+const result = setData(data)
 provide('columns', columns)
-provide('data', data)
+provide('data', result)
 </script>
 
 <style scoped></style>
