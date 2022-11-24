@@ -1,6 +1,7 @@
 package com.cle.onlinetestsystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.cle.onlinetestsystem.common.BaseContext;
 import com.cle.onlinetestsystem.pojo.Base;
 import com.cle.onlinetestsystem.pojo.R;
 import com.cle.onlinetestsystem.service.BaseService;
@@ -37,6 +38,7 @@ public class BaseController {
      */
     @PostMapping("/addBase")
     public R<String> addBase(@RequestBody Base base,HttpSession session){
+        base.setCreateUser(BaseContext.getCurrentId());
         baseService.save(base);
         LambdaUpdateWrapper<Base> baseLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
         baseLambdaUpdateWrapper.eq(Base::getBaseTitle,base.getBaseTitle());
