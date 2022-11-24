@@ -127,32 +127,29 @@ describe('columns', () => {
 describe('class data about table', () => {
   it('Student ', () => {
     const arr = [
-      new Student('1', '施颖杰', 32, '0922201'),
-      new Student('2', '施颖杰', 32, '0922201'),
-      new Student('3', '施颖杰', 32, '0922201'),
+      new Student('1', '施颖杰', '0922201'),
+      new Student('2', '施颖杰', '0922201'),
+      new Student('3', '施颖杰', '0922201'),
     ]
     const result = setData(arr)
     expect(result).toEqual([
       {
         key: 0,
-        sno: '1',
-        name: '施颖杰',
-        age: 32,
-        cno: '0922201',
+        studentNo: '1',
+        studentName: '施颖杰',
+        classNo: '0922201',
       },
       {
         key: 1,
-        sno: '2',
-        name: '施颖杰',
-        age: 32,
-        cno: '0922201',
+        studentNo: '2',
+        studentName: '施颖杰',
+        classNo: '0922201',
       },
       {
         key: 2,
-        sno: '3',
-        name: '施颖杰',
-        age: 32,
-        cno: '0922201',
+        studentNo: '3',
+        studentName: '施颖杰',
+        classNo: '0922201',
       },
     ])
   })
