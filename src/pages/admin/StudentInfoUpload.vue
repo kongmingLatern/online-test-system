@@ -45,7 +45,7 @@ import { provide } from 'vue'
 import type { TableColumnsOptions } from '@/type'
 import { setData } from '@/utils'
 import Column from '@/utils/Task/Column'
-import Student from '@/utils/Student'
+import { Student } from '@/utils'
 const options: Partial<TableColumnsOptions> = {
   align: 'center',
 }

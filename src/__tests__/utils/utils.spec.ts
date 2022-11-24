@@ -9,7 +9,7 @@ import {
   setData,
   Task,
 } from '@/utils'
-import Student from '@/utils/Student'
+import { Student } from '@/utils'
 
 describe('columns', () => {
   let title: string
