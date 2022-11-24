@@ -39,59 +39,11 @@ import Nav from '@/components/Nav.vue'
 import Main from '@/components/Main.vue'
 import BreadCrumb from '@/components/BreadCrumb.vue'
 import { provide } from 'vue'
-import type { TableColumnsOptions } from '@/type'
+import { JudgeData, JudgeColumn } from '@/utils/TableData'
 import { setData } from '@/utils'
-import Column from '@/utils/Task/Column'
-import Judge from '@/utils/Task/Judge'
 
-const options: Partial<TableColumnsOptions> = {
-  align: 'center',
-}
-const columns = [
-  new Column('题目编号', 'no', 'no', options),
-  new Column(
-    '题目',
-    'questionList',
-    'questionList',
-    options
-  ),
-  new Column(
-    '答案',
-    'questionCorrect',
-    'questionCorrect',
-    options
-  ),
-  new Column(
-    '所属试题名称',
-    'baseTitle',
-    'baseTitle',
-    options
-  ),
-  new Column('操作', 'delete', 'delete', {
-    width: 60,
-    ...options,
-  }),
-]
-
-const data = [
-  new Judge(
-    '马克思主义',
-    '下列选项属于马克思主义三个组成部分之一的是()',
-    ['对']
-  ),
-  new Judge(
-    '马克思主义',
-    '下列选项属于马克思主义三个组成部分之一的是()',
-    ['对']
-  ),
-  new Judge(
-    '马克思主义',
-    '下列选项属于马克思主义三个组成部分之一的是()',
-    ['对']
-  ),
-]
-const result = setData(data)
-provide('columns', columns)
+const result = setData(JudgeData)
+provide('columns', JudgeColumn)
 provide('data', result)
 </script>
 
