@@ -42,68 +42,62 @@ import Nav from '@/components/Nav.vue'
 import Main from '@/components/Main.vue'
 import BreadCrumb from '@/components/BreadCrumb.vue'
 import { provide } from 'vue'
+import Checkbox from '../../utils/Checkbox'
+import type { TableColumnsOptions } from '@/type'
+import { setData } from '@/utils'
+import Column from '@/utils/Column'
+const options: Partial<TableColumnsOptions> = {
+  align: 'center',
+}
 const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-    width: 80,
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address 1',
-    ellipsis: true,
-  },
-  {
-    title: 'Long Column Long Column Long Column',
-    dataIndex: 'address',
-    key: 'address 2',
-    ellipsis: true,
-  },
-  {
-    title: 'Long Column Long Column',
-    dataIndex: 'address',
-    key: 'address 3',
-    ellipsis: true,
-  },
-  {
-    title: 'Long Column',
-    dataIndex: 'address',
-    key: 'address 4',
-    ellipsis: true,
-  },
-]
-const data = [
-  {
-    key: '1',
-    name: '施颖杰',
-    age: 32,
-    address: '晒好死啊调式的解耦[]',
-  },
-  {
-    key: '2',
-    name: 'Jim Gasdoiajs',
-    age: 42,
-    address:
-      'London No. 2 Lake Park, London No. 2 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address:
-      'Sidney No. 1 Lake Park, Sidney No. 1 Lake Park',
-  },
+  new Column('题目编号', 'no', 'no', options),
+  new Column(
+    '题目',
+    'questionList',
+    'questionList',
+    options
+  ),
+  new Column(
+    '选项',
+    'questionAnswer',
+    'questionAnswer',
+    options
+  ),
+  new Column(
+    '答案',
+    'questionCorrect',
+    'questionCorrect',
+    options
+  ),
+  new Column(
+    '所属试题名称',
+    'baseTitle',
+    'baseTitle',
+    options
+  ),
+  new Column('操作', 'delete', 'delete', {
+    width: 60,
+    ...options,
+  }),
 ]
 
+const data = [
+  new Checkbox(
+    '马克思主义',
+    '下列选项属于马克思主义三个组成部分之一的是()',
+    ['1', '2', '3', '4'],
+    ['1', '2']
+  ),
+  new Checkbox(
+    '马克思主义',
+    '下列选项属于马克思主义三个组成部分之一的是()',
+    ['1', '2', '3', '4'],
+    ['1', '2']
+  ),
+]
+const result = setData(data)
 provide('columns', columns)
-provide('data', data)
+provide('data', result)
 </script>
 
 <style scoped></style>
