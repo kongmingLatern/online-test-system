@@ -8,4 +8,16 @@ import {
   data as JudgeData,
 } from './Judge.data'
 
-export { RadioColumn, RadioData, JudgeColumn, JudgeData }
+import {
+  columns as CheckboxColumn,
+  data as CheckboxData,
+} from './Checkbox.data'
+
+export {
+  RadioColumn,
+  RadioData,
+  JudgeColumn,
+  JudgeData,
+  CheckboxColumn,
+  CheckboxData,
+}
