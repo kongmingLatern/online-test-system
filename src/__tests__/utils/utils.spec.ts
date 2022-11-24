@@ -2,6 +2,7 @@ import type { TableColumnsOptions } from '../../type';
 import { setColumn, setColumns, setData } from "@/utils";
 import Column from '@/utils/Column';
 import Student from '@/utils/Student';
+import Task from '@/utils/Task';
 
 describe('columns', () => {
   let title: string
@@ -92,25 +93,50 @@ describe('columns', () => {
     },])
   });
 });
-describe('data', () => {
-  it('should have some params ', () => {
+describe('class data about table', () => {
+  it('Student ', () => {
     const arr = [new Student('1', '施颖杰', 32, '0922201'), new Student('2', '施颖杰', 32, '0922201'), new Student('3', '施颖杰', 32, '0922201')]
     const result = setData(arr)
     expect(result).toEqual([{
       key: 0,
+      sno: '1',
       name: '施颖杰',
       age: 32,
       cno: '0922201',
     }, {
       key: 1,
+      sno: '2',
       name: '施颖杰',
       age: 32,
       cno: '0922201',
     }, {
       key: 2,
+      sno: '3',
       name: '施颖杰',
       age: 32,
       cno: '0922201',
     },])
   });
+
+  it('Task', () => {
+    const arr = new Array(3).fill(new Task('马克思主义', '马克思主义与毛泽东思想', '孔祥琦'))
+    const result = setData(arr)
+    expect(result).toEqual([{
+      key: 0,
+      baseTitle: '马克思主义',
+      subjectName: '马克思主义与毛泽东思想',
+      teacherName: '孔祥琦'
+    }, {
+      key: 1,
+      baseTitle: '马克思主义',
+      subjectName: '马克思主义与毛泽东思想',
+      teacherName: '孔祥琦'
+    }, {
+      key: 2,
+      baseTitle: '马克思主义',
+      subjectName: '马克思主义与毛泽东思想',
+      teacherName: '孔祥琦'
+    },])
+  });
+
 });
