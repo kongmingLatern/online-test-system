@@ -33,7 +33,7 @@
     <a-menu-item
       key="taskBase"
       data-test="taskBase"
-      @click="goPath('/taskInfoManage')"
+      @click="goPath('/taskBaseManage')"
     >
       <user-outlined />
       <span>试题库管理</span>

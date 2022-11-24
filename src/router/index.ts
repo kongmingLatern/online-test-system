@@ -25,23 +25,23 @@ const router = createRouter({
           component: () => import('@/pages/admin/StudentInfoManage.vue')
         },
         {
-          path: 'taskBase',
-          name: 'taskBase',
+          path: 'taskBaseManage',
+          name: 'taskBaseManage',
           component: () => import('@/pages/admin/TaskBaseManage.vue')
         },
         {
-          path: 'radio',
-          name: 'radio',
+          path: 'radioManage',
+          name: 'radioManage',
           component: () => import('@/pages/admin/RadioManage.vue')
         },
         {
-          path: 'checkbox',
-          name: 'checkbox',
+          path: 'checkboxManage',
+          name: 'checkboxManage',
           component: () => import('@/pages/admin/CheckBoxManage.vue')
         },
         {
-          path: 'judge',
-          name: 'judge',
+          path: 'judgeManage',
+          name: 'judgeManage',
           component: () => import('@/pages/admin/JudgeManage.vue')
         },
       ]
