@@ -43,13 +43,11 @@ import { inject, ref, type Ref } from 'vue'
 const columns = inject('columns')
 const data = inject('data')
 const pagination = inject('pagination')
-const change:
-  | ((pagination: any, loading: Ref<boolean>) => void)
-  | null = inject('change') ?? null
-const loading = ref<boolean>(false)
+const change: ((pagination: any) => void) | null =
+  inject('change') ?? null
 
 // TODO: 孙传爷
 const changePage = pagination => {
-  change!(pagination, loading)
+  change!(pagination)
 }
 </script>
