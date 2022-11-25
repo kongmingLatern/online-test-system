@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 
-public class EasyExcelUtils {
+public class EasyExcelUtil {
 
     /**
      * @param consumer   传入一个消费者接口对象，作用：业务逻辑处理

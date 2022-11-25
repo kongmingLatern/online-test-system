@@ -33,7 +33,7 @@ public class StudentController {
      * @return
      */
     @GetMapping("/page")
-    public R<Page> page(int page,int pageSize,String studentNo){
+    public R<Page> page(Integer page,Integer pageSize,String studentNo){
         //升序查询班级id和学生编号
         LambdaQueryWrapper<Student> studentLambdaQueryWrapper = new LambdaQueryWrapper<>();
        studentLambdaQueryWrapper.like(studentNo!=null,Student::getStudentNo,studentNo)
@@ -56,7 +56,7 @@ public class StudentController {
             return studentDto;
         }).collect(Collectors.toList());
         studentDtoPage.setRecords(collect);
-        return R.success(studentPage);
+        return R.success(studentDtoPage);
     }
     /**
      * 添加学生

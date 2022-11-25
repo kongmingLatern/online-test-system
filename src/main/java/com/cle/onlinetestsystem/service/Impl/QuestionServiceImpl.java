@@ -10,6 +10,7 @@ import com.cle.onlinetestsystem.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,6 +21,14 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class QuestionServiceImpl extends ServiceImpl<QuestionDao, Question> implements QuestionService {
+    /**
+     * 抽取相应题目
+     * @param baseId
+     * @param radioNumber
+     * @param selectedNumber
+     * @param judgeNumber
+     * @return
+     */
     @Override
     public List<Question> chooseQuestion(Long baseId,Integer radioNumber, Integer selectedNumber, Integer judgeNumber) {
         //查询所有的所有题目
@@ -48,13 +57,18 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionDao, Question> impl
         Set<Integer> radioSet = MyRandom.generateRandomArray( radioList.size(),radioNumber);
         Set<Integer> selectedSet = MyRandom.generateRandomArray(selectedList.size(),selectedNumber);
         Set<Integer> judgeSet = MyRandom.generateRandomArray(judgeList.size(),judgeNumber);
-        List<Question> radioCollect = radioSet.parallelStream().map(integer -> radioList.get(integer)).collect(Collectors.toList());
-        List<Question> selectedCollect = selectedSet.parallelStream().map(integer -> selectedList.get(integer)).collect(Collectors.toList());
-        List<Question> judgeCollect = judgeSet.parallelStream().map(integer -> judgeList.get(integer)).collect(Collectors.toList());
+        List<Question> radioCollect = radioSet.stream().map(integer -> radioList.get(integer)).collect(Collectors.toList());
+        List<Question> selectedCollect = selectedSet.stream().map(integer -> selectedList.get(integer)).collect(Collectors.toList());
+        List<Question> judgeCollect = judgeSet.stream().map(integer -> judgeList.get(integer)).collect(Collectors.toList());
         radioCollect.forEach(item-> System.out.println(item));
         selectedCollect.forEach(item-> System.out.println(item));
         judgeCollect.forEach(item-> System.out.println(item));
-        return null;
+        radioList.addAll(selectedCollect);
+        List<Question> questionList = new ArrayList<>();
+        questionList.addAll(radioCollect);
+        questionList.addAll(selectedCollect);
+        questionList.addAll(judgeCollect);
+        return questionList;
     }
 }
 

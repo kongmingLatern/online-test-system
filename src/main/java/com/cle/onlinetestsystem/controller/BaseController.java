@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,25 +38,16 @@ public class BaseController {
      * @return
      */
     @PostMapping("/importBase")
-    public R<String> importBase(MultipartFile file, HttpSession session){
-       baseService.baseAdd(file,(Long)session.getAttribute("baseId"));
-       return R.success("添加成功");
-    }
-
-    /**
-     * 添加题库
-     * @param base
-     * @param session
-     * @return
-     */
-    @PostMapping("/addBase")
-    public R<String> addBase(@RequestBody Base base,HttpSession session){
+    public R<String> importBase( MultipartFile file, @RequestParam("baseTitle") String baseTitle,@RequestParam("subjectId") Long subjectId){
+        Base base = new Base();
         base.setCreateUser(BaseContext.getCurrentId());
+        base.setBaseTitle(baseTitle);
+        base.setSubjectId(subjectId);
         baseService.save(base);
         LambdaUpdateWrapper<Base> baseLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
-        baseLambdaUpdateWrapper.eq(Base::getBaseTitle,base.getBaseTitle());
-        Base serviceOne = baseService.getOne(baseLambdaUpdateWrapper);
-        session.setAttribute("baseId",serviceOne.getBaseId());
+        baseLambdaUpdateWrapper.eq(Base::getBaseTitle,baseTitle);
+        Base one = baseService.getOne(baseLambdaUpdateWrapper);
+        baseService.baseAdd(file,one.getBaseId());
         return R.success("添加成功");
     }
 
