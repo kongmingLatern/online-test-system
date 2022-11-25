@@ -9,8 +9,6 @@ export const useStudent = defineStore('users', {
 
   actions: {
     async getStudentsByPage(pageSize, currentPage) {
-      console.log(pageSize, currentPage)
-
       try {
         const res = await http.get('student/page', {
           params: {
