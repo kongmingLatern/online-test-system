@@ -31,6 +31,7 @@ import {
   reactive,
   ref,
 } from 'vue'
+import { useStudent } from '@/stores/student.store'
 import type { TableColumnsOptions } from '@/type'
 import Column from '@/utils/Task/Column'
 import { getStudentData } from '@/api/request'
@@ -39,9 +40,12 @@ const options: Partial<TableColumnsOptions> = {
   align: 'center',
 }
 let data = reactive<Student[]>([])
-const total = ref<number>()
+const totalPage = ref<number>()
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
+
+const store = useStudent()
+
 const columns = [
   new Column('编号', 'no', 'no', options),
   new Column('学号', 'studentNo', 'studentNo', options),
@@ -54,12 +58,28 @@ const columns = [
 ]
 
 const pagination = computed(() => ({
-  total: total.value,
+  total: totalPage.value,
   current: current.value,
   pageSize: pageSize.value,
 }))
+async function getStudentData(currentPage) {
+  try {
+    const [res, total] = await store.getStudentsByPage(
+      pageSize.value,
+      currentPage
+    )
+
+    res.forEach(item => {
+      data.push(item)
+    })
+
+    totalPage.value = total
+  } catch (error) {
+    console.log(error)
+  }
+}
 onMounted(async () => {
-  await getStudentData(data, pageSize.value, total)()
+  await getStudentData(1)
 })
 
 const changePage: (
@@ -68,12 +88,7 @@ const changePage: (
   pagination.current = pagination.current
   current.value = pagination.current
   data.length = 0
-  await getStudentData(
-    data,
-    pageSize.value,
-    total,
-    pagination.current
-  )()
+  getStudentData(current.value)
 }
 
 provide('columns', columns)
