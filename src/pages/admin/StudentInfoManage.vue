@@ -35,32 +35,64 @@
 </template>
 
 <script setup lang="ts">
-import { provide } from 'vue'
-import { setData, Student, Column } from '@/utils'
+import {
+  computed,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+} from 'vue'
+import { Column, Student } from '@/utils'
 import type { TableColumnsOptions } from '@/type'
+import { getStudentData } from '@/api/request'
 
 const options: Partial<TableColumnsOptions> = {
   align: 'center',
 }
 const columns = [
   new Column('编号', 'no', 'no', options),
-  new Column('学号', 'sno', 'sno', options),
-  new Column('姓名', 'name', 'name', options),
-  new Column('班级', 'cno', 'cno', options),
-  new Column('操作', 'student', 'student', {
+  new Column('学号', 'studentNo', 'studentNo', options),
+  new Column('姓名', 'studentName', 'studentName', options),
+  new Column('班级', 'classNo', 'classNo', options),
+  new Column('操作', 'delete', 'delete', {
     width: 60,
-    ...options,
+    align: 'center',
   }),
 ]
 
-const data = [
-  new Student('1', '施颖杰', 32, '0922201'),
-  new Student('2', '施颖杰', 32, '0922201'),
-  new Student('3', '施颖杰', 32, '0922201'),
-]
-const result = setData(data)
+let data = reactive<Student[]>([])
+const total = ref<number>()
+const current = ref<number>(1)
+const pageSize = ref<number>(10)
+
+const pagination = computed(() => ({
+  total: total.value,
+  current: current.value,
+  pageSize: pageSize.value,
+}))
+
+onMounted(async () => {
+  await getStudentData(data, pageSize.value, total)()
+})
+
+const changePage: (
+  pagination: any
+) => Promise<void> = async pagination => {
+  pagination.current = pagination.current
+  current.value = pagination.current
+  data.length = 0
+  await getStudentData(
+    data,
+    pageSize.value,
+    total,
+    pagination.current
+  )()
+}
+
 provide('columns', columns)
-provide('data', result)
+provide('data', data)
+provide('pagination', pagination)
+provide('change', changePage)
 </script>
 
 <style scoped></style>

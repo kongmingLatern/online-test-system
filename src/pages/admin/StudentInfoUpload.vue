@@ -44,8 +44,8 @@ import {
 } from 'vue'
 import type { TableColumnsOptions } from '@/type'
 import Column from '@/utils/Task/Column'
-import { Student } from '@/utils'
-import http from '@/api/http'
+import { getStudentData } from '@/api/request'
+import type { Student } from '@/utils'
 const options: Partial<TableColumnsOptions> = {
   align: 'center',
 }
@@ -64,37 +64,29 @@ const columns = [
   }),
 ]
 
-async function getData(pageDefault: number = 1) {
-  const res = await http.get('student/page', {
-    params: {
-      page: pageDefault,
-      pageSize: pageSize.value,
-    },
-  })
-  res.data.records.forEach(record => {
-    const { studentNo, studentName, classNo } = record
-    data.push(new Student(studentNo, studentName, classNo))
-  })
-  total.value = res.data.total
-  return data
-}
-
 const pagination = computed(() => ({
   total: total.value,
   current: current.value,
   pageSize: pageSize.value,
 }))
 onMounted(async () => {
-  await getData()
+  await getStudentData(data, pageSize.value, total)()
 })
 
 const changePage: (
   pagination: any
-) => void = pagination => {
+) => Promise<void> = async pagination => {
   pagination.current = pagination.current
   current.value = pagination.current
   data.length = 0
-  getData(pagination.current)
+  console.log(pagination)
+  console.log(pagination.current)
+  await getStudentData(
+    data,
+    pageSize.value,
+    total,
+    pagination.current
+  )()
 }
 
 provide('columns', columns)
