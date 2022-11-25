@@ -1,37 +1,26 @@
 <template>
-  <Layout>
-    <template #header>
+  <div data-test="checkBoxContent">
+    <Content>
       <!-- 头部 -->
-      <Header
-        data-test="checkBoxHeader"
-        text="在线考试系统"
-      />
-    </template>
-    <template #content>
-      <div data-test="checkBoxContent">
-        <Content>
-          <!-- 头部 -->
-          <template #header>
-            <Header text="多选题管理" isTitle="false" />
-          </template>
+      <template #header>
+        <Header text="多选题管理" isTitle="false" />
+      </template>
 
-          <!-- 导航 -->
-          <template #nav>
-            <Nav data-test="checkBoxNav">
-              <template #breadcrumb>
-                <BreadCrumb />
-              </template>
-            </Nav>
+      <!-- 导航 -->
+      <template #nav>
+        <Nav data-test="checkBoxNav">
+          <template #breadcrumb>
+            <BreadCrumb />
           </template>
+        </Nav>
+      </template>
 
-          <!-- 内容 -->
-          <template #main>
-            <Main data-test="checkBoxMain" />
-          </template>
-        </Content>
-      </div>
-    </template>
-  </Layout>
+      <!-- 内容 -->
+      <template #main>
+        <Main data-test="checkBoxMain" />
+      </template>
+    </Content>
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -1,13 +1,8 @@
 import Header from '@/components/Header.vue'
-import Nav from '@/components/Nav.vue'
 import {
   findComponent,
   registGlobalComponent,
 } from '@/utils'
-import { h } from 'vue'
-import Breadcrumb from '@/components/BreadCrumb.vue'
-import Content from '@/components/Content.vue'
-import Main from '@/components/Main.vue'
 import StudentInfoManage from '@/pages/admin/StudentInfoManage.vue'
 
 vitest.mock('ant-design-vue')
@@ -27,10 +22,6 @@ beforeEach(() => {
   )
 })
 describe('component shoule be exists', () => {
-  it('we should have a Header component', () => {
-    const header = findComponent(wrapper, 'studentHeader')
-    expect(header.exists()).toBe(true)
-  })
   it('we should have a Nav component', () => {
     const studentNav = findComponent(wrapper, 'studentNav')
     expect(studentNav.exists()).toBe(true)

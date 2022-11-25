@@ -24,10 +24,6 @@ beforeEach(() => {
   wrapper = registGlobalComponent(TaskBaseManage, options)
 })
 describe('component shoule be exists', () => {
-  it('we should have a Header component', () => {
-    const header = findComponent(wrapper, 'taskBaseHeader')
-    expect(header.exists()).toBe(true)
-  })
   it('we should have a Nav component', () => {
     const taskBaseNav = findComponent(
       wrapper,

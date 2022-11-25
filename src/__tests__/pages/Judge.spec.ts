@@ -16,30 +16,6 @@ const options = {
   props: {
     text: '',
   },
-  slots: {
-    header: h(Header, {
-      'data-test': 'studentHeader',
-    }),
-
-    content: h(Content, {
-      'data-test': 'studentContent',
-      slots: {
-        header: h(Header, {
-          'data-test': 'header',
-          text: '学生信息管理',
-        }),
-        nav: h(Nav, {
-          'data-test': 'nav',
-          slots: {
-            breadcrumb: h(Breadcrumb, {}),
-          },
-        }),
-        main: h(Main, {
-          'data-test': 'main',
-        }),
-      },
-    }),
-  },
 }
 
 let wrapper
@@ -48,10 +24,6 @@ beforeEach(() => {
   wrapper = registGlobalComponent(JudgeManage, options)
 })
 describe('component shoule be exists', () => {
-  it('we should have a Header component', () => {
-    const header = findComponent(wrapper, 'judgeHeader')
-    expect(header.exists()).toBe(true)
-  })
   it('we should have a Nav component', () => {
     const judgeNav = findComponent(wrapper, 'judgeNav')
     expect(judgeNav.exists()).toBe(true)

@@ -16,29 +16,6 @@ const options = {
   props: {
     text: '',
   },
-  slots: {
-    header: h(Header, {
-      'data-test': 'studentHeader',
-    }),
-
-    content: h(Content, {
-      'data-test': 'studentContent',
-      slots: {
-        header: h(Header, {
-          'data-test': 'header',
-        }),
-        nav: h(Nav, {
-          'data-test': 'nav',
-          slots: {
-            breadcrumb: h(Breadcrumb, {}),
-          },
-        }),
-        main: h(Main, {
-          'data-test': 'main',
-        }),
-      },
-    }),
-  },
 }
 
 let wrapper
@@ -50,10 +27,6 @@ beforeEach(() => {
   )
 })
 describe('component shoule be exists', () => {
-  it('we should have a Header component', () => {
-    const header = findComponent(wrapper, 'studentHeader')
-    expect(header.exists()).toBe(true)
-  })
   it('we should have a Nav component', () => {
     const studentNav = findComponent(wrapper, 'studentNav')
     expect(studentNav.exists()).toBe(true)

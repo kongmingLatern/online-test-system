@@ -1,34 +1,26 @@
 <template>
-  <Layout>
-    <template #header>
+  <div data-test="judgeContent">
+    <Content>
       <!-- 头部 -->
-      <Header data-test="judgeHeader" text="在线考试系统" />
-    </template>
-    <template #content>
-      <div data-test="judgeContent">
-        <Content>
-          <!-- 头部 -->
-          <template #header>
-            <Header text="判断题管理" isTitle="false" />
-          </template>
+      <template #header>
+        <Header text="判断题管理" isTitle="false" />
+      </template>
 
-          <!-- 导航 -->
-          <template #nav>
-            <Nav data-test="judgeNav">
-              <template #breadcrumb>
-                <BreadCrumb />
-              </template>
-            </Nav>
+      <!-- 导航 -->
+      <template #nav>
+        <Nav data-test="judgeNav">
+          <template #breadcrumb>
+            <BreadCrumb />
           </template>
+        </Nav>
+      </template>
 
-          <!-- 内容 -->
-          <template #main>
-            <Main data-test="judgeMain" />
-          </template>
-        </Content>
-      </div>
-    </template>
-  </Layout>
+      <!-- 内容 -->
+      <template #main>
+        <Main data-test="judgeMain" />
+      </template>
+    </Content>
+  </div>
 </template>
 
 <script setup lang="ts">

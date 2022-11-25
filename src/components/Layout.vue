@@ -3,9 +3,8 @@
     <a-layout>
       <a-layout-header
         :style="{ background: '#fff', padding: 0 }"
-        data-test="header"
       >
-        <slot name="header"></slot>
+        <Header data-test="header" />
       </a-layout-header>
       <a-layout>
         <a-layout-sider
@@ -14,24 +13,21 @@
           @collapse="onCollapse"
           @breakpoint="onBreakpoint"
         >
-          <div class="logo" />
           <a-menu
-            v-model:openKeys="openKeys"
-            v-model:selectedKeys="selectedKeys"
+            v-model:openKeys="state.openKeys"
+            v-model:selectedKeys="state.selectedKeys"
             theme="dark"
             mode="inline"
-            h-100
+            :inline-collapsed="state.collapsed"
             @openChange="onOpenChange"
-            data-test="aside"
           >
-            <!-- TODO: 侧边栏的展示问题 -->
-            <AdminAside />
+            <AdminAside data-test="aside" />
           </a-menu>
         </a-layout-sider>
 
         <a-layout-content data-test="content">
           <div p-5>
-            <slot name="content"></slot>
+            <router-view />
           </div>
         </a-layout-content>
       </a-layout>
@@ -42,10 +38,21 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { reactive, watch } from 'vue'
 import AdminAside from '@/components/admin/AdminAside.vue'
-const selectedKeys = ref<string[]>(['studentInfoUpload'])
-const openKeys = ref<string[]>(['student'])
+const state = reactive({
+  collapsed: false,
+  selectedKeys: ['studentInfoUpload'],
+  openKeys: ['student', 'task'],
+  preOpenKeys: ['sub1'],
+})
+watch(
+  () => state.openKeys,
+  (_val, oldVal) => {
+    state.preOpenKeys = oldVal
+  }
+)
+
 const onCollapse = (collapsed: boolean, type: string) => {
   console.log(collapsed, type)
 }

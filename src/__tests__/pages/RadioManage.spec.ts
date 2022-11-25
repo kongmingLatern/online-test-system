@@ -19,10 +19,6 @@ beforeEach(() => {
   wrapper = registGlobalComponent(RadioManage, options)
 })
 describe('component shoule be exists', () => {
-  it('we should have a Header component', () => {
-    const header = findComponent(wrapper, 'radioHeader')
-    expect(header.exists()).toBe(true)
-  })
   it('we should have a Nav component', () => {
     const radioNav = findComponent(wrapper, 'radioNav')
     expect(radioNav.exists()).toBe(true)
