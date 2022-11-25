@@ -4,6 +4,7 @@ import {
   registGlobalComponent,
 } from '@/utils'
 import StudentInfoUpload from '@/pages/admin/StudentInfoUpload.vue'
+import { setActivePinia, createPinia } from 'pinia'
 
 vitest.mock('ant-design-vue')
 
@@ -16,6 +17,7 @@ const options = {
 let wrapper
 
 beforeEach(() => {
+  setActivePinia(createPinia())
   wrapper = registGlobalComponent(
     StudentInfoUpload,
     options
