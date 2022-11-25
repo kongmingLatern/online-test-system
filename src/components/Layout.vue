@@ -20,8 +20,9 @@
             mode="inline"
             :inline-collapsed="state.collapsed"
             @openChange="onOpenChange"
+            data-test="aside"
           >
-            <AdminAside data-test="aside" />
+            <AdminAside />
           </a-menu>
         </a-layout-sider>
 
