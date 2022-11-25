@@ -79,8 +79,6 @@ const changePage: (
   pagination.current = pagination.current
   current.value = pagination.current
   data.length = 0
-  console.log(pagination)
-  console.log(pagination.current)
   await getStudentData(
     data,
     pageSize.value,
