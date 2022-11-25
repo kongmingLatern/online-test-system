@@ -35,16 +35,24 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, provide, reactive } from 'vue'
+import {
+  computed,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+} from 'vue'
 import type { TableColumnsOptions } from '@/type'
-import { setData } from '@/utils'
 import Column from '@/utils/Task/Column'
 import { Student } from '@/utils'
 import http from '@/api/http'
 const options: Partial<TableColumnsOptions> = {
   align: 'center',
 }
-const data = reactive<Student[]>([])
+let data = reactive<Student[]>([])
+const total = ref<number>()
+const current = ref<number>(1)
+const pageSize = ref<number>(10)
 const columns = [
   new Column('编号', 'no', 'no', options),
   new Column('学号', 'studentNo', 'studentNo', options),
@@ -56,26 +64,43 @@ const columns = [
   }),
 ]
 
-async function getData() {
+async function getData(pageDefault: number = 1) {
   const res = await http.get('student/page', {
     params: {
-      page: 1,
-      pageSize: 10,
+      page: pageDefault,
+      pageSize: pageSize.value,
     },
   })
   res.data.records.forEach(record => {
     const { studentNo, studentName, classNo } = record
     data.push(new Student(studentNo, studentName, classNo))
   })
+  total.value = res.data.total
   return data
 }
 
+const pagination = computed(() => ({
+  total: total.value,
+  current: current.value,
+  pageSize: pageSize.value,
+}))
 onMounted(async () => {
   await getData()
 })
 
+const changePage: (
+  pagination: any
+) => void = pagination => {
+  pagination.current = pagination.current
+  current.value = pagination.current
+  data.length = 0
+  getData(pagination.current)
+}
+
 provide('columns', columns)
 provide('data', data)
+provide('pagination', pagination)
+provide('change', changePage)
 </script>
 
 <style scoped></style>
