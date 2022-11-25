@@ -31,11 +31,10 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { useStudent } from '@/stores/student.store'
 import type { TableColumnsOptions } from '@/type'
-import Column from '@/utils/Task/Column'
-import { getStudentData } from '@/api/request'
 import type { Student } from '@/utils'
+import Column from '@/utils/Task/Column'
+import { useStudent } from '@/stores/student.store'
 const options: Partial<TableColumnsOptions> = {
   align: 'center',
 }
