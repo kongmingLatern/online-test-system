@@ -3,6 +3,9 @@
     :columns="columns"
     :data-source="data"
     data-test="table"
+    :pagination="pagination"
+    :loading="loading"
+    @change="changePage"
   >
     <template #bodyCell="{ column, text, record, index }">
       <template v-if="column.dataIndex === 'no'">
@@ -36,8 +39,19 @@
   </a-table>
 </template>
 <script lang="ts" setup>
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
 
 const columns = inject('columns')
 const data = inject('data')
+const pagination = inject('pagination')
+const change: ((pagination: any) => void) | null =
+  inject('change') ?? null
+const loading = ref<boolean>(false)
+
+// TODO: 孙传爷
+const changePage = pagination => {
+  loading.value = true
+  change!(pagination)
+  loading.value = false
+}
 </script>
