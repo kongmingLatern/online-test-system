@@ -14,7 +14,7 @@ public class MyRandom {
         Random ran = new Random();
         while (set.size() < num) {
             Integer tmp = ran.nextInt(range);
-            set.add(tmp);//直接加入，当有重复值时，不会往里加入，直到set的长度为52才结束
+            set.add(tmp);//直接加入，当有重复值时，不会往里加入，直到set的长度为num才结束
         }
         return set;
     }

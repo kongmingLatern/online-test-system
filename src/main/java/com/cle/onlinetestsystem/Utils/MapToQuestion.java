@@ -18,7 +18,6 @@ public class MapToQuestion {
                                          final ArrayList<Integer> arrayList = new ArrayList();
                                          String correct = "[";
                                          String answer = "[";
-
                                          @Override
                                          public void accept(Integer k, String v) {
                                              if (k == 0) {

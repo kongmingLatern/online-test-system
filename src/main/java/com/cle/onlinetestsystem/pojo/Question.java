@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * @author kele
+ */
 @Data
 public class Question implements Serializable {
 @TableId

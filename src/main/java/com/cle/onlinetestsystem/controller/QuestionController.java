@@ -36,6 +36,7 @@ public class QuestionController {
      * @return
      */
     @GetMapping("/page")
+//    @Cacheable(value = "questionCache",key = "#baseId")
     public R<Page> page(Integer page, Integer pageSize, Long baseId, String questionList,Integer questionType){
         Page<Question> questionPage = new Page<>(page,pageSize);
         LambdaQueryWrapper<Question> questionLambdaQueryWrapper = new LambdaQueryWrapper<>();

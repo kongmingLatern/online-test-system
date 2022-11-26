@@ -8,7 +8,6 @@ import com.cle.onlinetestsystem.dao.QuestionDao;
 import com.cle.onlinetestsystem.pojo.Question;
 import com.cle.onlinetestsystem.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionDao, Question> impl
      * @return
      */
     @Override
-    @Cacheable(value = "questionCache",key = "#baseId")
+//    @Cacheable(value = "questionCache",key = "#baseId")
     public List<Question> chooseQuestion(Long baseId,Integer radioNumber, Integer selectedNumber, Integer judgeNumber) {
         //查询所有的所有题目
         LambdaQueryWrapper<Question> questionLambdaQueryWrapper = new LambdaQueryWrapper<>();
