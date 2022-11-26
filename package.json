@@ -50,6 +50,7 @@
     "unplugin-vue-components": "^0.22.11",
     "vite": "^3.0.9",
     "vitest": "^0.23.0",
+    "vue-request": "^1.2.4",
     "vue-tsc": "^0.40.7"
   }
 }
