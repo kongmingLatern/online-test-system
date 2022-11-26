@@ -33,7 +33,7 @@ public class BaseController {
     private QuestionService questionService;
 
     /**
-     * 导入题库（必须配合addBase使用）
+     * 导入题库
      * @param file
      * @return
      */

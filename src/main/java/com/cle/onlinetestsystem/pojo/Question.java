@@ -3,8 +3,10 @@ package com.cle.onlinetestsystem.pojo;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class Question {
+public class Question implements Serializable {
 @TableId
   private Long questionId;//题目id
   private Long baseId;//题库id

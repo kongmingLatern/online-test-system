@@ -12,7 +12,7 @@ class QuestionServiceImplTest {
     private QuestionService questionService;
 @Test
     public void test(){
-    List<Question> questionList = questionService.chooseQuestion(1595785024261701633L, 4, 5, 10);
+    List<Question> questionList = questionService.chooseQuestion(111L, 1, 0, 0);
     System.out.println(questionList);
 }
 }
