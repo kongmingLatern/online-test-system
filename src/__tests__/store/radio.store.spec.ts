@@ -1,14 +1,14 @@
-import { useRadio } from '@/stores/question.store'
+import { useQuestion } from '@/stores/question.store'
 import { setActivePinia, createPinia } from 'pinia'
 
-describe('Student Store', () => {
+describe('Radio Store', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
   })
 
   // NOTE: 测试接口 'student/pages' 的数据'
-  it('should return 1 record', async () => {
-    const store = useRadio()
+  it('should return 5 record', async () => {
+    const store = useQuestion()
     await expect(store.getQuestionByCurrentPage(5, 1, 1))
       .resolves.toMatchInlineSnapshot(`
       [
