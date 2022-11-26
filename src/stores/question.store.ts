@@ -27,6 +27,7 @@ export const useQuestion = defineStore('question', {
             questionType,
           },
         })
+        this.question = []
         res.data.records.forEach(record => {
           const {
             questionList,
@@ -62,6 +63,8 @@ export const useQuestion = defineStore('question', {
             )
           }
         })
+        console.log(this.question)
+
         return [this.question, res.data.total]
       } catch (error) {
         // 让表单组件显示错误
