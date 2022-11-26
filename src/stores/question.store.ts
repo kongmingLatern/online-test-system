@@ -6,7 +6,7 @@ import Radio from '../utils/Task/Radio'
 
 const requestPath = '/question/page'
 
-export const useRadio = defineStore('radio', {
+export const useQuestion = defineStore('question', {
   state: () => ({
     question: [] as Radio[] | Checkbox[] | Judge[],
   }),
