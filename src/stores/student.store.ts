@@ -16,6 +16,7 @@ export const useStudent = defineStore('students', {
             pageSize,
           },
         })
+        this.studentData = []
         res.data.records.forEach(record => {
           const { studentNo, studentName, classNo } = record
           this.studentData.push(

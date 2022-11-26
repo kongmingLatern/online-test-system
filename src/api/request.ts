@@ -5,16 +5,20 @@ export async function getStudentDataByCurrentPage(
   data,
   currentPage,
   pageSize,
-  totalPage: Ref<number | undefined>
+  totalPage: Ref<number | undefined>,
+  isLoading: Ref<boolean | undefined>
 ) {
   try {
     const store = useStudent()
+    isLoading.value = true
     const [res, total] = await store.getStudentsByPage(
       pageSize,
       currentPage
     )
 
+    data.length = 0
     Object.assign(data, res)
+    isLoading.value = false
 
     totalPage.value = total
     return true

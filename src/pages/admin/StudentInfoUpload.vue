@@ -54,6 +54,7 @@ let data = reactive<Student[]>([])
 const totalPage = ref<number>()
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
+const loading = ref<boolean>(false)
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,
@@ -65,7 +66,8 @@ onMounted(async () => {
     data,
     1,
     pageSize.value,
-    totalPage
+    totalPage,
+    loading
   )
 })
 
@@ -79,12 +81,14 @@ const changePage: (
     data,
     current.value,
     pageSize.value,
-    totalPage
+    totalPage,
+    loading
   )
 }
 
 provide('columns', columns)
 provide('data', data)
+provide('loading', loading)
 provide('pagination', pagination)
 provide('change', changePage)
 </script>
