@@ -14,7 +14,6 @@ const options = {
 }
 
 let wrapper
-
 beforeEach(() => {
   wrapper = registGlobalComponent(
     StudentInfoManage,

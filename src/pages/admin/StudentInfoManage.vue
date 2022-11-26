@@ -32,7 +32,7 @@ import {
 } from 'vue'
 import { Column, Student } from '@/utils'
 import type { TableColumnsOptions } from '@/type'
-import { getStudentData } from '@/api/request'
+import { getStudentDataByCurrentPage } from '@/api/request'
 
 const options: Partial<TableColumnsOptions> = {
   align: 'center',
@@ -49,18 +49,22 @@ const columns = [
 ]
 
 let data = reactive<Student[]>([])
-const total = ref<number>()
+const totalPage = ref<number>()
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
-
 const pagination = computed(() => ({
-  total: total.value,
+  total: totalPage.value,
   current: current.value,
   pageSize: pageSize.value,
 }))
 
 onMounted(async () => {
-  await getStudentData(data, pageSize.value, total)()
+  await getStudentDataByCurrentPage(
+    data,
+    1,
+    pageSize.value,
+    totalPage
+  )
 })
 
 const changePage: (
@@ -69,12 +73,12 @@ const changePage: (
   pagination.current = pagination.current
   current.value = pagination.current
   data.length = 0
-  await getStudentData(
+  getStudentDataByCurrentPage(
     data,
+    current.value,
     pageSize.value,
-    total,
-    pagination.current
-  )()
+    totalPage
+  )
 }
 
 provide('columns', columns)

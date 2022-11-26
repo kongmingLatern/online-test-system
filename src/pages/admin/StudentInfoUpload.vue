@@ -34,17 +34,11 @@ import {
 import type { TableColumnsOptions } from '@/type'
 import type { Student } from '@/utils'
 import Column from '@/utils/Task/Column'
-import { useStudent } from '@/stores/student.store'
 import { getStudentDataByCurrentPage } from '@/api/request'
 const options: Partial<TableColumnsOptions> = {
   align: 'center',
 }
-let data = reactive<Student[]>([])
-const totalPage = ref<number>()
-const current = ref<number>(1)
-const pageSize = ref<number>(10)
 
-const store = useStudent()
 
 const columns = [
   new Column('编号', 'no', 'no', options),
@@ -57,6 +51,10 @@ const columns = [
   }),
 ]
 
+let data = reactive<Student[]>([])
+const totalPage = ref<number>()
+const current = ref<number>(1)
+const pageSize = ref<number>(10)
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,

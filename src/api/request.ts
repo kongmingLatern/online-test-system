@@ -20,7 +20,8 @@ export async function getStudentDataByCurrentPage(
     })
 
     totalPage.value = total
+    return true
   } catch (error) {
-    console.log(error)
+    return false
   }
 }
