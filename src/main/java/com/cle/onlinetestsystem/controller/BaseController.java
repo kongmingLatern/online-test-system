@@ -23,14 +23,17 @@ import java.util.stream.Collectors;
 @RequestMapping("/base")
 @Slf4j
 public class BaseController {
-    @Autowired
-    private BaseService baseService;
-    @Autowired
-    private SubjectService subjectService;
-    @Autowired
-    private TeacherService teacherService;
-    @Autowired
-    private QuestionService questionService;
+    private final BaseService baseService;
+    private final SubjectService subjectService;
+    private final TeacherService teacherService;
+    private final QuestionService questionService;
+
+    public BaseController(BaseService baseService, SubjectService subjectService, TeacherService teacherService, QuestionService questionService) {
+        this.baseService = baseService;
+        this.subjectService = subjectService;
+        this.teacherService = teacherService;
+        this.questionService = questionService;
+    }
 
     /**
      * 导入题库

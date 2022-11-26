@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GlobalExceptionHandler {
     @ExceptionHandler(CustomException.class)
     public R<String> customException(CustomException customException){
-        return R.success(customException.getMessage());
+        return R.error(customException.getMessage());
     }
 
 }

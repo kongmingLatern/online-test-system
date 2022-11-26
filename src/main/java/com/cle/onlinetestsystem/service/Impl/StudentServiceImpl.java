@@ -10,7 +10,6 @@ import com.cle.onlinetestsystem.pojo.Clbum;
 import com.cle.onlinetestsystem.pojo.Student;
 import com.cle.onlinetestsystem.service.ClbumService;
 import com.cle.onlinetestsystem.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
@@ -26,8 +25,12 @@ import java.util.Map;
  */
 @Service
 public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> implements StudentService {
-    @Autowired
-    private ClbumService clbumService;
+    private final ClbumService clbumService;
+
+    public StudentServiceImpl(ClbumService clbumService) {
+        this.clbumService = clbumService;
+    }
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void addStudentWithClbum(StudentDto studentDto) {

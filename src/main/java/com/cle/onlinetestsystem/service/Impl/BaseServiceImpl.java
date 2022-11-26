@@ -23,10 +23,15 @@ import java.util.Map;
  */
 @Service
 public class BaseServiceImpl extends ServiceImpl<BaseDao, Base> implements BaseService {
-    @Autowired
+    final
     QuestionService questionService;
-    @Autowired
-    private DataSourceTransactionManager transactionManager;
+    private final DataSourceTransactionManager transactionManager;
+
+    public BaseServiceImpl(QuestionService questionService, DataSourceTransactionManager transactionManager) {
+        this.questionService = questionService;
+        this.transactionManager = transactionManager;
+    }
+
     @Override
     @Transactional
     public void baseAdd(MultipartFile file,Long baseId){

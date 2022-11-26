@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/task")
 public class TaskController {
-    @Autowired
-    private QuestionService questionService;
-    @Autowired
-    private TaskService taskService;
+    private final QuestionService questionService;
+    private final TaskService taskService;
+
+    public TaskController(QuestionService questionService, TaskService taskService) {
+        this.questionService = questionService;
+        this.taskService = taskService;
+    }
+
     @PostMapping("/add")
     public R<String> addTask(@RequestBody TaskDto taskDto){
         if((taskDto.getRadioNumber()*taskDto.getRadioScore()+taskDto.getJudgeNumber()*taskDto.getJudgeScore()+taskDto.getSelectedNumber()*taskDto.getSelectedScore())!=100.0){

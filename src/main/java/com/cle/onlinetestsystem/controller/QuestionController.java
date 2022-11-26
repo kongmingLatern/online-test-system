@@ -21,10 +21,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
-    @Autowired
-    private QuestionService questionService;
-    @Autowired
-    private BaseService baseService;
+    private final QuestionService questionService;
+    private final BaseService baseService;
+
+    public QuestionController(QuestionService questionService, BaseService baseService) {
+        this.questionService = questionService;
+        this.baseService = baseService;
+    }
 
     /**
      * 题目分页查询

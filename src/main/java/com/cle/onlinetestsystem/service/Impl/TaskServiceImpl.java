@@ -10,7 +10,6 @@ import com.cle.onlinetestsystem.pojo.Task;
 import com.cle.onlinetestsystem.service.MatchService;
 import com.cle.onlinetestsystem.service.StudentService;
 import com.cle.onlinetestsystem.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,10 +17,14 @@ import java.util.List;
 
 @Service
 public class TaskServiceImpl extends ServiceImpl<TaskDao, Task> implements TaskService {
-    @Autowired
-    private StudentService studentService;
-    @Autowired
-    private MatchService matchService;
+    private final StudentService studentService;
+    private final MatchService matchService;
+
+    public TaskServiceImpl(StudentService studentService, MatchService matchService) {
+        this.studentService = studentService;
+        this.matchService = matchService;
+    }
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveTaskWithMatch(TaskDto taskDto) {

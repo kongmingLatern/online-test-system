@@ -10,7 +10,6 @@ import com.cle.onlinetestsystem.service.ClbumService;
 import com.cle.onlinetestsystem.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,10 +21,14 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/student")
 public class StudentController {
-    @Autowired
-    private StudentService studentService;
-    @Autowired
-    private ClbumService clbumService;
+    private final StudentService studentService;
+    private final ClbumService clbumService;
+
+    public StudentController(StudentService studentService, ClbumService clbumService) {
+        this.studentService = studentService;
+        this.clbumService = clbumService;
+    }
+
     /**
      * 学生分页查询
      * @param page

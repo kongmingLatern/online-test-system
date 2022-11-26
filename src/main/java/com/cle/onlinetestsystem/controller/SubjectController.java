@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/subject")
 public class SubjectController {
-    @Autowired
-    private SubjectService subjectService;
+    private final SubjectService subjectService;
+
+    public SubjectController(SubjectService subjectService) {
+        this.subjectService = subjectService;
+    }
+
     @PostMapping("/add")
     public R<String> addSubject(@RequestBody Subject subject){
 

@@ -7,7 +7,6 @@ import com.cle.onlinetestsystem.pojo.Student;
 import com.cle.onlinetestsystem.pojo.Teacher;
 import com.cle.onlinetestsystem.service.StudentService;
 import com.cle.onlinetestsystem.service.TeacherService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +19,13 @@ import java.nio.charset.StandardCharsets;
 @RestController
 @RequestMapping("/login")
 public class LoginController {
-    @Autowired
-    private StudentService studentService;
-    @Autowired
-    private TeacherService teacherService;
+    private final StudentService studentService;
+    private final TeacherService teacherService;
+
+    public LoginController(StudentService studentService, TeacherService teacherService) {
+        this.studentService = studentService;
+        this.teacherService = teacherService;
+    }
 
     /**
      * 教师学生登录接口
