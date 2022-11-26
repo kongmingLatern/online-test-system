@@ -4,10 +4,6 @@ import {
   findComponent,
   registGlobalComponent,
 } from '@/utils'
-import { h } from 'vue'
-import Breadcrumb from '@/components/BreadCrumb.vue'
-import Content from '@/components/Content.vue'
-import Main from '@/components/Main.vue'
 import TaskBaseManage from '@/pages/admin/TaskBaseManage.vue'
 
 vitest.mock('ant-design-vue')
