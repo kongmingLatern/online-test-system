@@ -4,6 +4,7 @@ specifiers:
   '@ant-design/icons-vue': ^6.1.0
   '@cypress/vite-dev-server': ^4.0.1
   '@cypress/vue': ^3.1.0
+  '@pinia/testing': ^0.0.14
   '@rushstack/eslint-patch': ^1.1.4
   '@types/jsdom': ^20.0.0
   '@types/node': ^16.11.56
@@ -44,6 +45,7 @@ devDependencies:
   '@ant-design/icons-vue': 6.1.0_vue@3.2.45
   '@cypress/vite-dev-server': 4.0.1
   '@cypress/vue': 3.1.0_cypress@10.11.0+vue@3.2.45
+  '@pinia/testing': registry.npmmirror.com/@pinia/testing/0.0.14_pinia@2.0.23+vue@3.2.45
   '@rushstack/eslint-patch': 1.2.0
   '@types/jsdom': 20.0.1
   '@types/node': 16.18.3
@@ -1095,7 +1097,6 @@ packages:
 
   /@vue/devtools-api/6.4.5:
     resolution: {integrity: sha512-JD5fcdIuFxU4fQyXUu3w2KpAJHzTVdN+p4iOX2lMWSHMOoQdMAcpFLZzm9Z/2nmsoZ1a96QEhZ26e50xLBsgOQ==}
-    dev: false
 
   /@vue/eslint-config-prettier/7.0.0_mbd4zptqpjbepwpyh2zbtslqey:
     resolution: {integrity: sha512-/CTc6ML3Wta1tCe1gUeO0EYnVXfo3nJXsIhZ8WJr3sov+cGASr6yuiibJTL6lmIBm7GobopToOuB3B6AWyV0Iw==}
@@ -3512,7 +3513,6 @@ packages:
       typescript: 4.7.4
       vue: 3.2.45
       vue-demi: 0.13.11_vue@3.2.45
-    dev: false
 
   /postcss-selector-parser/6.0.10:
     resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
@@ -4346,7 +4346,6 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.45
-    dev: false
 
   /vue-eslint-parser/9.1.0_eslint@8.27.0:
     resolution: {integrity: sha512-NGn/iQy8/Wb7RrRa4aRkokyCZfOUWk19OP5HP6JEozQFX5AoS/t+Z0ZN7FY4LlmWc4FNI922V7cvX28zctN8dQ==}
@@ -4655,6 +4654,21 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': registry.npmmirror.com/@nodelib/fs.scandir/2.1.5
       fastq: registry.npmmirror.com/fastq/1.13.0
+    dev: true
+
+  registry.npmmirror.com/@pinia/testing/0.0.14_pinia@2.0.23+vue@3.2.45:
+    resolution: {integrity: sha512-ZmZwVNd/NnKYLIfjfuKl0zlJ3UdiXFpsHzSlL6wCeezSlyrqGMxsIQKv0J6fleu38gyCNTPBEipfxrt8V4+VIg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@pinia/testing/-/testing-0.0.14.tgz}
+    id: registry.npmmirror.com/@pinia/testing/0.0.14
+    name: '@pinia/testing'
+    version: 0.0.14
+    peerDependencies:
+      pinia: '>=2.0.19'
+    dependencies:
+      pinia: 2.0.23_e7lp6ggkpgyi5vqd44m2kxvk6i
+      vue-demi: registry.npmmirror.com/vue-demi/0.13.11_vue@3.2.45
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
     dev: true
 
   registry.npmmirror.com/@rollup/pluginutils/5.0.2:
@@ -6187,6 +6201,24 @@ packages:
       - sugarss
       - supports-color
       - terser
+    dev: true
+
+  registry.npmmirror.com/vue-demi/0.13.11_vue@3.2.45:
+    resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-demi/-/vue-demi-0.13.11.tgz}
+    id: registry.npmmirror.com/vue-demi/0.13.11
+    name: vue-demi
+    version: 0.13.11
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.2.45
     dev: true
 
   registry.npmmirror.com/webpack-sources/3.2.3:
