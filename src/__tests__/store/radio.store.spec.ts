@@ -1,4 +1,4 @@
-import { useRadio } from '@/stores/Radio.store'
+import { useRadio } from '@/stores/question.store'
 import { setActivePinia, createPinia } from 'pinia'
 
 describe('Student Store', () => {
