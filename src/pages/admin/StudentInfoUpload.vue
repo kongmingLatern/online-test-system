@@ -35,6 +35,7 @@ import type { TableColumnsOptions } from '@/type'
 import type { Student } from '@/utils'
 import Column from '@/utils/Task/Column'
 import { useStudent } from '@/stores/student.store'
+import { getStudentDataByCurrentPage } from '@/api/request'
 const options: Partial<TableColumnsOptions> = {
   align: 'center',
 }
@@ -61,24 +62,14 @@ const pagination = computed(() => ({
   current: current.value,
   pageSize: pageSize.value,
 }))
-async function getStudentData(currentPage) {
-  try {
-    const [res, total] = await store.getStudentsByPage(
-      pageSize.value,
-      currentPage
-    )
 
-    res.forEach(item => {
-      data.push(item)
-    })
-
-    totalPage.value = total
-  } catch (error) {
-    console.log(error)
-  }
-}
 onMounted(async () => {
-  await getStudentData(1)
+  await getStudentDataByCurrentPage(
+    data,
+    1,
+    pageSize.value,
+    totalPage
+  )
 })
 
 const changePage: (
@@ -87,7 +78,12 @@ const changePage: (
   pagination.current = pagination.current
   current.value = pagination.current
   data.length = 0
-  getStudentData(current.value)
+  getStudentDataByCurrentPage(
+    data,
+    current.value,
+    pageSize.value,
+    totalPage
+  )
 }
 
 provide('columns', columns)

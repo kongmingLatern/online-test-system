@@ -15,6 +15,7 @@ export const useStudent = defineStore('users', {
             page: currentPage,
             pageSize,
           },
+          
         })
         res.data.records.forEach(record => {
           const { studentNo, studentName, classNo } = record
