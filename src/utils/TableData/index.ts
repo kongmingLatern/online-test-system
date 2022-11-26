@@ -13,6 +13,8 @@ import {
   data as CheckboxData,
 } from './Checkbox.data'
 
+import { columns as StudentColumn } from './Student.data'
+
 export {
   RadioColumn,
   RadioData,
@@ -20,4 +22,5 @@ export {
   JudgeData,
   CheckboxColumn,
   CheckboxData,
+  StudentColumn,
 }
