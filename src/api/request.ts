@@ -1,8 +1,6 @@
-import { Student } from '@/utils'
-import type { Ref } from 'vue'
-import http from './http'
 import { useStudent } from '../stores/student.store'
 import { useQuestion } from '@/stores/question.store'
+import type { Ref } from 'vue'
 export async function getStudentDataByCurrentPage(
   data,
   currentPage,
@@ -16,9 +14,7 @@ export async function getStudentDataByCurrentPage(
       currentPage
     )
 
-    res.forEach(item => {
-      data.push(item)
-    })
+    Object.assign(data, res)
 
     totalPage.value = total
     return true
@@ -42,13 +38,9 @@ export async function getQuestionByCurrentPage(
         currentPage,
         questionType
       )
-
-    res.forEach(item => {
-      data.push(item)
-    })
-
+    Object.assign(data, res)
     totalPage.value = total
-    return true
+    return data
   } catch (error) {
     return false
   }
