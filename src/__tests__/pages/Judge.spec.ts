@@ -1,13 +1,8 @@
 import Header from '@/components/Header.vue'
-import Nav from '@/components/Nav.vue'
 import {
   findComponent,
   registGlobalComponent,
 } from '@/utils'
-import { h } from 'vue'
-import Breadcrumb from '@/components/BreadCrumb.vue'
-import Content from '@/components/Content.vue'
-import Main from '@/components/Main.vue'
 import JudgeManage from '@/pages/admin/JudgeManage.vue'
 
 vitest.mock('ant-design-vue')

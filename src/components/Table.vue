@@ -38,16 +38,15 @@
   </a-table>
 </template>
 <script lang="ts" setup>
-import { inject, ref, type Ref } from 'vue'
+import { inject } from 'vue'
 
 const columns = inject('columns')
 const data = inject('data')
 const pagination = inject('pagination')
-const change: ((pagination: any) => void) | null =
-  inject('change') ?? null
+const change: any = inject('change') ?? null
 
 // TODO: 孙传爷
 const changePage = pagination => {
-  change!(pagination)
+  change(pagination)
 }
 </script>
