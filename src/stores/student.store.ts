@@ -2,7 +2,7 @@ import { Student } from '@/utils'
 import { defineStore } from 'pinia'
 import http from '../api/http'
 
-export const useStudent = defineStore('users', {
+export const useStudent = defineStore('students', {
   state: () => ({
     studentData: [] as Student[],
   }),
@@ -15,7 +15,6 @@ export const useStudent = defineStore('users', {
             page: currentPage,
             pageSize,
           },
-          
         })
         res.data.records.forEach(record => {
           const { studentNo, studentName, classNo } = record
