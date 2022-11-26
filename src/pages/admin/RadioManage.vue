@@ -24,12 +24,56 @@
 </template>
 
 <script setup lang="ts">
-import { provide } from 'vue'
-import { RadioColumn, RadioData } from '@/utils/TableData'
-import { setData } from '@/utils'
-const result = setData(RadioData)
+import {
+  computed,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+} from 'vue'
+import { RadioColumn } from '@/utils/TableData'
+import { getQuestionByCurrentPage } from '@/api/request'
+import type { Radio } from '@/utils'
+
+let data = reactive<Radio[]>([])
+const totalPage = ref<number>()
+const current = ref<number>(1)
+const pageSize = ref<number>(10)
+const pagination = computed(() => ({
+  total: totalPage.value,
+  current: current.value,
+  pageSize: pageSize.value,
+}))
+
+onMounted(async () => {
+  await getQuestionByCurrentPage(
+    data,
+    1,
+    pageSize.value,
+    totalPage,
+    1
+  )
+})
+
+const changePage: (
+  pagination: any
+) => Promise<void> = async pagination => {
+  pagination.current = pagination.current
+  current.value = pagination.current
+  data.length = 0
+  getQuestionByCurrentPage(
+    data,
+    current.value,
+    pageSize.value,
+    totalPage,
+    1
+  )
+}
+
 provide('columns', RadioColumn)
-provide('data', result)
+provide('data', data)
+provide('pagination', pagination)
+provide('change', changePage)
 </script>
 
 <style scoped></style>
