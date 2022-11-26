@@ -63,7 +63,6 @@ export const useQuestion = defineStore('question', {
             )
           }
         })
-        console.log(this.question)
 
         return [this.question, res.data.total]
       } catch (error) {

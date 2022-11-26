@@ -28,17 +28,21 @@ export async function getQuestionByCurrentPage(
   currentPage,
   pageSize,
   totalPage: Ref<number | undefined>,
-  questionType
+  questionType,
+  isLoading: Ref<boolean | undefined>
 ) {
   try {
     const store = useQuestion()
+    isLoading.value = true
     const [res, total] =
       await store.getQuestionByCurrentPage(
         pageSize,
         currentPage,
         questionType
       )
+    data.length = 0
     Object.assign(data, res)
+    isLoading.value = false
     totalPage.value = total
     return data
   } catch (error) {

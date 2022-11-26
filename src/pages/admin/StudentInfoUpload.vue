@@ -39,7 +39,6 @@ const options: Partial<TableColumnsOptions> = {
   align: 'center',
 }
 
-
 const columns = [
   new Column('编号', 'no', 'no', options),
   new Column('学号', 'studentNo', 'studentNo', options),

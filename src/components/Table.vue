@@ -4,6 +4,7 @@
     :data-source="data"
     data-test="table"
     :pagination="pagination"
+    :loading="loading"
     @change="changePage"
   >
     <template #bodyCell="{ column, text, record, index }">
@@ -42,6 +43,8 @@ import { inject } from 'vue'
 
 const columns = inject('columns')
 const data = inject('data')
+const loading = inject('loading')
+console.log(loading)
 const pagination = inject('pagination')
 const change: any = inject('change') ?? null
 

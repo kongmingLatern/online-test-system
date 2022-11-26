@@ -24,13 +24,61 @@
 </template>
 
 <script setup lang="ts">
-import { provide } from 'vue'
-import { JudgeData, JudgeColumn } from '@/utils/TableData'
-import { setData } from '@/utils'
+import {
+  computed,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+} from 'vue'
+import { JudgeColumn } from '@/utils/TableData'
+import { getQuestionByCurrentPage } from '@/api/request'
+import type { Radio } from '@/utils'
 
-const result = setData(JudgeData)
+let data = reactive<Radio[]>([])
+const totalPage = ref<number>()
+const loading = ref<boolean>(false)
+const current = ref<number>(1)
+const pageSize = ref<number>(10)
+
+const pagination = computed(() => ({
+  total: totalPage.value,
+  current: current.value,
+  pageSize: pageSize.value,
+}))
+
+onMounted(async () => {
+  await getQuestionByCurrentPage(
+    data,
+    current.value,
+    pageSize.value,
+    totalPage,
+    3,
+    loading
+  )
+})
+
+const changePage: (
+  pagination: any
+) => Promise<void> = async pagination => {
+  pagination.current = pagination.current
+  current.value = pagination.current
+
+  getQuestionByCurrentPage(
+    data,
+    current.value,
+    pageSize.value,
+    totalPage,
+    3,
+    loading
+  )
+}
+
 provide('columns', JudgeColumn)
-provide('data', result)
+provide('loading', loading)
+provide('data', data)
+provide('pagination', pagination)
+provide('change', changePage)
 </script>
 
 <style scoped></style>

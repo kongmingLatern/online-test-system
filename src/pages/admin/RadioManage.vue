@@ -37,8 +37,10 @@ import type { Radio } from '@/utils'
 
 let data = reactive<Radio[]>([])
 const totalPage = ref<number>()
+const loading = ref<boolean>(false)
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
+
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,
@@ -48,10 +50,11 @@ const pagination = computed(() => ({
 onMounted(async () => {
   await getQuestionByCurrentPage(
     data,
-    1,
+    current.value,
     pageSize.value,
     totalPage,
-    1
+    1,
+    loading
   )
 })
 
@@ -60,17 +63,19 @@ const changePage: (
 ) => Promise<void> = async pagination => {
   pagination.current = pagination.current
   current.value = pagination.current
-  data.length = 0
+
   getQuestionByCurrentPage(
     data,
     current.value,
     pageSize.value,
     totalPage,
-    1
+    1,
+    loading
   )
 }
 
 provide('columns', RadioColumn)
+provide('loading', loading)
 provide('data', data)
 provide('pagination', pagination)
 provide('change', changePage)
