@@ -104,6 +104,28 @@
       <span>试卷管理</span>
     </a-menu-item>
   </a-sub-menu>
+  <a-sub-menu key="proctor" data-test="proctor">
+    <template #icon>
+      <user-outlined />
+    </template>
+    <template #title>
+      <span>试卷管理</span>
+    </template>
+    <a-menu-item
+      key="searchStudentPassword"
+      data-test="searchStudentPassword"
+      @click="goPath('/searchStudentPassword')"
+    >
+      查询考生密码
+    </a-menu-item>
+    <a-menu-item
+      key="proctorManage"
+      data-test="proctorManage"
+      @click="goPath('/proctorManage')"
+    >
+      批准继续考试
+    </a-menu-item>
+  </a-sub-menu>
 </template>
 
 <script setup lang="ts">
