@@ -12,7 +12,6 @@ import com.cle.onlinetestsystem.service.SubjectService;
 import com.cle.onlinetestsystem.service.TeacherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -93,8 +92,11 @@ public class BaseController {
      * 查询所有题库提供筛选
      */
     @GetMapping("/list")
-    public R<List<Base>> list(){
-        List<Base> list = baseService.list();
+    public R<List<Base>> list(Long subjectId){
+        LambdaQueryWrapper<Base> baseLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        baseLambdaQueryWrapper.eq(subjectId!=null,Base::getSubjectId,subjectId)
+                              .select(Base::getBaseId,Base::getBaseTitle);
+        List<Base> list = baseService.list(baseLambdaQueryWrapper);
         return R.success(list);
     }
     /**

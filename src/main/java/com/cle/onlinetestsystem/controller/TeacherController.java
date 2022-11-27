@@ -47,26 +47,28 @@ public class TeacherController {
 
     /**
      * 分页查询教师
-     * @param size
+     * @param page
      * @param pageSize
      * @param teacherNo
      * @return
      */
     @GetMapping("/page")
-    public R<Page> page(int size,int pageSize,String teacherNo){
+    public R<Page> page(int page,int pageSize,String teacherNo){
         LambdaQueryWrapper<Teacher> teacherLambdaQueryWrapper = new LambdaQueryWrapper<>();
         teacherLambdaQueryWrapper.like(teacherNo!=null,Teacher::getTeacherNo,teacherNo)
                                  .orderByAsc(Teacher::getTeacherNo);
-     Page<Teacher> page = new Page<>(size,pageSize);
-     teacherService.page(page);
-     return R.success(page);
+     Page<Teacher> teacherPage = new Page<>(page,pageSize);
+     teacherService.page(teacherPage);
+     return R.success(teacherPage);
     }
     /**
-     * 下拉查询所有老师
+     * 查询老师列表
      */
     @GetMapping("/list")
     public R<List<Teacher>> list(){
-        List<Teacher> list = teacherService.list();
+        LambdaQueryWrapper<Teacher> teacherLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        teacherLambdaQueryWrapper.select(Teacher::getTeacherId,Teacher::getTeacherName);
+        List<Teacher> list = teacherService.list(teacherLambdaQueryWrapper);
         return R.success(list);
 
     }
