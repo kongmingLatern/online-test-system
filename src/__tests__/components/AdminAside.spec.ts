@@ -41,8 +41,16 @@ describe('sub', () => {
     const student = findComponent(wrapper, "student")
     expect(student.exists()).toBe(true)
   });
-  it('shoule have a sub called task', () => {
-    const task = findComponent(wrapper, "task")
+  it('shoule have a sub called question', () => {
+    const task = findComponent(wrapper, "question")
     expect(task.exists()).toBe(true)
+  });
+  it('shoule have a sub called grade', () => {
+    const grade = findComponent(wrapper, "grade")
+    expect(grade.exists()).toBe(true)
+  });
+  it('shoule have a sub called task', () => {
+    const grade = findComponent(wrapper, "task")
+    expect(grade.exists()).toBe(true)
   });
 })
