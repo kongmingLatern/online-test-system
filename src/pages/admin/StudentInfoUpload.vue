@@ -90,6 +90,7 @@ const changePage: (
   )
 }
 provide('isShow', isShow)
+provide('title', '添加学生')
 provide('columns', StudentColumn)
 provide('data', data)
 provide('loading', loading)

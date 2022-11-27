@@ -39,6 +39,7 @@ const totalPage = ref<number>()
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
 const loading = ref<boolean>(false)
+
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,
