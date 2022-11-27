@@ -24,6 +24,9 @@
 </template>
 
 <script setup lang="ts">
+import { getTeachersByCurrentPage } from '@/api/request'
+import type { Teacher } from '@/utils'
+import { TeacherColumn } from '@/utils/TableData'
 import {
   computed,
   onMounted,
@@ -31,11 +34,8 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { RadioColumn } from '@/utils/TableData'
-import { getQuestionByCurrentPage } from '@/api/request'
-import type { Radio } from '@/utils'
 
-let data = reactive<Radio[]>([])
+let data = reactive<Teacher[]>([])
 const totalPage = ref<number>()
 const loading = ref<boolean>(false)
 const current = ref<number>(1)
@@ -48,12 +48,11 @@ const pagination = computed(() => ({
 }))
 
 onMounted(async () => {
-  await getQuestionByCurrentPage(
+  await getTeachersByCurrentPage(
     data,
     current.value,
     pageSize.value,
     totalPage,
-    1,
     loading
   )
 })
@@ -64,17 +63,16 @@ const changePage: (
   pagination.current = pagination.current
   current.value = pagination.current
 
-  getQuestionByCurrentPage(
+  getTeachersByCurrentPage(
     data,
     current.value,
     pageSize.value,
     totalPage,
-    1,
     loading
   )
 }
 
-provide('columns', RadioColumn)
+provide('columns', TeacherColumn)
 provide('loading', loading)
 provide('data', data)
 provide('pagination', pagination)

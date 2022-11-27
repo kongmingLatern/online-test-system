@@ -82,6 +82,12 @@ const router = createRouter({
           component: () =>
             import('@/pages/admin/ProctorManage.vue'),
         },
+        {
+          path: 'teacherManage',
+          name: 'teacherManage',
+          component: () =>
+            import('@/pages/admin/TeacherManage.vue'),
+        },
       ],
     },
   ],

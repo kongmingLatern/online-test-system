@@ -126,6 +126,21 @@
       批准继续考试
     </a-menu-item>
   </a-sub-menu>
+  <a-sub-menu key="teacher" data-test="teacher">
+    <template #icon>
+      <user-outlined />
+    </template>
+    <template #title>
+      <span>高级管理</span>
+    </template>
+    <a-menu-item
+      key="teacherManage"
+      data-test="teacherManage"
+      @click="goPath('/teacherManage')"
+    >
+      教师管理
+    </a-menu-item>
+  </a-sub-menu>
 </template>
 
 <script setup lang="ts">

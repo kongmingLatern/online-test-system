@@ -8,6 +8,7 @@ import { columns as StudentColumn } from './Student.data'
 
 import { columns as GradeColumn } from './Grade.data'
 import { columns as SearchStudentPasswordColumn } from './SearchStudentPassword.data'
+import { columns as TeacherColumn } from './Teacher.data'
 
 export {
   RadioColumn,
@@ -16,4 +17,5 @@ export {
   StudentColumn,
   GradeColumn,
   SearchStudentPasswordColumn,
+  TeacherColumn,
 }
