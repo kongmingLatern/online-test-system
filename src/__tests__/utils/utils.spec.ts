@@ -10,8 +10,9 @@ import {
   Task,
 } from '@/utils'
 import { Student } from '@/utils'
+import getFormItem from '@/utils/form'
 
-describe('columns', () => {
+describe.skip('columns', () => {
   let title: string
   let dataIndex: string
   let key: string
@@ -124,7 +125,7 @@ describe('columns', () => {
     ])
   })
 })
-describe('class data about table', () => {
+describe.skip('class data about table', () => {
   it('Student ', () => {
     const arr = [
       new Student('1', '施颖杰', '0922201'),
@@ -289,6 +290,25 @@ describe('class data about table', () => {
         questionList:
           '下列选项属于马克思主义三个组成部分之一的是()',
         questionCorrect: ['对'],
+      },
+    ])
+  })
+})
+
+describe('Name of the group', () => {
+  it('have an only object', () => {
+    const result = getFormItem()
+    expect(result).toEqual([
+      {
+        type: 'text',
+        label: '教师姓名',
+      },
+      {
+        formState: {
+          teacher: {
+            teacherName: ''
+          },
+        },
       },
     ])
   })
