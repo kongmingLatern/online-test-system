@@ -6,9 +6,12 @@ import { columns as CheckboxColumn } from './Checkbox.data'
 
 import { columns as StudentColumn } from './Student.data'
 
+import { columns as GradeColumn } from './Grade.data'
+
 export {
   RadioColumn,
   JudgeColumn,
   CheckboxColumn,
   StudentColumn,
+  GradeColumn,
 }
