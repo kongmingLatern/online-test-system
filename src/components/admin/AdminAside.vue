@@ -23,7 +23,7 @@
       <span>学生信息管理</span>
     </a-menu-item>
   </a-sub-menu>
-  <a-sub-menu key="task" data-test="task">
+  <a-sub-menu key="question" data-test="question">
     <template #icon>
       <user-outlined />
     </template>
@@ -62,6 +62,46 @@
     >
       <user-outlined />
       <span>判断题管理</span>
+    </a-menu-item>
+  </a-sub-menu>
+  <a-sub-menu key="grade" data-test="grade">
+    <template #icon>
+      <user-outlined />
+    </template>
+    <template #title>
+      <span>成绩管理</span>
+    </template>
+    <a-menu-item
+      key="grade"
+      data-test="grade"
+      @click="goPath('/gradeManage')"
+    >
+      <user-outlined />
+      <span>成绩管理</span>
+    </a-menu-item>
+  </a-sub-menu>
+  <a-sub-menu key="task" data-test="task">
+    <template #icon>
+      <user-outlined />
+    </template>
+    <template #title>
+      <span>试卷管理</span>
+    </template>
+    <a-menu-item
+      key="taskGenerate"
+      data-test="taskGenerate"
+      @click="goPath('/taskGenerate')"
+    >
+      <user-outlined />
+      <span>试卷生成</span>
+    </a-menu-item>
+    <a-menu-item
+      key="taskManage"
+      data-test="taskManage"
+      @click="goPath('/taskManage')"
+    >
+      <user-outlined />
+      <span>试卷管理</span>
     </a-menu-item>
   </a-sub-menu>
 </template>
