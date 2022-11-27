@@ -52,6 +52,10 @@ describe('AdminAside tab', () => {
     const tab1 = findComponent(wrapper, 'proctorManage')
     expect(tab1.text()).toBe('批准继续考试')
   })
+  it('tab shoule have 教师管理', () => {
+    const tab1 = findComponent(wrapper, 'teacherManage')
+    expect(tab1.text()).toBe('教师管理')
+  })
 })
 
 describe('sub', () => {
@@ -74,5 +78,9 @@ describe('sub', () => {
   it('shoule have a sub called proctor', () => {
     const proctor = findComponent(wrapper, 'proctor')
     expect(proctor.exists()).toBe(true)
+  })
+  it('shoule have a sub called teacher', () => {
+    const teacher = findComponent(wrapper, 'teacher')
+    expect(teacher.exists()).toBe(true)
   })
 })
