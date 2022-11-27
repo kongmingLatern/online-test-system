@@ -17,7 +17,7 @@
 
       <!-- 内容 -->
       <template #main>
-        <Main data-test="taskGenerateMain" />
+        <Form />
       </template>
     </Content>
   </div>
@@ -32,6 +32,7 @@ import {
   ref,
 } from 'vue'
 import { RadioColumn } from '@/utils/TableData'
+import Form from '@/components/admin/Form.vue'
 import { getQuestionByCurrentPage } from '@/api/request'
 import type { Radio } from '@/utils'
 
