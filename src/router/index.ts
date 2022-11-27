@@ -50,6 +50,24 @@ const router = createRouter({
           component: () =>
             import('@/pages/admin/JudgeManage.vue'),
         },
+        {
+          path: 'gradeManage',
+          name: 'gradeManage',
+          component: () =>
+            import('@/pages/admin/GradeManage.vue'),
+        },
+        {
+          path: 'taskGenerate',
+          name: 'taskGenerate',
+          component: () =>
+            import('@/pages/admin/TaskGenerate.vue'),
+        },
+        {
+          path: 'taskManage',
+          name: 'taskManage',
+          component: () =>
+            import('@/pages/admin/TaskManage.vue'),
+        },
       ],
     },
   ],
