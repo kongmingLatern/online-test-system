@@ -7,6 +7,7 @@ import { columns as CheckboxColumn } from './Checkbox.data'
 import { columns as StudentColumn } from './Student.data'
 
 import { columns as GradeColumn } from './Grade.data'
+import { columns as SearchStudentPasswordColumn } from './SearchStudentPassword.data'
 
 export {
   RadioColumn,
@@ -14,4 +15,5 @@ export {
   CheckboxColumn,
   StudentColumn,
   GradeColumn,
+  SearchStudentPasswordColumn,
 }
