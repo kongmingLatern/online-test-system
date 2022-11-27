@@ -44,7 +44,7 @@ import AdminAside from '@/components/admin/AdminAside.vue'
 const state = reactive({
   collapsed: false,
   selectedKeys: ['studentInfoUpload'],
-  openKeys: ['student', 'task'],
+  openKeys: ['student'],
   preOpenKeys: ['sub1'],
 })
 watch(
