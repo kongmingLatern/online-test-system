@@ -13,7 +13,10 @@ export const columns = [
     '题目',
     'questionList',
     'questionList',
-    options
+    {
+      ...options,
+      ellipsis: true
+    }
   ),
   new Column(
     '选项',
@@ -21,12 +24,10 @@ export const columns = [
     'questionAnswer',
     options
   ),
-  new Column(
-    '答案',
-    'questionCorrect',
-    'questionCorrect',
-    options
-  ),
+  new Column('答案', 'questionCorrect', 'questionCorrect', {
+    ...options,
+    width: 150,
+  }),
   new Column('所属试题名称', 'baseTitle', 'baseTitle', {
     ...options,
     width: 200,
