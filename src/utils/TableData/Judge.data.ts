@@ -15,12 +15,10 @@ export const columns = [
     'questionList',
     options
   ),
-  new Column(
-    '答案',
-    'questionCorrect',
-    'questionCorrect',
-    options
-  ),
+  new Column('答案', 'questionCorrect', 'questionCorrect', {
+    ...options,
+    width: 100,
+  }),
   new Column('所属试题名称', 'baseTitle', 'baseTitle', {
     ...options,
     width: 200,
