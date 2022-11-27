@@ -27,6 +27,12 @@
       <template v-if="column.dataIndex === 'delete'">
         <a-button type="danger" rounded>删除</a-button>
       </template>
+      <template v-if="column.dataIndex === 'deleteAndAuth'">
+        <a-space>
+          <a-button type="danger" rounded>授权</a-button>
+          <a-button type="danger" rounded>删除</a-button>
+        </a-space>
+      </template>
       <template v-if="column.dataIndex === 'student'">
         <a-space>
           <a-button type="primary" rounded>
