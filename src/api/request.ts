@@ -1,6 +1,7 @@
 import { useStudent } from '../stores/student.store'
 import { useQuestion } from '@/stores/question.store'
 import type { Ref } from 'vue'
+import { useGrade } from '@/stores/grade.store'
 export async function getStudentDataByCurrentPage(
   data,
   currentPage,
@@ -46,6 +47,33 @@ export async function getQuestionByCurrentPage(
       )
     data.length = 0
     Object.assign(data, res)
+    isLoading.value = false
+    totalPage.value = total
+    return data
+  } catch (error) {
+    return false
+  }
+}
+
+export async function getGradeByCurrentPage(
+  data,
+  currentPage,
+  pageSize,
+  totalPage: Ref<number | undefined>,
+  isLoading: Ref<boolean | undefined>,
+  studentNo?
+) {
+  try {
+    const store = useGrade()
+    isLoading.value = true
+    const [res, total] = await store.getGradeByCurrentPage(
+      pageSize,
+      currentPage,
+      studentNo
+    )
+    data.length = 0
+    Object.assign(data, res)
+    console.log(data);
     isLoading.value = false
     totalPage.value = total
     return data
