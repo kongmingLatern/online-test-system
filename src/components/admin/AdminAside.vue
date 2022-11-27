@@ -109,7 +109,7 @@
       <user-outlined />
     </template>
     <template #title>
-      <span>试卷管理</span>
+      <span>监考管理</span>
     </template>
     <a-menu-item
       key="searchStudentPassword"
