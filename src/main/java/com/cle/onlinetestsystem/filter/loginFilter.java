@@ -29,6 +29,7 @@ public class loginFilter implements Filter {
         else {
             BaseContext.setCurrentId(student);
         }
+
         chain.doFilter(request, response);
 }
 }

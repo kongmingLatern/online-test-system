@@ -40,8 +40,8 @@ public class MatchController {
      * @return
      */
     @GetMapping("/getGradePage")
-    public R<Page> getGrade(Integer size, Integer pageSize, String studentNo){
-    Page<Match> matchPage = new Page<>(size,pageSize);
+    public R<Page> getGrade(Integer page, Integer pageSize, String studentNo){
+    Page<Match> matchPage = new Page<>(page,pageSize);
     //先去模糊查询studentNo对应的studentId
     LambdaQueryWrapper<Student> lambdaQueryWrapper = new LambdaQueryWrapper<>();
     lambdaQueryWrapper.like(studentNo!=null,Student::getStudentNo,studentNo);
