@@ -32,7 +32,7 @@ export const columns = [
     width: 200,
   }),
   new Column('操作', 'delete', 'delete', {
-    width: 60,
+    width: 100,
     ...options,
   }),
 ]
