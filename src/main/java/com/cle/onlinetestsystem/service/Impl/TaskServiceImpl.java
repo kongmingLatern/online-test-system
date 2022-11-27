@@ -28,7 +28,7 @@ public class TaskServiceImpl extends ServiceImpl<TaskDao, Task> implements TaskS
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveTaskWithMatch(TaskDto taskDto) {
-        this.save(taskDto);
+
         LambdaQueryWrapper<Student> studentLambdaQueryWrapper = new LambdaQueryWrapper<>();
         studentLambdaQueryWrapper.eq(Student::getClassId,taskDto.getClassId());
         List<Student> studentList = studentService.list(studentLambdaQueryWrapper);

@@ -34,7 +34,7 @@ public class MatchController {
 
     /**
      * 分页查询学生成绩
-     * @param size
+     * @param page
      * @param pageSize
      * @param studentNo
      * @return
@@ -42,16 +42,9 @@ public class MatchController {
     @GetMapping("/getGradePage")
     public R<Page> getGrade(Integer page, Integer pageSize, String studentNo){
     Page<Match> matchPage = new Page<>(page,pageSize);
-    //先去模糊查询studentNo对应的studentId
-    LambdaQueryWrapper<Student> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-    lambdaQueryWrapper.like(studentNo!=null,Student::getStudentNo,studentNo);
-        List<Student> studentList = studentService.list(lambdaQueryWrapper);
-        List<Long> studentIdList = studentList.parallelStream().map(Student::getStudentId).collect(Collectors.toList());
         LambdaQueryWrapper<Match> matchLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        //根据id数组查询对应的match
-        matchLambdaQueryWrapper.in(Match::getStudentId,studentIdList)
         //没有结束的考试不查询成绩
-                               .eq(Match::getIsEnd,1);
+        matchLambdaQueryWrapper.eq(Match::getIsEnd,1);
     matchService.page(matchPage,matchLambdaQueryWrapper);
     Page<MatchDto> matchDtoPage = new Page<>();
     BeanUtils.copyProperties(matchPage,matchDtoPage);
@@ -81,6 +74,13 @@ public class MatchController {
             matchDto.setBaseTitle(base.getBaseTitle());
             matchDto.setGrade(match.getGrade());
             return matchDto;
+        }).filter(matchDto -> {
+            if(studentNo==null){
+                return true;
+            }
+            else {
+                return matchDto.getStudentNo().contains(studentNo);
+            }
         }).collect(Collectors.toList());
         matchDtoPage.setRecords(collect);
         return R.success(matchDtoPage);

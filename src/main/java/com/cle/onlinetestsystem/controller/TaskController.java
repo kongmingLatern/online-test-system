@@ -2,6 +2,7 @@ package com.cle.onlinetestsystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cle.onlinetestsystem.Utils.ValidateCodeUtils;
 import com.cle.onlinetestsystem.dto.TaskDto;
 import com.cle.onlinetestsystem.pojo.Match;
 import com.cle.onlinetestsystem.pojo.R;
@@ -36,7 +37,8 @@ public class TaskController {
         if((taskDto.getRadioNumber()*taskDto.getRadioScore()+taskDto.getJudgeNumber()*taskDto.getJudgeScore()+taskDto.getSelectedNumber()*taskDto.getSelectedScore())!=100.0){
             return R.error("试卷分值有误");
         }
-        taskService.saveTaskWithMatch(taskDto);
+        taskDto.setTaskPassword(ValidateCodeUtils.generateValidateCode(4).toString());
+        taskService.save(taskDto);
         return R.success("添加成功");
     }
     @GetMapping("/getAll")
