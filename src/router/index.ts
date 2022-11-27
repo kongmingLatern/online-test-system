@@ -68,6 +68,20 @@ const router = createRouter({
           component: () =>
             import('@/pages/admin/TaskManage.vue'),
         },
+        {
+          path: 'searchStudentPassword',
+          name: 'searchStudentPassword',
+          component: () =>
+            import(
+              '@/pages/admin/SearchStudentPassword.vue'
+            ),
+        },
+        {
+          path: 'proctorManage',
+          name: 'proctorManage',
+          component: () =>
+            import('@/pages/admin/ProctorManage.vue'),
+        },
       ],
     },
   ],
