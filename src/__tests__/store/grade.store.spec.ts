@@ -7,7 +7,7 @@ describe('Radio Store', () => {
   })
 
   // NOTE: 测试接口 'student/pages' 的数据'
-  it('should return 8 record', async () => {
+  it.skip('should return 8 record', async () => {
     const store = useGrade()
     await expect(store.getGradeByCurrentPage(1, 1)).resolves
       .toMatchInlineSnapshot(`
