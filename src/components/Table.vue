@@ -44,7 +44,6 @@ import { inject } from 'vue'
 const columns = inject('columns')
 const data = inject('data')
 const loading = inject('loading')
-console.log(loading)
 const pagination = inject('pagination')
 const change: any = inject('change') ?? null
 
