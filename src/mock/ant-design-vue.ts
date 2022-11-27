@@ -1,7 +1,6 @@
-
 const mockComponent = {
   template: '<div><slot></slot></div>',
-};
+}
 
 const AntdIcons = {
   'video-camera-outlined': mockComponent,
@@ -20,6 +19,7 @@ const AntdComponents = {
   'a-menu-item-group': mockComponent,
   'a-sub-menu': mockComponent,
   'a-input': mockComponent,
+  'a-modal': mockComponent,
   'a-form': mockComponent,
   'a-form-item': mockComponent,
   'a-select': mockComponent,
@@ -40,7 +40,7 @@ const AntdComponents = {
   'a-checkbox-group': mockComponent,
   'a-switch': mockComponent,
   'a-breadcrumb-item': mockComponent,
-  'a-breadcrumb':mockComponent
+  'a-breadcrumb': mockComponent,
 }
 
 const vueComponents = {
@@ -49,12 +49,12 @@ const vueComponents = {
 }
 
 const customComponents = {
-  'AdminAside': mockComponent
+  AdminAside: mockComponent,
 }
 
 export const globalComponents = {
   ...AntdComponents,
   ...AntdIcons,
   ...customComponents,
-  ...vueComponents
-};
+  ...vueComponents,
+}
