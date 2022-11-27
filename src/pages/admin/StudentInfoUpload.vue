@@ -8,16 +8,30 @@
 
       <!-- 导航 -->
       <template #nav>
-        <Nav data-test="studentNav">
+        <Nav
+          data-test="studentNav"
+          flex="~"
+          justify="between"
+          mb-2
+        >
           <template #breadcrumb>
             <BreadCrumb />
+            <a-button
+              type="primary"
+              float-right
+              @click="addStudent"
+            >
+              添加学生
+            </a-button>
           </template>
         </Nav>
       </template>
 
       <!-- 内容 -->
       <template #main>
-        <Main data-test="studentMain" />
+        <Main data-test="studentMain" isModal>
+          <template #modal>123123</template>
+        </Main>
       </template>
     </Content>
   </div>
@@ -31,30 +45,16 @@ import {
   reactive,
   ref,
 } from 'vue'
-import type { TableColumnsOptions } from '@/type'
 import type { Student } from '@/utils'
-import Column from '@/utils/Task/Column'
 import { getStudentDataByCurrentPage } from '@/api/request'
-const options: Partial<TableColumnsOptions> = {
-  align: 'center',
-}
-
-const columns = [
-  new Column('编号', 'no', 'no', options),
-  new Column('学号', 'studentNo', 'studentNo', options),
-  new Column('姓名', 'studentName', 'studentName', options),
-  new Column('班级', 'classNo', 'classNo', options),
-  new Column('操作', 'delete', 'delete', {
-    width: 60,
-    align: 'center',
-  }),
-]
-
+import { StudentColumn } from '@/utils/TableData'
 let data = reactive<Student[]>([])
 const totalPage = ref<number>()
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
 const loading = ref<boolean>(false)
+const isShow = ref<boolean>(false)
+
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,
@@ -71,6 +71,10 @@ onMounted(async () => {
   )
 })
 
+const addStudent = () => {
+  isShow.value = true
+}
+
 const changePage: (
   pagination: any
 ) => Promise<void> = async pagination => {
@@ -85,8 +89,8 @@ const changePage: (
     loading
   )
 }
-
-provide('columns', columns)
+provide('isShow', isShow)
+provide('columns', StudentColumn)
 provide('data', data)
 provide('loading', loading)
 provide('pagination', pagination)

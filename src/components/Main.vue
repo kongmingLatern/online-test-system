@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Modal v-if="isModal" data-test="main-modal" />
+    <Modal v-if="isModal" data-test="main-modal">
+      <template #modalContent>
+        <slot name="modal"></slot>
+      </template>
+    </Modal>
     <Table />
   </div>
 </template>

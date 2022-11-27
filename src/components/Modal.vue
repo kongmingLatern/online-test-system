@@ -11,13 +11,13 @@
   </a-modal>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { inject, ref, type Ref } from 'vue'
 
 defineProps<{
   title?: string
 }>()
 
-const visible = ref<boolean>(false)
+let visible: Ref<boolean | undefined> = inject('isShow')!
 
 const handleOk = (e: MouseEvent) => {
   console.log(e)
