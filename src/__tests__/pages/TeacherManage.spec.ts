@@ -1,5 +1,5 @@
 import Header from '@/components/Header.vue'
-import TeacherManager from '@/pages/admin/TeacherManager.vue'
+import TeacherManager from '@/pages/admin/TeacherManage.vue'
 import {
   findComponent,
   registGlobalComponent,
