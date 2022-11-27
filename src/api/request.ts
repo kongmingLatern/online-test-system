@@ -22,7 +22,7 @@ export async function getStudentDataByCurrentPage(
     isLoading.value = false
 
     totalPage.value = total
-    return true
+    return data
   } catch (error) {
     return false
   }
@@ -73,7 +73,7 @@ export async function getGradeByCurrentPage(
     )
     data.length = 0
     Object.assign(data, res)
-    console.log(data);
+    console.log(data)
     isLoading.value = false
     totalPage.value = total
     return data
