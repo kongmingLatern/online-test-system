@@ -8,6 +8,7 @@ import com.cle.onlinetestsystem.pojo.R;
 import com.cle.onlinetestsystem.pojo.Student;
 import com.cle.onlinetestsystem.service.ClbumService;
 import com.cle.onlinetestsystem.service.StudentService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.DigestUtils;
@@ -19,15 +20,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Slf4j
 @RestController
+@AllArgsConstructor
 @RequestMapping("/student")
 public class StudentController {
     private final StudentService studentService;
     private final ClbumService clbumService;
 
-    public StudentController(StudentService studentService, ClbumService clbumService) {
-        this.studentService = studentService;
-        this.clbumService = clbumService;
-    }
 
     /**
      * 学生分页查询

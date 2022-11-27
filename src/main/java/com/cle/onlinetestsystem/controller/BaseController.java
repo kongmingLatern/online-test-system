@@ -10,6 +10,7 @@ import com.cle.onlinetestsystem.service.BaseService;
 import com.cle.onlinetestsystem.service.QuestionService;
 import com.cle.onlinetestsystem.service.SubjectService;
 import com.cle.onlinetestsystem.service.TeacherService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/base")
 @Slf4j
 public class BaseController {
@@ -27,12 +29,6 @@ public class BaseController {
     private final TeacherService teacherService;
     private final QuestionService questionService;
 
-    public BaseController(BaseService baseService, SubjectService subjectService, TeacherService teacherService, QuestionService questionService) {
-        this.baseService = baseService;
-        this.subjectService = subjectService;
-        this.teacherService = teacherService;
-        this.questionService = questionService;
-    }
 
     /**
      * 导入题库

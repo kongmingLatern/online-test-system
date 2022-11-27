@@ -7,6 +7,7 @@ import com.cle.onlinetestsystem.pojo.Student;
 import com.cle.onlinetestsystem.pojo.Teacher;
 import com.cle.onlinetestsystem.service.StudentService;
 import com.cle.onlinetestsystem.service.TeacherService;
+import lombok.AllArgsConstructor;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,15 +18,12 @@ import javax.servlet.http.HttpSession;
 import java.nio.charset.StandardCharsets;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/login")
 public class LoginController {
     private final StudentService studentService;
     private final TeacherService teacherService;
 
-    public LoginController(StudentService studentService, TeacherService teacherService) {
-        this.studentService = studentService;
-        this.teacherService = teacherService;
-    }
 
     /**
      * 教师学生登录接口

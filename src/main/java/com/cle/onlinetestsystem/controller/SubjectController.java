@@ -4,18 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.cle.onlinetestsystem.pojo.R;
 import com.cle.onlinetestsystem.pojo.Subject;
 import com.cle.onlinetestsystem.service.SubjectService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/subject")
 public class SubjectController {
     private final SubjectService subjectService;
 
-    public SubjectController(SubjectService subjectService) {
-        this.subjectService = subjectService;
-    }
 
     /**
      * 添加科目

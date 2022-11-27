@@ -10,6 +10,7 @@ import com.cle.onlinetestsystem.pojo.Task;
 import com.cle.onlinetestsystem.service.MatchService;
 import com.cle.onlinetestsystem.service.QuestionService;
 import com.cle.onlinetestsystem.service.TaskService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,17 +21,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/task")
 public class TaskController {
     private final QuestionService questionService;
     private final TaskService taskService;
     private final MatchService matchService;
 
-    public TaskController(QuestionService questionService, TaskService taskService, MatchService matchService) {
-        this.questionService = questionService;
-        this.taskService = taskService;
-        this.matchService = matchService;
-    }
 
     @PostMapping("/add")
     public R<String> addTask(@RequestBody TaskDto taskDto){

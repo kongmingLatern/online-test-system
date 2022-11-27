@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cle.onlinetestsystem.pojo.R;
 import com.cle.onlinetestsystem.pojo.Teacher;
 import com.cle.onlinetestsystem.service.TeacherService;
+import lombok.AllArgsConstructor;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,13 +14,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/teacher")
 public class TeacherController {
     private final TeacherService teacherService;
 
-    public TeacherController(TeacherService teacherService) {
-        this.teacherService = teacherService;
-    }
 
     /**
      * 单独添加教师

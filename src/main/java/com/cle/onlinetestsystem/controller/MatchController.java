@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cle.onlinetestsystem.dto.MatchDto;
 import com.cle.onlinetestsystem.pojo.*;
 import com.cle.onlinetestsystem.service.*;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Slf4j
 @RestController
+@AllArgsConstructor
 @RequestMapping("/match")
 public class MatchController {
     private final StudentService studentService;
@@ -23,14 +26,6 @@ public class MatchController {
     private final ClbumService clbumService;
     private final TaskService taskService;
     private final BaseService baseService;
-    public MatchController(StudentService studentService, SubjectService subjectService, MatchService matchService, ClbumService clbumService, TaskService taskService, BaseService baseService) {
-        this.studentService = studentService;
-        this.subjectService = subjectService;
-        this.matchService = matchService;
-        this.clbumService = clbumService;
-        this.taskService = taskService;
-        this.baseService = baseService;
-    }
 
     /**
      * 分页查询学生成绩
@@ -84,5 +79,14 @@ public class MatchController {
         }).collect(Collectors.toList());
         matchDtoPage.setRecords(collect);
         return R.success(matchDtoPage);
+    }
+
+
+    /**
+     * 为班级添加考试
+     */
+    @PostMapping("/addClassMatch")
+    public R<String> addClassMatch(List<String> classId,Long taskId){
+        return null;
     }
 }

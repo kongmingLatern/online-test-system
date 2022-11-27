@@ -8,9 +8,9 @@ import com.cle.onlinetestsystem.pojo.Question;
 import com.cle.onlinetestsystem.pojo.R;
 import com.cle.onlinetestsystem.service.BaseService;
 import com.cle.onlinetestsystem.service.QuestionService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,15 +19,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Slf4j
 @RestController
+@AllArgsConstructor
 @RequestMapping("/question")
 public class QuestionController {
     private final QuestionService questionService;
     private final BaseService baseService;
 
-    public QuestionController(QuestionService questionService, BaseService baseService) {
-        this.questionService = questionService;
-        this.baseService = baseService;
-    }
 
     /**
      * 题目分页查询
