@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     AdminAside: typeof import('./components/admin/AdminAside.vue')['default']
     BreadCrumb: typeof import('./components/BreadCrumb.vue')['default']
     Content: typeof import('./components/Content.vue')['default']
+    Form: typeof import('./components/admin/Form.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
     Layout: typeof import('./components/Layout.vue')['default']
     Main: typeof import('./components/Main.vue')['default']
