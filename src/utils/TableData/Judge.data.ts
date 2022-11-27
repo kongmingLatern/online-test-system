@@ -9,12 +9,11 @@ export const columns = [
     ...options,
     width: 100,
   }),
-  new Column(
-    '题目',
-    'questionList',
-    'questionList',
-    options
-  ),
+  new Column('题目', 'questionList', 'questionList', {
+    ...options,
+    width: 150,
+    ellipsis: true,
+  }),
   new Column('答案', 'questionCorrect', 'questionCorrect', {
     ...options,
     width: 100,
