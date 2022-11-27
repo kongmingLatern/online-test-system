@@ -1,9 +1,14 @@
 <template>
-  <Table />
+  <div>
+    <Modal v-if="isModal" data-test="main-modal" />
+    <Table />
+  </div>
 </template>
 
 <script setup lang="ts">
-import Table from '@/components/Table.vue'
+defineProps<{
+  isModal?: boolean
+}>()
 </script>
 
 <style scoped></style>
