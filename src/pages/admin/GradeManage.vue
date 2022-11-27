@@ -31,11 +31,11 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { RadioColumn } from '@/utils/TableData'
-import { getQuestionByCurrentPage } from '@/api/request'
-import type { Radio } from '@/utils'
+import { GradeColumn } from '@/utils/TableData'
+import { getGradeByCurrentPage } from '@/api/request'
+import type { Grade } from '@/utils'
 
-let data = reactive<Radio[]>([])
+let data = reactive<Grade[]>([])
 const totalPage = ref<number>()
 const loading = ref<boolean>(false)
 const current = ref<number>(1)
@@ -48,12 +48,11 @@ const pagination = computed(() => ({
 }))
 
 onMounted(async () => {
-  await getQuestionByCurrentPage(
+  await getGradeByCurrentPage(
     data,
     current.value,
     pageSize.value,
     totalPage,
-    1,
     loading
   )
 })
@@ -64,17 +63,16 @@ const changePage: (
   pagination.current = pagination.current
   current.value = pagination.current
 
-  getQuestionByCurrentPage(
+  await getGradeByCurrentPage(
     data,
     current.value,
     pageSize.value,
     totalPage,
-    1,
     loading
   )
 }
 
-provide('columns', RadioColumn)
+provide('columns', GradeColumn)
 provide('loading', loading)
 provide('data', data)
 provide('pagination', pagination)
