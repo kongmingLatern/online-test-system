@@ -8,6 +8,7 @@ export const useStudent = defineStore('students', {
   }),
 
   actions: {
+    // 分页查询学生
     async getStudentsByPage(pageSize, currentPage) {
       try {
         const res = await http.get('student/page', {
@@ -27,6 +28,15 @@ export const useStudent = defineStore('students', {
       } catch (error) {
         // 让表单组件显示错误
         return [this.studentData, 0]
+      }
+    },
+
+    async addStudent(student: Student) {
+      try {
+        const res = await http.post('student/add', student)
+        return res.data
+      } catch (error) {
+        return '添加失败'
       }
     },
   },
