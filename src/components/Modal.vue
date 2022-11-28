@@ -3,6 +3,7 @@
     v-model:visible="visible"
     @ok="handleOk"
     data-test="modal"
+    :footer="null"
   >
     <template #title>
       <span data-test="title">{{ title || '添加' }}</span>
