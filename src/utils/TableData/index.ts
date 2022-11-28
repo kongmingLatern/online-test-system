@@ -5,7 +5,10 @@ import { columns as JudgeColumn } from './Judge.data'
 
 import { columns as CheckboxColumn } from './Checkbox.data'
 
-import { columns as StudentColumn } from './Student.data'
+import {
+  uploadColumns as StudentUploadColumn,
+  infoColumns as StudentInfoColumns,
+} from './Student.data'
 
 import { columns as GradeColumn } from './Grade.data'
 import { columns as SearchStudentPasswordColumn } from './SearchStudentPassword.data'
@@ -16,7 +19,8 @@ export {
   RadioColumn,
   JudgeColumn,
   CheckboxColumn,
-  StudentColumn,
+  StudentUploadColumn,
+  StudentInfoColumns,
   GradeColumn,
   SearchStudentPasswordColumn,
   TeacherColumn,

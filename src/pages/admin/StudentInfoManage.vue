@@ -31,7 +31,7 @@ import {
   ref,
 } from 'vue'
 import { removeStudent } from '../../api/student'
-import { StudentColumn } from '@/utils/TableData'
+import { StudentInfoColumns } from '../../utils/TableData'
 import { getStudentDataByCurrentPage } from '@/api/request'
 import type { Student } from '@/utils'
 
@@ -72,7 +72,7 @@ const changePage: (
   )
 }
 
-provide('columns', StudentColumn)
+provide('columns', StudentInfoColumns)
 provide('data', data)
 provide('pagination', pagination)
 provide('loading', loading)

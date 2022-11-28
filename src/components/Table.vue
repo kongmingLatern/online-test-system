@@ -72,7 +72,7 @@ const pagination = inject('pagination')
 const change: any = inject('change') ?? null
 const removeItem: any = inject('removeItem') ?? null
 
-// TODO: 孙传爷
+// NOTE: 孙传爷
 const changePage = pagination => {
   change(pagination)
 }
