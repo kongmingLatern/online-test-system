@@ -31,7 +31,7 @@
       <template #main>
         <Main data-test="studentMain" isModal>
           <template #modal>
-            <FormItem sort="teacher" />
+            <FormItem sort="student" />
           </template>
         </Main>
       </template>
