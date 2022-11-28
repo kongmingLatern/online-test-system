@@ -13,7 +13,7 @@ describe('test form', () => {
         },
       },
     }
-    expect(getFormItem(data)).toEqual([
+    expect(getFormItem('teacher', data)).toEqual([
       [
         {
           name: 'teacherName',
@@ -45,7 +45,7 @@ describe('test form', () => {
         },
       },
     }
-    expect(getFormItem(data)).toEqual([
+    expect(getFormItem('teacher', data)).toEqual([
       [
         {
           name: 'teacherName',
@@ -88,7 +88,7 @@ describe('test form', () => {
         },
       },
     }
-    expect(getFormItem(data)).toEqual([
+    expect(getFormItem('teacher', data)).toEqual([
       [
         {
           name: 'teacherName',
@@ -132,7 +132,7 @@ describe('test form', () => {
         },
       },
     }
-    expect(getFormItem(data)).toEqual([
+    expect(getFormItem('task', data)).toEqual([
       [
         {
           name: 'taskName',
@@ -153,7 +153,7 @@ describe('test form', () => {
       },
     ])
   })
-  it.skip('test type is number', () => {
+  it('test type is number', () => {
     const data = {
       form: {
         task: {
@@ -168,7 +168,7 @@ describe('test form', () => {
             label: '考试时长',
           },
         },
-        teahcer: {
+        teacher: {
           teacherName: {
             name: 'teacherName',
             type: 'text',
@@ -182,31 +182,21 @@ describe('test form', () => {
         },
       },
     }
-    expect(getFormItem(data)).toEqual([
+    expect(getFormItem('teacher', data)).toEqual([
       [
         {
-          type: 'text',
-          label: '考试名称',
-        },
-        {
-          type: 'number',
-          label: '考试时长',
-        },
-        {
+          name: 'teacherName',
           type: 'text',
           label: '教师姓名',
         },
         {
+          name: 'teacherNo',
           type: 'text',
           label: '教工号',
         },
       ],
       {
-        task: {
-          taskName: '',
-          taskTime: 0,
-        },
-        teahcer: {
+        teacher: {
           teacherName: '',
           teacherNo: '',
         },
