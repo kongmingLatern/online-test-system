@@ -19,7 +19,7 @@
                 {
                   required: true,
                   type: item.type,
-                  min: 30,
+                  min: 0,
                   max: 300,
                 },
               ]

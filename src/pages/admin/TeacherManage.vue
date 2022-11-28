@@ -8,16 +8,32 @@
 
       <!-- 导航 -->
       <template #nav>
-        <Nav data-test="teacherNav">
+        <Nav
+          data-test="teacherNav"
+          flex="~"
+          justify="between"
+          mb-3
+        >
           <template #breadcrumb>
             <BreadCrumb />
+            <a-button
+              class="button-blue"
+              rounded
+              @click="addTeacher"
+            >
+              添加教师
+            </a-button>
           </template>
         </Nav>
       </template>
 
       <!-- 内容 -->
       <template #main>
-        <Main data-test="teacherMain" />
+        <Main data-test="teacherMain" isModal>
+          <template #modal>
+            <FormItem sort="teacher" />
+          </template>
+        </Main>
       </template>
     </Content>
   </div>
@@ -34,11 +50,13 @@ import {
   reactive,
   ref,
 } from 'vue'
+import { finishForm } from '../../api/teacher'
 
 let data = reactive<Teacher[]>([])
 const totalPage = ref<number>()
 const loading = ref<boolean>(false)
 const current = ref<number>(1)
+const isShow = ref<boolean>(false)
 const pageSize = ref<number>(10)
 
 const pagination = computed(() => ({
@@ -72,7 +90,14 @@ const changePage: (
   )
 }
 
+const addTeacher = () => {
+  isShow.value = true
+}
+
 provide('columns', TeacherColumn)
+provide('finish', finishForm)
+provide('title', '添加教师')
+provide('isShow', isShow)
 provide('loading', loading)
 provide('data', data)
 provide('pagination', pagination)
