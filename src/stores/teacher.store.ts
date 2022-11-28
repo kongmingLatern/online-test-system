@@ -35,5 +35,13 @@ export const useTeacher = defineStore('teachers', {
         return [this.teacherData, 0]
       }
     },
+    async addTeacher(values: Teacher) {
+      try {
+        const res = await http.post('teacher/add', values)
+        return res.data
+      } catch (error) {
+        return '添加失败'
+      }
+    },
   },
 })
