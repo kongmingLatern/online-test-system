@@ -7,7 +7,7 @@ describe('Student Store', () => {
   })
 
   // NOTE: 测试接口 'teacher/pages' 的数据'
-  it('should return 1 record', async () => {
+  it.skip('should return 1 record', async () => {
     const store = useTeacher()
     await expect(store.getTeachersByPage(1, 1)).resolves
       .toMatchInlineSnapshot(`
