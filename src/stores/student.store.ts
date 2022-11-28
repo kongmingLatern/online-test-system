@@ -19,9 +19,19 @@ export const useStudent = defineStore('students', {
         })
         this.studentData = []
         res.data.records.forEach(record => {
-          const { studentNo, studentName, classNo } = record
+          const {
+            studentId,
+            studentNo,
+            studentName,
+            classNo,
+          } = record
           this.studentData.push(
-            new Student(studentNo, studentName, classNo)
+            new Student(
+              studentId,
+              studentNo,
+              studentName,
+              classNo
+            )
           )
         })
         return [this.studentData, res.data.total]
@@ -30,13 +40,25 @@ export const useStudent = defineStore('students', {
         return [this.studentData, 0]
       }
     },
-
     async addStudent(student: Student) {
       try {
         const res = await http.post('student/add', student)
         return res.data
       } catch (error) {
         return '添加失败'
+      }
+    },
+    async deleteStudent(studentId: string) {
+      try {
+        const res = await http.delete('student/delete', {
+          params: {
+            studentId,
+          },
+        })
+        console.log(res)
+        return res.data
+      } catch (error) {
+        return '删除失败'
       }
     },
   },
