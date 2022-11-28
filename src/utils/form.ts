@@ -6,20 +6,23 @@ export default function getFormItem(data?) {
   const formStateKeys = Object.keys(form)
   formStateKeys.forEach(key => {
     if (typeof form[key] === 'object') {
-      const getKeys: any = Object.values(form[key])[0]
-      const type = getKeys.type
-      const index = Object.keys(form[key])[0]
-      result.push(Object.values(form[key])[0])
-
+      const getValues: any[] = Object.values(form[key])
+      const getKeys = Object.keys(form[key])
       formState[key] = {}
 
-      // 判断该对象上的 type 属性
-      if (type === 'text') {
-        formState[key][index] = ''
-      }
+      getValues.forEach((item: any, index: number) => {
+        const { type, label } = item
+        result.push({
+          type,
+          label,
+        })
+
+        if (type === 'text') {
+          formState[key][getKeys[index]] = ''
+        }
+      })
     }
   })
   result.push({ formState })
-
   return result
 }
