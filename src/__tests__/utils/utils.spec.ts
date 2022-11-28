@@ -127,26 +127,29 @@ describe('columns', () => {
 describe('class data about table', () => {
   it('Student ', () => {
     const arr = [
-      new Student('1', '施颖杰', '0922201'),
-      new Student('2', '施颖杰', '0922201'),
-      new Student('3', '施颖杰', '0922201'),
+      new Student('121', '1', '施颖杰', '0922201'),
+      new Student('122', '2', '施颖杰', '0922201'),
+      new Student('123', '3', '施颖杰', '0922201'),
     ]
     const result = setData(arr)
     expect(result).toEqual([
       {
         key: 0,
+        studentId: '121',
         studentNo: '1',
         studentName: '施颖杰',
         classNo: '0922201',
       },
       {
         key: 1,
+        studentId: '122',
         studentNo: '2',
         studentName: '施颖杰',
         classNo: '0922201',
       },
       {
         key: 2,
+        studentId: '123',
         studentNo: '3',
         studentName: '施颖杰',
         classNo: '0922201',
@@ -159,6 +162,7 @@ describe('class data about table', () => {
       new Task(
         '马克思主义',
         '马克思主义与毛泽东思想',
+        '孔祥琦',
         '孔祥琦'
       )
     )
@@ -169,18 +173,21 @@ describe('class data about table', () => {
         baseTitle: '马克思主义',
         subjectName: '马克思主义与毛泽东思想',
         teacherName: '孔祥琦',
+        createUser: '孔祥琦',
       },
       {
         key: 1,
         baseTitle: '马克思主义',
         subjectName: '马克思主义与毛泽东思想',
         teacherName: '孔祥琦',
+        createUser: '孔祥琦',
       },
       {
         key: 2,
         baseTitle: '马克思主义',
         subjectName: '马克思主义与毛泽东思想',
         teacherName: '孔祥琦',
+        createUser: '孔祥琦',
       },
     ])
   })
