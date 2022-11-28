@@ -19,6 +19,7 @@ export async function getStudentDataByCurrentPage(
       currentPage
     )
 
+    data.length = 0
     Object.assign(data, res)
     isLoading.value = false
 
@@ -46,6 +47,7 @@ export async function getQuestionByCurrentPage(
         currentPage,
         questionType
       )
+    data.length = 0
     Object.assign(data, res)
     isLoading.value = false
     totalPage.value = total
@@ -71,6 +73,7 @@ export async function getGradeByCurrentPage(
       currentPage,
       studentNo
     )
+    data.length = 0
     Object.assign(data, res)
     isLoading.value = false
     totalPage.value = total
@@ -96,6 +99,7 @@ export async function getTeachersByCurrentPage(
       currentPage,
       teacherNo
     )
+    data.length = 0
     Object.assign(data, res)
     isLoading.value = false
     totalPage.value = total
@@ -121,6 +125,7 @@ export async function getBasesByCurrentPage(
       currentPage,
       subjectId
     )
+    data.length = 0
     Object.assign(data, res)
     isLoading.value = false
     totalPage.value = total
