@@ -3,6 +3,7 @@ package com.cle.onlinetestsystem.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cle.onlinetestsystem.dto.MatchDto;
+import com.cle.onlinetestsystem.dto.QuestionDto;
 import com.cle.onlinetestsystem.pojo.*;
 import com.cle.onlinetestsystem.service.*;
 import lombok.AllArgsConstructor;
@@ -173,9 +174,16 @@ public class MatchController {
         return R.success("添加成功");
     }
 
+    /**
+     * 开始考试
+     * @param matchId
+     * @param matchPassword
+     * @return
+     */
     @GetMapping("/startMatch")
-    public R<List<Question>> startMatch(Long matchId){
-        List<Question> questionList = matchService.startMatch(matchId);
+    public R<List<QuestionDto>> startMatch(Long matchId,String matchPassword){
+        List<QuestionDto> questionList = matchService.startMatch(matchId,matchPassword);
         return R.success(questionList);
     }
+
 }

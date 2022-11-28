@@ -5,14 +5,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cle.onlinetestsystem.Utils.MyRandom;
 import com.cle.onlinetestsystem.common.CustomException;
 import com.cle.onlinetestsystem.dao.QuestionDao;
+import com.cle.onlinetestsystem.dto.QuestionDto;
 import com.cle.onlinetestsystem.pojo.Question;
 import com.cle.onlinetestsystem.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -31,7 +31,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionDao, Question> impl
      */
     @Override
 //    @Cacheable(value = "questionCache",key = "#baseId")
-    public List<Question> chooseQuestion(Long baseId,Integer radioNumber, Integer selectedNumber, Integer judgeNumber) {
+    public List<QuestionDto> chooseQuestion(Long baseId, Integer radioNumber, Integer selectedNumber, Integer judgeNumber) {
         //查询所有的所有题目
         LambdaQueryWrapper<Question> questionLambdaQueryWrapper = new LambdaQueryWrapper<>();
         questionLambdaQueryWrapper.eq(Question::getBaseId,baseId)
@@ -73,7 +73,19 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionDao, Question> impl
         questionList.addAll(radioCollect);
         questionList.addAll(selectedCollect);
         questionList.addAll(judgeCollect);
-        return questionList;
+        List<QuestionDto> collect = questionList.parallelStream().map(question -> {
+                    QuestionDto questionDto = new QuestionDto();
+                    BeanUtils.copyProperties(question, questionDto,new String[]{"questionAnswer"});
+                    String questionAnswer = question.getQuestionAnswer();
+                    //答案转换成集合
+            List<String> stringList = Arrays.asList(questionAnswer.substring(1, questionAnswer.length() - 1).split(","));
+           //集合打乱
+            Collections.shuffle(stringList);
+            questionDto.setQuestionAnswerList(stringList);
+                    return questionDto;
+                }
+        ).collect(Collectors.toList());
+        return collect;
     }
 }
 
