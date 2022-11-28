@@ -1,6 +1,7 @@
 import { useStudent } from '../stores/student.store'
 import { useQuestion } from '@/stores/question.store'
 import type { Ref } from 'vue'
+import { useTask } from '../stores/task.store'
 import { useGrade } from '@/stores/grade.store'
 import { useTeacher } from '@/stores/teacher.store'
 export async function getStudentDataByCurrentPage(
@@ -18,7 +19,6 @@ export async function getStudentDataByCurrentPage(
       currentPage
     )
 
-    data.length = 0
     Object.assign(data, res)
     isLoading.value = false
 
@@ -46,7 +46,6 @@ export async function getQuestionByCurrentPage(
         currentPage,
         questionType
       )
-    data.length = 0
     Object.assign(data, res)
     isLoading.value = false
     totalPage.value = total
@@ -72,9 +71,7 @@ export async function getGradeByCurrentPage(
       currentPage,
       studentNo
     )
-    data.length = 0
     Object.assign(data, res)
-    console.log(data)
     isLoading.value = false
     totalPage.value = total
     return data
@@ -99,9 +96,32 @@ export async function getTeachersByCurrentPage(
       currentPage,
       teacherNo
     )
-    data.length = 0
     Object.assign(data, res)
-    console.log(data)
+    isLoading.value = false
+    totalPage.value = total
+    return data
+  } catch (error) {
+    return false
+  }
+}
+
+export async function getBasesByCurrentPage(
+  data,
+  currentPage,
+  pageSize,
+  totalPage: Ref<number | undefined>,
+  isLoading: Ref<boolean | undefined>,
+  subjectId?
+) {
+  try {
+    const store = useTask()
+    isLoading.value = true
+    const [res, total] = await store.getTaskByCurrentPage(
+      pageSize,
+      currentPage,
+      subjectId
+    )
+    Object.assign(data, res)
     isLoading.value = false
     totalPage.value = total
     return data
