@@ -18,6 +18,15 @@
         <slot name="import"></slot>
       </template>
     </Modal>
+    <Modal
+      type="common"
+      v-if="isCommon"
+      data-test="main-modal-common"
+    >
+      <template #modalContent>
+        <slot name="common"></slot>
+      </template>
+    </Modal>
     <Table />
   </div>
 </template>
@@ -26,6 +35,7 @@
 defineProps<{
   isModal?: boolean
   isImport?: boolean
+  isCommon?: boolean
 }>()
 </script>
 
