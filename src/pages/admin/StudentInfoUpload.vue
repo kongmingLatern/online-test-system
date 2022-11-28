@@ -62,10 +62,10 @@ import {
   ref,
 } from 'vue'
 import { useStudent } from '../../stores/student.store'
-import type { Student } from '@/utils'
 import { getStudentDataByCurrentPage } from '@/api/request'
 import { StudentColumn } from '@/utils/TableData'
-import { message } from 'ant-design-vue'
+import { finishForm, removeStudent } from '@/api/student'
+import type { Student } from '@/utils'
 let data = reactive<Student[]>([])
 const store = useStudent()
 const totalPage = ref<number>()
@@ -114,11 +114,6 @@ const changePage: (
   )
 }
 
-const finish = async (values: Student) => {
-  const msg = await store.addStudent(values)
-  message.success(msg)
-}
-
 provide('isShow', isShow)
 provide('impShow', impShow)
 provide('title', '添加学生')
@@ -127,7 +122,8 @@ provide('data', data)
 provide('loading', loading)
 provide('pagination', pagination)
 provide('change', changePage)
-provide('finish', finish)
+provide('finish', finishForm)
+provide('removeItem', removeStudent)
 </script>
 
 <style scoped></style>

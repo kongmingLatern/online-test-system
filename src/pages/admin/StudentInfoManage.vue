@@ -30,6 +30,7 @@ import {
   reactive,
   ref,
 } from 'vue'
+import { removeStudent } from '../../api/student'
 import { StudentColumn } from '@/utils/TableData'
 import { getStudentDataByCurrentPage } from '@/api/request'
 import type { Student } from '@/utils'
@@ -76,6 +77,7 @@ provide('data', data)
 provide('pagination', pagination)
 provide('loading', loading)
 provide('change', changePage)
+provide('removeItem', removeStudent)
 </script>
 
 <style scoped></style>
