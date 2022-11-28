@@ -42,7 +42,9 @@
           <template #modal>
             <FormItem sort="student" />
           </template>
-          <template #import>123123</template>
+          <template #import>
+            <ImportInfo />
+          </template>
         </Main>
       </template>
     </Content>
