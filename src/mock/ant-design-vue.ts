@@ -5,6 +5,7 @@ const mockComponent = {
 const AntdIcons = {
   'video-camera-outlined': mockComponent,
   'user-outlined': mockComponent,
+  'upload-outlined': mockComponent,
 }
 
 const AntdComponents = {
