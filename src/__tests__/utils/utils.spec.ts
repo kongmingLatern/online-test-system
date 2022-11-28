@@ -10,9 +10,8 @@ import {
   Task,
 } from '@/utils'
 import { Student } from '@/utils'
-import getFormItem from '@/utils/form'
 
-describe.skip('columns', () => {
+describe('columns', () => {
   let title: string
   let dataIndex: string
   let key: string
@@ -125,7 +124,7 @@ describe.skip('columns', () => {
     ])
   })
 })
-describe.skip('class data about table', () => {
+describe('class data about table', () => {
   it('Student ', () => {
     const arr = [
       new Student('1', '施颖杰', '0922201'),
