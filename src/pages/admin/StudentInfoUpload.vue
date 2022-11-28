@@ -30,7 +30,9 @@
       <!-- 内容 -->
       <template #main>
         <Main data-test="studentMain" isModal>
-          <template #modal>123123</template>
+          <template #modal>
+            <FormItem sort="teacher" />
+          </template>
         </Main>
       </template>
     </Content>
