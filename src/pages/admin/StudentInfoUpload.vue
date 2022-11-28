@@ -16,23 +16,33 @@
         >
           <template #breadcrumb>
             <BreadCrumb />
-            <a-button
-              type="primary"
-              float-right
-              @click="addStudent"
-            >
-              添加学生
-            </a-button>
+            <a-space>
+              <a-button
+                type="primary"
+                float-right
+                @click="addStudent"
+              >
+                添加学生
+              </a-button>
+              <a-button
+                type="primary"
+                float-right
+                @click="importStudent"
+              >
+                导入学生信息
+              </a-button>
+            </a-space>
           </template>
         </Nav>
       </template>
 
       <!-- 内容 -->
       <template #main>
-        <Main data-test="studentMain" isModal>
+        <Main data-test="studentMain" isModal isImport>
           <template #modal>
             <FormItem sort="student" />
           </template>
+          <template #import>123123</template>
         </Main>
       </template>
     </Content>
@@ -56,6 +66,7 @@ const current = ref<number>(1)
 const pageSize = ref<number>(10)
 const loading = ref<boolean>(false)
 const isShow = ref<boolean>(false)
+const impShow = ref<boolean>(false)
 
 const pagination = computed(() => ({
   total: totalPage.value,
@@ -77,6 +88,10 @@ const addStudent = () => {
   isShow.value = true
 }
 
+const importStudent = () => {
+  impShow.value = true
+}
+
 const changePage: (
   pagination: any
 ) => Promise<void> = async pagination => {
@@ -92,6 +107,7 @@ const changePage: (
   )
 }
 provide('isShow', isShow)
+provide('impShow', impShow)
 provide('title', '添加学生')
 provide('columns', StudentColumn)
 provide('data', data)

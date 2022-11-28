@@ -1,7 +1,6 @@
 <template>
   <a-modal
     v-model:visible="visible"
-    @ok="handleOk"
     data-test="modal"
     :footer="null"
   >
@@ -14,12 +13,13 @@
 <script lang="ts" setup>
 import { inject, type Ref } from 'vue'
 
+const props = defineProps<{
+  type?: string
+}>()
+
 const title = inject('title') ?? null
 let visible: Ref<boolean | undefined> =
-  inject('isShow')! ?? null
-
-const handleOk = (e: MouseEvent) => {
-  console.log(e)
-  visible.value = false
-}
+  props.type === 'content'
+    ? inject('isShow')!
+    : inject('impShow')!
 </script>
