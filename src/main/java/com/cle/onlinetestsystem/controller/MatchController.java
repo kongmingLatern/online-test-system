@@ -8,13 +8,11 @@ import com.cle.onlinetestsystem.service.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Slf4j
 @RestController
 @AllArgsConstructor
@@ -29,20 +27,21 @@ public class MatchController {
 
     /**
      * 分页查询学生成绩
+     *
      * @param page
      * @param pageSize
      * @param studentNo
      * @return
      */
     @GetMapping("/getGradePage")
-    public R<Page> getGrade(Integer page, Integer pageSize, String studentNo){
-    Page<Match> matchPage = new Page<>(page,pageSize);
+    public R<Page> getGrade(Integer page, Integer pageSize, String studentNo) {
+        Page<Match> matchPage = new Page<>(page, pageSize);
         LambdaQueryWrapper<Match> matchLambdaQueryWrapper = new LambdaQueryWrapper<>();
         //没有结束的考试不查询成绩
-        matchLambdaQueryWrapper.eq(Match::getIsEnd,1);
-    matchService.page(matchPage,matchLambdaQueryWrapper);
-    Page<MatchDto> matchDtoPage = new Page<>();
-    BeanUtils.copyProperties(matchPage,matchDtoPage);
+        matchLambdaQueryWrapper.eq(Match::getIsEnd, 1);
+        matchService.page(matchPage, matchLambdaQueryWrapper);
+        Page<MatchDto> matchDtoPage = new Page<>();
+        BeanUtils.copyProperties(matchPage, matchDtoPage);
         List<Match> records = matchPage.getRecords();
         List<MatchDto> collect = records.parallelStream().map(match -> {
             MatchDto matchDto = new MatchDto();
@@ -70,10 +69,9 @@ public class MatchController {
             matchDto.setGrade(match.getGrade());
             return matchDto;
         }).filter(matchDto -> {
-            if(studentNo==null){
+            if (studentNo == null) {
                 return true;
-            }
-            else {
+            } else {
                 return matchDto.getStudentNo().contains(studentNo);
             }
         }).collect(Collectors.toList());
@@ -81,12 +79,103 @@ public class MatchController {
         return R.success(matchDtoPage);
     }
 
+    /**
+     * 分页查询考生密码
+     *
+     * @param page
+     * @param pageSize
+     * @param studentNo
+     * @return
+     */
+    @GetMapping("/getMatchPasswordPage")
+    public R<Page> getMatchPasswordPage(Integer page, Integer pageSize, String studentNo) {
+        Page<Match> matchPage = new Page<>(page, pageSize);
+        matchService.page(matchPage);
+        Page<MatchDto> matchDtoPage = new Page<>();
+        BeanUtils.copyProperties(matchPage, matchDtoPage);
+        List<Match> records = matchPage.getRecords();
+        List<MatchDto> collect = records.parallelStream().map(match -> {
+            MatchDto matchDto = new MatchDto();
+            LambdaQueryWrapper<Student> studentLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            studentLambdaQueryWrapper.eq(match.getStudentId() != null, Student::getStudentId, match.getStudentId());
+            Student student = studentService.getOne(studentLambdaQueryWrapper);
+            LambdaQueryWrapper<Clbum> clbumLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            clbumLambdaQueryWrapper.eq(student.getClassId() != null, Clbum::getClassId, student.getClassId());
+            Clbum clbum = clbumService.getOne(clbumLambdaQueryWrapper);
+            LambdaQueryWrapper<Task> taskLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            taskLambdaQueryWrapper.eq(match.getTaskId() != null, Task::getTaskId, match.getTaskId());
+            Task task = taskService.getOne(taskLambdaQueryWrapper);
+            LambdaQueryWrapper<Base> baseLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            baseLambdaQueryWrapper.eq(task.getTaskId() != null, Base::getBaseId, task.getBaseId());
+            Base base = baseService.getOne(baseLambdaQueryWrapper);
+            LambdaQueryWrapper<Subject> subjectLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            subjectLambdaQueryWrapper.eq(base.getSubjectId() != null, Subject::getSubjectId, base.getSubjectId());
+            Subject subject = subjectService.getOne(subjectLambdaQueryWrapper);
+            matchDto.setMatchId(match.getMatchId());
+            matchDto.setStudentNo(student.getStudentNo());
+            matchDto.setClassNo(clbum.getClassNo());
+            matchDto.setStudentName(student.getStudentName());
+            matchDto.setSubjectName(subject.getSubjectName());
+            matchDto.setTaskPassword(match.getMatchPassword());
+             if (match.getIsStart() == 0) {
+                matchDto.setStatus("未开考");
+            } else if (match.getIsStart() == 1) {
+                matchDto.setStatus("考试中");
+            }
+            if (match.getIsEnd() == 1) {
+                matchDto.setStatus("考完了");
+            }
+            if (match.getIsCheat() == 1) {
+                matchDto.setStatus("作弊");
+            }
+            return matchDto;
+        }).filter(matchDto -> {
+            if (studentNo == null) {
+                return true;
+            } else {
+                return matchDto.getStudentNo().contains(studentNo);
+            }
+        })
+                .collect(Collectors.toList());
+        matchDtoPage.setRecords(collect);
+        return R.success(matchDtoPage);
+    }
 
     /**
      * 为班级添加考试
      */
     @PostMapping("/addClassMatch")
-    public R<String> addClassMatch(List<String> classId,Long taskId){
-        return null;
+    public R<String> addClassMatch(@RequestBody MatchDto matchDto) {
+//        log.info(matchDto.toString());
+        List<Long> classId = matchDto.getClassIdList();
+        classId.parallelStream().forEach(s -> {
+            LambdaQueryWrapper<Student> studentLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            studentLambdaQueryWrapper.eq(Student::getClassId, s)
+                    .select(Student::getStudentId);
+            LambdaQueryWrapper<Task> taskLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            taskLambdaQueryWrapper.eq(Task::getTaskId,matchDto.getTaskId());
+            Task task = taskService.getOne(taskLambdaQueryWrapper);
+            taskLambdaQueryWrapper.eq(Task::getTaskId,matchDto.getTaskId());
+            List<Student> list = studentService.list(studentLambdaQueryWrapper);
+            List<Match> collect = list.parallelStream().map(student -> {
+                Match match = new Match();
+                match.setIsStart(0);
+                match.setTaskId(matchDto.getTaskId());
+                match.setIsEnd(0);
+                match.setIsCheat(0);
+                match.setGrade(0.0);
+                match.setMatchPassword(task.getTaskPassword());
+                match.setStudentId(student.getStudentId());
+                return match;
+            }).collect(Collectors.toList());
+            matchService.saveBatch(collect);
+        });
+        return R.success("添加成功");
+    }
+
+    @GetMapping("/startMatch")
+    public R<List<Question>> startMatch(Long matchId){
+        List<Question> questionList = matchService.startMatch(matchId);
+        return R.success(questionList);
     }
 }

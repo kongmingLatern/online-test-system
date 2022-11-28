@@ -35,15 +35,19 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionDao, Question> impl
         //查询所有的所有题目
         LambdaQueryWrapper<Question> questionLambdaQueryWrapper = new LambdaQueryWrapper<>();
         questionLambdaQueryWrapper.eq(Question::getBaseId,baseId)
-                                  .eq(Question::getQuestionType,1);
+                                  .eq(Question::getQuestionType,1)
+                                  .select(Question::getQuestionId,Question::getQuestionType,Question::getQuestionList,Question::getQuestionAnswer);
         List<Question> radioList = this.list(questionLambdaQueryWrapper);
+        log.info(radioList.toString());
         questionLambdaQueryWrapper=new LambdaQueryWrapper<>();
         questionLambdaQueryWrapper.eq(Question::getBaseId,baseId)
-                                  .eq(Question::getQuestionType,2);
+                                  .eq(Question::getQuestionType,2)
+                                  .select(Question::getQuestionId,Question::getQuestionType,Question::getQuestionList,Question::getQuestionAnswer);
         List<Question> selectedList = this.list(questionLambdaQueryWrapper);
         questionLambdaQueryWrapper=new LambdaQueryWrapper<>();
         questionLambdaQueryWrapper.eq(Question::getBaseId,baseId)
-                                  .eq(Question::getQuestionType,3);
+                                  .eq(Question::getQuestionType,3)
+                                  .select(Question::getQuestionId,Question::getQuestionType,Question::getQuestionList,Question::getQuestionAnswer);
         List<Question> judgeList = this.list(questionLambdaQueryWrapper);
         if(radioList.size()<radioNumber) {
             throw new CustomException("单选题个数不足");

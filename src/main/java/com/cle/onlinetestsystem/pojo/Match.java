@@ -18,4 +18,5 @@ public class Match {
   private Integer isCheat;//是否作弊
   private Integer isStart;//是否开始
   private Integer isEnd;//是否结束
+  private String matchPassword;
 }

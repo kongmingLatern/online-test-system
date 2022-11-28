@@ -3,8 +3,6 @@ package com.cle.onlinetestsystem.service.Impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cle.onlinetestsystem.dao.TaskDao;
 import com.cle.onlinetestsystem.pojo.Task;
-import com.cle.onlinetestsystem.service.MatchService;
-import com.cle.onlinetestsystem.service.StudentService;
 import com.cle.onlinetestsystem.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,8 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class TaskServiceImpl extends ServiceImpl<TaskDao, Task> implements TaskService {
-    private final StudentService studentService;
-    private final MatchService matchService;
+
 
 
 //    @Override
