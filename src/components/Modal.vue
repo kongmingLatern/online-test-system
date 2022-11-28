@@ -21,5 +21,7 @@ const title = inject('title') ?? null
 let visible: Ref<boolean | undefined> =
   props.type === 'content'
     ? inject('isShow')!
-    : inject('impShow')!
+    : props.type === 'import'
+    ? inject('impShow')!
+    : inject('comShow')!
 </script>
