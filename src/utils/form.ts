@@ -19,6 +19,8 @@ export default function getFormItem(data?) {
 
         if (type === 'text') {
           formState[key][getKeys[index]] = ''
+        } else if (type === 'number') {
+          formState[key][getKeys[index]] = 0
         }
       })
     }
