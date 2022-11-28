@@ -56,5 +56,71 @@ export default {
         label: '班级号',
       },
     },
+    radio: {
+      radioName: {
+        name: 'radioName',
+        type: 'text',
+        label: '单选题名称',
+      },
+      radioAnswer: {
+        name: 'radioAnswer',
+        type: 'text',
+        label: '单选题答案',
+      },
+      radioScore: {
+        name: 'radioScore',
+        type: 'number',
+        label: '单选题分数',
+      },
+      baseTitle: {
+        name: 'baseTitle',
+        type: 'text',
+        label: '题库名称',
+      },
+    },
+    checkbox: {
+      checkboxName: {
+        name: 'checkboxName',
+        type: 'text',
+        label: '多选题名称',
+      },
+      checkboxAnswer: {
+        name: 'checkboxAnswer',
+        type: 'text',
+        label: '多选题答案',
+      },
+      checkboxScore: {
+        name: 'checkboxScore',
+        type: 'number',
+        label: '多选题分数',
+      },
+      baseTitle: {
+        name: 'baseTitle',
+        type: 'text',
+        label: '题库名称',
+      },
+    },
+    judge: {
+      judgeName: {
+        name: 'judgeName',
+        type: 'text',
+        label: '判断题名称',
+      },
+      judgeAnswer: {
+        name: 'judgeAnswer',
+        type: 'text',
+        label: '判断题答案',
+      },
+      judgeScore: {
+        name: 'judgeScore',
+        type: 'number',
+        label: '判断题分数',
+      },
+      baseTitle: {
+        name: 'baseTitle',
+        type: 'text',
+        label: '题库名称',
+      },
+    },
   },
 }

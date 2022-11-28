@@ -8,16 +8,33 @@
 
       <!-- 导航 -->
       <template #nav>
-        <Nav data-test="radioNav">
+        <Nav
+          data-test="radioNav"
+          flex="~"
+          justify="between"
+          mb-3
+        >
           <template #breadcrumb>
             <BreadCrumb />
+            <a-button
+              type="primary"
+              float-right
+              @click="addRadio"
+              class="button-blue"
+            >
+              添加单选题
+            </a-button>
           </template>
         </Nav>
       </template>
 
       <!-- 内容 -->
       <template #main>
-        <Main data-test="radioMain" />
+        <Main data-test="radioMain" isModal>
+          <template #modal>
+            <FormItem sort="radio" />
+          </template>
+        </Main>
       </template>
     </Content>
   </div>
@@ -39,6 +56,7 @@ let data = reactive<Radio[]>([])
 const totalPage = ref<number>()
 const loading = ref<boolean>(false)
 const current = ref<number>(1)
+const isShow = ref<boolean>(false)
 const pageSize = ref<number>(10)
 
 const pagination = computed(() => ({
@@ -46,6 +64,10 @@ const pagination = computed(() => ({
   current: current.value,
   pageSize: pageSize.value,
 }))
+
+const addRadio = () => {
+  isShow.value = true
+}
 
 onMounted(async () => {
   await getQuestionByCurrentPage(
@@ -75,6 +97,8 @@ const changePage: (
 }
 
 provide('columns', RadioColumn)
+provide('title', '添加单选题')
+provide('isShow', isShow)
 provide('loading', loading)
 provide('data', data)
 provide('pagination', pagination)

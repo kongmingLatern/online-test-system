@@ -8,16 +8,33 @@
 
       <!-- 导航 -->
       <template #nav>
-        <Nav data-test="checkBoxNav">
+        <Nav
+          data-test="checkBoxNav"
+          flex="~"
+          justify="between"
+          mb-3
+        >
           <template #breadcrumb>
             <BreadCrumb />
+            <a-button
+              type="primary"
+              float-right
+              @click="addCheckbox"
+              class="button-blue"
+            >
+              添加多选题
+            </a-button>
           </template>
         </Nav>
       </template>
 
       <!-- 内容 -->
       <template #main>
-        <Main data-test="checkBoxMain" />
+        <Main data-test="checkBoxMain" isModal>
+          <template #modal>
+            <FormItem sort="checkbox" />
+          </template>
+        </Main>
       </template>
     </Content>
   </div>
@@ -40,6 +57,10 @@ const totalPage = ref<number>()
 const loading = ref<boolean>(false)
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
+const isShow = ref<boolean>(false)
+const addCheckbox = () => {
+  isShow.value = true
+}
 
 const pagination = computed(() => ({
   total: totalPage.value,
@@ -75,6 +96,8 @@ const changePage: (
 }
 
 provide('columns', RadioColumn)
+provide('title', '添加多选题')
+provide('isShow', isShow)
 provide('loading', loading)
 provide('data', data)
 provide('pagination', pagination)

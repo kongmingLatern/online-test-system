@@ -12,7 +12,7 @@
           data-test="studentNav"
           flex="~"
           justify="between"
-          mb-2
+          mb-3
         >
           <template #breadcrumb>
             <BreadCrumb />
@@ -21,6 +21,7 @@
                 type="primary"
                 float-right
                 @click="addStudent"
+                class="button-blue"
               >
                 添加学生
               </a-button>
@@ -28,6 +29,7 @@
                 type="primary"
                 float-right
                 @click="importStudent"
+                class="button-green"
               >
                 导入学生信息
               </a-button>

@@ -8,16 +8,33 @@
 
       <!-- 导航 -->
       <template #nav>
-        <Nav data-test="judgeNav">
+        <Nav
+          data-test="judgeNav"
+          flex="~"
+          justify="between"
+          mb-3
+        >
           <template #breadcrumb>
             <BreadCrumb />
+            <a-button
+              type="primary"
+              float-right
+              @click="addJudge"
+              class="button-blue"
+            >
+              添加判断题
+            </a-button>
           </template>
         </Nav>
       </template>
 
       <!-- 内容 -->
       <template #main>
-        <Main data-test="judgeMain" />
+        <Main data-test="judgeMain" isModal>
+          <template #modal>
+            <FormItem sort="judge" />
+          </template>
+        </Main>
       </template>
     </Content>
   </div>
@@ -40,6 +57,7 @@ const totalPage = ref<number>()
 const loading = ref<boolean>(false)
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
+const isShow = ref<boolean>(false)
 
 const pagination = computed(() => ({
   total: totalPage.value,
@@ -58,6 +76,10 @@ onMounted(async () => {
   )
 })
 
+const addJudge = () => {
+  isShow.value = true
+}
+
 const changePage: (
   pagination: any
 ) => Promise<void> = async pagination => {
@@ -75,6 +97,8 @@ const changePage: (
 }
 
 provide('columns', JudgeColumn)
+provide('title', '添加判断题')
+provide('isShow', isShow)
 provide('loading', loading)
 provide('data', data)
 provide('pagination', pagination)

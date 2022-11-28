@@ -16,7 +16,7 @@
 
       <!-- 内容 -->
       <template #main>
-        <Main data-test="studentMain" />
+        <Main data-test="studentMain"></Main>
       </template>
     </Content>
   </div>
