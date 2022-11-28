@@ -1,6 +1,11 @@
 export default {
   form: {
     teacher: {
+      teacherNo: {
+        name: 'teacherNo',
+        type: 'text',
+        label: '教工号',
+      },
       teacherName: {
         name: 'teacherName',
         type: 'text',
@@ -32,6 +37,23 @@ export default {
         name: 'taskTime',
         type: 'number',
         label: '考试时间',
+      },
+    },
+    student: {
+      studentNo: {
+        name: 'studentNo',
+        type: 'text',
+        label: '学号',
+      },
+      studentName: {
+        name: 'studentName',
+        type: 'text',
+        label: '学生姓名',
+      },
+      classNo: {
+        name: 'classNo',
+        type: 'text',
+        label: '班级号',
       },
     },
   },
