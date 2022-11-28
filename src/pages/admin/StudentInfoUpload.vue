@@ -61,13 +61,11 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { useStudent } from '../../stores/student.store'
 import { getStudentDataByCurrentPage } from '@/api/request'
 import { StudentColumn } from '@/utils/TableData'
 import { finishForm, removeStudent } from '@/api/student'
 import type { Student } from '@/utils'
 let data = reactive<Student[]>([])
-const store = useStudent()
 const totalPage = ref<number>()
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
