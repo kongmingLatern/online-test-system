@@ -16,20 +16,6 @@ describe('Modal shoule be exist', () => {
   })
 })
 
-describe('Modal shoule have a title props', () => {
-  it('shoule have a title props', () => {
-    const options = {
-      props: {
-        title: '添加学生',
-      },
-    }
-    wrapper = registGlobalComponent(Modal, options)
-    expect(wrapper.props()).toEqual({
-      title: '添加学生',
-    })
-  })
-})
-
 describe('test Slot', () => {
   it('shoule have a title props', () => {
     const options = {
