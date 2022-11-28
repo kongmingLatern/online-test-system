@@ -1,3 +1,9 @@
 .bg-title {
   background-color: #00162A;
 }
+
+.button-green {
+  background-color: #00BE21;
+  border: #797979;
+  color: #fff;
+}
