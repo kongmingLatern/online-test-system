@@ -56,6 +56,7 @@ const layout = {
 }
 
 const isShow: Ref<boolean | undefined> = inject('isShow')!
+const finish: (values: any) => void = inject('finish')!
 
 const [formArr, form] = getFormItem(props.sort)
 const formState = reactive(form)
@@ -70,6 +71,7 @@ const validateMessages = {
 const onFinish = (values: any) => {
   console.log('Success:', values)
   isShow.value = false
+  finish(values)
 }
 </script>
 
