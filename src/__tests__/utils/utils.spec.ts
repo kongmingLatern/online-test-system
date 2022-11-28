@@ -297,8 +297,17 @@ describe.skip('class data about table', () => {
 
 describe('Name of the group', () => {
   it('have an only object', () => {
-    const result = getFormItem()
-    expect(result).toEqual([
+    const data = {
+      form: {
+        teacher: {
+          teacherName: {
+            type: 'text',
+            label: '教师姓名',
+          },
+        },
+      },
+    }
+    expect(getFormItem(data)).toEqual([
       {
         type: 'text',
         label: '教师姓名',
@@ -306,7 +315,7 @@ describe('Name of the group', () => {
       {
         formState: {
           teacher: {
-            teacherName: ''
+            teacherName: '',
           },
         },
       },
