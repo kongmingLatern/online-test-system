@@ -5,8 +5,6 @@
     :validate-messages="validateMessages"
     v-bind="layout"
     @finish="onFinish"
-    flex="~"
-    justify="evenly"
     items="center"
   >
     <div class="left">
@@ -36,14 +34,16 @@
           v-model:value="formState[item.name]"
         />
       </a-form-item>
-      <a-button type="linted" html-type="submit">
-        提交
-      </a-button>
+      <div text-right>
+        <a-button class="button" html-type="submit" rounded>
+          提交信息
+        </a-button>
+      </div>
     </div>
   </a-form>
 </template>
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { inject, reactive, type Ref } from 'vue'
 import getFormItem from '@/utils/form'
 
 const props = defineProps<{
@@ -51,11 +51,14 @@ const props = defineProps<{
 }>()
 
 const layout = {
-  labelCol: { span: 8 },
+  labelCol: { span: 4 },
   wrapperCol: { span: 20 },
 }
-const [formArr, form] = getFormItem()
-const formState = reactive(form[props.sort])
+
+const isShow: Ref<boolean | undefined> = inject('isShow')!
+
+const [formArr, form] = getFormItem(props.sort)
+const formState = reactive(form)
 
 const validateMessages = {
   required: '${label} is required!',
@@ -66,11 +69,16 @@ const validateMessages = {
 
 const onFinish = (values: any) => {
   console.log('Success:', values)
+  isShow.value = false
 }
 </script>
 
 <style scoped>
 .bg {
   background-color: #00be21;
+}
+.button {
+  background-color: #75b1ff;
+  color: #fff;
 }
 </style>
