@@ -1,6 +1,6 @@
 import adminConfig from '@/config/admin.config'
 export default function getFormItem(data?) {
-  const result: Record<string, any> = []
+  const formArr: Record<string, any> = []
   const { form } = data || adminConfig
   const formState = {}
   const formStateKeys = Object.keys(form)
@@ -11,10 +11,11 @@ export default function getFormItem(data?) {
       formState[key] = {}
 
       getValues.forEach((item: any, index: number) => {
-        const { type, label } = item
-        result.push({
+        const { type, label, name } = item
+        formArr.push({
           type,
           label,
+          name,
         })
 
         if (type === 'text') {
@@ -25,6 +26,5 @@ export default function getFormItem(data?) {
       })
     }
   })
-  result.push({ formState })
-  return result
+  return [formArr, formState]
 }
