@@ -11,6 +11,11 @@ export default {
         type: 'text',
         label: '教师姓名',
       },
+      isAuth: {
+        name: 'isAuth',
+        type: 'number',
+        label: '是否授权',
+      },
     },
     task: {
       subjectName: {
