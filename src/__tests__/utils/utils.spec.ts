@@ -321,4 +321,115 @@ describe('Name of the group', () => {
       },
     ])
   })
+  it('have two object', () => {
+    const data = {
+      form: {
+        teacher: {
+          teacherName: {
+            type: 'text',
+            label: '教师姓名',
+          },
+          teacherNo: {
+            type: 'text',
+            label: '教工号',
+          },
+        },
+      },
+    }
+    expect(getFormItem(data)).toEqual([
+      {
+        type: 'text',
+        label: '教师姓名',
+      },
+      {
+        type: 'text',
+        label: '教工号',
+      },
+      {
+        formState: {
+          teacher: {
+            teacherName: '',
+            teacherNo: '',
+          },
+        },
+      },
+    ])
+  })
+  it('have some object params', () => {
+    const data = {
+      form: {
+        teacher: {
+          teacherName: {
+            type: 'text',
+            label: '教师姓名',
+          },
+          teacherNo: {
+            type: 'text',
+            label: '教工号',
+          },
+          isAuth: {
+            type: 'text',
+            label: '是否授权',
+          },
+        },
+      },
+    }
+    expect(getFormItem(data)).toEqual([
+      {
+        type: 'text',
+        label: '教师姓名',
+      },
+      {
+        type: 'text',
+        label: '教工号',
+      },
+      {
+        type: 'text',
+        label: '是否授权',
+      },
+      {
+        formState: {
+          teacher: {
+            teacherName: '',
+            teacherNo: '',
+            isAuth: '',
+          },
+        },
+      },
+    ])
+  })
+  it('test type is number', () => {
+    const data = {
+      form: {
+        task: {
+          taskName: {
+            type: 'text',
+            label: '考试名称',
+          },
+          taskTime: {
+            type: 'number',
+            label: '考试时长',
+          },
+        },
+      },
+    }
+    expect(getFormItem(data)).toEqual([
+      {
+        type: 'text',
+        label: '考试名称',
+      },
+      {
+        type: 'number',
+        label: '考试时长',
+      },
+      {
+        formState: {
+          task: {
+            taskName: '',
+            taskTime: 0,
+          },
+        },
+      },
+    ])
+  })
 })
