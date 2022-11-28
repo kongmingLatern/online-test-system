@@ -128,4 +128,24 @@ export default {
       },
     },
   },
+  column: {
+    judge: [
+      {
+        name: '题目编号',
+        dataIndex: 'no',
+        options: {
+          width: 100,
+          align: 'center',
+        },
+      },
+      {
+        name: '题目',
+        dataIndex: 'questionList',
+        options: {
+          ellipsis: true,
+          align: 'center',
+        },
+      },
+    ],
+  },
 }
