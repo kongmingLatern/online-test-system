@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     Form: typeof import('./components/admin/Form.vue')['default']
     FormItem: typeof import('./components/admin/FormItem.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
+    ImportInfo: typeof import('./components/ImportInfo.vue')['default']
     Layout: typeof import('./components/Layout.vue')['default']
     Main: typeof import('./components/Main.vue')['default']
     Modal: typeof import('./components/Modal.vue')['default']
