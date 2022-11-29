@@ -31,7 +31,6 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { TaskColumn } from '@/utils/TableData'
 import { getBasesByCurrentPage } from '@/api/request'
 import type { Task } from '@/utils'
 let data = reactive<Task[]>([])
