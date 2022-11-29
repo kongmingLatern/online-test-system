@@ -13,11 +13,15 @@ export const useSubject = defineStore('subject', {
       try {
         const res = await http.get(requestPath)
         res.data.forEach(item => {
-          this.subjectList.push(item)
+          const { subjectId, subjectName } = item
+          this.subjectList.push({
+            subjectId,
+            subjectName,
+          })
         })
-        return this.subjectList
+        return [this.subjectList, '获取成功']
       } catch (e) {
-        return '科目获取失败'
+        return [[], '科目获取失败']
       }
     },
   },
