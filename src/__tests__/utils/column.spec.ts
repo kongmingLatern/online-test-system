@@ -6,14 +6,14 @@ describe('test column', () => {
       column: {
         judge: [
           {
-            name: '编号',
+            title: '编号',
             dataIndex: 'no',
             options: {
               width: 200,
             },
           },
           {
-            name: '题目',
+            title: '题目',
             dataIndex: 'questionList',
             options: {
               width: 200,
@@ -24,16 +24,16 @@ describe('test column', () => {
     }
     expect(getColumn('judge', data)).toEqual([
       {
-        name: '编号',
+        title: '编号',
         key: 'no',
         dataIndex: 'no',
-        options: { width: 200 },
+        width: 200,
       },
       {
-        name: '题目',
+        title: '题目',
         key: 'questionList',
         dataIndex: 'questionList',
-        options: { width: 200 },
+        width: 200,
       },
     ])
   })
