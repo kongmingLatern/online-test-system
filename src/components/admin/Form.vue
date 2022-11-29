@@ -27,8 +27,8 @@
           v-model:value="formState.firstSubjectName"
           style="width: 120px"
           :options="
-            formState.subjectName.map(pro => ({
-              value: pro,
+            formState.subjectNames.map(name => ({
+              value: name.subjectName,
             }))
           "
           data-test="select"
@@ -40,7 +40,9 @@
           v-model:value="formState.secondBaseTitle"
           style="width: 120px"
           :options="
-            baseTitles.map(city => ({ value: city }))
+            baseTitles.map(baseTitle => ({
+              value: baseTitle,
+            }))
           "
         />
       </a-form-item>
@@ -144,8 +146,15 @@
 </template>
 <script lang="ts" setup>
 import { useBase } from '@/stores/base.store'
-import { computed, onMounted, reactive, watch } from 'vue'
-
+import { useSubject } from '@/stores/subject.store'
+import { message } from 'ant-design-vue'
+import {
+  computed,
+  onMounted,
+  reactive,
+  ref,
+  watch,
+} from 'vue'
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 20 },
@@ -157,27 +166,34 @@ const validateMessages = {
     range: '${label} must be between ${min} and ${max}',
   },
 }
-// const store = useBase()
+// NOTE: store
+const subjectStore = useSubject()
+const baseStore = useBase()
 
-let subjectName = ['Zhejiang', 'Jiangsu']
-
-onMounted(() => {
-  // subjectNamej = store.getBaseList('12')
-})
-
-const baseTitle = {
+// NOTE: data
+let subjectNames = reactive<any[]>([
+  {
+    subjectId: '1',
+    subjectName: 'Zhejiang',
+  },
+  {
+    subjectId: '2',
+    subjectName: 'Jiangsu',
+  },
+])
+let baseTitle = reactive({
   Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
   Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang'],
-}
-const firstSubjectName = subjectName[0]
-const baseTitles = computed(() => {
-  return baseTitle[formState.firstSubjectName]
 })
+let firstSubjectName = ref<string>(
+  subjectNames[0].subjectName
+)
+
 const formState = reactive({
   firstSubjectName,
-  subjectName,
+  subjectNames,
   baseTitle,
-  secondBaseTitle: baseTitle[firstSubjectName][0],
+  secondBaseTitle: baseTitle[firstSubjectName.value][0],
   baseName: '',
   taskTerm: '',
   taskTime: '',
@@ -188,10 +204,50 @@ const formState = reactive({
   judgeNum: undefined,
   judgeScore: undefined,
 })
+
+onMounted(async () => {
+  const [res, msg] = await subjectStore.getSubjectList()
+  const subjectId = ref<string>('')
+  const subjectName = ref<string>('')
+  const arr = reactive<any[]>([])
+  if (Array.isArray(res)) {
+    res.forEach((item, index) => {
+      if (index === 0) {
+        subjectId.value = item.subjectId
+        subjectName.value = item.subjectName
+      }
+      subjectNames.push(item)
+    })
+    console.log(subjectNames)
+  }
+  // subjectNames.splice(0, 2)
+  // delete baseTitle['Jiangsu']
+  // delete baseTitle['Zhejiang']
+
+  firstSubjectName.value = subjectNames[0].subjectName
+  // 继续请求
+  const [result, message] = await baseStore.getBaseList(
+    subjectId.value
+  )
+  if (Array.isArray(result)) {
+    result.forEach(item => {
+      arr.push(item)
+    })
+  }
+  baseTitle[subjectName.value] = arr
+})
+
+const baseTitles = computed(() => {
+  return baseTitle[formState.firstSubjectName]
+})
 watch(
   () => formState.firstSubjectName,
   val => {
-    formState.secondBaseTitle = formState.baseTitle[val][0]
+    console.log('触发回调')
+
+    console.log(formState.baseTitle[val])
+
+    formState.secondBaseTitle = formState.baseTitle[val]
   }
 )
 const onFinish = (values: any) => {
