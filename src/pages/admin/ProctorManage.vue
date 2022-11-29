@@ -31,8 +31,7 @@ import {
   ref,
 } from 'vue'
 import { getStudentDataByCurrentPage } from '@/api/request'
-import { Column, type Student } from '@/utils'
-import { SearchStudentPasswordColumn } from '@/utils/TableData'
+import type { Student } from '@/utils'
 
 let data = reactive<Student[]>([])
 const totalPage = ref<number>()
@@ -70,13 +69,7 @@ const changePage: (
   )
 }
 
-provide('columns', [
-  ...SearchStudentPasswordColumn,
-  new Column('操作', 'delete', 'delete', {
-    width: 100,
-    align: 'center',
-  }),
-])
+provide('columnSort', 'grade')
 provide('data', data)
 provide('pagination', pagination)
 provide('loading', loading)

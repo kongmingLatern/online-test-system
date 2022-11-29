@@ -31,7 +31,6 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { GradeColumn } from '@/utils/TableData'
 import { getGradeByCurrentPage } from '@/api/request'
 import type { Grade } from '@/utils'
 
@@ -72,7 +71,7 @@ const changePage: (
   )
 }
 
-provide('columns', GradeColumn)
+provide('columnSort', 'grade')
 provide('loading', loading)
 provide('data', data)
 provide('pagination', pagination)

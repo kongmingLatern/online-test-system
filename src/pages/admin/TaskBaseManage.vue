@@ -75,7 +75,7 @@ const changePage: (
 
 provide('isShow', isShow)
 provide('impShow', impShow)
-provide('columns', TaskColumn)
+provide('columnSort', 'task')
 provide('data', data)
 provide('loading', loading)
 provide('pagination', pagination)

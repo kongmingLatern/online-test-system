@@ -31,7 +31,6 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { RadioColumn } from '@/utils/TableData'
 import { getQuestionByCurrentPage } from '@/api/request'
 import type { Radio } from '@/utils'
 
@@ -74,7 +73,7 @@ const changePage: (
   )
 }
 
-provide('columns', RadioColumn)
+provide('columnSort', 'radio')
 provide('loading', loading)
 provide('data', data)
 provide('pagination', pagination)

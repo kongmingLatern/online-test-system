@@ -42,7 +42,6 @@
 <script setup lang="ts">
 import { getTeachersByCurrentPage } from '@/api/request'
 import type { Teacher } from '@/utils'
-import { TeacherColumn } from '@/utils/TableData'
 import {
   computed,
   onMounted,
@@ -94,7 +93,7 @@ const addTeacher = () => {
   isShow.value = true
 }
 
-provide('columns', TeacherColumn)
+provide('columnSort', 'teacher')
 provide('finish', finishForm)
 provide('title', '添加教师')
 provide('isShow', isShow)
