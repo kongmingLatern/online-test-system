@@ -12,13 +12,16 @@ import { columns as GradeColumn } from './Grade.data'
 import { columns as SearchStudentPasswordColumn } from './SearchStudentPassword.data'
 import { columns as TeacherColumn } from './Teacher.data'
 
-export {
-  TaskColumn,
-  QuestionColumn,
-  JudgeColumn,
-  StudentUploadColumn,
-  StudentInfoColumns,
-  GradeColumn,
-  SearchStudentPasswordColumn,
-  TeacherColumn,
+const columnConfig = {
+  studentUpload: StudentUploadColumn,
+  studentInfo: StudentInfoColumns,
+  radio: QuestionColumn,
+  checkbox: QuestionColumn,
+  judge: JudgeColumn,
+  task: TaskColumn,
+  grade: GradeColumn,
+  searchPassword: SearchStudentPasswordColumn,
+  teacher: TeacherColumn,
 }
+
+export { columnConfig }

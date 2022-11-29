@@ -1,21 +1,31 @@
-import type { TableColumnsOptions } from '@/type'
-import { Column } from '../Task'
-
-const options: Partial<TableColumnsOptions> = {
-  align: 'center',
-}
-
 export const columns = [
-  new Column('编号', 'no', 'no', options),
-  new Column('教工号', 'teacherNo', 'teacherNo', options),
-  new Column(
-    '教师姓名',
-    'teacherName',
-    'teacherName',
-    options
-  ),
-  new Column('操作', 'deleteAndAuth', 'deleteAndAuth', {
-    width: 60,
-    align: 'center',
-  }),
+  {
+    title: '编号',
+    dataIndex: 'no',
+    options: {
+      align: 'center',
+    },
+  },
+  {
+    title: '教工号',
+    dataIndex: 'teacherNo',
+    options: {
+      align: 'center',
+    },
+  },
+  {
+    title: '教师姓名',
+    dataIndex: 'teacherName',
+    options: {
+      align: 'center',
+    },
+  },
+  {
+    title: '操作',
+    dataIndex: 'deleteAndAuth',
+    options: {
+      width: 60,
+      align: 'center',
+    },
+  },
 ]

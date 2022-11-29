@@ -1,22 +1,53 @@
-import type { TableColumnsOptions } from '@/type'
-import { Column } from '../Task'
-
-const options: Partial<TableColumnsOptions> = {
-  align: 'center',
-}
-
 export const columns = [
-  new Column('学号', 'studentNo', 'studentNo', options),
-  new Column('班级', 'classNo', 'classNo', options),
-  new Column('姓名', 'studentName', 'studentName', options),
-  new Column('科目', 'subjectName', 'subjectName', options),
-  new Column('所属试题名称', 'baseTitle', 'baseTitle', {
-    ...options,
-    width: 200,
-  }),
-  new Column('成绩', 'grade', 'grade', options),
-  new Column('操作', 'delete', 'delete', {
-    width: 100,
-    align: 'center',
-  }),
+  {
+    title: '学号',
+    dataIndex: 'studentNo',
+    options: {
+      align: 'center',
+    },
+  },
+  {
+    title: '班级',
+    dataIndex: 'classNo',
+    options: {
+      align: 'center',
+    },
+  },
+  {
+    title: '姓名',
+    dataIndex: 'studentName',
+    options: {
+      align: 'center',
+    },
+  },
+  {
+    title: '科目',
+    dataIndex: 'subjectName',
+    options: {
+      align: 'center',
+    },
+  },
+  {
+    title: '所属试题名称',
+    dataIndex: 'baseTitle',
+    options: {
+      width: 200,
+      align: 'center',
+    },
+  },
+  {
+    title: '成绩',
+    dataIndex: 'grade',
+    options: {
+      align: 'center',
+    },
+  },
+  {
+    title: '操作',
+    dataIndex: 'delete',
+    options: {
+      width: 100,
+      align: 'center',
+    },
+  },
 ]
