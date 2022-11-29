@@ -44,7 +44,7 @@
 </template>
 <script lang="ts" setup>
 import { inject, reactive, type Ref } from 'vue'
-import getFormItem from '@/utils/config/form'
+import { getFormItem } from '@/utils'
 
 const props = defineProps<{
   sort: string
