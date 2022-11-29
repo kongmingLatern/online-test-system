@@ -48,9 +48,9 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { RadioColumn } from '@/utils/TableData'
 import { getQuestionByCurrentPage } from '@/api/request'
 import type { Radio } from '@/utils'
+import { getColumn } from '@/utils/column'
 
 let data = reactive<Radio[]>([])
 const totalPage = ref<number>()
@@ -96,7 +96,7 @@ const changePage: (
   )
 }
 
-provide('columns', RadioColumn)
+provide('columns', getColumn('radio'))
 provide('title', '添加单选题')
 provide('isShow', isShow)
 provide('loading', loading)

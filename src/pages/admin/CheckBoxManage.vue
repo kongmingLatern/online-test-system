@@ -51,6 +51,7 @@ import {
 import { RadioColumn } from '@/utils/TableData'
 import { getQuestionByCurrentPage } from '@/api/request'
 import type { Radio } from '@/utils'
+import { getColumn } from '@/utils/column'
 
 let data = reactive<Radio[]>([])
 const totalPage = ref<number>()
@@ -95,7 +96,7 @@ const changePage: (
   )
 }
 
-provide('columns', RadioColumn)
+provide('columns', getColumn('checkbox'))
 provide('title', '添加多选题')
 provide('isShow', isShow)
 provide('loading', loading)
