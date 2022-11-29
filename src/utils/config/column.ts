@@ -1,5 +1,5 @@
 import adminConfig from '@/config/admin.config'
-export function getColumn(name, data?) {
+export default function getColumn(name, data?) {
   const columnArr: Record<string, any> = []
   const { column } = data || adminConfig
   for (const key in column) {
