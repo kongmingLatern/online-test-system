@@ -50,7 +50,6 @@ import {
 } from 'vue'
 import { getQuestionByCurrentPage } from '@/api/request'
 import type { Radio } from '@/utils'
-import { getColumn } from '@/utils/column'
 
 let data = reactive<Radio[]>([])
 const totalPage = ref<number>()

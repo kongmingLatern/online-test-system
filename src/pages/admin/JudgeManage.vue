@@ -49,10 +49,9 @@ import {
   ref,
 } from 'vue'
 import { getQuestionByCurrentPage } from '@/api/request'
-import type { Radio } from '@/utils'
-import { getColumn } from '@/utils/column'
+import type { Judge } from '@/utils'
 
-let data = reactive<Radio[]>([])
+let data = reactive<Judge[]>([])
 const totalPage = ref<number>()
 const loading = ref<boolean>(false)
 const current = ref<number>(1)

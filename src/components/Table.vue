@@ -63,7 +63,7 @@
   </a-table>
 </template>
 <script lang="ts" setup>
-import { getColumn } from '@/utils/column'
+import { getColumn } from '@/utils'
 import { inject } from 'vue'
 
 const columnSort = inject('columnSort')
