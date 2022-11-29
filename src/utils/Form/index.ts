@@ -5,6 +5,7 @@ import RadioForm from './radio'
 import CheckboxForm from './checkbox'
 import JudgeForm from './judge'
 
+// 表单配置组件 => FormItem.vue
 const formConfig = {
   teacher: TeacherForm,
   task: TaskForm,
