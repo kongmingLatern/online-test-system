@@ -1,4 +1,4 @@
-import getFormItem from '@/utils/form'
+import { getFormItem } from '@/utils'
 
 describe('test form', () => {
   it('have an only object', () => {

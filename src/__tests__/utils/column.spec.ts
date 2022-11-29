@@ -1,4 +1,4 @@
-import { getColumn } from '@/utils/column'
+import { getColumn } from '@/utils'
 
 describe('test column', () => {
   it('should return Object', () => {
