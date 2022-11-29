@@ -10,12 +10,12 @@ export function getColumn(name, data?) {
         const element = column[key]
         if (typeof element === 'object') {
           element.forEach((item: any) => {
-            const { name, dataIndex, options } = item
+            const { title, dataIndex, options } = item
             columnArr.push({
-              name,
+              title,
               key: dataIndex,
               dataIndex,
-              options,
+              ...options,
             })
           })
         }
