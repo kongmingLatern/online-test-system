@@ -1,28 +1,67 @@
 import type { TableColumnsOptions } from '@/type'
-import { Column } from '../Task'
 
 const options: Partial<TableColumnsOptions> = {
   align: 'center',
 }
 
 export const uploadColumns = [
-  new Column('编号', 'no', 'no', options),
-  new Column('学号', 'studentNo', 'studentNo', options),
-  new Column('姓名', 'studentName', 'studentName', options),
-  new Column('班级', 'classNo', 'classNo', options),
-  new Column('操作', 'delete', 'delete', {
-    width: 60,
-    align: 'center',
-  }),
+  {
+    title: '编号',
+    dataIndex: 'no',
+    ...options,
+  },
+  {
+    title: '学号',
+    dataIndex: 'studentNo',
+    ...options,
+  },
+  {
+    title: '姓名',
+    dataIndex: 'studentName',
+    ...options,
+  },
+  {
+    title: '班级',
+    dataIndex: 'classNo',
+    ...options,
+  },
+  {
+    title: '操作',
+    dataIndex: 'delete',
+    options: {
+      ...options,
+      width: 60,
+    },
+  },
 ]
 
 export const infoColumns = [
-  new Column('编号', 'no', 'no', options),
-  new Column('学号', 'studentNo', 'studentNo', options),
-  new Column('姓名', 'studentName', 'studentName', options),
-  new Column('班级', 'classNo', 'classNo', options),
-  new Column('操作', 'student', 'student', {
-    width: 60,
-    align: 'center',
-  }),
+  {
+    title: '编号',
+    dataIndex: 'no',
+    ...options,
+  },
+  {
+    title: '学号',
+    dataIndex: 'studentNo',
+    ...options,
+  },
+  {
+    title: '姓名',
+    dataIndex: 'studentName',
+    ...options,
+  },
+  {
+    title: '班级',
+    dataIndex: 'classNo',
+    ...options,
+  },
+  {
+    title: '操作',
+    dataIndex: 'student',
+    options: {
+      ...options,
+      width: 60,
+    },
+  },
 ]

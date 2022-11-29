@@ -1,9 +1,7 @@
 import { columns as TaskColumn } from './Task.data'
-import { columns as RadioColumn } from './Radio.data'
+import { columns as QuestionColumn } from './Question.data.'
 
 import { columns as JudgeColumn } from './Judge.data'
-
-import { columns as CheckboxColumn } from './Checkbox.data'
 
 import {
   uploadColumns as StudentUploadColumn,
@@ -16,9 +14,8 @@ import { columns as TeacherColumn } from './Teacher.data'
 
 export {
   TaskColumn,
-  RadioColumn,
+  QuestionColumn,
   JudgeColumn,
-  CheckboxColumn,
   StudentUploadColumn,
   StudentInfoColumns,
   GradeColumn,
