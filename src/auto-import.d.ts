@@ -20,6 +20,7 @@ declare module '@vue/runtime-core' {
     Nav: typeof import('./components/Nav.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Search: typeof import('./components/Search.vue')['default']
     Table: typeof import('./components/Table.vue')['default']
   }
 }
