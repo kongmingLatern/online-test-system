@@ -96,7 +96,7 @@ const changePage: (
   )
 }
 
-provide('columns', getColumn('radio'))
+provide('columnSort', 'radio')
 provide('title', '添加单选题')
 provide('isShow', isShow)
 provide('loading', loading)

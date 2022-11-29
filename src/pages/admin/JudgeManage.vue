@@ -96,7 +96,7 @@ const changePage: (
   )
 }
 
-provide('columns', getColumn('judge'))
+provide('columnSort', 'judge')
 provide('title', '添加判断题')
 provide('isShow', isShow)
 provide('loading', loading)

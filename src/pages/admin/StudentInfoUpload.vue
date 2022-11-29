@@ -61,7 +61,6 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { StudentUploadColumn } from '../../utils/TableData'
 import { getStudentDataByCurrentPage } from '@/api/request'
 import { finishForm, removeStudent } from '@/api/student'
 import type { Student } from '@/utils'
@@ -115,7 +114,7 @@ const changePage: (
 provide('isShow', isShow)
 provide('impShow', impShow)
 provide('title', '添加学生')
-provide('columns', StudentUploadColumn)
+provide('columnSort', 'studentUpload')
 provide('data', data)
 provide('loading', loading)
 provide('pagination', pagination)
