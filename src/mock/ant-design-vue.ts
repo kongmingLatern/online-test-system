@@ -20,6 +20,7 @@ const AntdComponents = {
   'a-menu-item-group': mockComponent,
   'a-sub-menu': mockComponent,
   'a-input': mockComponent,
+  'a-input-search': mockComponent,
   'a-modal': mockComponent,
   'a-form': mockComponent,
   'a-form-item': mockComponent,
