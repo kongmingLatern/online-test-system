@@ -16,6 +16,8 @@
         >
           <template #breadcrumb>
             <BreadCrumb />
+          </template>
+          <template #button>
             <a-space>
               <a-button
                 type="primary"

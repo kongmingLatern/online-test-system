@@ -16,6 +16,8 @@
         >
           <template #breadcrumb>
             <BreadCrumb />
+          </template>
+          <template #button>
             <a-button
               type="primary"
               float-right

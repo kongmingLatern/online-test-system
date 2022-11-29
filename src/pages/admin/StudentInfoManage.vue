@@ -7,16 +7,27 @@
 
       <!-- 导航 -->
       <template #nav>
-        <Nav data-test="studentNav">
+        <Nav
+          data-test="studentNav"
+          flex
+          justify="between"
+          mb-3
+        >
           <template #breadcrumb>
             <BreadCrumb />
+          </template>
+          <template #search>
+            <Search
+              text="请输入学号"
+              @search="searchStudent"
+            />
           </template>
         </Nav>
       </template>
 
       <!-- 内容 -->
       <template #main>
-        <Main data-test="studentMain"></Main>
+        <Main data-test="studentMain" />
       </template>
     </Content>
   </div>
@@ -56,6 +67,10 @@ onMounted(async () => {
   )
 })
 
+const searchStudent = (values: string) => {
+  console.log(values)
+}
+
 const changePage: (
   pagination: any
 ) => Promise<void> = async pagination => {
@@ -79,4 +94,8 @@ provide('change', changePage)
 provide('removeItem', removeStudent)
 </script>
 
-<style scoped></style>
+<style scoped>
+:deep(.ant-input-search) {
+  width: 300px;
+}
+</style>
