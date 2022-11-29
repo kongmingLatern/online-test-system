@@ -63,14 +63,17 @@
   </a-table>
 </template>
 <script lang="ts" setup>
+import { getColumn } from '@/utils/column'
 import { inject } from 'vue'
 
-const columns = inject('columns')
+const columnSort = inject('columnSort')
 const data = inject('data')
 const loading = inject('loading')
 const pagination = inject('pagination')
 const change: any = inject('change') ?? null
 const removeItem: any = inject('removeItem') ?? null
+
+const columns = getColumn(columnSort)
 
 // NOTE: 孙传爷
 const changePage = pagination => {
