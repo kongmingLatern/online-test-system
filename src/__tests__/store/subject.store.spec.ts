@@ -12,11 +12,13 @@ describe('Subject Store', () => {
     await expect(store.getSubjectList()).resolves
       .toMatchInlineSnapshot(`
       [
-        {
-          "subjectId": "1595617742638100481",
-          "subjectName": "高数A",
-          "teacherId": null,
-        },
+        [
+          {
+            "subjectId": "1595617742638100481",
+            "subjectName": "高数A",
+          },
+        ],
+        "获取成功",
       ]
     `)
   })

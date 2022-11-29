@@ -26,17 +26,15 @@ describe('Task Store', () => {
     `)
   })
   // NOTE: 测试接口 'base/list' 的数据'
-  it.skip('should return 1 record', async () => {
+  it('should return 1 record', async () => {
     const store = useBase()
     await expect(store.getBaseList('1595617742638100481'))
       .resolves.toMatchInlineSnapshot(`
       [
-        {
-          "baseId": "1595984141143273474",
-          "baseTitle": "123",
-          "createUser": null,
-          "subjectId": null,
-        },
+        [
+          "123",
+        ],
+        "获取成功",
       ]
     `)
   })
