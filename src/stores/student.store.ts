@@ -55,7 +55,6 @@ export const useStudent = defineStore('students', {
             studentId,
           },
         })
-        console.log(res)
         return res.data
       } catch (error) {
         return '删除失败'
