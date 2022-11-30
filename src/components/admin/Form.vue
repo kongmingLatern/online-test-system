@@ -26,11 +26,7 @@
         <a-select
           v-model:value="formState.firstSubjectName"
           style="width: 120px"
-          :options="
-            formState.subjectNames.map(name => ({
-              value: name.subjectName,
-            }))
-          "
+          :options="firstOptions"
           data-test="select"
         />
       </a-form-item>
@@ -39,11 +35,7 @@
         <a-select
           v-model:value="formState.secondBaseTitle"
           style="width: 120px"
-          :options="
-            baseTitles.map(baseTitle => ({
-              value: baseTitle,
-            }))
-          "
+          :options="secondOptions"
         />
       </a-form-item>
       <a-form-item
@@ -217,13 +209,23 @@ onMounted(async () => {
     baseTitle[firstSubjectName.value][0]
 })
 
-const baseTitles = computed(() => {
-  return baseTitle[formState.firstSubjectName] || []
+const baseTitles: any = computed(() => {
+  return Array.isArray(
+    baseTitle[formState.firstSubjectName]
+  )
+    ? baseTitle[formState.firstSubjectName]
+    : []
 })
 
-watchEffect(() => {
-  console.log('触发回调', formState.firstSubjectName)
+const firstOptions = formState.subjectNames.map(name => ({
+  value: name.subjectName,
+}))
 
+const secondOptions = baseTitles.value.map(baseTitle => ({
+  value: baseTitle,
+}))
+
+watchEffect(() => {
   formState.secondBaseTitle =
     baseTitle[formState.firstSubjectName]
 })
