@@ -11,6 +11,32 @@
       <template v-if="column.dataIndex === 'no'">
         <span>{{ index + 1 }}</span>
       </template>
+      <template v-if="column.dataIndex === 'status'">
+        <a-tag
+          v-if="record.status === '考完了'"
+          color="red"
+        >
+          {{ record.status }}
+        </a-tag>
+        <a-tag
+          v-if="record.status === '考试中'"
+          color="green"
+        >
+          {{ record.status }}
+        </a-tag>
+        <a-tag v-if="record.status === '未开考'">
+          {{ record.status }}
+        </a-tag>
+        <a-tag
+          v-if="record.status === '作弊'"
+          bg-red
+          text-2
+          rounded
+          color-white
+        >
+          {{ record.status }}
+        </a-tag>
+      </template>
       <template
         v-if="column.dataIndex === 'questionAnswer'"
       >
