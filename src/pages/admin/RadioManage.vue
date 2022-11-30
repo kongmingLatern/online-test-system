@@ -50,6 +50,7 @@ import {
   reactive,
   ref,
 } from 'vue'
+import { finishQuestionForm } from '../../api/question'
 import { getQuestionByCurrentPage } from '@/api/request'
 import type { Radio } from '@/utils'
 
@@ -102,6 +103,7 @@ provide('title', '添加单选题')
 provide('isShow', isShow)
 provide('loading', loading)
 provide('data', data)
+provide('finish', finishQuestionForm)
 provide('pagination', pagination)
 provide('change', changePage)
 </script>
