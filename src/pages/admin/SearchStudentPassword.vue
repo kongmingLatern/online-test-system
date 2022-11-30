@@ -30,10 +30,9 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { getStudentDataByCurrentPage } from '@/api/request'
-import type { Student } from '@/utils'
+import { getMatchsByCurrentPage } from '@/api/request'
 
-let data = reactive<Student[]>([])
+let data = reactive<any[]>([])
 const totalPage = ref<number>()
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
@@ -45,7 +44,7 @@ const pagination = computed(() => ({
 }))
 
 onMounted(async () => {
-  await getStudentDataByCurrentPage(
+  await getMatchsByCurrentPage(
     data,
     1,
     pageSize.value,
@@ -60,7 +59,7 @@ const changePage: (
   pagination.current = pagination.current
   current.value = pagination.current
   data.length = 0
-  getStudentDataByCurrentPage(
+  getMatchsByCurrentPage(
     data,
     current.value,
     pageSize.value,
