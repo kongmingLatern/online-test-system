@@ -153,7 +153,7 @@ describe('test form', () => {
       },
     ])
   })
-  it('test type is number', () => {
+  it('test choose one object', () => {
     const data = {
       form: {
         task: {
@@ -199,6 +199,47 @@ describe('test form', () => {
         teacher: {
           teacherName: '',
           teacherNo: '',
+        },
+      },
+    ])
+  })
+})
+
+describe('test some feat', () => {
+  it('shoule return object when type equals radio', () => {
+    const data = {
+      form: {
+        question: {
+          questionName: {
+            name: 'questionName',
+            type: 'text',
+            label: '题目名称',
+          },
+          questionType: {
+            name: 'questionType',
+            type: 'radio',
+            label: '题目类型',
+          },
+        },
+      },
+    }
+    expect(getFormItem('question', data)).toEqual([
+      [
+        {
+          name: 'questionName',
+          type: 'text',
+          label: '题目名称',
+        },
+        {
+          name: 'questionType',
+          type: 'radio',
+          label: '题目类型',
+        },
+      ],
+      {
+        question: {
+          questionName: '',
+          questionType: '',
         },
       },
     ])
