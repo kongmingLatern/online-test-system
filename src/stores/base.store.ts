@@ -21,7 +21,7 @@ export const useBase = defineStore('base', {
         })
         return [this.baseList, '获取成功']
       } catch (e) {
-        return '题库获取失败'
+        return [this.baseList, '题库获取失败']
       }
     },
   },
