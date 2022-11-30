@@ -15,7 +15,8 @@
         :rules="
           item.type === 'text'
             ? [{ required: true }]
-            : [
+            : item.type === 'number '
+            ? [
                 {
                   required: true,
                   type: item.type,
@@ -23,8 +24,17 @@
                   max: 300,
                 },
               ]
+            : null
         "
       >
+        <a-radio-group
+          v-if="item.type === 'radio'"
+          v-model:value="value"
+        >
+          <a-radio :value="1">单选题</a-radio>
+          <a-radio :value="2">多选题</a-radio>
+          <a-radio :value="3">判断题</a-radio>
+        </a-radio-group>
         <a-input
           v-if="item.type === 'text'"
           v-model:value="formState[item.name]"
@@ -43,12 +53,14 @@
   </a-form>
 </template>
 <script lang="ts" setup>
-import { inject, reactive, type Ref } from 'vue'
+import { inject, reactive, ref, type Ref } from 'vue'
 import { getFormItem } from '@/utils'
 
 const props = defineProps<{
   sort: string
 }>()
+
+const value = ref<number>(1)
 
 const layout = {
   // labelCol: { span: 4 },
@@ -69,9 +81,16 @@ const validateMessages = {
 }
 
 const onFinish = (values: any) => {
-  console.log('Success:', values)
+  console.log('Success:', values, value.value)
   isShow.value = false
-  finish(values)
+  if (props.sort === 'radio') {
+    finish({
+      ...values,
+      questionType: value.value,
+    })
+  } else {
+    finish(values)
+  }
 }
 </script>
 
