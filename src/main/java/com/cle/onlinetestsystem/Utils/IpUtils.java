@@ -7,7 +7,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 
-public class IpUtil {
+public class IpUtils {
     public static String getIpAddr(HttpServletRequest request) {
         String ipAddress = null;
              try {

@@ -19,4 +19,6 @@ public class MatchDto extends Match {
     private Long taskId;//考试号
     private String taskPassword;//
     private String status;//当前考试状态
+    private List<QuestionDto> questionDtoList;//试卷集合
+    private String taskStartToEnd;//考试开始到结束时间
 }

@@ -1,6 +1,6 @@
 package com.cle.onlinetestsystem.filter;
 
-import com.cle.onlinetestsystem.Utils.IpUtil;
+import com.cle.onlinetestsystem.Utils.IpUtils;
 import com.cle.onlinetestsystem.common.BaseContext;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,7 +18,7 @@ public class loginFilter implements Filter {
         HttpServletRequest servletRequest = (HttpServletRequest) request;
         String requestURI = servletRequest.getRequestURI();
         log.info("拦截到请求{}",requestURI);
-        String ipAddr = IpUtil.getIpAddr(servletRequest);
+        String ipAddr = IpUtils.getIpAddr(servletRequest);
         System.out.println(ipAddr);
         HttpSession session = servletRequest.getSession();
         Long student =(Long) session.getAttribute("student");
@@ -29,7 +29,6 @@ public class loginFilter implements Filter {
         else {
             BaseContext.setCurrentId(student);
         }
-
         chain.doFilter(request, response);
 }
 }

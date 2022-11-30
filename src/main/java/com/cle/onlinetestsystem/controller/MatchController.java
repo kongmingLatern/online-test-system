@@ -2,6 +2,7 @@ package com.cle.onlinetestsystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cle.onlinetestsystem.Utils.RedisUtils;
 import com.cle.onlinetestsystem.dto.MatchDto;
 import com.cle.onlinetestsystem.dto.QuestionDto;
 import com.cle.onlinetestsystem.pojo.*;
@@ -11,6 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +29,7 @@ public class MatchController {
     private final ClbumService clbumService;
     private final TaskService taskService;
     private final BaseService baseService;
-
+    private final RedisUtils redisUtils;
     /**
      * 分页查询学生成绩
      *
@@ -97,12 +101,8 @@ public class MatchController {
         List<Match> records = matchPage.getRecords();
         List<MatchDto> collect = records.parallelStream().map(match -> {
             MatchDto matchDto = new MatchDto();
-            LambdaQueryWrapper<Student> studentLambdaQueryWrapper = new LambdaQueryWrapper<>();
-            studentLambdaQueryWrapper.eq(match.getStudentId() != null, Student::getStudentId, match.getStudentId());
-            Student student = studentService.getOne(studentLambdaQueryWrapper);
-            LambdaQueryWrapper<Clbum> clbumLambdaQueryWrapper = new LambdaQueryWrapper<>();
-            clbumLambdaQueryWrapper.eq(student.getClassId() != null, Clbum::getClassId, student.getClassId());
-            Clbum clbum = clbumService.getOne(clbumLambdaQueryWrapper);
+            Student student = studentService.getById(match.getStudentId());
+            Clbum clbum = clbumService.getById(student.getClassId());
             LambdaQueryWrapper<Task> taskLambdaQueryWrapper = new LambdaQueryWrapper<>();
             taskLambdaQueryWrapper.eq(match.getTaskId() != null, Task::getTaskId, match.getTaskId());
             Task task = taskService.getOne(taskLambdaQueryWrapper);
@@ -112,6 +112,13 @@ public class MatchController {
             LambdaQueryWrapper<Subject> subjectLambdaQueryWrapper = new LambdaQueryWrapper<>();
             subjectLambdaQueryWrapper.eq(base.getSubjectId() != null, Subject::getSubjectId, base.getSubjectId());
             Subject subject = subjectService.getOne(subjectLambdaQueryWrapper);
+            LocalDateTime taskTime = task.getTaskTime();
+            Integer limitTime = task.getLimitTime();
+            LocalDateTime dateTime = taskTime.plusMinutes(limitTime);
+            LocalTime localTime = LocalTime.of(dateTime.getHour(), dateTime.getMinute());
+            String taskTimeFormat = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm").format(taskTime);
+            String localTimeFormat = DateTimeFormatter.ofPattern("HH:mm").format(localTime);
+            matchDto.setTaskStartToEnd(taskTimeFormat + "-" + localTimeFormat);
             matchDto.setMatchId(match.getMatchId());
             matchDto.setStudentNo(student.getStudentNo());
             matchDto.setClassNo(clbum.getClassNo());
@@ -186,4 +193,32 @@ public class MatchController {
         return R.success(questionList);
     }
 
+    /**
+     * 提供前端每过一段时间保存试卷
+     * @param matchDto
+     * @return
+     */
+    @PostMapping("/saveMatch")
+    public R<String> saveMatch(@RequestBody MatchDto matchDto){
+        matchService.saveMatch(matchDto);
+        return R.success("保存成功");
+    }
+
+    /**
+     * 二次考试进入提取最近保存的试卷
+     * @param matchId
+     * @param matchPassword
+     * @return
+     */
+    @GetMapping("/getMatch")
+    public R<List<QuestionDto>> getMatch(Long matchId,String matchPassword){
+        List<QuestionDto> questionDtoList = matchService.getMatch(matchId, matchPassword);
+        return R.success(questionDtoList);
+    }
+
+    @PostMapping("/submit")
+    public R<String> submit(@RequestBody MatchDto matchDto){
+        Double grade = matchService.computeGrade(matchDto);
+        return R.success("分数为"+grade);
+    }
 }
