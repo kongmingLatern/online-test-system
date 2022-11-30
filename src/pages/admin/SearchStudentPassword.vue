@@ -30,9 +30,10 @@ import {
   reactive,
   ref,
 } from 'vue'
+import type Match from '@/utils/Task/Match'
 import { getMatchsByCurrentPage } from '@/api/request'
 
-let data = reactive<any[]>([])
+let data = reactive<Match[]>([])
 const totalPage = ref<number>()
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
