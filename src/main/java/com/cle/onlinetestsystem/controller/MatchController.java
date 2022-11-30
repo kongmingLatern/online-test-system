@@ -2,6 +2,7 @@ package com.cle.onlinetestsystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cle.onlinetestsystem.Utils.MyUtils;
 import com.cle.onlinetestsystem.Utils.RedisUtils;
 import com.cle.onlinetestsystem.dto.MatchDto;
 import com.cle.onlinetestsystem.dto.QuestionDto;
@@ -12,9 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -112,13 +110,8 @@ public class MatchController {
             LambdaQueryWrapper<Subject> subjectLambdaQueryWrapper = new LambdaQueryWrapper<>();
             subjectLambdaQueryWrapper.eq(base.getSubjectId() != null, Subject::getSubjectId, base.getSubjectId());
             Subject subject = subjectService.getOne(subjectLambdaQueryWrapper);
-            LocalDateTime taskTime = task.getTaskTime();
-            Integer limitTime = task.getLimitTime();
-            LocalDateTime dateTime = taskTime.plusMinutes(limitTime);
-            LocalTime localTime = LocalTime.of(dateTime.getHour(), dateTime.getMinute());
-            String taskTimeFormat = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm").format(taskTime);
-            String localTimeFormat = DateTimeFormatter.ofPattern("HH:mm").format(localTime);
-            matchDto.setTaskStartToEnd(taskTimeFormat + "-" + localTimeFormat);
+            String timeConversion = MyUtils.timeConversion(task.getTaskTime(), task.getLimitTime());
+            matchDto.setTaskStartToEnd(timeConversion);
             matchDto.setMatchId(match.getMatchId());
             matchDto.setStudentNo(student.getStudentNo());
             matchDto.setClassNo(clbum.getClassNo());

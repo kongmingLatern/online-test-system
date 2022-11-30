@@ -2,13 +2,12 @@ package com.cle.onlinetestsystem.service.Impl;
 
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.cle.onlinetestsystem.Utils.MapToQuestion;
+import com.cle.onlinetestsystem.Utils.MyUtils;
 import com.cle.onlinetestsystem.common.CustomException;
 import com.cle.onlinetestsystem.dao.BaseDao;
 import com.cle.onlinetestsystem.pojo.Base;
 import com.cle.onlinetestsystem.service.BaseService;
 import com.cle.onlinetestsystem.service.QuestionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
@@ -40,11 +39,11 @@ public class BaseServiceImpl extends ServiceImpl<BaseDao, Base> implements BaseS
         TransactionStatus status = transactionManager.getTransaction(def);
         try {
             list = EasyExcel.read(file.getInputStream()).sheet("单选题").doReadSync();
-            questionService.saveBatch(MapToQuestion.RadioAndSelected(list,"Radio",baseId)) ;
+            questionService.saveBatch(MyUtils.RadioAndSelected(list,"Radio",baseId)) ;
             list=EasyExcel.read(file.getInputStream()).sheet("多选题").doReadSync();
-            questionService.saveBatch(MapToQuestion.RadioAndSelected(list, "Selected", baseId));
+            questionService.saveBatch(MyUtils.RadioAndSelected(list, "Selected", baseId));
             list=EasyExcel.read(file.getInputStream()).sheet("判断题").doReadSync();
-            questionService.saveBatch(MapToQuestion.Judge(list, baseId));
+            questionService.saveBatch(MyUtils.Judge(list, baseId));
 
         }
         catch (Exception e) {

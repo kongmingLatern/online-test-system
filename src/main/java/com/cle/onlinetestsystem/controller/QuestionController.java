@@ -53,6 +53,7 @@ public class QuestionController {
             questionDto.setQuestionList(item.getQuestionList());
             questionDto.setQuestionAnswer(item.getQuestionAnswer());
             questionDto.setQuestionCorrect(item.getQuestionCorrect());
+            questionDto.setBaseId(item.getBaseId());
             LambdaQueryWrapper<Base> baseLambdaQueryWrapper = new LambdaQueryWrapper<>();
             baseLambdaQueryWrapper.eq(Base::getBaseId, item.getBaseId());
             Base base = baseService.getOne(baseLambdaQueryWrapper);

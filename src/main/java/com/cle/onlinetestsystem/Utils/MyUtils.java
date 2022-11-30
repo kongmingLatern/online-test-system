@@ -2,6 +2,9 @@ package com.cle.onlinetestsystem.Utils;
 
 import com.cle.onlinetestsystem.pojo.Question;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -9,7 +12,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
-public class MapToQuestion {
+public class MyUtils {
     public static List<Question> RadioAndSelected(List<Map<Integer, String>> list, String type, Long baseId) {
         List<Question> questionList = list.parallelStream().map(integerStringMap -> {
             Question question = new Question();
@@ -64,5 +67,20 @@ public class MapToQuestion {
             return question;
         }).collect(Collectors.toList());
         return judgeList;
+    }
+
+    /**
+     * 传入时间和分钟转换为 yyyy年MM月dd日 HH:mm - HH:mm格式
+     * @param localDateTime
+     * @param minute
+     * @return
+     */
+    public static String timeConversion(LocalDateTime localDateTime,Integer minute)
+    {
+        LocalDateTime dateTime = localDateTime.plusMinutes(minute);
+        LocalTime localTime = LocalTime.of(dateTime.getHour(), dateTime.getMinute());
+        String taskTimeFormat = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm").format(localDateTime);
+        String localTimeFormat = DateTimeFormatter.ofPattern("HH:mm").format(localTime);
+        return taskTimeFormat + "-" + localTimeFormat;
     }
 }
