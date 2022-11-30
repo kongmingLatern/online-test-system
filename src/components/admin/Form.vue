@@ -147,13 +147,13 @@
 <script lang="ts" setup>
 import { useBase } from '@/stores/base.store'
 import { useSubject } from '@/stores/subject.store'
-import { message } from 'ant-design-vue'
 import {
   computed,
   onMounted,
   reactive,
   ref,
   watch,
+  watchEffect,
 } from 'vue'
 const layout = {
   labelCol: { span: 8 },
@@ -171,29 +171,16 @@ const subjectStore = useSubject()
 const baseStore = useBase()
 
 // NOTE: data
-let subjectNames = reactive<any[]>([
-  {
-    subjectId: '1',
-    subjectName: 'Zhejiang',
-  },
-  {
-    subjectId: '2',
-    subjectName: 'Jiangsu',
-  },
-])
-let baseTitle = reactive({
-  Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
-  Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang'],
-})
-let firstSubjectName = ref<string>(
-  subjectNames[0].subjectName
-)
+let subjectNames = reactive<any[]>([])
+let baseTitle = reactive({})
+let firstSubjectName = ref<string>('')
+let secondBaseTitle = ref<string>('')
 
 const formState = reactive({
   firstSubjectName,
   subjectNames,
   baseTitle,
-  secondBaseTitle: baseTitle[firstSubjectName.value][0],
+  secondBaseTitle,
   baseName: '',
   taskTerm: '',
   taskTime: '',
@@ -206,27 +193,18 @@ const formState = reactive({
 })
 
 onMounted(async () => {
-  const [res, msg] = await subjectStore.getSubjectList()
+  const [res, _] = await subjectStore.getSubjectList()
   const subjectId = ref<string>('')
-  const subjectName = ref<string>('')
   const arr = reactive<any[]>([])
   if (Array.isArray(res)) {
-    res.forEach((item, index) => {
-      if (index === 0) {
-        subjectId.value = item.subjectId
-        subjectName.value = item.subjectName
-      }
+    res.forEach(item => {
       subjectNames.push(item)
     })
-    console.log(subjectNames)
   }
-  // subjectNames.splice(0, 2)
-  // delete baseTitle['Jiangsu']
-  // delete baseTitle['Zhejiang']
 
   firstSubjectName.value = subjectNames[0].subjectName
   // 继续请求
-  const [result, message] = await baseStore.getBaseList(
+  const [result, __] = await baseStore.getBaseList(
     subjectId.value
   )
   if (Array.isArray(result)) {
@@ -234,24 +212,29 @@ onMounted(async () => {
       arr.push(item)
     })
   }
-  baseTitle[subjectName.value] = arr
+  baseTitle[firstSubjectName.value] = arr
+  secondBaseTitle.value =
+    baseTitle[firstSubjectName.value][0]
 })
 
 const baseTitles = computed(() => {
-  return baseTitle[formState.firstSubjectName]
+  return baseTitle[formState.firstSubjectName] || []
 })
-watch(
-  () => formState.firstSubjectName,
-  val => {
-    console.log('触发回调')
 
-    console.log(formState.baseTitle[val])
+watchEffect(() => {
+  console.log('触发回调', formState.firstSubjectName)
 
-    formState.secondBaseTitle = formState.baseTitle[val]
-  }
-)
+  formState.secondBaseTitle =
+    baseTitle[formState.firstSubjectName]
+})
+
 const onFinish = (values: any) => {
   console.log('Success:', formState)
+  if (Array.isArray(formState.secondBaseTitle)) {
+    console.log(formState.secondBaseTitle[0])
+  } else {
+    console.log(formState.secondBaseTitle)
+  }
 }
 </script>
 
