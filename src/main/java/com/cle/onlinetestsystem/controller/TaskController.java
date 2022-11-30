@@ -2,6 +2,7 @@ package com.cle.onlinetestsystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cle.onlinetestsystem.Utils.MyUtils;
 import com.cle.onlinetestsystem.Utils.ValidateCodeUtils;
 import com.cle.onlinetestsystem.dto.TaskDto;
 import com.cle.onlinetestsystem.pojo.Match;
@@ -14,9 +15,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,14 +55,9 @@ public class TaskController {
             taskDto.setTaskPeople((int) count);
             taskDto.setTaskType(task.getTaskType());
             //处理格式化时间
-            LocalDateTime taskTime = task.getTaskTime();
-            Integer limitTime = task.getLimitTime();
-            LocalDateTime dateTime = taskTime.plusMinutes(limitTime);
-            LocalTime localTime = LocalTime.of(dateTime.getHour(), dateTime.getMinute());
-            String taskTimeFormat = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm").format(taskTime);
-            String localTimeFormat = DateTimeFormatter.ofPattern("HH:mm").format(localTime);
-            taskDto.setTaskStartToEnd(taskTimeFormat + "-" + localTimeFormat);
-            taskDto.setLimitTime(limitTime);
+            String timeConversion = MyUtils.timeConversion(task.getTaskTime(), task.getLimitTime());
+            taskDto.setTaskStartToEnd(timeConversion);
+            taskDto.setLimitTime(task.getLimitTime());
             return taskDto;
         }).filter(taskDto -> {
             if(taskName==null) {

@@ -1,6 +1,7 @@
 package com.cle.onlinetestsystem.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cle.onlinetestsystem.Utils.MyUtils;
 import com.cle.onlinetestsystem.Utils.RedisUtils;
 import com.cle.onlinetestsystem.Utils.ValidateCodeUtils;
 import com.cle.onlinetestsystem.common.CustomException;
@@ -17,8 +18,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -113,7 +112,7 @@ public class MatchServiceImpl extends ServiceImpl<MatchDao, Match> implements Ma
             //如果没填就是错误
             if(questionCorrectList!=null) {
                 //转为list判断是否一致
-                List<String> split =new ArrayList<>(Arrays.asList(questionCorrect.substring(1, questionCorrect.length() - 1).split(","))) ;
+                List<String> split = MyUtils.stringConversionList(questionCorrect);
                 List<String> stringList = intersectList2(split, questionCorrectList);
                 flag = split.size()==stringList.size();
             }

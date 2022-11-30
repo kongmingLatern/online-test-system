@@ -5,10 +5,7 @@ import com.cle.onlinetestsystem.pojo.Question;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
@@ -82,5 +79,28 @@ public class MyUtils {
         String taskTimeFormat = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm").format(localDateTime);
         String localTimeFormat = DateTimeFormatter.ofPattern("HH:mm").format(localTime);
         return taskTimeFormat + "-" + localTimeFormat;
+    }
+
+    /**
+     * [xx,xx,xx]字符串转换成集合
+     * @return
+     */
+    public static List<String> stringConversionList(String string){
+        return new ArrayList<>(Arrays.asList(string.substring(1, string.length() - 1).split(",")));
+    }
+
+    /**
+     * 集合转换为[xx,xx,xx]字符串
+     * @param list
+     * @return
+     */
+    public static String listConversionString(List<String> list){
+        StringBuilder string=new StringBuilder("[");
+        list.parallelStream().forEach(s -> {
+            s.trim().replaceAll(",","，");
+            string.append(s).append(",");
+        });
+         string.replace(string.length()-1,string.length(),"]");
+         return String.valueOf(string);
     }
 }
