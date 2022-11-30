@@ -66,7 +66,7 @@ export const columns = [
   },
   {
     title: '考试时间',
-    dataIndex: 'taskTime',
+    dataIndex: 'taskStartToEnd',
     options: {
       align: 'center',
       width: 150,
@@ -98,7 +98,7 @@ export const columns = [
   },
   {
     title: '考试状态',
-    dataIndex: 'taskStutus',
+    dataIndex: 'status',
     options: {
       align: 'center',
       width: 200,
