@@ -2,6 +2,7 @@ import { useStudent } from '../stores/student.store'
 import { useQuestion } from '@/stores/question.store'
 import type { Ref } from 'vue'
 import { useTask } from '../stores/task.store'
+import { useMatch } from '../stores/match.store'
 import { useGrade } from '@/stores/grade.store'
 import { useTeacher } from '@/stores/teacher.store'
 export async function getStudentDataByCurrentPage(
@@ -124,6 +125,32 @@ export async function getBasesByCurrentPage(
       pageSize,
       currentPage,
       subjectId
+    )
+    data.length = 0
+    Object.assign(data, res)
+    isLoading.value = false
+    totalPage.value = total
+    return data
+  } catch (error) {
+    return false
+  }
+}
+
+export async function getMatchsByCurrentPage(
+  data,
+  currentPage,
+  pageSize,
+  totalPage: Ref<number | undefined>,
+  isLoading: Ref<boolean | undefined>,
+  studentNo?
+) {
+  try {
+    const store = useMatch()
+    isLoading.value = true
+    const [res, total] = await store.getMatchsByPage(
+      pageSize,
+      currentPage,
+      studentNo
     )
     data.length = 0
     Object.assign(data, res)
