@@ -19,7 +19,7 @@ export default function getFormItem(formKey, data?) {
             name,
           })
 
-          if (type === 'text') {
+          if (type === 'text' || type === 'radio') {
             formState[key][getKeys[index]] = ''
           } else if (type === 'number') {
             formState[key][getKeys[index]] = 0
