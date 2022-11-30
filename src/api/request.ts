@@ -1,12 +1,19 @@
-import { useStudent } from '../stores/student.store'
+import { useStudent } from '@/stores/student.store'
 import { useQuestion } from '@/stores/question.store'
-import type { Ref } from 'vue'
-import { useTask } from '../stores/task.store'
-import { useMatch } from '../stores/match.store'
+import { useTask } from '@/stores/task.store'
+import { useMatch } from '@/stores/match.store'
 import { useGrade } from '@/stores/grade.store'
 import { useTeacher } from '@/stores/teacher.store'
+import type {
+  Teacher,
+  Match,
+  Task,
+  Student,
+  Grade,
+} from '@/utils'
+import type { Ref } from 'vue'
 export async function getStudentDataByCurrentPage(
-  data,
+  data: Student[],
   currentPage,
   pageSize,
   totalPage: Ref<number | undefined>,
@@ -32,7 +39,7 @@ export async function getStudentDataByCurrentPage(
 }
 
 export async function getQuestionByCurrentPage(
-  data,
+  data: Student[],
   currentPage,
   pageSize,
   totalPage: Ref<number | undefined>,
@@ -59,7 +66,7 @@ export async function getQuestionByCurrentPage(
 }
 
 export async function getGradeByCurrentPage(
-  data,
+  data: Grade[],
   currentPage,
   pageSize,
   totalPage: Ref<number | undefined>,
@@ -85,7 +92,7 @@ export async function getGradeByCurrentPage(
 }
 
 export async function getTeachersByCurrentPage(
-  data,
+  data: Teacher[],
   currentPage,
   pageSize,
   totalPage: Ref<number | undefined>,
@@ -111,7 +118,7 @@ export async function getTeachersByCurrentPage(
 }
 
 export async function getBasesByCurrentPage(
-  data,
+  data: Task[],
   currentPage,
   pageSize,
   totalPage: Ref<number | undefined>,
@@ -137,7 +144,7 @@ export async function getBasesByCurrentPage(
 }
 
 export async function getMatchsByCurrentPage(
-  data,
+  data: Match[],
   currentPage,
   pageSize,
   totalPage: Ref<number | undefined>,
