@@ -12,7 +12,7 @@ export default class Grade extends Student {
     baseTitle: string,
     grade: number
   ) {
-    super(studentNo, classNo, studentName)
+    super(studentNo, classNo, studentName, classNo)
     this.subjectName = subjectName
     this.baseTitle = baseTitle
     this.grade = grade
