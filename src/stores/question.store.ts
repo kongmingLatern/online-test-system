@@ -6,9 +6,13 @@ import Radio from '../utils/Task/Radio'
 
 const requestPath = '/question/page'
 
+const addQuestionPath = '/question/add'
+
+type QuestionType = Radio | Checkbox | Judge
+
 export const useQuestion = defineStore('question', {
   state: () => ({
-    question: [] as Radio[] | Checkbox[] | Judge[],
+    question: [] as QuestionType[],
   }),
 
   actions: {
@@ -30,14 +34,18 @@ export const useQuestion = defineStore('question', {
         this.question = []
         res.data.records.forEach(record => {
           const {
+            questionId,
             questionList,
             questionAnswer,
             questionCorrect,
+            baseId,
             baseTitle,
           } = record
           if (questionType === 1) {
             this.question.push(
               new Radio(
+                questionId,
+                baseId,
                 baseTitle,
                 questionList,
                 questionAnswer,
@@ -47,6 +55,8 @@ export const useQuestion = defineStore('question', {
           } else if (questionType === 2) {
             this.question.push(
               new Checkbox(
+                questionId,
+                baseId,
                 baseTitle,
                 questionList,
                 questionAnswer,
@@ -56,10 +66,12 @@ export const useQuestion = defineStore('question', {
           } else if (questionType === 3) {
             this.question.push(
               new Judge(
+                questionId,
+                baseId,
                 baseTitle,
                 questionList,
                 questionCorrect
-              ) as any
+              )
             )
           }
         })
@@ -68,6 +80,29 @@ export const useQuestion = defineStore('question', {
       } catch (error) {
         // 让表单组件显示错误
         return [this.question, 0]
+      }
+    },
+    async deleteQuestion(questionId: string) {
+      try {
+        const res = await http.delete('/question/delete', {
+          params: {
+            questionId,
+          },
+        })
+        return res.data
+      } catch (e) {
+        return '删除失败'
+      }
+    },
+    async addQuestion(question: QuestionType) {
+      try {
+        const res = await http.post(
+          addQuestionPath,
+          question
+        )
+        return res.data
+      } catch (e) {
+        return '添加失败'
       }
     },
   },
