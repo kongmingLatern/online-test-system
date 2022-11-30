@@ -4,11 +4,13 @@ export default class Judge extends Task {
   public questionCorrect: string[]
 
   constructor(
+    questionId: string,
+    baseId: string,
     baseTitle: string,
     questionList: string,
     questionCorrect: string[]
   ) {
-    super(baseTitle)
+    super(questionId, baseId, baseTitle)
     this.questionList = questionList
     this.questionCorrect = questionCorrect
   }

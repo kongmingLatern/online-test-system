@@ -6,12 +6,14 @@ export default class Checkbox extends Task {
   public questionCorrect: string[]
 
   constructor(
+    questionId: string,
+    baseId: string,
     baseTitle: string,
     questionList: string,
     questionAnswer: string[],
     questionCorrect: string[]
   ) {
-    super(baseTitle)
+    super(questionId, baseId, baseTitle)
     this.questionList = questionList
     this.questionAnswer = questionAnswer
     this.questionCorrect = questionCorrect
