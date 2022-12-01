@@ -23,6 +23,8 @@ export default function getFormItem(formKey, data?) {
             formState[key][getKeys[index]] = ''
           } else if (type === 'number') {
             formState[key][getKeys[index]] = 0
+          } else if (type === 'answer') {
+            formState[key][getKeys[index]] = []
           }
         })
       }
