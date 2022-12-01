@@ -73,7 +73,7 @@ const changePage: (
   )
 }
 
-provide('columnSort', 'radio')
+provide('columnSort', 'question')
 provide('loading', loading)
 provide('data', data)
 provide('pagination', pagination)
