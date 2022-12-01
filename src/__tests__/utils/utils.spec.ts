@@ -1,10 +1,11 @@
 import type { TableColumnsOptions } from '../../type'
 import {
   Column,
-  reactiveToCommon,
+  getValueByObject,
   setColumn,
   setColumns,
   setData,
+  setReactiveValue,
   Task,
 } from '@/utils'
 import { Student } from '@/utils'
@@ -203,27 +204,79 @@ describe('class data about table', () => {
 describe('change reactive into common object', () => {
   it('should return a common object', () => {
     const formState = reactive({
-      question: {
-        questionCorrect: [
-          {
-            values: '123',
-            key: Date.now(),
-          },
-          {
-            values: '123',
-            key: Date.now(),
-          },
-          {
-            values: '123',
-            key: Date.now(),
-          },
-        ],
-      },
+      questionCorrectList: [
+        {
+          values: '123',
+          key: Date.now(),
+        },
+        {
+          values: '123',
+          key: Date.now(),
+        },
+        {
+          values: '123',
+          key: Date.now(),
+        },
+      ],
+      questionAnswerList: [
+        {
+          values: '123',
+          key: Date.now(),
+        },
+        {
+          values: '123',
+          key: Date.now(),
+        },
+        {
+          values: '123',
+          key: Date.now(),
+        },
+      ],
     })
-    expect(reactiveToCommon(formState)).toEqual([
-      '123',
-      '123',
-      '123',
+    expect(
+      getValueByObject(formState, 'questionCorrectList')
+    ).toEqual(['123', '123', '123'])
+  })
+})
+
+describe('enhance reactive object', () => {
+  it.skip('shoule add a value param', () => {
+    const res = reactive([
+      {
+        baseId: '1595984141143273474',
+        baseTitle: '123',
+        createUser: null,
+        subjectName: '高数A',
+        teacherName: '沈金晶',
+      },
+      {
+        baseId: '1597624468123942913',
+        baseTitle: '高数',
+        createUser: null,
+        subjectName: '高数A',
+        teacherName: '沈金晶',
+      },
     ])
+    expect(setReactiveValue(res)).toEqual(
+      reactive([
+        {
+          baseId: '1595984141143273474',
+          baseTitle: '123',
+          createUser: null,
+          subjectName: '高数A',
+          teacherName: '沈金晶',
+          // 添加一行，value = baseTitle 对应的值就行
+          value: '123',
+        },
+        {
+          baseId: '1597624468123942913',
+          baseTitle: '高数',
+          createUser: null,
+          subjectName: '高数A',
+          teacherName: '沈金晶',
+          value: '高数',
+        },
+      ])
+    )
   })
 })
