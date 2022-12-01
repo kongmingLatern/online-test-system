@@ -244,4 +244,53 @@ describe('test some feat', () => {
       },
     ])
   })
+  it('should return list when type equals answer', () => {
+    const data = {
+      form: {
+        question: {
+          questionName: {
+            name: 'questionName',
+            type: 'text',
+            label: '题目名称',
+          },
+          questionType: {
+            name: 'questionType',
+            type: 'radio',
+            label: '题目类型',
+          },
+          questionCorrect: {
+            name: 'questionCorrect',
+            type: 'answer',
+            label: '答案',
+          },
+        },
+      },
+    }
+    expect(getFormItem('question', data)).toEqual([
+      [
+        {
+          name: 'questionName',
+          type: 'text',
+          label: '题目名称',
+        },
+        {
+          name: 'questionType',
+          type: 'radio',
+          label: '题目类型',
+        },
+        {
+          name: 'questionCorrect',
+          type: 'answer',
+          label: '答案',
+        },
+      ],
+      {
+        question: {
+          questionName: '',
+          questionType: '',
+          questionCorrect: [],
+        },
+      },
+    ])
+  })
 })
