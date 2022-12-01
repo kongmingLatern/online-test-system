@@ -13,11 +13,13 @@ export default function getFormItem(formKey, data?) {
 
         getValues.forEach((item: any, index: number) => {
           const { type, label, name } = item
-          formArr.push({
-            type,
-            label,
-            name,
-          })
+          if (type !== 'answer') {
+            formArr.push({
+              type,
+              label,
+              name,
+            })
+          }
 
           if (type === 'text' || type === 'radio') {
             formState[key][getKeys[index]] = ''
