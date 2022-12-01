@@ -11,6 +11,7 @@ import {
 import { columns as GradeColumn } from './Grade.data'
 import { columns as SearchStudentPasswordColumn } from './SearchStudentPassword.data'
 import { columns as TeacherColumn } from './Teacher.data'
+import { columns as TaskInfoColumn } from './TaskInfoColumn.data'
 
 const columnConfig = {
   studentUpload: StudentUploadColumn,
@@ -21,6 +22,7 @@ const columnConfig = {
   grade: GradeColumn,
   searchPassword: SearchStudentPasswordColumn,
   teacher: TeacherColumn,
+  taskInfo: TaskInfoColumn,
 }
 
 export { columnConfig }

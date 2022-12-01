@@ -8,9 +8,11 @@ const requestPath = '/question/page'
 
 const addQuestionPath = '/question/add'
 
+// type QuestionType = Radio[] | Checkbox[] | Judge[]
+
 export const useQuestion = defineStore('question', {
   state: () => ({
-    question: [] as QuestionType[],
+    question: [] as any[],
   }),
 
   actions: {
