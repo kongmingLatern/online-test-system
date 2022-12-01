@@ -39,11 +39,11 @@
         />
       </a-form-item>
       <a-form-item
-        :name="['baseName']"
+        :name="['taskName']"
         label="试卷名称"
         :rules="[{ required: true }]"
       >
-        <a-input v-model:value="formState.baseName" />
+        <a-input v-model:value="formState.taskName" />
       </a-form-item>
       <a-form-item
         :name="['taskTerm']"
@@ -53,14 +53,24 @@
         <a-input v-model:value="formState.taskTerm" />
       </a-form-item>
       <a-form-item
-        :name="['taskTime']"
-        label="考试用时"
+        :name="['taskType']"
+        label="考试类型"
+        :rules="[{ required: true }]"
+      >
+        <a-input v-model:value="formState.taskType" />
+      </a-form-item>
+      <a-form-item :name="['taskTime']" label="考试时间">
+        <a-input v-model:value="formState.taskTime" />
+      </a-form-item>
+      <a-form-item
+        :name="['limitTime']"
+        label="限制提交时间"
         :rules="[{ type: 'number', min: 30, max: 300 }]"
       >
         <a-input-number
-          v-model:value="formState.taskTime"
+          v-model:value="formState.limitTime"
         />
-        分钟
+        <span text-sm w-10>分钟</span>
       </a-form-item>
     </div>
     <div class="right">
@@ -73,7 +83,7 @@
         :rules="[{ type: 'number', min: 1, max: 100 }]"
       >
         <a-input-number
-          v-model:value="formState.radioNum"
+          v-model:value="formState.radioNumber"
         />
       </a-form-item>
       <a-form-item
@@ -86,21 +96,21 @@
         />
       </a-form-item>
       <a-form-item
-        :name="['checkboxNum']"
+        :name="['selectedNumber']"
         label="多选题数量"
         :rules="[{ type: 'number', min: 1, max: 100 }]"
       >
         <a-input-number
-          v-model:value="formState.checkboxNum"
+          v-model:value="formState.selectedNumber"
         />
       </a-form-item>
       <a-form-item
-        :name="['checkboxScore']"
+        :name="['selectedScore']"
         label="多选题分值"
         :rules="[{ type: 'number', min: 1, max: 100 }]"
       >
         <a-input-number
-          v-model:value="formState.checkboxScore"
+          v-model:value="formState.selectedScore"
         />
       </a-form-item>
       <a-form-item
@@ -109,7 +119,7 @@
         :rules="[{ type: 'number', min: 1, max: 100 }]"
       >
         <a-input-number
-          v-model:value="formState.judgeNum"
+          v-model:value="formState.judgeNumber"
         />
       </a-form-item>
       <a-form-item
@@ -137,6 +147,7 @@
   </a-form>
 </template>
 <script lang="ts" setup>
+import { generateTask } from '@/api/task'
 import { useBase } from '@/stores/base.store'
 import { useSubject } from '@/stores/subject.store'
 import {
@@ -167,20 +178,24 @@ let subjectNames = reactive<any[]>([])
 let baseTitle = reactive({})
 let firstSubjectName = ref<string>('')
 let secondBaseTitle = ref<string>('')
+const selectId = ref<string>('')
 
 const formState = reactive({
   firstSubjectName,
   subjectNames,
   baseTitle,
+  baseId: selectId,
   secondBaseTitle,
-  baseName: '',
+  taskName: '',
   taskTerm: '',
+  taskType: '',
   taskTime: '',
-  radioNum: undefined,
+  limitTime: '',
+  radioNumber: undefined,
   radioScore: undefined,
-  checkboxNum: undefined,
-  checkboxScore: undefined,
-  judgeNum: undefined,
+  selectedNumber: undefined,
+  selectedScore: undefined,
+  judgeNumber: undefined,
   judgeScore: undefined,
 })
 
@@ -204,9 +219,15 @@ onMounted(async () => {
       arr.push(item)
     })
   }
-  baseTitle[firstSubjectName.value] = arr
+  selectId.value = result[0].baseId
+  baseTitle[firstSubjectName.value] = [...arr]
+  // console.log(baseTitle)
+
   secondBaseTitle.value =
-    baseTitle[firstSubjectName.value][0]
+    baseTitle[firstSubjectName.value][0].baseTitle
+  console.log(
+    baseTitle[firstSubjectName.value][0].baseTitle
+  )
 })
 
 const baseTitles: any = computed(() => {
@@ -224,23 +245,48 @@ const firstOptions = computed(() =>
 )
 
 const secondOptions = computed(() =>
-  baseTitles.value.map(baseTitle => ({
-    value: baseTitle,
+  baseTitles.value.map(item => ({
+    value: item.baseTitle,
   }))
 )
 
+watch(
+  () => formState.secondBaseTitle,
+  val => {
+    selectId.value = baseTitle[formState.firstSubjectName]
+      ? baseTitle[formState.firstSubjectName].find(
+          item => item.baseTitle === val
+        )?.baseId
+      : ''
+  }
+)
+
 watchEffect(() => {
-  formState.secondBaseTitle =
-    baseTitle[formState.firstSubjectName]
+  console.log(baseTitle[formState.firstSubjectName])
+  formState.secondBaseTitle = baseTitle[
+    formState.firstSubjectName
+  ]
+    ? baseTitle[formState.firstSubjectName][0]?.baseTitle
+    : []
 })
 
 const onFinish = (values: any) => {
   console.log('Success:', formState)
-  if (Array.isArray(formState.secondBaseTitle)) {
-    console.log(formState.secondBaseTitle[0])
-  } else {
-    console.log(formState.secondBaseTitle)
-  }
+
+  generateTask({
+    baseId: selectId.value,
+    taskTerm: formState.taskTerm,
+    taskType: formState.taskType,
+    taskTime: formState.taskTime,
+    taskName: formState.taskName,
+    limitTime: formState.limitTime,
+    radioNumber: formState.radioNumber,
+    radioScore: formState.radioScore,
+    selectedNumber: formState.selectedNumber,
+    selectedScore: formState.selectedScore,
+    judgeNumber: formState.judgeNumber,
+    judgeScore: formState.judgeScore,
+  })
 }
 </script>
 
@@ -250,5 +296,13 @@ const onFinish = (values: any) => {
 }
 :deep(.ant-input-number) {
   width: 100%;
+}
+
+:deep(.ant-form-item-control-input-content) {
+  display: flex;
+  align-items: center;
+}
+.left {
+  width: 400px;
 }
 </style>
