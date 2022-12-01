@@ -217,13 +217,17 @@ const baseTitles: any = computed(() => {
     : []
 })
 
-const firstOptions = formState.subjectNames.map(name => ({
-  value: name.subjectName,
-}))
+const firstOptions = computed(() =>
+  formState.subjectNames.map(name => ({
+    value: name.subjectName,
+  }))
+)
 
-const secondOptions = baseTitles.value.map(baseTitle => ({
-  value: baseTitle,
-}))
+const secondOptions = computed(() =>
+  baseTitles.value.map(baseTitle => ({
+    value: baseTitle,
+  }))
+)
 
 watchEffect(() => {
   formState.secondBaseTitle =
