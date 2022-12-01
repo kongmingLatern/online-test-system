@@ -1,50 +1,64 @@
 import { defineStore } from 'pinia'
 import http from '../api/http'
 
-const requestPath = '/base/page'
+const getAllTaskPath = '/task/getAll'
 
 export const useTask = defineStore('task', {
   state: () => ({
-    baseList: [] as any[],
+    taskData: [] as any[],
   }),
 
   actions: {
-    async getTaskByCurrentPage(
+    async getTasksByCurrentPage(
       pageSize,
       currentPage,
-      subjectId?
+      taskName?
     ) {
       try {
-        const res = await http.get(requestPath, {
+        const res = await http.get(getAllTaskPath, {
           params: {
             page: currentPage,
             pageSize,
-            subjectId,
+            taskName,
           },
         })
-        this.baseList = []
-
+        this.taskData = []
         res.data.records.forEach(record => {
           const {
-            baseId,
-            subjectName,
-            teacherName,
-            createUser,
-            baseTitle,
+            taskTime,
+            taskType,
+            taskName,
+            limitTime,
+            taskStartToEnd,
+            taskPeople,
           } = record
-          this.baseList.push({
-            baseId,
-            baseTitle,
-            subjectName,
-            teacherName,
-            createUser,
+          this.taskData.push({
+            taskTime,
+            taskType,
+            taskName,
+            limitTime,
+            taskStartToEnd,
+            taskPeople,
           })
         })
-
-        return [this.baseList, res.data.total]
+        return [this.taskData, res.data.total]
+      } catch (e) {
+        return '获取失败'
+      }
+    },
+    async addTask(values) {
+      try {
+        const res: Record<string, any> = await http.post(
+          '/task/add',
+          values
+        )
+        if (!res.msg) {
+          return res.data
+        } else {
+          return Promise.reject(res.msg)
+        }
       } catch (error) {
-        // 让表单组件显示错误
-        return [this.baseList, 0]
+        return error
       }
     },
   },

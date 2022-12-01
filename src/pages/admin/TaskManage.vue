@@ -31,6 +31,7 @@ import {
   reactive,
   ref,
 } from 'vue'
+import { getTasksByCurrentPage } from '../../api/request'
 import { getQuestionByCurrentPage } from '@/api/request'
 import type { Radio } from '@/utils'
 
@@ -47,12 +48,11 @@ const pagination = computed(() => ({
 }))
 
 onMounted(async () => {
-  await getQuestionByCurrentPage(
+  await getTasksByCurrentPage(
     data,
     current.value,
     pageSize.value,
     totalPage,
-    1,
     loading
   )
 })
@@ -63,17 +63,16 @@ const changePage: (
   pagination.current = pagination.current
   current.value = pagination.current
 
-  getQuestionByCurrentPage(
+  getTasksByCurrentPage(
     data,
     current.value,
     pageSize.value,
     totalPage,
-    1,
     loading
   )
 }
 
-provide('columnSort', 'question')
+provide('columnSort', 'taskInfo')
 provide('loading', loading)
 provide('data', data)
 provide('pagination', pagination)
