@@ -50,7 +50,10 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { finishQuestionForm } from '../../api/question'
+import {
+  finishQuestionForm,
+  removeQuestion,
+} from '../../api/question'
 import { getQuestionByCurrentPage } from '@/api/request'
 import type { Radio } from '@/utils'
 
@@ -101,6 +104,7 @@ const changePage: (
 provide('columnSort', 'question')
 provide('title', '添加单选题')
 provide('isShow', isShow)
+provide('removeItem', removeQuestion)
 provide('loading', loading)
 provide('data', data)
 provide('finish', finishQuestionForm)
