@@ -1,10 +1,9 @@
-import { Task } from '@/utils'
 import { defineStore } from 'pinia'
 import http from '../api/http'
 
 const requestPath = '/base/page'
 
-export const useTask = defineStore('question', {
+export const useTask = defineStore('task', {
   state: () => ({
     baseList: [] as any[],
   }),
