@@ -14,8 +14,13 @@ export default {
     type: 'text',
     label: '题目名称',
   },
-  questionCorrect: {
-    name: 'questionCorrect',
+  questionAnswerList: {
+    name: 'questionAnswerList',
+    type: 'answer',
+    label: '选项',
+  },
+  questionCorrectList: {
+    name: 'questionCorrectList',
     type: 'answer',
     label: '答案',
   },
