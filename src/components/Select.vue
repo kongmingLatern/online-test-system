@@ -1,4 +1,4 @@
-<dd template>
+<template>
   <a-select
     v-model:value="value"
     label-in-value
@@ -7,16 +7,24 @@
     @change="handleChange"
     data-test="select"
   ></a-select>
-</dd>
+</template>
 <script lang="ts" setup>
 import { getBasesByCurrentPage } from '@/api/request'
-import type { SelectProps } from 'ant-design-vue'
-import { onMounted, reactive, ref } from 'vue'
+import { setReactiveValue } from '@/utils'
+import { onMounted, reactive, ref, watchEffect } from 'vue'
 
-const value = ref<Record<string, any>>({ value: 'lucy1' })
+const value = ref<Record<string, any>>({
+  value: '',
+  baseId: '',
+})
 const totalPage = ref<number | undefined>()
 const loading = ref<boolean>(false)
 
+const selectBaseId = ref<string>('')
+
+const emits = defineEmits<{
+  (event: 'change', value: string): void
+}>()
 const options = reactive<any[]>([])
 onMounted(async () => {
   const res = await getBasesByCurrentPage(
@@ -26,10 +34,19 @@ onMounted(async () => {
     totalPage,
     loading
   )
-  console.log(res)
+  if (Array.isArray(res)) {
+    value.value = setReactiveValue(res)
+
+    selectBaseId.value = value.value[0].baseId
+  }
 })
 
-const handleChange: SelectProps['onChange'] = value => {
-  console.log(value) // { key: "lucy", label: "Lucy (101)" }
+watchEffect(() => {
+  emits('change', selectBaseId.value)
+})
+
+const handleChange = value => {
+  const { baseId } = value.option
+  selectBaseId.value = baseId
 }
 </script>
