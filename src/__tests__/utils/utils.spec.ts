@@ -1,15 +1,14 @@
 import type { TableColumnsOptions } from '../../type'
 import {
-  Checkbox,
   Column,
-  Judge,
-  Radio,
+  reactiveToCommon,
   setColumn,
   setColumns,
   setData,
   Task,
 } from '@/utils'
 import { Student } from '@/utils'
+import { reactive } from 'vue'
 
 describe('columns', () => {
   let title: string
@@ -167,136 +166,64 @@ describe('class data about table', () => {
       )
     )
     const result = setData(arr)
-    expect(result).toEqual([
-      {
-        key: 0,
-        baseTitle: '马克思主义',
-        subjectName: '马克思主义与毛泽东思想',
-        teacherName: '孔祥琦',
-        createUser: '孔祥琦',
-      },
-      {
-        key: 1,
-        baseTitle: '马克思主义',
-        subjectName: '马克思主义与毛泽东思想',
-        teacherName: '孔祥琦',
-        createUser: '孔祥琦',
-      },
-      {
-        key: 2,
-        baseTitle: '马克思主义',
-        subjectName: '马克思主义与毛泽东思想',
-        teacherName: '孔祥琦',
-        createUser: '孔祥琦',
-      },
-    ])
+    expect(result).toMatchInlineSnapshot(`
+      [
+        {
+          "baseId": "马克思主义与毛泽东思想",
+          "baseTitle": "孔祥琦",
+          "createUser": undefined,
+          "key": 0,
+          "questionId": "马克思主义",
+          "subjectName": "孔祥琦",
+          "teacherName": undefined,
+        },
+        {
+          "baseId": "马克思主义与毛泽东思想",
+          "baseTitle": "孔祥琦",
+          "createUser": undefined,
+          "key": 1,
+          "questionId": "马克思主义",
+          "subjectName": "孔祥琦",
+          "teacherName": undefined,
+        },
+        {
+          "baseId": "马克思主义与毛泽东思想",
+          "baseTitle": "孔祥琦",
+          "createUser": undefined,
+          "key": 2,
+          "questionId": "马克思主义",
+          "subjectName": "孔祥琦",
+          "teacherName": undefined,
+        },
+      ]
+    `)
   })
+})
 
-  it('Radio', () => {
-    const arr = new Array(3).fill(
-      new Radio(
-        '马克思主义',
-        '下列选项属于马克思主义三个组成部分之一的是()',
-        ['1', '2', '3', '4'],
-        ['2']
-      )
-    )
-    const result = setData(arr)
-    expect(result).toEqual([
-      {
-        key: 0,
-        baseTitle: '马克思主义',
-        questionList:
-          '下列选项属于马克思主义三个组成部分之一的是()',
-        questionAnswer: ['1', '2', '3', '4'],
-        questionCorrect: ['2'],
+describe('change reactive into common object', () => {
+  it('should return a common object', () => {
+    const formState = reactive({
+      question: {
+        questionCorrect: [
+          {
+            values: '123',
+            key: Date.now(),
+          },
+          {
+            values: '123',
+            key: Date.now(),
+          },
+          {
+            values: '123',
+            key: Date.now(),
+          },
+        ],
       },
-      {
-        key: 1,
-        baseTitle: '马克思主义',
-        questionList:
-          '下列选项属于马克思主义三个组成部分之一的是()',
-        questionAnswer: ['1', '2', '3', '4'],
-        questionCorrect: ['2'],
-      },
-      {
-        key: 2,
-        baseTitle: '马克思主义',
-        questionList:
-          '下列选项属于马克思主义三个组成部分之一的是()',
-        questionAnswer: ['1', '2', '3', '4'],
-        questionCorrect: ['2'],
-      },
-    ])
-  })
-  it('Checkbox', () => {
-    const arr = new Array(3).fill(
-      new Checkbox(
-        '马克思主义',
-        '下列选项属于马克思主义三个组成部分之一的是()',
-        ['1', '2', '3', '4'],
-        ['1', '2']
-      )
-    )
-    const result = setData(arr)
-    expect(result).toEqual([
-      {
-        key: 0,
-        baseTitle: '马克思主义',
-        questionList:
-          '下列选项属于马克思主义三个组成部分之一的是()',
-        questionAnswer: ['1', '2', '3', '4'],
-        questionCorrect: ['1', '2'],
-      },
-      {
-        key: 1,
-        baseTitle: '马克思主义',
-        questionList:
-          '下列选项属于马克思主义三个组成部分之一的是()',
-        questionAnswer: ['1', '2', '3', '4'],
-        questionCorrect: ['1', '2'],
-      },
-      {
-        key: 2,
-        baseTitle: '马克思主义',
-        questionList:
-          '下列选项属于马克思主义三个组成部分之一的是()',
-        questionAnswer: ['1', '2', '3', '4'],
-        questionCorrect: ['1', '2'],
-      },
-    ])
-  })
-  it('Judge', () => {
-    const arr = new Array(3).fill(
-      new Judge(
-        '马克思主义',
-        '下列选项属于马克思主义三个组成部分之一的是()',
-        ['对']
-      )
-    )
-    const result = setData(arr)
-    expect(result).toEqual([
-      {
-        key: 0,
-        baseTitle: '马克思主义',
-        questionList:
-          '下列选项属于马克思主义三个组成部分之一的是()',
-        questionCorrect: ['对'],
-      },
-      {
-        key: 1,
-        baseTitle: '马克思主义',
-        questionList:
-          '下列选项属于马克思主义三个组成部分之一的是()',
-        questionCorrect: ['对'],
-      },
-      {
-        key: 2,
-        baseTitle: '马克思主义',
-        questionList:
-          '下列选项属于马克思主义三个组成部分之一的是()',
-        questionCorrect: ['对'],
-      },
+    })
+    expect(reactiveToCommon(formState)).toEqual([
+      '123',
+      '123',
+      '123',
     ])
   })
 })
