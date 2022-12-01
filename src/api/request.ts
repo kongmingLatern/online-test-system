@@ -121,7 +121,7 @@ export async function getTeachersByCurrentPage(
 }
 
 export async function getBasesByCurrentPage(
-  data: Task[],
+  data: any[],
   currentPage,
   pageSize,
   totalPage: Ref<number | undefined>,
