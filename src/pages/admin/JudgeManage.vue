@@ -52,6 +52,10 @@ import {
 } from 'vue'
 import { getQuestionByCurrentPage } from '@/api/request'
 import type { Judge } from '@/utils'
+import {
+  finishQuestionForm,
+  removeQuestion,
+} from '@/api/question'
 
 let data = reactive<Judge[]>([])
 const totalPage = ref<number>()
@@ -104,6 +108,10 @@ provide('loading', loading)
 provide('data', data)
 provide('pagination', pagination)
 provide('change', changePage)
+
+// NOTE: 自定义事件
+provide('removeItem', removeQuestion)
+provide('finish', finishQuestionForm)
 </script>
 
 <style scoped></style>
