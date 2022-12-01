@@ -1,10 +1,5 @@
 import router from '@/router'
-import type {
-  Checkbox,
-  Judge,
-  Radio,
-  Student,
-} from '@/utils'
+import type { Checkbox, Judge, Radio } from '@/utils'
 import { message } from 'ant-design-vue'
 import { useQuestion } from '../stores/question.store'
 
