@@ -15,6 +15,7 @@ import type {
   Judge,
 } from '@/utils'
 import type { Ref } from 'vue'
+import { useBase } from '@/stores/base.store'
 export async function getStudentDataByCurrentPage(
   data: Student[],
   currentPage,
@@ -129,9 +130,9 @@ export async function getBasesByCurrentPage(
   subjectId?
 ) {
   try {
-    const store = useTask()
+    const store = useBase()
     isLoading.value = true
-    const [res, total] = await store.getTaskByCurrentPage(
+    const [res, total] = await store.getBasesByCurrentPage(
       pageSize,
       currentPage,
       subjectId
@@ -161,6 +162,32 @@ export async function getMatchsByCurrentPage(
       pageSize,
       currentPage,
       studentNo
+    )
+    data.length = 0
+    Object.assign(data, res)
+    isLoading.value = false
+    totalPage.value = total
+    return data
+  } catch (error) {
+    return false
+  }
+}
+
+export async function getTasksByCurrentPage(
+  data: Radio[] | Checkbox[] | Judge[],
+  currentPage,
+  pageSize,
+  totalPage: Ref<number | undefined>,
+  isLoading: Ref<boolean | undefined>,
+  taskName?: string
+) {
+  try {
+    const store = useTask()
+    isLoading.value = true
+    const [res, total] = await store.getTasksByCurrentPage(
+      pageSize,
+      currentPage,
+      taskName
     )
     data.length = 0
     Object.assign(data, res)
