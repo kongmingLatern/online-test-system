@@ -1,6 +1,6 @@
 <template>
   <a-form
-    :model="formState[sort]"
+    :model="formState"
     name="nest-messages"
     :validate-messages="validateMessages"
     v-bind="layout"
@@ -162,14 +162,10 @@ const onFinish = (values: any) => {
         formState[props.sort],
         'questionAnswerList'
       )
-    console.log(formState[props.sort])
-
-    finish({
-      ...formState[props.sort],
-    })
-  } else {
-    finish(values)
   }
+  finish({
+    ...formState[props.sort],
+  })
 }
 </script>
 
