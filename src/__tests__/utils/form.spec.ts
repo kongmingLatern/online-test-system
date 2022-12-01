@@ -278,11 +278,6 @@ describe('test some feat', () => {
           type: 'radio',
           label: '题目类型',
         },
-        {
-          name: 'questionCorrect',
-          type: 'answer',
-          label: '答案',
-        },
       ],
       {
         question: {
