@@ -52,6 +52,10 @@ import {
 } from 'vue'
 import { getQuestionByCurrentPage } from '@/api/request'
 import type { Radio } from '@/utils'
+import {
+  finishQuestionForm,
+  removeQuestion,
+} from '@/api/question'
 
 let data = reactive<Radio[]>([])
 const totalPage = ref<number>()
@@ -98,6 +102,8 @@ const changePage: (
 
 provide('columnSort', 'question')
 provide('title', '添加多选题')
+provide('removeItem', removeQuestion)
+provide('finish', finishQuestionForm)
 provide('isShow', isShow)
 provide('loading', loading)
 provide('data', data)

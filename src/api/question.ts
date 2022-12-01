@@ -20,4 +20,5 @@ export const finishQuestionForm = async (
   const store = useQuestion()
   const msg = await store.addQuestion(values)
   message.success(msg)
+  router.go(0)
 }
