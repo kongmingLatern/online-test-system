@@ -211,7 +211,7 @@ public class MatchController {
 
     @PostMapping("/submit")
     public R<String> submit(@RequestBody MatchDto matchDto){
-        Double grade = matchService.computeGrade(matchDto);
+        Double grade = matchService.submit(matchDto);
         return R.success("分数为"+grade);
     }
 }

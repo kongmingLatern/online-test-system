@@ -2,6 +2,7 @@ package com.cle.onlinetestsystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cle.onlinetestsystem.Utils.MyUtils;
 import com.cle.onlinetestsystem.dto.QuestionDto;
 import com.cle.onlinetestsystem.pojo.Base;
 import com.cle.onlinetestsystem.pojo.Question;
@@ -11,9 +12,7 @@ import com.cle.onlinetestsystem.service.QuestionService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,4 +63,29 @@ public class QuestionController {
         return R.success(questionDtoPage);
     }
 
+    /**
+     * 添加单个题目
+     * @param questionDto
+     * @return
+     */
+    @PostMapping("/add")
+    public R<String> addQuestion(@RequestBody QuestionDto questionDto)
+    {
+        questionDto.setQuestionAnswer( MyUtils.listConversionString(questionDto.getQuestionAnswerList()));
+        questionDto.setQuestionCorrect(MyUtils.listConversionString(questionDto.getQuestionCorrectList()));
+        questionService.save(questionDto);
+        return R.success("添加成功");
+    }
+
+    /**
+     * 删除单个题目
+     * @param questionId
+     * @return
+     */
+    @DeleteMapping("/delete")
+    public R<String> deleteQuestion(Long questionId)
+    {
+        questionService.removeById(questionId);
+        return R.success("删除成功");
+    }
 }

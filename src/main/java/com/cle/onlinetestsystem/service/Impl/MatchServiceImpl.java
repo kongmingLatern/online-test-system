@@ -69,9 +69,10 @@ public class MatchServiceImpl extends ServiceImpl<MatchDao, Match> implements Ma
      * @param matchDto
      */
     @Override
-    public void saveMatch(MatchDto matchDto) {
-        log.info(String.valueOf(matchDto.getQuestionDtoList()));
 
+    public void saveMatch(MatchDto matchDto) {
+        log.info(String.valueOf(matchDto));
+        //存入缓存
         redisUtils.hmSet("matchCache",matchDto.getMatchId(),matchDto.getQuestionDtoList());
     }
 
@@ -93,32 +94,34 @@ public class MatchServiceImpl extends ServiceImpl<MatchDao, Match> implements Ma
         return matchCache;
     }
 
+
+
     /**
      * 计算分数
-     * @param matchDto
+     * @param questionDtoList
      * @return
      */
     @Override
-    public Double computeGrade(MatchDto matchDto) {
-        Match match = this.getById(matchDto.getMatchId());
-        Task task = taskService.getById(match.getTaskId());
+    public Double computeGrade(List<QuestionDto> questionDtoList,Task task){
         AtomicReference<Double> grade = new AtomicReference<>(0.0);
-        matchDto.getQuestionDtoList().parallelStream().forEach(questionDto -> {
+        questionDtoList.parallelStream().forEach(questionDto -> {
             Question question = questionService.getById(questionDto.getQuestionId());
             String questionCorrect = question.getQuestionCorrect();
-            List<String> questionCorrectList = questionDto.getQuestionCorrectList();
+            List<String> questionCorrectList = questionDto.getQuestionCorrectList();//用户选项集合
             //默认为错误
             Boolean flag = false;
             //如果没填就是错误
             if(questionCorrectList!=null) {
                 //转为list判断是否一致
-                List<String> split = MyUtils.stringConversionList(questionCorrect);
-                List<String> stringList = intersectList2(split, questionCorrectList);
-                flag = split.size()==stringList.size();
+                List<String> split = MyUtils.stringConversionList(questionCorrect);//正确答案集合
+                if(split.size()==questionCorrectList.size()) {//如果选的和正确答案长度相同
+                    List<String> stringList = intersectList2(split, questionCorrectList);
+                    flag = split.size() == stringList.size();
+                }
             }
             if(flag){
                 if(question.getQuestionType().equals(1)){
-                grade.updateAndGet(v -> v + task.getJudgeScore());
+                    grade.updateAndGet(v -> v + task.getJudgeScore());
                 }
                 else if(question.getQuestionType().equals(2)){
                     grade.updateAndGet(v -> v + task.getSelectedScore());
@@ -128,9 +131,25 @@ public class MatchServiceImpl extends ServiceImpl<MatchDao, Match> implements Ma
                 }
             }
         });
-        matchDto.setGrade(grade.get());
-        this.updateById(matchDto);
         return grade.get();
+    }
+
+
+    /**
+     * 提交试卷
+     * @param matchDto
+     * @return
+     */
+    @Override
+    public Double submit(MatchDto matchDto) {
+        Match match = this.getById(matchDto.getMatchId());
+        Task task = taskService.getById(match.getTaskId());
+        List<QuestionDto> questionDtoList = matchDto.getQuestionDtoList();
+        Double computeGrade = computeGrade(questionDtoList, task);
+        matchDto.setGrade(computeGrade);
+        matchDto.setIsEnd(1);
+        this.updateById(matchDto);
+        return computeGrade;
     }
 
     /**

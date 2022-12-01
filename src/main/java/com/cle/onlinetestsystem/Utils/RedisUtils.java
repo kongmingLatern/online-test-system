@@ -306,4 +306,18 @@ public class RedisUtils {
         Set<ZSetOperations.TypedTuple<Object>> ret = zset.reverseRangeWithScores(key, start, end);
         return ret;
     }
+
+    /**
+     * 通过hashKey获得所有keys
+     * @param hashKey
+     * @return
+     */
+    public Set<Long> getHashKeys(String hashKey){
+
+        return redisTemplate.opsForHash().keys(hashKey);
+    }
+
+    public void deleteHashValue(String hashKey,Object key){
+        redisTemplate.opsForHash().delete(hashKey,key);
+    }
 }
