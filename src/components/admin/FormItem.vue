@@ -26,6 +26,7 @@
           : null
       "
     >
+      <Select v-if="item.type === 'select'" />
       <a-radio-group
         v-if="item.type === 'radio'"
         v-model:value="value"
@@ -75,13 +76,7 @@
   </a-form>
 </template>
 <script lang="ts" setup>
-import {
-  inject,
-  reactive,
-  ref,
-  toRefs,
-  type Ref,
-} from 'vue'
+import { inject, reactive, ref, type Ref } from 'vue'
 import { getFormItem, reactiveToCommon } from '@/utils'
 import { PlusOutlined } from '@ant-design/icons-vue'
 
