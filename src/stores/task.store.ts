@@ -6,7 +6,7 @@ const requestPath = '/base/page'
 
 export const useTask = defineStore('question', {
   state: () => ({
-    baseList: [] as Task[],
+    baseList: [] as any[],
   }),
 
   actions: {
@@ -24,6 +24,7 @@ export const useTask = defineStore('question', {
           },
         })
         this.baseList = []
+
         res.data.records.forEach(record => {
           const {
             subjectName,
@@ -31,14 +32,12 @@ export const useTask = defineStore('question', {
             createUser,
             baseTitle,
           } = record
-          this.baseList.push(
-            new Task(
-              baseTitle,
-              subjectName,
-              teacherName,
-              createUser
-            )
-          )
+          this.baseList.push({
+            baseTitle,
+            subjectName,
+            teacherName,
+            createUser,
+          })
         })
 
         return [this.baseList, res.data.total]
