@@ -6,7 +6,7 @@ export default {
   },
   baseTitle: {
     name: 'baseTitle',
-    type: 'text',
+    type: 'select',
     label: '题库名称',
   },
   questionList: {
