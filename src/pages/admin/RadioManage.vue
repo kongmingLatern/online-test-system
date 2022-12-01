@@ -34,7 +34,7 @@
       <template #main>
         <Main data-test="radioMain" isModal>
           <template #modal>
-            <FormItem sort="radio" />
+            <FormItem sort="question" />
           </template>
         </Main>
       </template>
@@ -98,7 +98,7 @@ const changePage: (
   )
 }
 
-provide('columnSort', 'radio')
+provide('columnSort', 'question')
 provide('title', '添加单选题')
 provide('isShow', isShow)
 provide('loading', loading)

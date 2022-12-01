@@ -34,7 +34,7 @@
       <template #main>
         <Main data-test="judgeMain" isModal>
           <template #modal>
-            <FormItem sort="judge" />
+            <FormItem sort="question" />
           </template>
         </Main>
       </template>
@@ -97,7 +97,7 @@ const changePage: (
   )
 }
 
-provide('columnSort', 'judge')
+provide('columnSort', 'question')
 provide('title', '添加判断题')
 provide('isShow', isShow)
 provide('loading', loading)

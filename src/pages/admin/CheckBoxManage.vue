@@ -34,7 +34,7 @@
       <template #main>
         <Main data-test="checkBoxMain" isModal>
           <template #modal>
-            <FormItem sort="checkbox" />
+            <FormItem sort="question" />
           </template>
         </Main>
       </template>
@@ -96,7 +96,7 @@ const changePage: (
   )
 }
 
-provide('columnSort', 'checkbox')
+provide('columnSort', 'question')
 provide('title', '添加多选题')
 provide('isShow', isShow)
 provide('loading', loading)
