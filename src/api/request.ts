@@ -12,6 +12,7 @@ import type {
   Grade,
   Radio,
   Checkbox,
+  Judge,
 } from '@/utils'
 import type { Ref } from 'vue'
 export async function getStudentDataByCurrentPage(
@@ -41,7 +42,7 @@ export async function getStudentDataByCurrentPage(
 }
 
 export async function getQuestionByCurrentPage(
-  data: Radio[] | Checkbox[],
+  data: Radio[] | Checkbox[] | Judge[],
   currentPage,
   pageSize,
   totalPage: Ref<number | undefined>,

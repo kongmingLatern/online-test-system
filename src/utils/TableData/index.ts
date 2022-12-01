@@ -15,9 +15,7 @@ import { columns as TeacherColumn } from './Teacher.data'
 const columnConfig = {
   studentUpload: StudentUploadColumn,
   studentInfo: StudentInfoColumns,
-  radio: QuestionColumn,
-  checkbox: QuestionColumn,
-  judge: JudgeColumn,
+  question: QuestionColumn,
   task: TaskColumn,
   grade: GradeColumn,
   searchPassword: SearchStudentPasswordColumn,
