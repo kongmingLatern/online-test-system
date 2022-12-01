@@ -16,6 +16,7 @@ const columnConfig = {
   studentUpload: StudentUploadColumn,
   studentInfo: StudentInfoColumns,
   question: QuestionColumn,
+  judge: JudgeColumn,
   task: TaskColumn,
   grade: GradeColumn,
   searchPassword: SearchStudentPasswordColumn,

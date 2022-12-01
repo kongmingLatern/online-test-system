@@ -34,3 +34,15 @@ export function setData(arr: any[]): any[] {
     }
   })
 }
+
+export function reactiveToCommon(
+  arr: Record<string, any>
+): any[] {
+  const result: any[] = []
+  const target = arr.question
+  const { questionCorrect } = target
+  questionCorrect.forEach(item => {
+    result.push(item.values)
+  })
+  return result
+}

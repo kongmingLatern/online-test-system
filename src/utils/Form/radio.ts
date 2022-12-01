@@ -16,7 +16,7 @@ export default {
   },
   questionCorrect: {
     name: 'questionCorrect',
-    type: 'text',
+    type: 'answer',
     label: '答案',
   },
 }
