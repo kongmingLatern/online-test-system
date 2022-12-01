@@ -26,12 +26,14 @@ export const useTask = defineStore('task', {
 
         res.data.records.forEach(record => {
           const {
+            baseId,
             subjectName,
             teacherName,
             createUser,
             baseTitle,
           } = record
           this.baseList.push({
+            baseId,
             baseTitle,
             subjectName,
             teacherName,
