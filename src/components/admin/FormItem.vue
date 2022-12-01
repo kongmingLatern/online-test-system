@@ -26,7 +26,10 @@
           : null
       "
     >
-      <Select v-if="item.type === 'select'" />
+      <Select
+        v-if="item.type === 'select'"
+        @change="getBaseId"
+      />
       <a-radio-group
         v-if="item.type === 'radio'"
         v-model:value="value"
@@ -46,10 +49,32 @@
       />
     </a-form-item>
 
-    <div v-if="formState[sort].questionCorrect">
+    <div v-if="formState[sort].questionAnswerList">
+      <p>选项：</p>
       <a-form-item
-        v-for="(answer, index) in formState[sort]
-          .questionCorrect"
+        v-for="answer in formState[sort].questionAnswerList"
+        :key="answer.key"
+      >
+        <a-input
+          v-model:value="answer.values"
+          placeholder="请输入选项"
+          style="width: 60%"
+        />
+      </a-form-item>
+      <a-button
+        type="dashed"
+        style="width: 60%"
+        @click="addDomain('questionAnswerList')"
+      >
+        <PlusOutlined />
+        Add
+      </a-button>
+    </div>
+    <div v-if="formState[sort].questionCorrectList">
+      <p>答案：</p>
+      <a-form-item
+        v-for="answer in formState[sort]
+          .questionCorrectList"
         :key="answer.key"
       >
         <a-input
@@ -61,7 +86,7 @@
       <a-button
         type="dashed"
         style="width: 60%"
-        @click="addDomain"
+        @click="addDomain('questionCorrectList')"
       >
         <PlusOutlined />
         Add
@@ -77,7 +102,11 @@
 </template>
 <script lang="ts" setup>
 import { inject, reactive, ref, type Ref } from 'vue'
-import { getFormItem, reactiveToCommon } from '@/utils'
+import {
+  getFormItem,
+  getValueByObject,
+  reactiveToCommon,
+} from '@/utils'
 import { PlusOutlined } from '@ant-design/icons-vue'
 
 const props = defineProps<{
@@ -104,23 +133,39 @@ const validateMessages = {
   },
 }
 
-const addDomain = () => {
+const addDomain = (key: string) => {
   console.log(formState)
-  formState[props.sort].questionCorrect.push({
+  formState[props.sort][key].push({
     values: '',
     key: Date.now(),
   })
 }
 
+const getBaseId = (baseId: string) => {
+  formState[props.sort].baseId = baseId
+}
+
 const onFinish = (values: any) => {
   console.log('Success:', values, value.value)
   isShow.value = false
+
   if (props.sort === 'question') {
-    formState[props.sort].questionCorrect =
-      reactiveToCommon(formState)
+    formState[props.sort].questionType = value.value
+    console.log(formState)
+    formState[props.sort].questionCorrectList =
+      getValueByObject(
+        formState[props.sort],
+        'questionCorrectList'
+      )
+    formState[props.sort].questionAnswerList =
+      getValueByObject(
+        formState[props.sort],
+        'questionAnswerList'
+      )
+    console.log(formState[props.sort])
+
     finish({
       ...formState[props.sort],
-      questionType: value.value,
     })
   } else {
     finish(values)
