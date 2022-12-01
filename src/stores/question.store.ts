@@ -8,8 +8,6 @@ const requestPath = '/question/page'
 
 const addQuestionPath = '/question/add'
 
-type QuestionType = Radio | Checkbox | Judge
-
 export const useQuestion = defineStore('question', {
   state: () => ({
     question: [] as QuestionType[],
@@ -94,7 +92,7 @@ export const useQuestion = defineStore('question', {
         return '删除失败'
       }
     },
-    async addQuestion(question: QuestionType) {
+    async addQuestion(question: any) {
       try {
         const res = await http.post(
           addQuestionPath,
