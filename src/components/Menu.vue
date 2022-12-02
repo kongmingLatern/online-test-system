@@ -53,6 +53,7 @@ const goRouter = (path: string) => {
 .menu {
   height: 64px;
   padding: 0 50px;
+  border: unset;
   /* color: #fff; */
   /* color: rgba(0, 0, 0, 0.85); */
   line-height: 64px;
