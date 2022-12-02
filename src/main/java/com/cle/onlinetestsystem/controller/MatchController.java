@@ -209,9 +209,38 @@ public class MatchController {
         return R.success(questionDtoList);
     }
 
+    /**
+     * 提交试卷
+     * @param matchDto
+     * @return
+     */
     @PostMapping("/submit")
     public R<String> submit(@RequestBody MatchDto matchDto){
         Double grade = matchService.submit(matchDto);
         return R.success("分数为"+grade);
+    }
+
+    /**
+     * 获取自己的考试
+     * @param studentId
+     * @return
+     */
+    @GetMapping("/getSelfMatch")
+    public R<List<MatchDto>> getSelfMatch(Long studentId){
+        LambdaQueryWrapper<Match> matchLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        matchLambdaQueryWrapper.eq(Match::getStudentId,studentId)
+                               .eq(Match::getIsEnd,0);
+        List<Match> matchList = matchService.list(matchLambdaQueryWrapper);
+        List<MatchDto> matchDtoList = matchList.parallelStream().map(match -> {
+            MatchDto matchDto = new MatchDto();
+            Task task = taskService.getById(match.getTaskId());
+            matchDto.setTaskName(task.getTaskName());
+            matchDto.setTaskTime(task.getTaskTime());
+            matchDto.setLimitTime(task.getLimitTime());
+            matchDto.setMatchId(match.getMatchId());
+            matchDto.setIsStart(match.getIsStart());
+            return matchDto;
+        }).collect(Collectors.toList());
+        return R.success(matchDtoList);
     }
 }

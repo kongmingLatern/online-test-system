@@ -12,12 +12,13 @@ import com.cle.onlinetestsystem.service.MatchService;
 import com.cle.onlinetestsystem.service.QuestionService;
 import com.cle.onlinetestsystem.service.TaskService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Slf4j
 @RestController
 @AllArgsConstructor
 @RequestMapping("/task")
@@ -26,9 +27,9 @@ public class TaskController {
     private final TaskService taskService;
     private final MatchService matchService;
 
-
     @PostMapping("/add")
     public R<String> addTask(@RequestBody TaskDto taskDto){
+        log.info(String.valueOf(taskDto.getTaskTime()));
         if((taskDto.getRadioNumber()*taskDto.getRadioScore()+taskDto.getJudgeNumber()*taskDto.getJudgeScore()+taskDto.getSelectedNumber()*taskDto.getSelectedScore())!=100.0){
             return R.error("试卷分值有误");
         }

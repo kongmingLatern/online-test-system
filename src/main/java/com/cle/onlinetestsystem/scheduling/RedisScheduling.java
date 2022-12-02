@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -32,15 +33,21 @@ public class RedisScheduling {
         Set<Long> matchCache = redisUtils.getHashKeys(MATCH_CACHE);
         matchCache.parallelStream().forEach(matchId->{
             Match match = matchService.getById(matchId);
-            Task task = taskService.getById(match.getTaskId());
-            Object questionDtoList = redisUtils.hmGet(MATCH_CACHE, matchId);
-            String jsonString = JSON.toJSONString(questionDtoList);
-            List<QuestionDto> questionDtos = JSON.parseArray(jsonString, QuestionDto.class);
-            redisUtils.deleteHashValue(MATCH_CACHE,match.getMatchId());
-            Double computeGrade = matchService.computeGrade(questionDtos, task);
-            match.setGrade(computeGrade);
-            match.setIsEnd(1);
-            matchService.updateById(match);
+            if(match.getIsEnd()==0) {
+                Task task = taskService.getById(match.getTaskId());
+                if (task.getTaskTime().plusMinutes(task.getLimitTime()).isBefore(LocalDateTime.now())) {
+                    //redis中获取所有试卷
+                    Object questionDtoList = redisUtils.hmGet(MATCH_CACHE, matchId);
+                    String jsonString = JSON.toJSONString(questionDtoList);
+                    List<QuestionDto> questionDtos = JSON.parseArray(jsonString, QuestionDto.class);
+                    //清除缓存
+                    redisUtils.deleteHashValue(MATCH_CACHE, match.getMatchId());
+                    Double computeGrade = matchService.computeGrade(questionDtos, task);
+                    match.setGrade(computeGrade);
+                    match.setIsEnd(1);
+                    matchService.updateById(match);
+                }
+            }
         });
     }
 }

@@ -143,6 +143,9 @@ public class MatchServiceImpl extends ServiceImpl<MatchDao, Match> implements Ma
     @Override
     public Double submit(MatchDto matchDto) {
         Match match = this.getById(matchDto.getMatchId());
+        if(match.getIsEnd()==1){
+            throw new CustomException("不可重复提交");
+        }
         Task task = taskService.getById(match.getTaskId());
         List<QuestionDto> questionDtoList = matchDto.getQuestionDtoList();
         Double computeGrade = computeGrade(questionDtoList, task);
@@ -162,4 +165,5 @@ public class MatchServiceImpl extends ServiceImpl<MatchDao, Match> implements Ma
         Map<String, String> tempMap = list2.parallelStream().collect(Collectors.toMap(Function.identity(), Function.identity(), (oldData, newData) -> newData));
         return list1.parallelStream().filter(str -> tempMap.containsKey(str)).collect(Collectors.toList());
     }
+
 }

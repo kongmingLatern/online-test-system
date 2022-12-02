@@ -3,6 +3,7 @@ package com.cle.onlinetestsystem.dto;
 import com.cle.onlinetestsystem.pojo.Match;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -21,4 +22,8 @@ public class MatchDto extends Match {
     private String status;//当前考试状态
     private List<QuestionDto> questionDtoList;//试卷集合
     private String taskStartToEnd;//考试开始到结束时间
+    private String taskName;//考试名称
+    private LocalDateTime taskTime;//考试时间
+    private Integer limitTime;//限制时间
+
 }
