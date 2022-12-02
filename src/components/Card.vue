@@ -1,20 +1,13 @@
 <template>
-  <a-space
-    size="large"
-    flex-wrap
-    justify-center
-    mt-5
-    data-test="card"
-  >
+  <a-space size="large" flex-wrap mt-5 data-test="card">
     <a-card
       hoverable
-      style="width: 380px"
+      style="width: 450px"
       v-for="item in cardList"
       :key="item"
       flex="~"
-      justify="start"
       items="center"
-      p-3
+      p-5
       rounded
     >
       <template #cover>
@@ -25,18 +18,25 @@
       </template>
       <a-card-meta pl-5>
         <template #title>
-          <div text-center font-semibold>
+          <div text-center font-semibold text-xl>
             {{ item.title }}
           </div>
         </template>
         <template #description>
-          <p>考试时间：{{ item.taskTime }}</p>
-          <p>限制时间：{{ item.limitTime }}分钟</p>
-          <p text-center>
-            <a-button type="primary" class="button-green">
-              进入考试
-            </a-button>
-          </p>
+          <a-space direction="vertical" pt-3>
+            <p>考试时间：{{ item.taskTime }}</p>
+            <p>限制时间：{{ item.limitTime }}分钟</p>
+            <p text-center>
+              <a-button
+                type="primary"
+                class="button-green"
+                w-60
+                rounded="full"
+              >
+                进入考试
+              </a-button>
+            </p>
+          </a-space>
         </template>
       </a-card-meta>
     </a-card>
