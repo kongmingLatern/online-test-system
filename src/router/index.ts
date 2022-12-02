@@ -16,10 +16,31 @@ const router = createRouter({
         import('@/components/MainLayout.vue'),
       children: [
         {
+          // 主页
           path: 'index',
           name: 'index',
           component: () =>
             import('@/pages/home/HomeIndex.vue'),
+        },
+        {
+          // 试题库
+          path: 'task',
+          name: 'task',
+          component: () =>
+            import('@/pages/home/TaskBase.vue'),
+        },
+        {
+          //成绩管理
+          path: 'grade',
+          name: 'grade',
+          component: () => import('@/pages/home/Grade.vue'),
+        },
+        {
+          // 我的考试
+          path: 'personal',
+          name: 'personal',
+          component: () =>
+            import('@/pages/home/Personal.vue'),
         },
       ],
     },

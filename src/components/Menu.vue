@@ -5,25 +5,28 @@
     mode="horizontal"
     class="menu"
   >
-    <a-menu-item key="index">
+    <a-menu-item key="index" @click="goRouter('/index')">
       <template #icon>
         <HomeOutlined />
       </template>
       首页
     </a-menu-item>
-    <a-menu-item key="task">
+    <a-menu-item key="task" @click="goRouter('/task')">
       <template #icon>
         <PaperClipOutlined />
       </template>
       试题库
     </a-menu-item>
-    <a-menu-item key="grade">
+    <a-menu-item key="grade" @click="goRouter('/grade')">
       <template #icon>
         <FileSyncOutlined />
       </template>
       成绩管理
     </a-menu-item>
-    <a-menu-item key="personal">
+    <a-menu-item
+      key="personal"
+      @click="goRouter('/personal')"
+    >
       <template #icon>
         <UserOutlined />
       </template>
@@ -39,7 +42,11 @@ import {
   FileSyncOutlined,
   UserOutlined,
 } from '@ant-design/icons-vue'
+import router from '@/router'
 const current = ref<string[]>(['index'])
+const goRouter = (path: string) => {
+  router.push('/home' + path)
+}
 </script>
 
 <style scoped>
