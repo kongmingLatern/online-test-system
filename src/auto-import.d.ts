@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     Header: typeof import('./components/Header.vue')['default']
     ImportInfo: typeof import('./components/ImportInfo.vue')['default']
     Layout: typeof import('./components/Layout.vue')['default']
+    List: typeof import('./components/List.vue')['default']
     Main: typeof import('./components/Main.vue')['default']
     MainLayout: typeof import('./components/MainLayout.vue')['default']
     Menu: typeof import('./components/Menu.vue')['default']
