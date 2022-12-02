@@ -1,6 +1,6 @@
 <template>
   <!-- NOTE: 考试准则 -->
-  <div p-5 overflow-hidden>
+  <div overflow-hidden class="width-50">
     <h1 font-bold>考试准则</h1>
 
     <p>参加国家教育考试的考生须遵守以下规则：</p>
@@ -25,4 +25,8 @@
 
 <script setup lang="ts"></script>
 
-<style scoped></style>
+<style scoped>
+.width-50 {
+  width: 50%;
+}
+</style>
