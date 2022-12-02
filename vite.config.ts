@@ -7,8 +7,24 @@ import { presetAttributify, presetUno } from 'unocss'
 import { vitestConfig } from './viteConfig'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import presetIcons from '@unocss/preset-icons'
+import Icons from 'unplugin-icons/vite'
 
 export default defineConfig({
+  build: {
+    minify: false,
+    rollupOptions: {
+      output: {
+        manualChunks: (id: string) => {
+          // 分包策略
+          // 如果包含 node_modules 的依赖，就单独打包
+          if (id.includes('node_modules')) {
+            return 'vendor'
+          }
+        },
+      },
+    },
+  },
   test: {
     ...vitestConfig,
   },
@@ -16,7 +32,13 @@ export default defineConfig({
     vue(),
     vueJsx(),
     Unocss({
-      presets: [presetUno(), presetAttributify()],
+      presets: [
+        presetUno(),
+        presetAttributify(),
+        presetIcons({
+          /* options */
+        }),
+      ],
       shortcuts: {
         'header-title':
           'color-white font-bold text-5 pl-10 ',
@@ -40,6 +62,7 @@ export default defineConfig({
       dts: 'src/auto-import.d.ts',
       extensions: ['vue'],
     }),
+    Icons({ autoInstall: true }),
   ],
   resolve: {
     alias: {
@@ -51,7 +74,8 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://10.16.20.4:8080', //实际请求地址
+        // target: 'http://10.16.20.4:8080', //实际请求地址
+        target: 'http://10.12.146.67:8080', //实际请求地址
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, ''),
       },
