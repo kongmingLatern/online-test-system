@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     AdminAside: typeof import('./components/admin/AdminAside.vue')['default']
     BreadCrumb: typeof import('./components/BreadCrumb.vue')['default']
     Card: typeof import('./components/Card.vue')['default']
+    Carousel: typeof import('./components/Carousel.vue')['default']
     Content: typeof import('./components/Content.vue')['default']
     Form: typeof import('./components/admin/Form.vue')['default']
     FormItem: typeof import('./components/admin/FormItem.vue')['default']
