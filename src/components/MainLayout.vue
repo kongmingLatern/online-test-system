@@ -18,8 +18,4 @@
 
 <script setup lang="ts"></script>
 
-<style scoped>
-:deep(.ant-layout-content) {
-  display: flex;
-}
-</style>
+<style scoped></style>
