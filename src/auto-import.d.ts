@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AdminAside: typeof import('./components/admin/AdminAside.vue')['default']
     BreadCrumb: typeof import('./components/BreadCrumb.vue')['default']
+    Card: typeof import('./components/Card.vue')['default']
     Content: typeof import('./components/Content.vue')['default']
     Form: typeof import('./components/admin/Form.vue')['default']
     FormItem: typeof import('./components/admin/FormItem.vue')['default']
@@ -16,6 +17,8 @@ declare module '@vue/runtime-core' {
     ImportInfo: typeof import('./components/ImportInfo.vue')['default']
     Layout: typeof import('./components/Layout.vue')['default']
     Main: typeof import('./components/Main.vue')['default']
+    MainLayout: typeof import('./components/MainLayout.vue')['default']
+    Menu: typeof import('./components/Menu.vue')['default']
     Modal: typeof import('./components/Modal.vue')['default']
     Nav: typeof import('./components/Nav.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
