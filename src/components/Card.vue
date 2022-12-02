@@ -1,10 +1,15 @@
 <template>
-  <a-space size="large" flex-wrap justify-center mt-5>
+  <a-space
+    size="large"
+    flex-wrap
+    justify-center
+    mt-5
+    data-test="card"
+  >
     <a-card
       hoverable
       style="width: 380px"
-      data-test="card"
-      v-for="item in tasks"
+      v-for="item in cardList"
       :key="item"
       flex="~"
       justify="start"
@@ -39,50 +44,9 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-
-const tasks = reactive([
-  {
-    title: '高等数学A',
-    taskTime: '2022年9月20日 09:00',
-    limitTime: '120',
-  },
-  {
-    title: '高等数学B',
-    taskTime: '2022年9月22日 19:00',
-    limitTime: '20',
-  },
-  {
-    title: '高等数学A',
-    taskTime: '2022年9月20日 09:00',
-    limitTime: '120',
-  },
-  {
-    title: '高等数学B',
-    taskTime: '2022年9月22日 19:00',
-    limitTime: '20',
-  },
-  {
-    title: '高等数学A',
-    taskTime: '2022年9月20日 09:00',
-    limitTime: '120',
-  },
-  {
-    title: '高等数学B',
-    taskTime: '2022年9月22日 19:00',
-    limitTime: '20',
-  },
-  {
-    title: '高等数学A',
-    taskTime: '2022年9月20日 09:00',
-    limitTime: '120',
-  },
-  {
-    title: '高等数学B',
-    taskTime: '2022年9月22日 19:00',
-    limitTime: '20',
-  },
-])
+defineProps<{
+  cardList?: any[]
+}>()
 </script>
 
 <style scoped>
