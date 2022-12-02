@@ -18,4 +18,9 @@
 
 <script setup lang="ts"></script>
 
-<style scoped></style>
+<style scoped>
+:deep(.ant-layout-content) {
+  width: 1400px;
+  margin: 0 auto;
+}
+</style>
