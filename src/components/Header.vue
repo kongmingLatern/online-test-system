@@ -18,7 +18,7 @@
 <script setup lang="ts">
 defineProps<{
   text?: string
-  isTitle?: string
+  isTitle?: boolean
 }>()
 </script>
 
