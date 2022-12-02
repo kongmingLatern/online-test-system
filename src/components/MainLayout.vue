@@ -1,7 +1,7 @@
 <template>
   <a-layout data-test="layout">
     <a-layout-header flex>
-      <Header>
+      <Header class="bg">
         <template #menu>
           <Menu />
         </template>
@@ -18,4 +18,8 @@
 
 <script setup lang="ts"></script>
 
-<style scoped></style>
+<style scoped>
+:deep(.ant-layout-content) {
+  display: flex;
+}
+</style>

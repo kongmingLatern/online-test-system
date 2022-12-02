@@ -1,6 +1,6 @@
 <template>
   <a-menu
-  data-test="menu"
+    data-test="menu"
     v-model:selectedKeys="current"
     mode="horizontal"
     class="menu"
@@ -50,5 +50,17 @@ const current = ref<string[]>(['index'])
   /* color: rgba(0, 0, 0, 0.85); */
   line-height: 64px;
   background: #001529;
+}
+:deep(.ant-menu-item-selected) {
+  color: skyblue;
+}
+:deep(.ant-menu-title-content) {
+  color: #fff;
+}
+:deep(.ant-menu-title-content):hover {
+  color: skyblue;
+}
+:deep(.ant-menu-item-icon) {
+  color: #fff;
 }
 </style>
