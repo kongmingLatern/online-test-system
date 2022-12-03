@@ -1,14 +1,24 @@
 <template>
-  <header data-test="header" flex relative class="width">
+  <header data-test="header" flex>
     <h1
       data-test="title"
       header="title"
-      :class="isTitle ? 'color-black font-semibold pl-0' : 'bg-title'"
+      :class="
+        isTitle
+          ? 'color-black font-semibold pl-0'
+          : 'bg-title'
+      "
     >
-      {{ text || "在线考试系统" }}
+      {{ text || '在线考试系统' }}
     </h1>
     <slot name="menu"></slot>
-    <div color-white absolute right-0>
+    <div
+      color-white
+      absolute
+      right-10
+      top-0
+      v-if="isShow === 'true'"
+    >
       <user-outlined />
       用户名称
     </div>
@@ -16,15 +26,19 @@
 </template>
 
 <script setup lang="ts">
-import { UserOutlined } from "@ant-design/icons-vue";
+import { UserOutlined } from '@ant-design/icons-vue'
 defineProps<{
-  text?: string;
-  isTitle?: string;
-}>();
+  text?: string
+  isTitle?: string
+  isShow?: string
+}>()
 </script>
 
 <style scoped>
-.width {
+.bg {
   width: 100%;
+}
+.ant-layout-header {
+  position: relative;
 }
 </style>
