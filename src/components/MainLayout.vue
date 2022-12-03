@@ -11,7 +11,9 @@
       <router-view />
     </a-layout-content>
     <a-layout-footer>
-      <slot name="footer"></slot>
+      <slot name="footer">
+        <Footer />
+      </slot>
     </a-layout-footer>
   </a-layout>
 </template>
