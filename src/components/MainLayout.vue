@@ -1,7 +1,7 @@
 <template>
   <a-layout data-test="layout">
     <a-layout-header flex>
-      <Header>
+      <Header isShow="true">
         <template #menu>
           <Menu />
         </template>
