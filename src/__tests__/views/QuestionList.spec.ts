@@ -9,6 +9,6 @@ beforeEach(() => {
 describe('it shoule be exist', () => {
   it('shoule be existed', () => {
     const match = findComponent(wrapper, 'questionList')
-    expect(match).toBeTruthy()
+    expect(match.exists()).toBeTruthy()
   })
 })

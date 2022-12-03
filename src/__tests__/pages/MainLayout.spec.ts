@@ -8,10 +8,10 @@ beforeEach(() => {
 describe("layout ", () => {
   it("should exists -> Layout", () => {
     const layout = findComponent(wrapper, "layout");
-    expect(layout).toBeTruthy();
+    expect(layout.exists()).toBeTruthy();
   });
   it("should exists -> header", () => {
     const header = findComponent(wrapper, "header");
-    expect(header).toBeTruthy();
+    expect(header.exists()).toBeTruthy();
   });
 });

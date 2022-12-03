@@ -7,6 +7,6 @@ beforeEach(() => {
 describe("components shoule be exists", () => {
   it("shoule be existed", () => {
     const components = findComponent(wrapper, "homeIndex");
-    expect(components).toBeTruthy();
+    expect(components.exists()).toBeTruthy();
   });
 });
