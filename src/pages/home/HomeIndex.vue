@@ -5,7 +5,7 @@
     <div flex="~" justify="around" p-5>
       <Rules
         rounded
-        hover="rounded-l-lg bg-black color-white ease-out duration-500"
+        hover="rounded-l-lg bg-red-800 color-white ease-out duration-500"
         p-5
       />
       <Recent ml-5 />

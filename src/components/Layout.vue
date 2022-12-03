@@ -33,7 +33,7 @@
         </a-layout-content>
       </a-layout>
       <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
+        <Footer />
       </a-layout-footer>
     </a-layout>
   </a-layout>
