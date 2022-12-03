@@ -1,11 +1,11 @@
 <template>
   <a-list bordered :data-source="data">
     <template #renderItem="{ item, index }">
-      <a-list-item>
-        <a-tag>
-          <span mr-3 rounded>{{ index + 1 }}</span>
+      <a-list-item hover="bg-red color-white">
+        <div>
+          <span mr-2 text-sm>{{ index + 1 }}</span>
           <a-tag color="red" text-sm>{{ item }}</a-tag>
-        </a-tag>
+        </div>
       </a-list-item>
     </template>
   </a-list>

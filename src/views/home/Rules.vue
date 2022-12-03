@@ -1,7 +1,7 @@
 <template>
   <!-- NOTE: 考试准则 -->
   <div overflow-hidden class="width-50">
-    <h1 font-bold>考试准则</h1>
+    <p font-bold text-xl>考试准则</p>
 
     <p>参加国家教育考试的考生须遵守以下规则：</p>
 
