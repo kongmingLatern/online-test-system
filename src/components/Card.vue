@@ -19,15 +19,20 @@
       <a-card-meta pl-5>
         <template #title>
           <div text-center font-semibold text-xl>
-            {{ item.title }}
+            科目： {{ item.baseTitle }}
           </div>
         </template>
         <template #description>
           <a-space direction="vertical" pt-3>
-            <p>考试时间：{{ item.taskTime }}</p>
-            <p>限制时间：{{ item.limitTime }}分钟</p>
+            <p v-if="isBase === 'false'">
+              考试时间：{{ item.taskTime }}
+            </p>
+            <p v-if="isBase === 'false'">
+              限制时间：{{ item.limitTime }}分钟
+            </p>
             <p text-center>
               <a-button
+                v-if="isBase === 'false'"
                 type="primary"
                 class="button-green"
                 w-60
@@ -35,6 +40,16 @@
                 @click="showModal(item.matchId)"
               >
                 进入考试
+              </a-button>
+              <a-button
+                v-if="isBase === 'true'"
+                type="primary"
+                class="button-green"
+                w-60
+                rounded="full"
+                @click="showModal(item.matchId)"
+              >
+                进入练习
               </a-button>
             </p>
           </a-space>
@@ -75,6 +90,7 @@
           </a-radio>
           <footer text-center mt-10>
             <a-button
+              v-if="isBase === 'false'"
               class="button-green"
               h-15
               w-60
@@ -82,6 +98,16 @@
               @click="goTask(currentMatch.matchId)"
             >
               进入考试
+            </a-button>
+            <a-button
+              v-if="isBase === 'true'"
+              class="button-green"
+              h-15
+              w-60
+              rounded
+              @click="goTask(currentMatch.matchId)"
+            >
+              进入练习
             </a-button>
           </footer>
         </div>
@@ -97,6 +123,7 @@ import { provide, reactive, ref } from 'vue'
 
 const props = defineProps<{
   cardList?: any[]
+  isBase?: string
 }>()
 const comShow = ref<boolean>(false)
 const currentMatch = reactive<Record<string, any>>({})
