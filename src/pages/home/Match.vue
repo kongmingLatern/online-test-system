@@ -1,13 +1,13 @@
 <template>
-  <Modal />
+  <div flex>
+    <QuestionList pl-10 mt-5 border-r-dashed />
+    <MatchInfo />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { provide, ref } from "vue";
-
-const comShow = ref<boolean>(false);
-provide("title", "查询考试");
-provide("comShow", comShow);
+import QuestionList from '@/views/match/QuestionList.vue'
+import MatchInfo from '@/views/match/MatchInfo.vue'
 </script>
 
 <style scoped></style>
