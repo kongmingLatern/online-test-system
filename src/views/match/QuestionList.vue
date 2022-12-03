@@ -17,6 +17,7 @@ import RadioList from './RadioList.vue'
 import CheckboxList from './CheckboxList.vue'
 import JudgeList from './JudgeList.vue'
 import { computed, reactive } from 'vue'
+import mitt from '@/utils/mitt'
 const questionList = reactive([
   {
     questionId: '1595984141935997030',
@@ -1576,6 +1577,10 @@ const judgeList = computed(() => {
   return questionList.filter(
     item => item.questionType === 3
   )
+})
+
+mitt.on('finishTask', () => {
+  console.log('finishTask',questionList)
 })
 </script>
 
