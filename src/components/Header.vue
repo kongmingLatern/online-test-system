@@ -1,10 +1,13 @@
 <template>
-  <header data-test="header" flex>
+  <header
+    data-test="header"
+    :class="isTitle === 'true' ? '' : 'flex'"
+  >
     <h1
       data-test="title"
       header="title"
       :class="
-        isTitle
+        isTitle === 'true'
           ? 'color-black font-semibold pl-0'
           : 'bg-title'
       "
@@ -35,9 +38,6 @@ defineProps<{
 </script>
 
 <style scoped>
-.bg {
-  width: 100%;
-}
 .ant-layout-header {
   position: relative;
 }

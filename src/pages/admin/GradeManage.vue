@@ -3,7 +3,7 @@
     <Content>
       <!-- 头部 -->
       <template #header>
-        <Header text="成绩管理" isTitle="false" />
+        <Header text="成绩管理" isTitle="true" />
       </template>
 
       <!-- 导航 -->

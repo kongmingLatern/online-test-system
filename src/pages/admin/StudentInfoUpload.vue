@@ -5,7 +5,7 @@
       <template #header>
         <Header
           text="学生信息上传"
-          isTitle="false"
+          isTitle="true"
           isShow="false"
         />
       </template>
