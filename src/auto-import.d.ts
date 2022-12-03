@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     Card: typeof import('./components/Card.vue')['default']
     Carousel: typeof import('./components/Carousel.vue')['default']
     Content: typeof import('./components/Content.vue')['default']
+    Footer: typeof import('./components/Footer.vue')['default']
     Form: typeof import('./components/admin/Form.vue')['default']
     FormItem: typeof import('./components/admin/FormItem.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
