@@ -1,5 +1,5 @@
 <template>
-  <header data-test="header">
+  <header data-test="header" flex relative class="width">
     <h1
       data-test="title"
       header="title"
@@ -11,15 +11,24 @@
     >
       {{ text || '在线考试系统' }}
     </h1>
+    <slot name="menu"></slot>
+    <div color-white absolute right-0>
+      <user-outlined />
+      用户名称
+    </div>
   </header>
-  <slot name="menu"></slot>
 </template>
 
 <script setup lang="ts">
+import { UserOutlined } from '@ant-design/icons-vue'
 defineProps<{
   text?: string
-  isTitle?: boolean
+  isTitle?: string
 }>()
 </script>
 
-<style scoped></style>
+<style scoped>
+.width {
+  width: 100%;
+}
+</style>
