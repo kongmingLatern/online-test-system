@@ -243,4 +243,29 @@ public class MatchController {
         }).collect(Collectors.toList());
         return R.success(matchDtoList);
     }
+
+    /**
+     * 获取自己考完试的成绩
+     * @param studentId
+     * @return
+     */
+    @GetMapping("/getSelfGrade")
+    public R<List<MatchDto>> getSelfGrade(Long studentId){
+        LambdaQueryWrapper<Match> matchLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        matchLambdaQueryWrapper.eq(Match::getStudentId,studentId)
+                               .eq(Match::getIsEnd,1);
+        List<Match> matchList = matchService.list(matchLambdaQueryWrapper);
+        List<MatchDto> collect = matchList.parallelStream().map(match -> {
+            MatchDto matchDto = new MatchDto();
+            Task task = taskService.getById(match.getTaskId());
+            Base base = baseService.getById(task.getBaseId());
+            Subject subject = subjectService.getById(base.getSubjectId());
+            matchDto.setMatchId(match.getMatchId());
+            matchDto.setGrade(match.getGrade());
+            matchDto.setTaskStartToEnd(MyUtils.timeConversion(task.getTaskTime(), task.getLimitTime()));
+            matchDto.setSubjectName(subject.getSubjectName());
+            return matchDto;
+        }).collect(Collectors.toList());
+        return R.success(collect);
+    }
 }

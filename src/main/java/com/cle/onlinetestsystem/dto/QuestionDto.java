@@ -1,12 +1,14 @@
 package com.cle.onlinetestsystem.dto;
 
 import com.cle.onlinetestsystem.pojo.Question;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class QuestionDto extends Question implements Serializable {
 
     private String baseTitle;//题库名称

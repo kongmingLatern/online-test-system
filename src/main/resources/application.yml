@@ -13,6 +13,10 @@ spring:
   cache:
     redis:
       time-to-live: 1800000
+  jackson:
+    default-property-inclusion: non_null
+
+
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true

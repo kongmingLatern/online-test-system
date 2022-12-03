@@ -1,9 +1,11 @@
 package com.cle.onlinetestsystem.dto;
 
 import com.cle.onlinetestsystem.pojo.Task;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TaskDto extends Task {
     private String classId;
     private String classNo;
