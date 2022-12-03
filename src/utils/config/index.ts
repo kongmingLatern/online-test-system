@@ -1,5 +1,5 @@
-import getColumn from '@/utils/config/column'
+import getColumn from "@/utils/config/column";
 
-import getFormItem from '@/utils/config/form'
+import getFormItem from "@/utils/config/form";
 
-export { getColumn, getFormItem }
+export { getColumn, getFormItem };

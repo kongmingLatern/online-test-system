@@ -1,15 +1,14 @@
-import Table from '@/components/Table.vue';
-import { findComponent, registGlobalComponent } from '../../utils/vueUtils';
+import Table from "@/components/Table.vue";
+import { findComponent, registGlobalComponent } from "../../utils/vueUtils";
 // 注册全局组件
-let wrapper = registGlobalComponent(Table)
-let table
+const wrapper = registGlobalComponent(Table);
+let table;
 beforeEach(() => {
-  table = findComponent(wrapper, "table")
-})
-
-describe('first', () => {
-  it('should be true', () => {
-    expect(table.exists()).toBeTruthy()
-  })
+  table = findComponent(wrapper, "table");
 });
 
+describe("first", () => {
+  it("should be true", () => {
+    expect(table.exists()).toBeTruthy();
+  });
+});

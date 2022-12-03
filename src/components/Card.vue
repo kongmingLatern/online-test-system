@@ -32,6 +32,7 @@
                 class="button-green"
                 w-60
                 rounded="full"
+                @click="goTask(item.matchId)"
               >
                 进入考试
               </a-button>
@@ -40,13 +41,66 @@
         </template>
       </a-card-meta>
     </a-card>
+    <Modal width="100%" isMatch>
+      <template #modalContent>
+        <Rules class="font" text="lg" px-10>
+          <template #matchInfo>
+            <p text="center xl">当前考试：高等数学 A</p>
+            <p text="center xl">考试时间： 2022年9月12日 08:00 - 10:00</p>
+            <a-divider />
+          </template>
+        </Rules>
+
+        <div class="task-info font" text="lg" px-10>
+          <div flex items="center" justify="center">
+            <span>考试码：</span>
+            <a-input
+              v-model:value="taskPassword"
+              w-40
+              placeholder="请输入考试码"
+            />
+          </div>
+          <p>如由于自身操作不当导致系统故障，不予提供二次考试密码。</p>
+          <p>
+            如系统发生意外，请联系监考老师，由监考老师确定为系统故障后，再由监考老师联系管理员提供二次考试密码并继续考试。
+          </p>
+          <a-radio text-lg font-semibold>
+            我已阅读上述准则，并且保证严格遵守
+          </a-radio>
+          <footer text-right>
+            <a-button class="button-green" h-10 w-30 rounded>
+              进入考试
+            </a-button>
+          </footer>
+        </div>
+      </template>
+    </Modal>
   </a-space>
 </template>
 
 <script setup lang="ts">
+import router from "@/router";
+import Rules from "@/views/home/Rules.vue";
+import { provide, ref } from "vue";
+
 defineProps<{
-  cardList?: any[]
-}>()
+  cardList?: any[];
+}>();
+const comShow = ref<boolean>(false);
+
+provide("title", "进入考试");
+provide("comShow", comShow);
+const taskPassword = ref<string>("");
+
+const goTask = (matchId) => {
+  comShow.value = true;
+  // router.push({
+  //   path: '/match',
+  //   query: {
+  //     matchId,
+  //   },
+  // })
+};
 </script>
 
 <style scoped>
@@ -60,5 +114,11 @@ img {
 :deep(.ant-card-body) {
   flex: 2;
   padding: unset;
+}
+.width-50 {
+  width: 100%;
+}
+.font {
+  font-family: "仿宋";
 }
 </style>

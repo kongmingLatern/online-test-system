@@ -1,65 +1,65 @@
 export const columns = [
   {
-    title: '考试编号',
-    dataIndex: 'no',
+    title: "考试编号",
+    dataIndex: "no",
     options: {
-      align: 'center',
+      align: "center",
       width: 100,
     },
   },
   {
-    title: '考试科目',
-    dataIndex: 'subjectName',
+    title: "考试科目",
+    dataIndex: "subjectName",
     options: {
-      align: 'center',
+      align: "center",
       ellipsis: true,
     },
   },
   {
-    title: '考试密码',
-    dataIndex: 'taskPassword',
+    title: "考试密码",
+    dataIndex: "taskPassword",
     options: {
-      align: 'center',
+      align: "center",
     },
   },
   {
-    title: '考试时间',
-    dataIndex: 'taskStartToEnd',
+    title: "考试时间",
+    dataIndex: "taskStartToEnd",
     options: {
-      align: 'center',
+      align: "center",
       width: 250,
     },
   },
   {
-    title: '班级',
-    dataIndex: 'classNo',
+    title: "班级",
+    dataIndex: "classNo",
     options: {
-      align: 'center',
+      align: "center",
       width: 200,
     },
   },
   {
-    title: '学号',
-    dataIndex: 'studentNo',
+    title: "学号",
+    dataIndex: "studentNo",
     options: {
-      align: 'center',
+      align: "center",
       width: 200,
     },
   },
   {
-    title: '姓名',
-    dataIndex: 'studentName',
+    title: "姓名",
+    dataIndex: "studentName",
     options: {
-      align: 'center',
+      align: "center",
       width: 200,
     },
   },
   {
-    title: '考试状态',
-    dataIndex: 'status',
+    title: "考试状态",
+    dataIndex: "status",
     options: {
-      align: 'center',
+      align: "center",
       width: 200,
     },
   },
-]
+];

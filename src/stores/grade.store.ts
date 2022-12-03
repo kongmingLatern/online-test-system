@@ -1,28 +1,24 @@
-import { Grade } from '@/utils'
-import { defineStore } from 'pinia'
-import http from '../api/http'
+import { Grade } from "@/utils";
+import { defineStore } from "pinia";
+import http from "../api/http";
 
-export const useGrade = defineStore('grade', {
+export const useGrade = defineStore("grade", {
   state: () => ({
     gradeData: [] as Grade[],
   }),
 
   actions: {
-    async getGradeByCurrentPage(
-      pageSize,
-      currentPage,
-      studentNo?
-    ) {
+    async getGradeByCurrentPage(pageSize, currentPage, studentNo?) {
       try {
-        const res = await http.get('match/getGradePage', {
+        const res = await http.get("match/getGradePage", {
           params: {
             page: currentPage,
             pageSize,
             studentNo,
           },
-        })
-        this.gradeData = []
-        res.data.records.forEach(record => {
+        });
+        this.gradeData = [];
+        res.data.records.forEach((record) => {
           const {
             studentNo,
             studentName,
@@ -30,7 +26,7 @@ export const useGrade = defineStore('grade', {
             subjectName,
             baseTitle,
             grade,
-          } = record
+          } = record;
           this.gradeData.push(
             new Grade(
               studentNo,
@@ -40,13 +36,13 @@ export const useGrade = defineStore('grade', {
               baseTitle,
               grade
             )
-          )
-        })
-        return [this.gradeData, res.data.total]
+          );
+        });
+        return [this.gradeData, res.data.total];
       } catch (error) {
         // 让表单组件显示错误
-        return [this.gradeData, 0]
+        return [this.gradeData, 0];
       }
     },
   },
-})
+});

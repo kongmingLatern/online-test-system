@@ -3,13 +3,9 @@
     <h1
       data-test="title"
       header="title"
-      :class="
-        isTitle
-          ? 'color-black font-semibold pl-0'
-          : 'bg-title'
-      "
+      :class="isTitle ? 'color-black font-semibold pl-0' : 'bg-title'"
     >
-      {{ text || '在线考试系统' }}
+      {{ text || "在线考试系统" }}
     </h1>
     <slot name="menu"></slot>
     <div color-white absolute right-0>
@@ -20,11 +16,11 @@
 </template>
 
 <script setup lang="ts">
-import { UserOutlined } from '@ant-design/icons-vue'
+import { UserOutlined } from "@ant-design/icons-vue";
 defineProps<{
-  text?: string
-  isTitle?: string
-}>()
+  text?: string;
+  isTitle?: string;
+}>();
 </script>
 
 <style scoped>

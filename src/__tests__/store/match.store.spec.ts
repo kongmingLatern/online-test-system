@@ -1,16 +1,15 @@
-import { useMatch } from '@/stores/match.store'
-import { setActivePinia, createPinia } from 'pinia'
+import { useMatch } from "@/stores/match.store";
+import { setActivePinia, createPinia } from "pinia";
 
-describe('Subject Store', () => {
+describe("Subject Store", () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
-  })
+    setActivePinia(createPinia());
+  });
 
   // NOTE: 测试接口 'match/getMatchPasswordPage' 的数据'
-  it.skip('should return 1 record', async () => {
-    const store = useMatch()
-    await expect(store.getMatchsByPage(10, 1)).resolves
-      .toMatchInlineSnapshot(`
+  it.skip("should return 1 record", async () => {
+    const store = useMatch();
+    await expect(store.getMatchsByPage(10, 1)).resolves.toMatchInlineSnapshot(`
       [
         [
           {
@@ -216,6 +215,6 @@ describe('Subject Store', () => {
         ],
         18,
       ]
-    `)
-  })
-})
+    `);
+  });
+});

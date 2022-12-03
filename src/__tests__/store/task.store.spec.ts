@@ -1,15 +1,15 @@
-import { useTask } from '@/stores/task.store'
-import { setActivePinia, createPinia } from 'pinia'
-import { useBase } from '@/stores/base.store'
-import { resolveSoa } from 'dns'
+import { useTask } from "@/stores/task.store";
+import { setActivePinia, createPinia } from "pinia";
+import { useBase } from "@/stores/base.store";
+import { resolveSoa } from "dns";
 
-describe('Task Store', () => {
+describe("Task Store", () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
-  })
+    setActivePinia(createPinia());
+  });
 
-  it.skip('shoule return list about task', async () => {
-    const store = useTask()
+  it.skip("shoule return list about task", async () => {
+    const store = useTask();
     await expect(store.getTasksByCurrentPage(1, 1)).resolves
       .toMatchInlineSnapshot(`
       [
@@ -24,6 +24,6 @@ describe('Task Store', () => {
         ],
         4,
       ]
-    `)
-  })
-})
+    `);
+  });
+});

@@ -1,9 +1,9 @@
-import { useStudent } from '@/stores/student.store'
-import { useQuestion } from '@/stores/question.store'
-import { useTask } from '@/stores/task.store'
-import { useMatch } from '@/stores/match.store'
-import { useGrade } from '@/stores/grade.store'
-import { useTeacher } from '@/stores/teacher.store'
+import { useStudent } from "@/stores/student.store";
+import { useQuestion } from "@/stores/question.store";
+import { useTask } from "@/stores/task.store";
+import { useMatch } from "@/stores/match.store";
+import { useGrade } from "@/stores/grade.store";
+import { useTeacher } from "@/stores/teacher.store";
 import type {
   Teacher,
   Match,
@@ -13,9 +13,9 @@ import type {
   Radio,
   Checkbox,
   Judge,
-} from '@/utils'
-import type { Ref } from 'vue'
-import { useBase } from '@/stores/base.store'
+} from "@/utils";
+import type { Ref } from "vue";
+import { useBase } from "@/stores/base.store";
 export async function getStudentDataByCurrentPage(
   data: Student[],
   currentPage,
@@ -24,21 +24,18 @@ export async function getStudentDataByCurrentPage(
   isLoading: Ref<boolean | undefined>
 ) {
   try {
-    const store = useStudent()
-    isLoading.value = true
-    const [res, total] = await store.getStudentsByPage(
-      pageSize,
-      currentPage
-    )
+    const store = useStudent();
+    isLoading.value = true;
+    const [res, total] = await store.getStudentsByPage(pageSize, currentPage);
 
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
 
-    totalPage.value = total
-    return data
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 
@@ -51,21 +48,20 @@ export async function getQuestionByCurrentPage(
   isLoading: Ref<boolean | undefined>
 ) {
   try {
-    const store = useQuestion()
-    isLoading.value = true
-    const [res, total] =
-      await store.getQuestionByCurrentPage(
-        pageSize,
-        currentPage,
-        questionType
-      )
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
-    totalPage.value = total
-    return data
+    const store = useQuestion();
+    isLoading.value = true;
+    const [res, total] = await store.getQuestionByCurrentPage(
+      pageSize,
+      currentPage,
+      questionType
+    );
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 
@@ -78,20 +74,20 @@ export async function getGradeByCurrentPage(
   studentNo?
 ) {
   try {
-    const store = useGrade()
-    isLoading.value = true
+    const store = useGrade();
+    isLoading.value = true;
     const [res, total] = await store.getGradeByCurrentPage(
       pageSize,
       currentPage,
       studentNo
-    )
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
-    totalPage.value = total
-    return data
+    );
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 
@@ -104,20 +100,20 @@ export async function getTeachersByCurrentPage(
   teacherNo?
 ) {
   try {
-    const store = useTeacher()
-    isLoading.value = true
+    const store = useTeacher();
+    isLoading.value = true;
     const [res, total] = await store.getTeachersByPage(
       pageSize,
       currentPage,
       teacherNo
-    )
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
-    totalPage.value = total
-    return data
+    );
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 
@@ -130,20 +126,20 @@ export async function getBasesByCurrentPage(
   subjectId?
 ) {
   try {
-    const store = useBase()
-    isLoading.value = true
+    const store = useBase();
+    isLoading.value = true;
     const [res, total] = await store.getBasesByCurrentPage(
       pageSize,
       currentPage,
       subjectId
-    )
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
-    totalPage.value = total
-    return data
+    );
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 
@@ -156,20 +152,20 @@ export async function getMatchsByCurrentPage(
   studentNo?
 ) {
   try {
-    const store = useMatch()
-    isLoading.value = true
+    const store = useMatch();
+    isLoading.value = true;
     const [res, total] = await store.getMatchsByPage(
       pageSize,
       currentPage,
       studentNo
-    )
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
-    totalPage.value = total
-    return data
+    );
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 
@@ -182,19 +178,19 @@ export async function getTasksByCurrentPage(
   taskName?: string
 ) {
   try {
-    const store = useTask()
-    isLoading.value = true
+    const store = useTask();
+    isLoading.value = true;
     const [res, total] = await store.getTasksByCurrentPage(
       pageSize,
       currentPage,
       taskName
-    )
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
-    totalPage.value = total
-    return data
+    );
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }

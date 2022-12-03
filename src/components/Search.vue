@@ -9,21 +9,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from "vue";
 
 defineProps<{
-  text?: string
-}>()
+  text?: string;
+}>();
 
 const emits = defineEmits<{
-  (event: 'search', values: string): void
-}>()
+  (event: "search", values: string): void;
+}>();
 
-const value = ref<string>('')
+const value = ref<string>("");
 
-const onSearch = values => {
-  emits('search', values)
-}
+const onSearch = (values) => {
+  emits("search", values);
+};
 </script>
 
 <style scoped></style>

@@ -1,14 +1,14 @@
-import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import Unocss from 'unocss/vite'
-import { presetAttributify, presetUno } from 'unocss'
-import { vitestConfig } from './viteConfig'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import presetIcons from '@unocss/preset-icons'
-import Icons from 'unplugin-icons/vite'
+import { fileURLToPath, URL } from "node:url";
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import Unocss from "unocss/vite";
+import { presetAttributify, presetUno } from "unocss";
+import { vitestConfig } from "./viteConfig";
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import presetIcons from "@unocss/preset-icons";
+import Icons from "unplugin-icons/vite";
 
 export default defineConfig({
   build: {
@@ -18,8 +18,8 @@ export default defineConfig({
         manualChunks: (id: string) => {
           // 分包策略
           // 如果包含 node_modules 的依赖，就单独打包
-          if (id.includes('node_modules')) {
-            return 'vendor'
+          if (id.includes("node_modules")) {
+            return "vendor";
           }
         },
       },
@@ -40,8 +40,7 @@ export default defineConfig({
         }),
       ],
       shortcuts: {
-        'header-title':
-          'color-white font-bold text-5 pl-10 ',
+        "header-title": "color-white font-bold text-5 pl-10 ",
       },
     }),
     AutoImport({
@@ -50,35 +49,35 @@ export default defineConfig({
         /\.vue$/,
         /\.vue\?vue/, // .vue
       ],
-      imports: ['vue', 'vue-router'],
+      imports: ["vue", "vue-router"],
       dts: true,
       eslintrc: {
         enabled: false, // Default `false`
-        filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+        filepath: "./.eslintrc-auto-import.json", // Default `./.eslintrc-auto-import.json`
         globalsPropValue: true,
       },
     }),
     Components({
-      dts: 'src/auto-import.d.ts',
-      extensions: ['vue'],
+      dts: "src/auto-import.d.ts",
+      extensions: ["vue"],
     }),
     Icons({ autoInstall: true }),
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
   server: {
-    host: '127.0.0.1',
+    host: "127.0.0.1",
     port: 3000,
     proxy: {
-      '/api': {
+      "/api": {
         // target: 'http://10.16.20.4:8080', //实际请求地址
-        target: 'http://10.12.146.67:8080', //实际请求地址
+        target: "http://10.12.146.67:8080", //实际请求地址
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
-})
+});

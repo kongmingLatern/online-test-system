@@ -1,12 +1,12 @@
-import Column from './Column'
+import Column from "./Column";
 
-import Checkbox from './Checkbox'
+import Checkbox from "./Checkbox";
 
-import Radio from './Radio'
+import Radio from "./Radio";
 
-import Judge from './Judge'
+import Judge from "./Judge";
 
-import Task from './Task'
-import Match from './Match'
+import Task from "./Task";
+import Match from "./Match";
 
-export { Column, Checkbox, Radio, Judge, Task, Match }
+export { Column, Checkbox, Radio, Judge, Task, Match };

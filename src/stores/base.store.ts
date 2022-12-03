@@ -1,22 +1,18 @@
-import { defineStore } from 'pinia'
-import http from '../api/http'
+import { defineStore } from "pinia";
+import http from "../api/http";
 
-const getBaseListPath = '/base/list'
+const getBaseListPath = "/base/list";
 
-const getBasePagePath = '/base/page'
+const getBasePagePath = "/base/page";
 
-export const useBase = defineStore('base', {
+export const useBase = defineStore("base", {
   state: () => ({
     bases: [] as any[],
     baseList: [] as any[],
   }),
 
   actions: {
-    async getBasesByCurrentPage(
-      pageSize,
-      currentPage,
-      subjectId?
-    ) {
+    async getBasesByCurrentPage(pageSize, currentPage, subjectId?) {
       try {
         const res = await http.get(getBasePagePath, {
           params: {
@@ -24,30 +20,25 @@ export const useBase = defineStore('base', {
             pageSize,
             subjectId,
           },
-        })
-        this.bases = []
+        });
+        this.bases = [];
 
-        res.data.records.forEach(record => {
-          const {
-            baseId,
-            subjectName,
-            teacherName,
-            createUser,
-            baseTitle,
-          } = record
+        res.data.records.forEach((record) => {
+          const { baseId, subjectName, teacherName, createUser, baseTitle } =
+            record;
           this.bases.push({
             baseId,
             baseTitle,
             subjectName,
             teacherName,
             createUser,
-          })
-        })
+          });
+        });
 
-        return [this.bases, res.data.total]
+        return [this.bases, res.data.total];
       } catch (error) {
         // 让表单组件显示错误
-        return [this.baseList, 0]
+        return [this.baseList, 0];
       }
     },
     async getBaseList(subjectId: string) {
@@ -56,14 +47,14 @@ export const useBase = defineStore('base', {
           params: {
             subjectId,
           },
-        })
-        res.data.forEach(item => {
-          this.baseList.push(item)
-        })
-        return [this.baseList, '获取成功']
+        });
+        res.data.forEach((item) => {
+          this.baseList.push(item);
+        });
+        return [this.baseList, "获取成功"];
       } catch (e) {
-        return [this.baseList, '题库获取失败']
+        return [this.baseList, "题库获取失败"];
       }
     },
   },
-})
+});

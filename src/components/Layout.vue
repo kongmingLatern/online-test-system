@@ -1,9 +1,7 @@
 <template>
   <a-layout>
     <a-layout>
-      <a-layout-header
-        :style="{ background: '#fff', padding: 0 }"
-      >
+      <a-layout-header :style="{ background: '#fff', padding: 0 }">
         <Header data-test="header" />
       </a-layout-header>
       <a-layout>
@@ -39,32 +37,32 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
-import { reactive, watch } from 'vue'
-import AdminAside from '@/components/admin/AdminAside.vue'
+import { reactive, watch } from "vue";
+import AdminAside from "@/components/admin/AdminAside.vue";
 const state = reactive({
   collapsed: false,
-  selectedKeys: ['studentInfoUpload'],
-  openKeys: ['student'],
-  preOpenKeys: ['sub1'],
-})
+  selectedKeys: ["studentInfoUpload"],
+  openKeys: ["student"],
+  preOpenKeys: ["sub1"],
+});
 watch(
   () => state.openKeys,
   (_val, oldVal) => {
-    state.preOpenKeys = oldVal
+    state.preOpenKeys = oldVal;
   }
-)
+);
 
 const onCollapse = (collapsed: boolean, type: string) => {
-  console.log(collapsed, type)
-}
+  console.log(collapsed, type);
+};
 
 const onOpenChange = (openKeys: string[]) => {
-  console.log(openKeys)
-}
+  console.log(openKeys);
+};
 
 const onBreakpoint = (broken: boolean) => {
-  console.log(broken)
-}
+  console.log(broken);
+};
 </script>
 <style>
 #components-layout-demo-responsive .logo {
@@ -81,7 +79,7 @@ const onBreakpoint = (broken: boolean) => {
   background: #fff;
 }
 
-[data-theme='dark'] .site-layout-sub-header-background {
+[data-theme="dark"] .site-layout-sub-header-background {
   background: #141414;
 }
 </style>

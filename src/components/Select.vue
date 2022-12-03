@@ -9,23 +9,23 @@
   ></a-select>
 </template>
 <script lang="ts" setup>
-import { getBasesByCurrentPage } from '@/api/request'
-import { setReactiveValue } from '@/utils'
-import { onMounted, reactive, ref, watchEffect } from 'vue'
+import { getBasesByCurrentPage } from "@/api/request";
+import { setReactiveValue } from "@/utils";
+import { onMounted, reactive, ref, watchEffect } from "vue";
 
 const value = ref<Record<string, any>>({
-  value: '',
-  baseId: '',
-})
-const totalPage = ref<number | undefined>()
-const loading = ref<boolean>(false)
+  value: "",
+  baseId: "",
+});
+const totalPage = ref<number | undefined>();
+const loading = ref<boolean>(false);
 
-const selectBaseId = ref<string>('')
+const selectBaseId = ref<string>("");
 
 const emits = defineEmits<{
-  (event: 'change', value: string): void
-}>()
-const options = reactive<any[]>([])
+  (event: "change", value: string): void;
+}>();
+const options = reactive<any[]>([]);
 onMounted(async () => {
   const res = await getBasesByCurrentPage(
     options as any,
@@ -33,20 +33,20 @@ onMounted(async () => {
     10,
     totalPage,
     loading
-  )
+  );
   if (Array.isArray(res)) {
-    value.value = setReactiveValue(res)
+    value.value = setReactiveValue(res);
 
-    selectBaseId.value = value.value[0].baseId
+    selectBaseId.value = value.value[0].baseId;
   }
-})
+});
 
 watchEffect(() => {
-  emits('change', selectBaseId.value)
-})
+  emits("change", selectBaseId.value);
+});
 
-const handleChange = value => {
-  const { baseId } = value.option
-  selectBaseId.value = baseId
-}
+const handleChange = (value) => {
+  const { baseId } = value.option;
+  selectBaseId.value = baseId;
+};
 </script>

@@ -1,15 +1,7 @@
 <template>
-  <a-carousel
-    arrows
-    :after-change="onChange"
-    data-test="carousel"
-    mt-10
-  >
+  <a-carousel arrows :after-change="onChange" data-test="carousel" mt-10>
     <template #prevArrow>
-      <div
-        class="custom-slick-arrow"
-        style="left: 10px; z-index: 1"
-      >
+      <div class="custom-slick-arrow" style="left: 10px; z-index: 1">
         <left-circle-outlined />
       </div>
     </template>
@@ -41,13 +33,10 @@
   </a-carousel>
 </template>
 <script lang="ts" setup>
-import {
-  LeftCircleOutlined,
-  RightCircleOutlined,
-} from '@ant-design/icons-vue'
+import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons-vue";
 const onChange = (current: number) => {
-  console.log(current)
-}
+  console.log(current);
+};
 </script>
 <style scoped>
 .ant-carousel :deep(.slick-slide) {

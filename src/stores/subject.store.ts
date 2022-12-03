@@ -1,9 +1,9 @@
-import { defineStore } from 'pinia'
-import http from '../api/http'
+import { defineStore } from "pinia";
+import http from "../api/http";
 
-const requestPath = '/subject/list'
+const requestPath = "/subject/list";
 
-export const useSubject = defineStore('subject', {
+export const useSubject = defineStore("subject", {
   state: () => ({
     subjectList: [] as any[],
   }),
@@ -11,18 +11,18 @@ export const useSubject = defineStore('subject', {
   actions: {
     async getSubjectList() {
       try {
-        const res = await http.get(requestPath)
-        res.data.forEach(item => {
-          const { subjectId, subjectName } = item
+        const res = await http.get(requestPath);
+        res.data.forEach((item) => {
+          const { subjectId, subjectName } = item;
           this.subjectList.push({
             subjectId,
             subjectName,
-          })
-        })
-        return [this.subjectList, '获取成功']
+          });
+        });
+        return [this.subjectList, "获取成功"];
       } catch (e) {
-        return [[], '科目获取失败']
+        return [[], "科目获取失败"];
       }
     },
   },
-})
+});

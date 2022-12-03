@@ -8,12 +8,7 @@
 
       <!-- 导航 -->
       <template #nav>
-        <Nav
-          data-test="radioNav"
-          flex="~"
-          justify="between"
-          mb-3
-        >
+        <Nav data-test="radioNav" flex="~" justify="between" mb-3>
           <template #breadcrumb>
             <BreadCrumb />
           </template>
@@ -43,36 +38,27 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  onMounted,
-  provide,
-  reactive,
-  ref,
-} from 'vue'
-import {
-  finishQuestionForm,
-  removeQuestion,
-} from '../../api/question'
-import { getQuestionByCurrentPage } from '@/api/request'
-import type { Radio } from '@/utils'
+import { computed, onMounted, provide, reactive, ref } from "vue";
+import { finishQuestionForm, removeQuestion } from "../../api/question";
+import { getQuestionByCurrentPage } from "@/api/request";
+import type { Radio } from "@/utils";
 
-let data = reactive<Radio[]>([])
-const totalPage = ref<number>()
-const loading = ref<boolean>(false)
-const current = ref<number>(1)
-const isShow = ref<boolean>(false)
-const pageSize = ref<number>(10)
+let data = reactive<Radio[]>([]);
+const totalPage = ref<number>();
+const loading = ref<boolean>(false);
+const current = ref<number>(1);
+const isShow = ref<boolean>(false);
+const pageSize = ref<number>(10);
 
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,
   pageSize: pageSize.value,
-}))
+}));
 
 const addRadio = () => {
-  isShow.value = true
-}
+  isShow.value = true;
+};
 
 onMounted(async () => {
   await getQuestionByCurrentPage(
@@ -82,14 +68,12 @@ onMounted(async () => {
     totalPage,
     1,
     loading
-  )
-})
+  );
+});
 
-const changePage: (
-  pagination: any
-) => Promise<void> = async pagination => {
-  pagination.current = pagination.current
-  current.value = pagination.current
+const changePage: (pagination: any) => Promise<void> = async (pagination) => {
+  pagination.current = pagination.current;
+  current.value = pagination.current;
 
   getQuestionByCurrentPage(
     data,
@@ -98,18 +82,18 @@ const changePage: (
     totalPage,
     1,
     loading
-  )
-}
+  );
+};
 
-provide('columnSort', 'question')
-provide('title', '添加单选题')
-provide('isShow', isShow)
-provide('removeItem', removeQuestion)
-provide('loading', loading)
-provide('data', data)
-provide('finish', finishQuestionForm)
-provide('pagination', pagination)
-provide('change', changePage)
+provide("columnSort", "question");
+provide("title", "添加单选题");
+provide("isShow", isShow);
+provide("removeItem", removeQuestion);
+provide("loading", loading);
+provide("data", data);
+provide("finish", finishQuestionForm);
+provide("pagination", pagination);
+provide("change", changePage);
 </script>
 
 <style scoped></style>

@@ -23,10 +23,7 @@
       </template>
       成绩管理
     </a-menu-item>
-    <a-menu-item
-      key="personal"
-      @click="goRouter('/personal')"
-    >
+    <a-menu-item key="personal" @click="goRouter('/personal')">
       <template #icon>
         <UserOutlined />
       </template>
@@ -35,18 +32,18 @@
   </a-menu>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 import {
   HomeOutlined,
   PaperClipOutlined,
   FileSyncOutlined,
   UserOutlined,
-} from '@ant-design/icons-vue'
-import router from '@/router'
-const current = ref<string[]>(['index'])
+} from "@ant-design/icons-vue";
+import router from "@/router";
+const current = ref<string[]>(["index"]);
 const goRouter = (path: string) => {
-  router.push('/home' + path)
-}
+  router.push("/home" + path);
+};
 </script>
 
 <style scoped>

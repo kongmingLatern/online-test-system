@@ -24,61 +24,47 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  onMounted,
-  provide,
-  reactive,
-  ref,
-} from 'vue'
-import { getBasesByCurrentPage } from '@/api/request'
-import type { Task } from '@/utils'
-let data = reactive<Task[]>([])
-const totalPage = ref<number>()
-const current = ref<number>(1)
-const pageSize = ref<number>(10)
-const loading = ref<boolean>(false)
-const isShow = ref<boolean>(false)
-const impShow = ref<boolean>(false)
+import { computed, onMounted, provide, reactive, ref } from "vue";
+import { getBasesByCurrentPage } from "@/api/request";
+import type { Task } from "@/utils";
+let data = reactive<Task[]>([]);
+const totalPage = ref<number>();
+const current = ref<number>(1);
+const pageSize = ref<number>(10);
+const loading = ref<boolean>(false);
+const isShow = ref<boolean>(false);
+const impShow = ref<boolean>(false);
 
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,
   pageSize: pageSize.value,
-}))
+}));
 
 onMounted(async () => {
-  await getBasesByCurrentPage(
-    data,
-    1,
-    pageSize.value,
-    totalPage,
-    loading
-  )
-})
+  await getBasesByCurrentPage(data, 1, pageSize.value, totalPage, loading);
+});
 
-const changePage: (
-  pagination: any
-) => Promise<void> = async pagination => {
-  pagination.current = pagination.current
-  current.value = pagination.current
-  data.length = 0
+const changePage: (pagination: any) => Promise<void> = async (pagination) => {
+  pagination.current = pagination.current;
+  current.value = pagination.current;
+  data.length = 0;
   getBasesByCurrentPage(
     data,
     current.value,
     pageSize.value,
     totalPage,
     loading
-  )
-}
+  );
+};
 
-provide('isShow', isShow)
-provide('impShow', impShow)
-provide('columnSort', 'task')
-provide('data', data)
-provide('loading', loading)
-provide('pagination', pagination)
-provide('change', changePage)
+provide("isShow", isShow);
+provide("impShow", impShow);
+provide("columnSort", "task");
+provide("data", data);
+provide("loading", loading);
+provide("pagination", pagination);
+provide("change", changePage);
 </script>
 
 <style scoped></style>
