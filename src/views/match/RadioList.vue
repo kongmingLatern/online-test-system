@@ -20,7 +20,6 @@
 const props = defineProps<{
   data: any[]
 }>()
-console.log('单选题', props.data)
 const emits = defineEmits<{
   (event: 'selected', ...args: any[]): void
 }>()

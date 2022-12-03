@@ -25,7 +25,6 @@ const props = defineProps<{
 const handleClick = e => {
   console.log(props.data)
 }
-console.log('多选题', props.data)
 </script>
 
 <style scoped></style>

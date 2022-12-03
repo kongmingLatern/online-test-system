@@ -20,7 +20,6 @@
 const props = defineProps<{
   data: any[]
 }>()
-console.log('单选题', props.data)
 
 const handleClick = (e: any) => {
   console.log(props.data)

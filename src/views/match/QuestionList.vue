@@ -1,5 +1,5 @@
 <template>
-  <div class="question-container">
+  <div class="question-container" data-test="questionList">
     <h1 text-center>
       常熟理工学院 XXX 学院 马克思主义思想道德期末考试试卷
     </h1>
@@ -1580,7 +1580,7 @@ const judgeList = computed(() => {
 })
 
 mitt.on('finishTask', () => {
-  console.log('finishTask',questionList)
+  console.log('finishTask', questionList)
 })
 </script>
 
