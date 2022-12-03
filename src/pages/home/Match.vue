@@ -1,5 +1,5 @@
 <template>
-  <div flex>
+  <div flex data-test="match">
     <QuestionList pl-10 mt-5 border-r-dashed />
     <MatchInfo />
   </div>
