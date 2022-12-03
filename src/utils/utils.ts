@@ -80,7 +80,6 @@ export function setReactiveValue(arr: any[]): any[] {
 export const getValueByObject = (formState, key) => {
   const obj: any[] = []
   const arr = formState[key]
-  console.log(arr)
   arr.forEach(item => {
     obj.push(item.values)
   })
