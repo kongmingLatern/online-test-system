@@ -87,6 +87,9 @@ import {
   UserOutlined,
   LockOutlined,
 } from '@ant-design/icons-vue'
+import { useLogin } from '@/stores/login.store'
+import { message } from 'ant-design-vue'
+import router from '@/router'
 interface FormState {
   username: string
   password: string
@@ -95,8 +98,22 @@ const formState = reactive<FormState>({
   username: '',
   password: '',
 })
-const onFinish = (values: any) => {
-  console.log('Success:', values)
+const store = useLogin()
+const onFinish = async (values: any) => {
+  const { username, password } = values
+  const [res, isSuccess] = await store.login(
+    username,
+    password
+  )
+  if (isSuccess) {
+    message.success('登录成功')
+    store.setLocalStorage('username', res.username)
+    setTimeout(() => {
+      router.push('/home')
+    }, 1000)
+  } else {
+    message.error('登录失败')
+  }
 }
 
 const onFinishFailed = (errorInfo: any) => {
