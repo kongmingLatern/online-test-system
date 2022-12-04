@@ -18,8 +18,21 @@
       </template>
       <a-card-meta pl-5>
         <template #title>
-          <div text-center font-semibold text-xl>
+          <div
+            v-if="isBase === 'true'"
+            text-center
+            font-semibold
+            text-xl
+          >
             科目： {{ item.baseTitle }}
+          </div>
+          <div
+            v-if="isBase === 'false'"
+            text-center
+            font-semibold
+            text-xl
+          >
+            科目： {{ item.taskName }}
           </div>
         </template>
         <template #description>
@@ -56,15 +69,15 @@
         </template>
       </a-card-meta>
     </a-card>
-    <Modal width="100%" isMatch>
+    <Modal width="100%" isMatch v-if="isBase === 'false'">
       <template #modalContent>
         <Rules class="font" text="lg" px-10>
           <template #matchInfo>
             <p text="center xl">
-              当前考试：{{ currentMatch.title }}
+              当前考试：{{ currentMatch.taskName }}
             </p>
             <p text="center xl">
-              考试时间：{{ currentMatch.taskTime }}
+              考试时间：{{ currentMatch.taskStartToEnd }}
             </p>
             <a-divider />
           </template>
@@ -100,7 +113,7 @@
               进入考试
             </a-button>
             <a-button
-              v-if="isBase === 'true'"
+              v-else
               class="button-green"
               h-15
               w-60
@@ -118,6 +131,7 @@
 
 <script setup lang="ts">
 import router from '@/router'
+import { useMatch } from '@/stores/match.store'
 import Rules from '@/views/home/Rules.vue'
 import { provide, reactive, ref } from 'vue'
 
@@ -127,13 +141,11 @@ const props = defineProps<{
 }>()
 const comShow = ref<boolean>(false)
 const currentMatch = reactive<Record<string, any>>({})
-
-provide('title', '进入考试')
-provide('comShow', comShow)
 const taskPassword = ref<string>('')
-
+const store = useMatch()
 const showModal = matchId => {
   comShow.value = true
+  console.log(props.cardList)
   // NOTE: 获取到当前的考试信息
   props.cardList!.find(item => {
     if (item.matchId === matchId) {
@@ -149,9 +161,28 @@ const showModal = matchId => {
   })
   console.log(currentMatch)
 }
-const goTask = matchId => {
-  // console.log(matchId)
-
+const goTask = async matchId => {
+  // NOTE:判断当前的考试码是否正确
+  const [res, num] = await store.startMatch(
+    matchId,
+    taskPassword.value
+  )
+  // NOTE: 题目信息
+  localStorage.setItem(
+    'radioNumber',
+    num.questionCount.radio
+  )
+  localStorage.setItem(
+    'checkboxNumber',
+    num.questionCount.selected
+  )
+  localStorage.setItem(
+    'judgeNumber',
+    num.questionCount.judge
+  )
+  // NOTE: 考试时间
+  localStorage.setItem('limitTime', currentMatch.limitTime)
+  localStorage.setItem('match', JSON.stringify(res))
   router.push({
     path: '/match',
     query: {
@@ -159,6 +190,8 @@ const goTask = matchId => {
     },
   })
 }
+provide('title', '进入考试')
+provide('comShow', comShow)
 </script>
 
 <style scoped>
