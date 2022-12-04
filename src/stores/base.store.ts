@@ -59,9 +59,7 @@ export const useBase = defineStore('base', {
             subjectId,
           },
         })
-        res.data.forEach(item => {
-          this.baseList.push(item)
-        })
+        Object.assign(this.baseList, {}, res.data)
         return [this.baseList, '获取成功']
       } catch (e) {
         return [this.baseList, '题库获取失败']
