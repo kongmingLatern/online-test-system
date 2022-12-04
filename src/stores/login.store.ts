@@ -12,10 +12,13 @@ export const useLogin = defineStore('login', {
           username,
           password,
         })
-        return [res.data, '登录成功']
+        return [res.data, true]
       } catch (error) {
-        return [[], '登录失败']
+        return [[], false]
       }
+    },
+    setLocalStorage(key: string, value: string) {
+      localStorage.setItem(key, value)
     },
   },
 })
