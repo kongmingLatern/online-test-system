@@ -26,6 +26,7 @@ export const useTask = defineStore('task', {
         this.taskData = []
         res.data.records.forEach(record => {
           const {
+            taskId,
             taskTime,
             taskType,
             taskName,
@@ -34,6 +35,7 @@ export const useTask = defineStore('task', {
             taskPeople,
           } = record
           this.taskData.push({
+            taskId,
             taskTime,
             taskType,
             taskName,
