@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'homeIndex',
-      redirect: '/home',
+      redirect: '/login',
     },
     {
       path: '/home',
@@ -135,6 +135,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => import('@/pages/Login.vue'),
+    },
+    {
+      path: '/success',
+      name: 'success',
+      component: () => import('@/pages/common/Success.vue'),
     },
   ],
 })
