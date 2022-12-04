@@ -1,21 +1,21 @@
-import { useStudent } from "@/stores/student.store";
-import { useQuestion } from "@/stores/question.store";
-import { useTask } from "@/stores/task.store";
-import { useMatch } from "@/stores/match.store";
-import { useGrade } from "@/stores/grade.store";
-import { useTeacher } from "@/stores/teacher.store";
+import { useStudent } from '@/stores/student.store'
+import { useQuestion } from '@/stores/question.store'
+import { useTask } from '@/stores/task.store'
+import { useMatch } from '@/stores/match.store'
+import { useGrade } from '@/stores/grade.store'
+import { useTeacher } from '@/stores/teacher.store'
 import type {
   Teacher,
   Match,
-  Task,
   Student,
   Grade,
   Radio,
   Checkbox,
   Judge,
-} from "@/utils";
-import type { Ref } from "vue";
-import { useBase } from "@/stores/base.store";
+} from '@/utils'
+import type { Ref } from 'vue'
+import { useBase } from '@/stores/base.store'
+// NOTE: 分页获取学生
 export async function getStudentDataByCurrentPage(
   data: Student[],
   currentPage,
@@ -24,21 +24,24 @@ export async function getStudentDataByCurrentPage(
   isLoading: Ref<boolean | undefined>
 ) {
   try {
-    const store = useStudent();
-    isLoading.value = true;
-    const [res, total] = await store.getStudentsByPage(pageSize, currentPage);
+    const store = useStudent()
+    isLoading.value = true
+    const [res, total] = await store.getStudentsByPage(
+      pageSize,
+      currentPage
+    )
 
-    data.length = 0;
-    Object.assign(data, res);
-    isLoading.value = false;
+    data.length = 0
+    Object.assign(data, res)
+    isLoading.value = false
 
-    totalPage.value = total;
-    return data;
+    totalPage.value = total
+    return data
   } catch (error) {
-    return false;
+    return false
   }
 }
-
+// NOTE: 分页获取题目
 export async function getQuestionByCurrentPage(
   data: Radio[] | Checkbox[] | Judge[],
   currentPage,
@@ -48,23 +51,24 @@ export async function getQuestionByCurrentPage(
   isLoading: Ref<boolean | undefined>
 ) {
   try {
-    const store = useQuestion();
-    isLoading.value = true;
-    const [res, total] = await store.getQuestionByCurrentPage(
-      pageSize,
-      currentPage,
-      questionType
-    );
-    data.length = 0;
-    Object.assign(data, res);
-    isLoading.value = false;
-    totalPage.value = total;
-    return data;
+    const store = useQuestion()
+    isLoading.value = true
+    const [res, total] =
+      await store.getQuestionByCurrentPage(
+        pageSize,
+        currentPage,
+        questionType
+      )
+    data.length = 0
+    Object.assign(data, res)
+    isLoading.value = false
+    totalPage.value = total
+    return data
   } catch (error) {
-    return false;
+    return false
   }
 }
-
+// NOTE: 分页获取成绩
 export async function getGradeByCurrentPage(
   data: Grade[],
   currentPage,
@@ -74,23 +78,23 @@ export async function getGradeByCurrentPage(
   studentNo?
 ) {
   try {
-    const store = useGrade();
-    isLoading.value = true;
+    const store = useGrade()
+    isLoading.value = true
     const [res, total] = await store.getGradeByCurrentPage(
       pageSize,
       currentPage,
       studentNo
-    );
-    data.length = 0;
-    Object.assign(data, res);
-    isLoading.value = false;
-    totalPage.value = total;
-    return data;
+    )
+    data.length = 0
+    Object.assign(data, res)
+    isLoading.value = false
+    totalPage.value = total
+    return data
   } catch (error) {
-    return false;
+    return false
   }
 }
-
+// NOTE: 分页获取教师
 export async function getTeachersByCurrentPage(
   data: Teacher[],
   currentPage,
@@ -100,23 +104,23 @@ export async function getTeachersByCurrentPage(
   teacherNo?
 ) {
   try {
-    const store = useTeacher();
-    isLoading.value = true;
+    const store = useTeacher()
+    isLoading.value = true
     const [res, total] = await store.getTeachersByPage(
       pageSize,
       currentPage,
       teacherNo
-    );
-    data.length = 0;
-    Object.assign(data, res);
-    isLoading.value = false;
-    totalPage.value = total;
-    return data;
+    )
+    data.length = 0
+    Object.assign(data, res)
+    isLoading.value = false
+    totalPage.value = total
+    return data
   } catch (error) {
-    return false;
+    return false
   }
 }
-
+// NOTE: 分页获取题库
 export async function getBasesByCurrentPage(
   data: any[],
   currentPage,
@@ -126,23 +130,23 @@ export async function getBasesByCurrentPage(
   subjectId?
 ) {
   try {
-    const store = useBase();
-    isLoading.value = true;
+    const store = useBase()
+    isLoading.value = true
     const [res, total] = await store.getBasesByCurrentPage(
       pageSize,
       currentPage,
       subjectId
-    );
-    data.length = 0;
-    Object.assign(data, res);
-    isLoading.value = false;
-    totalPage.value = total;
-    return data;
+    )
+    data.length = 0
+    Object.assign(data, res)
+    isLoading.value = false
+    totalPage.value = total
+    return data
   } catch (error) {
-    return false;
+    return false
   }
 }
-
+// NOTE: 分页获取考试
 export async function getMatchsByCurrentPage(
   data: Match[],
   currentPage,
@@ -152,23 +156,23 @@ export async function getMatchsByCurrentPage(
   studentNo?
 ) {
   try {
-    const store = useMatch();
-    isLoading.value = true;
+    const store = useMatch()
+    isLoading.value = true
     const [res, total] = await store.getMatchsByPage(
       pageSize,
       currentPage,
       studentNo
-    );
-    data.length = 0;
-    Object.assign(data, res);
-    isLoading.value = false;
-    totalPage.value = total;
-    return data;
+    )
+    data.length = 0
+    Object.assign(data, res)
+    isLoading.value = false
+    totalPage.value = total
+    return data
   } catch (error) {
-    return false;
+    return false
   }
 }
-
+// NOTE: 分页获取试卷
 export async function getTasksByCurrentPage(
   data: Radio[] | Checkbox[] | Judge[],
   currentPage,
@@ -178,19 +182,19 @@ export async function getTasksByCurrentPage(
   taskName?: string
 ) {
   try {
-    const store = useTask();
-    isLoading.value = true;
+    const store = useTask()
+    isLoading.value = true
     const [res, total] = await store.getTasksByCurrentPage(
       pageSize,
       currentPage,
       taskName
-    );
-    data.length = 0;
-    Object.assign(data, res);
-    isLoading.value = false;
-    totalPage.value = total;
-    return data;
+    )
+    data.length = 0
+    Object.assign(data, res)
+    isLoading.value = false
+    totalPage.value = total
+    return data
   } catch (error) {
-    return false;
+    return false
   }
 }

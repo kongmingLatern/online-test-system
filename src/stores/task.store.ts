@@ -1,15 +1,20 @@
-import { defineStore } from "pinia";
-import http from "../api/http";
+import { defineStore } from 'pinia'
+import http from '../api/http'
 
-const getAllTaskPath = "/task/getAll";
+const getAllTaskPath = '/task/getAll'
 
-export const useTask = defineStore("task", {
+export const useTask = defineStore('task', {
   state: () => ({
     taskData: [] as any[],
   }),
 
   actions: {
-    async getTasksByCurrentPage(pageSize, currentPage, taskName?) {
+    // NOTE: 分页查询所有试卷
+    async getTasksByCurrentPage(
+      pageSize,
+      currentPage,
+      taskName?
+    ) {
       try {
         const res = await http.get(getAllTaskPath, {
           params: {
@@ -17,9 +22,9 @@ export const useTask = defineStore("task", {
             pageSize,
             taskName,
           },
-        });
-        this.taskData = [];
-        res.data.records.forEach((record) => {
+        })
+        this.taskData = []
+        res.data.records.forEach(record => {
           const {
             taskTime,
             taskType,
@@ -27,7 +32,7 @@ export const useTask = defineStore("task", {
             limitTime,
             taskStartToEnd,
             taskPeople,
-          } = record;
+          } = record
           this.taskData.push({
             taskTime,
             taskType,
@@ -35,24 +40,28 @@ export const useTask = defineStore("task", {
             limitTime,
             taskStartToEnd,
             taskPeople,
-          });
-        });
-        return [this.taskData, res.data.total];
+          })
+        })
+        return [this.taskData, res.data.total]
       } catch (e) {
-        return "获取失败";
+        return '获取失败'
       }
     },
+    // NOTE: 添加试卷
     async addTask(values) {
       try {
-        const res: Record<string, any> = await http.post("/task/add", values);
+        const res: Record<string, any> = await http.post(
+          '/task/add',
+          values
+        )
         if (!res.msg) {
-          return res.data;
+          return res.data
         } else {
-          return Promise.reject(res.msg);
+          return Promise.reject(res.msg)
         }
       } catch (error) {
-        return error;
+        return error
       }
     },
   },
-});
+})

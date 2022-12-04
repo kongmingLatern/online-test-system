@@ -1,6 +1,7 @@
 import { message } from 'ant-design-vue'
 import { useBase } from '../stores/base.store'
 
+// NOTE:获取所有题库
 export const getBaseList = async (data: any[]) => {
   const store = useBase()
   try {
