@@ -14,7 +14,7 @@ export const columns = [
   },
   {
     title: '考试时间',
-    dataIndex: 'taskTime',
+    dataIndex: 'taskStartToEnd',
     options,
   },
   {
