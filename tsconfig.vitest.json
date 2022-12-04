@@ -1,6 +1,11 @@
 {
   "extends": "./tsconfig.app.json",
   "exclude": [],
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.json",
+    "src/**/*.store.spec.ts"
+  ],
   "compilerOptions": {
     "composite": true,
     "lib": [],
