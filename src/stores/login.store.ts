@@ -6,7 +6,7 @@ export const useLogin = defineStore('login', {
   }),
 
   actions: {
-    async login(username, password) {
+    async login(username: string, password: string) {
       try {
         const res = await http.post('/login', {
           username,
