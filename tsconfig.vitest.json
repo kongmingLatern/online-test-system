@@ -4,7 +4,8 @@
   "include": [
     "src/**/*.spec.ts",
     "src/**/*.json",
-    "src/**/*.store.spec.ts"
+    "src/**/*.store.spec.ts",
+    "src/**/*.store.ts"
   ],
   "compilerOptions": {
     "composite": true,
