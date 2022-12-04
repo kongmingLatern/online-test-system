@@ -120,7 +120,7 @@ export const useMatch = defineStore('match', {
             },
           })
         }
-        return res.data
+        return [res.data, res.map]
       } catch (error) {
         return '系统发生错误'
       }
