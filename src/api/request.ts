@@ -198,3 +198,25 @@ export async function getTasksByCurrentPage(
     return false
   }
 }
+
+export async function getSelfMatch(data) {
+  try {
+    const store = useMatch()
+    const res = await store.getSelfMatch()
+    Object.assign(data, res)
+    return data
+  } catch (error) {
+    return false
+  }
+}
+
+export async function getSelfGrade(data) {
+  try {
+    const store = useMatch()
+    const res = await store.getSelfGrade()
+    Object.assign(data, res)
+    return data
+  } catch (error) {
+    return false
+  }
+}
