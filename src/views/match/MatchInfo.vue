@@ -15,8 +15,15 @@
     <div flex="~ column" justify="center">
       <a-space flex="~ col">
         <user-outlined />
-        <span>用户名称</span>
-        <p>剩余时间：120'' 0'</p>
+        <span>{{ username }}</span>
+        <p>
+          剩余时间：{{
+            Math.floor(limitTime / 60000) +
+            "''" +
+            Math.floor(limitTime % 60) +
+            "'"
+          }}'
+        </p>
       </a-space>
     </div>
 
@@ -82,23 +89,53 @@
 
 <script setup lang="ts">
 import { UserOutlined } from '@ant-design/icons-vue'
-import type { AnchorProps } from 'ant-design-vue'
-import { reactive } from 'vue'
+import { message, type AnchorProps } from 'ant-design-vue'
+import { onMounted, reactive, ref } from 'vue'
 import mitt from '@/utils/mitt'
-const dataNumber = reactive({
-  radio: 40,
-  checkbox: 30,
-  judge: 30,
+import { useRoute } from 'vue-router'
+const route = useRoute()
+
+const username = localStorage.getItem('username')
+let limitTime = ref<number>(
+  Number.parseInt(
+    localStorage.getItem('limitTime') as string
+  ) *
+    60 *
+    1000 ?? 0
+)
+
+onMounted(() => {
+  setInterval(() => {
+    limitTime.value--
+    if (limitTime.value === 0) {
+      // 完成考试
+      finishTask()
+    } else if (limitTime.value === 300) {
+      message.warn('考试还有5分钟结束')
+    }
+  }, 1000)
+})
+let dataNumber = reactive({
+  radio:
+    Number.parseInt(
+      localStorage.getItem('radioNumber') as string
+    ) ?? 0,
+  checkbox:
+    Number.parseInt(
+      localStorage.getItem('checkboxNumber') as string
+    ) ?? 0,
+  judge:
+    Number.parseInt(
+      localStorage.getItem('judgeNumber') as string
+    ) ?? 30,
 })
 const handleClick: AnchorProps['onClick'] = (e, link) => {
   e.preventDefault()
-  console.log(link)
 }
 const finishTask = () => {
-  mitt.emit('finishTask')
+  mitt.emit('finishTask', route.query.matchId)
 }
 </script>
-
 <style lang="scss" scoped>
 .match-container {
   width: 20vw;
