@@ -3,11 +3,11 @@
     <p :id="'question' + (index + 1)">
       {{ index + 1 }}.{{ item.questionList }}
     </p>
-    <a-radio-group v-model:value="item.questionCorrectList">
+    <a-radio-group v-model:value="item.questionAnswer">
       <a-radio
         v-for="(list, index) in item.questionAnswerList"
         :value="item.questionAnswerList[index]"
-        @change="handleClick"
+        @change="handleClick(item, index)"
       >
         {{ String.fromCharCode(index + 65) }}.
         {{ list }}
@@ -24,8 +24,11 @@ const emits = defineEmits<{
   (event: 'selected', ...args: any[]): void
 }>()
 
-const handleClick = (e: any) => {
-  emits('selected', e)
+const handleClick = (item, index) => {
+  console.log(props.data)
+  // item.questionCorrectList = [item.questionCorrectList]
+  // console.log(item)
+  emits('selected', item, index)
 }
 </script>
 
