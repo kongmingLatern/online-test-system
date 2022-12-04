@@ -8,7 +8,6 @@ import com.cle.onlinetestsystem.pojo.Task;
 import com.cle.onlinetestsystem.service.MatchService;
 import com.cle.onlinetestsystem.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -28,7 +27,7 @@ public class RedisScheduling {
 
     @Autowired
     private TaskService taskService;
-    @Scheduled(fixedDelay = 5*60*1000)
+//    @Scheduled(fixedDelay = 5*60*1000)
     public void computeGradeFromRedis(){
         Set<Long> matchCache = redisUtils.getHashKeys(MATCH_CACHE);
         matchCache.parallelStream().forEach(matchId->{

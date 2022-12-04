@@ -13,4 +13,5 @@ public class LoginDto {
     private String username;//用户名
     private String password;//密码
     private Integer studentOrTeacher;//1为老师0为学生
+    private String name;//名字
 }

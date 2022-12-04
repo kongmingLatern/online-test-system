@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cle.onlinetestsystem.Utils.MyUtils;
 import com.cle.onlinetestsystem.Utils.RedisUtils;
+import com.cle.onlinetestsystem.common.BaseContext;
 import com.cle.onlinetestsystem.dto.MatchDto;
 import com.cle.onlinetestsystem.dto.QuestionDto;
 import com.cle.onlinetestsystem.pojo.*;
@@ -13,7 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -183,7 +186,19 @@ public class MatchController {
     @GetMapping("/startMatch")
     public R<List<QuestionDto>> startMatch(Long matchId,String matchPassword){
         List<QuestionDto> questionList = matchService.startMatch(matchId,matchPassword);
-        return R.success(questionList);
+        // 获取完立刻存入redis
+        MatchDto matchDto = new MatchDto();
+        matchDto.setQuestionDtoList(questionList);
+        matchDto.setMatchId(matchId);
+        matchService.saveMatch(matchDto);
+        //获取每个题目的数量
+        Match match = matchService.getById(matchId);
+        Map<String,Integer> questionCount = new HashMap<>();
+        Task task = taskService.getById(match.getTaskId());
+        questionCount.put("radio",task.getRadioNumber());
+        questionCount.put("selected",task.getSelectedNumber());
+        questionCount.put("judge",task.getJudgeNumber());
+        return R.success(questionList).add("questionCount",questionCount);
     }
 
     /**
@@ -206,7 +221,14 @@ public class MatchController {
     @GetMapping("/getMatch")
     public R<List<QuestionDto>> getMatch(Long matchId,String matchPassword){
         List<QuestionDto> questionDtoList = matchService.getMatch(matchId, matchPassword);
-        return R.success(questionDtoList);
+        Match match = matchService.getById(matchId);
+        Map<String,Integer> questionCount = new HashMap<>();
+        Task task = taskService.getById(match.getTaskId());
+        questionCount.put("radio",task.getRadioNumber());
+        questionCount.put("selected",task.getSelectedNumber());
+        questionCount.put("judge",task.getJudgeNumber());
+        return R.success(questionDtoList).add("questionCount",questionCount);
+
     }
 
     /**
@@ -215,20 +237,20 @@ public class MatchController {
      * @return
      */
     @PostMapping("/submit")
-    public R<String> submit(@RequestBody MatchDto matchDto){
+    public R<Double> submit(@RequestBody MatchDto matchDto){
         Double grade = matchService.submit(matchDto);
-        return R.success("分数为"+grade);
+        return R.success(grade);
     }
 
     /**
      * 获取自己的考试
-     * @param studentId
+     * @param
      * @return
      */
     @GetMapping("/getSelfMatch")
-    public R<List<MatchDto>> getSelfMatch(Long studentId){
+    public R<List<MatchDto>> getSelfMatch(){
         LambdaQueryWrapper<Match> matchLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        matchLambdaQueryWrapper.eq(Match::getStudentId,studentId)
+        matchLambdaQueryWrapper.eq(Match::getStudentId,BaseContext.getCurrentId())
                                .eq(Match::getIsEnd,0);
         List<Match> matchList = matchService.list(matchLambdaQueryWrapper);
         List<MatchDto> matchDtoList = matchList.parallelStream().map(match -> {
@@ -239,6 +261,7 @@ public class MatchController {
             matchDto.setLimitTime(task.getLimitTime());
             matchDto.setMatchId(match.getMatchId());
             matchDto.setIsStart(match.getIsStart());
+            matchDto.setTaskStartToEnd(MyUtils.timeConversion(task.getTaskTime(),task.getLimitTime()));
             return matchDto;
         }).collect(Collectors.toList());
         return R.success(matchDtoList);
@@ -246,13 +269,13 @@ public class MatchController {
 
     /**
      * 获取自己考完试的成绩
-     * @param studentId
+     * @param
      * @return
      */
     @GetMapping("/getSelfGrade")
-    public R<List<MatchDto>> getSelfGrade(Long studentId){
+    public R<List<MatchDto>> getSelfGrade(){
         LambdaQueryWrapper<Match> matchLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        matchLambdaQueryWrapper.eq(Match::getStudentId,studentId)
+        matchLambdaQueryWrapper.eq(Match::getStudentId, BaseContext.getCurrentId())
                                .eq(Match::getIsEnd,1);
         List<Match> matchList = matchService.list(matchLambdaQueryWrapper);
         List<MatchDto> collect = matchList.parallelStream().map(match -> {

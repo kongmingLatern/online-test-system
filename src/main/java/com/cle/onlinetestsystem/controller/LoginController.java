@@ -43,6 +43,7 @@ public class LoginController {
                 loginDto.setPassword(null);
                 loginDto.setId(student.getStudentId());
                 loginDto.setStudentOrTeacher(0);
+                loginDto.setName(student.getStudentName());
                 session.setAttribute("student",loginDto.getId());
             }
             else {
@@ -60,6 +61,7 @@ public class LoginController {
                     loginDto.setPassword(null);
                     loginDto.setId(teacher.getTeacherId());
                     loginDto.setStudentOrTeacher(1);
+                    loginDto.setName(teacher.getTeacherName());
                     session.setAttribute("teacher",loginDto.getId());
                 }
                 else {
