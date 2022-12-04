@@ -3,6 +3,7 @@ import http from '../api/http'
 
 const getBasePagePath = '/base/page'
 const getBaseListPath = '/base/list'
+const removeBasePath = '/base/delete'
 
 export const useBase = defineStore('base', {
   state: () => ({
@@ -11,6 +12,7 @@ export const useBase = defineStore('base', {
   }),
 
   actions: {
+    // NOTE:分页获取题库
     async getBasesByCurrentPage(
       pageSize,
       currentPage,
@@ -49,6 +51,7 @@ export const useBase = defineStore('base', {
         return [this.baseList, 0]
       }
     },
+    //NOTE: 获取所有题库列表
     async getBaseList(subjectId?: string) {
       try {
         const res = await http.get(getBaseListPath, {
@@ -62,6 +65,19 @@ export const useBase = defineStore('base', {
         return [this.baseList, '获取成功']
       } catch (e) {
         return [this.baseList, '题库获取失败']
+      }
+    },
+    // NOTE: 删除题库
+    async removeBase(baseId: string) {
+      try {
+        const res = await http.delete(removeBasePath, {
+          params: {
+            baseId,
+          },
+        })
+        return res.data
+      } catch (e) {
+        return '删除失败'
       }
     },
   },
