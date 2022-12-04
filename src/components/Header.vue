@@ -23,18 +23,30 @@
       v-if="isShow === 'true'"
     >
       <user-outlined />
-      用户名称
+      {{ username }}
+
+      <a-button type="primary" ml-4 @click="exit">
+        退出登录
+      </a-button>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
+import router from '@/router'
 import { UserOutlined } from '@ant-design/icons-vue'
 defineProps<{
   text?: string
   isTitle?: string
   isShow?: string
 }>()
+
+const username = localStorage.getItem('username')
+
+const exit = () => {
+  localStorage.clear()
+  router.push('/login')
+}
 </script>
 
 <style scoped>
