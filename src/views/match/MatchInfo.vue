@@ -72,17 +72,17 @@
           </td>
         </tr>
       </table>
-      <div text-center mt-10>
-        <a-button
-          type="danger"
-          class="button-green"
-          w-50
-          rounded
-          @click="finishTask"
-        >
-          提交试卷
-        </a-button>
-      </div>
+    </div>
+    <div text-center mt-10>
+      <a-button
+        type="danger"
+        class="button-green"
+        w-50
+        rounded
+        @click="finishTask"
+      >
+        提交试卷
+      </a-button>
     </div>
   </div>
 </template>
@@ -90,7 +90,7 @@
 <script setup lang="ts">
 import { UserOutlined } from '@ant-design/icons-vue'
 import { message, type AnchorProps } from 'ant-design-vue'
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import mitt from '@/utils/mitt'
 import { useRoute } from 'vue-router'
 const route = useRoute()
@@ -103,17 +103,28 @@ let limitTime = ref<number>(
     60 *
     1000 ?? 0
 )
-
+let timer
+let countTime = ref<number>(0)
 onMounted(() => {
-  setInterval(() => {
+  timer = setInterval(() => {
     limitTime.value--
+    countTime.value++
+    if (countTime.value === 30) {
+      // NOTE: 保存试卷
+      mitt.emit('saveTask', route.query.matchId)
+      countTime.value = 0
+    }
     if (limitTime.value === 0) {
       // 完成考试
       finishTask()
+      message.success('考试时间到，已直接交卷')
     } else if (limitTime.value === 300) {
       message.warn('考试还有5分钟结束')
     }
   }, 1000)
+})
+onUnmounted(() => {
+  clearInterval(timer)
 })
 let dataNumber = reactive({
   radio:

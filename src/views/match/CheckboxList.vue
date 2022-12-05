@@ -1,9 +1,10 @@
 <template>
-  <div v-for="(item, index) in data">
+  <div v-for="(item, index) in data" mb-3>
     <p :id="'checkbox' + (index + 1)">
       {{ index + 1 }}.{{ item.questionList }}
     </p>
     <a-checkbox-group
+      flex="~ col"
       v-model:value="item.questionCorrectList"
     >
       <a-checkbox
@@ -27,4 +28,8 @@ const handleClick = e => {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.ant-checkbox-wrapper {
+  margin-bottom: 5px;
+}
+</style>
