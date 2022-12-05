@@ -118,6 +118,7 @@ const loading = inject('loading')
 const pagination = inject('pagination')
 const change: any = inject('change') ?? null
 const removeItem: any = inject('removeItem') ?? null
+const allocation: any = inject('allocation') ?? null
 // const reset: any = inject('resetItem') ?? null
 
 const columns = getColumn(columnSort)
@@ -132,7 +133,9 @@ const deleteItem = record => {
 }
 
 const allocationTask = record => {
-  console.log(record)
+  console.log(allocation)
+
+  allocation(record)
 }
 
 // const resetItem = record => reset(record)
