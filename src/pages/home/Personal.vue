@@ -1,9 +1,15 @@
 <template>
   <Card
+    v-if="cardList.length > 0"
     :cardList="cardList"
     data-test="personal"
     isBase="false"
   />
+  <a-empty v-else>
+    <template #description>
+      <span>暂无考试</span>
+    </template>
+  </a-empty>
 </template>
 
 <script setup lang="ts">
