@@ -2,6 +2,7 @@ package com.cle.onlinetestsystem.Utils;
 
 import com.cle.onlinetestsystem.pojo.Question;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -102,5 +103,10 @@ public class MyUtils {
         });
          string.replace(string.length()-1,string.length(),"]");
          return String.valueOf(string);
+    }
+
+    public static Duration getBetweenTime(LocalDateTime before,LocalDateTime end){
+        Duration between = Duration.between(before, end);
+        return between;
     }
 }

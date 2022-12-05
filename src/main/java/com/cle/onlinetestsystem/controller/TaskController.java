@@ -9,7 +9,6 @@ import com.cle.onlinetestsystem.pojo.Match;
 import com.cle.onlinetestsystem.pojo.R;
 import com.cle.onlinetestsystem.pojo.Task;
 import com.cle.onlinetestsystem.service.MatchService;
-import com.cle.onlinetestsystem.service.QuestionService;
 import com.cle.onlinetestsystem.service.TaskService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @RequestMapping("/task")
 public class TaskController {
-    private final QuestionService questionService;
     private final TaskService taskService;
     private final MatchService matchService;
 

@@ -3,7 +3,6 @@ package com.cle.onlinetestsystem.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cle.onlinetestsystem.Utils.MyUtils;
-import com.cle.onlinetestsystem.Utils.RedisUtils;
 import com.cle.onlinetestsystem.common.BaseContext;
 import com.cle.onlinetestsystem.dto.MatchDto;
 import com.cle.onlinetestsystem.dto.QuestionDto;
@@ -14,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +30,6 @@ public class MatchController {
     private final ClbumService clbumService;
     private final TaskService taskService;
     private final BaseService baseService;
-    private final RedisUtils redisUtils;
     /**
      * 分页查询学生成绩
      *
@@ -151,15 +150,15 @@ public class MatchController {
     @PostMapping("/addClassMatch")
     public R<String> addClassMatch(@RequestBody MatchDto matchDto) {
 //        log.info(matchDto.toString());
+        Task task = taskService.getById(matchDto.getTaskId());
+        if(task.getTaskTime().plusMinutes(task.getLimitTime()).isBefore(LocalDateTime.now())){
+            return R.error("考试过期，不能分配");
+        }
         List<Long> classId = matchDto.getClassIdList();
         classId.parallelStream().forEach(s -> {
             LambdaQueryWrapper<Student> studentLambdaQueryWrapper = new LambdaQueryWrapper<>();
             studentLambdaQueryWrapper.eq(Student::getClassId, s)
                     .select(Student::getStudentId);
-            LambdaQueryWrapper<Task> taskLambdaQueryWrapper = new LambdaQueryWrapper<>();
-            taskLambdaQueryWrapper.eq(Task::getTaskId,matchDto.getTaskId());
-            Task task = taskService.getOne(taskLambdaQueryWrapper);
-            taskLambdaQueryWrapper.eq(Task::getTaskId,matchDto.getTaskId());
             List<Student> list = studentService.list(studentLambdaQueryWrapper);
             List<Match> collect = list.parallelStream().map(student -> {
                 Match match = new Match();
@@ -185,6 +184,14 @@ public class MatchController {
      */
     @GetMapping("/startMatch")
     public R<List<QuestionDto>> startMatch(Long matchId,String matchPassword){
+        Match match = matchService.getById(matchId);
+        Task task = taskService.getById(match.getTaskId());
+        if(!match.getStudentId().equals(BaseContext.getCurrentId())){
+            return R.error("该考试不是你的考试");
+        }
+        if(task.getTaskTime().plusMinutes(task.getLimitTime()).isAfter(LocalDateTime.now())){
+            return R.error("考试已经过期。");
+        }
         List<QuestionDto> questionList = matchService.startMatch(matchId,matchPassword);
         // 获取完立刻存入redis
         MatchDto matchDto = new MatchDto();
@@ -192,9 +199,7 @@ public class MatchController {
         matchDto.setMatchId(matchId);
         matchService.saveMatch(matchDto);
         //获取每个题目的数量
-        Match match = matchService.getById(matchId);
         Map<String,Integer> questionCount = new HashMap<>();
-        Task task = taskService.getById(match.getTaskId());
         questionCount.put("radio",task.getRadioNumber());
         questionCount.put("selected",task.getSelectedNumber());
         questionCount.put("judge",task.getJudgeNumber());
@@ -220,8 +225,11 @@ public class MatchController {
      */
     @GetMapping("/getMatch")
     public R<List<QuestionDto>> getMatch(Long matchId,String matchPassword){
-        List<QuestionDto> questionDtoList = matchService.getMatch(matchId, matchPassword);
         Match match = matchService.getById(matchId);
+        if(!match.getStudentId().equals(BaseContext.getCurrentId())){
+            return R.error("该考试不是你的考试");
+        }
+        List<QuestionDto> questionDtoList = matchService.getMatch(matchId, matchPassword);
         Map<String,Integer> questionCount = new HashMap<>();
         Task task = taskService.getById(match.getTaskId());
         questionCount.put("radio",task.getRadioNumber());
@@ -258,12 +266,14 @@ public class MatchController {
             Task task = taskService.getById(match.getTaskId());
             matchDto.setTaskName(task.getTaskName());
             matchDto.setTaskTime(task.getTaskTime());
-            matchDto.setLimitTime(task.getLimitTime());
+            matchDto.setLimitTime(Math.toIntExact(MyUtils.getBetweenTime(LocalDateTime.now(), task.getTaskTime().plusMinutes(task.getLimitTime())).toMinutes() >= task.getLimitTime() ? task.getLimitTime() : MyUtils.getBetweenTime(LocalDateTime.now(), task.getTaskTime().plusMinutes(task.getLimitTime())).toMinutes()));
             matchDto.setMatchId(match.getMatchId());
             matchDto.setIsStart(match.getIsStart());
             matchDto.setTaskStartToEnd(MyUtils.timeConversion(task.getTaskTime(),task.getLimitTime()));
             return matchDto;
-        }).collect(Collectors.toList());
+        })
+//                .filter(matchDto -> matchDto.getTaskTime().plusMinutes(matchDto.getLimitTime()).isAfter(LocalDateTime.now()))
+                .collect(Collectors.toList());
         return R.success(matchDtoList);
     }
 
@@ -287,8 +297,11 @@ public class MatchController {
             matchDto.setGrade(match.getGrade());
             matchDto.setTaskStartToEnd(MyUtils.timeConversion(task.getTaskTime(), task.getLimitTime()));
             matchDto.setSubjectName(subject.getSubjectName());
+            matchDto.setTaskName(task.getTaskName());
             return matchDto;
         }).collect(Collectors.toList());
         return R.success(collect);
     }
+
 }
+
