@@ -31,6 +31,7 @@ import { computed, nextTick, reactive } from 'vue'
 import mitt from '@/utils/mitt'
 import { useMatch } from '@/stores/match.store'
 import { message } from 'ant-design-vue'
+import { disableContextMenu } from '../../utils/common'
 import router from '@/router'
 const store = useMatch()
 
@@ -55,11 +56,15 @@ const judgeList = computed(() => {
 
 const handleCorrectList = (item, index) => {
   nextTick(() => {
-    console.log(item)
+    // console.log(item)
     item.questionCorrectList = [item.questionAnswer]
-    console.log(questionList)
+    // console.log(questionList)
   })
 }
+
+nextTick(() => {
+  // disableContextMenu()
+})
 
 mitt.on('finishTask', async matchId => {
   console.log(questionList)
@@ -74,10 +79,19 @@ mitt.on('finishTask', async matchId => {
     router.push('/success')
   }, 1000)
 })
+mitt.on('saveTask', async matchId => {
+  console.log(questionList)
+
+  await store.saveMatch(matchId as string, questionList)
+  message.success('自动保存成功')
+})
 </script>
 
 <style lang="scss" scoped>
 .question-container {
   width: 80vw;
+}
+:deep(.ant-checkbox-wrapper + .ant-checkbox-wrapper) {
+  margin-left: 0;
 }
 </style>
