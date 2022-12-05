@@ -1,41 +1,47 @@
-import { defineStore } from "pinia";
-import http from "../api/http";
+import { defineStore } from 'pinia'
+import http from '../api/http'
 
-import { Teacher } from "@/utils";
-export const useTeacher = defineStore("teachers", {
+import { Teacher } from '@/utils'
+export const useTeacher = defineStore('teachers', {
   state: () => ({
     teacherData: [] as Teacher[],
   }),
 
   actions: {
-    async getTeachersByPage(pageSize, currentPage, teacherNo?) {
+    async getTeachersByPage(
+      pageSize,
+      currentPage,
+      teacherNo?
+    ) {
       try {
-        const res = await http.get("teacher/page", {
+        const res = await http.get('teacher/page', {
           params: {
             page: currentPage,
             pageSize,
             teacherNo,
           },
-        });
-        this.teacherData = [];
-        res.data.records.forEach((record) => {
-          const { teacherNo, teacherName } = record;
+        })
+        this.teacherData = []
+        res.data.records.forEach(record => {
+          const { teacherNo, teacherName, isAuth } = record
 
-          this.teacherData.push(new Teacher(teacherNo, teacherName));
-        });
-        return [this.teacherData, res.data.total];
+          this.teacherData.push(
+            new Teacher(teacherNo, teacherName, isAuth)
+          )
+        })
+        return [this.teacherData, res.data.total]
       } catch (error) {
         // 让表单组件显示错误
-        return [this.teacherData, 0];
+        return [this.teacherData, 0]
       }
     },
     async addTeacher(values: Teacher) {
       try {
-        const res = await http.post("teacher/add", values);
-        return res.data;
+        const res = await http.post('teacher/add', values)
+        return res.data
       } catch (error) {
-        return "添加失败";
+        return '添加失败'
       }
     },
   },
-});
+})

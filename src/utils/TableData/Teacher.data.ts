@@ -1,31 +1,38 @@
 export const columns = [
   {
-    title: "编号",
-    dataIndex: "no",
+    title: '编号',
+    dataIndex: 'no',
     options: {
-      align: "center",
+      align: 'center',
     },
   },
   {
-    title: "教工号",
-    dataIndex: "teacherNo",
+    title: '教工号',
+    dataIndex: 'teacherNo',
     options: {
-      align: "center",
+      align: 'center',
     },
   },
   {
-    title: "教师姓名",
-    dataIndex: "teacherName",
+    title: '教师姓名',
+    dataIndex: 'teacherName',
     options: {
-      align: "center",
+      align: 'center',
     },
   },
   {
-    title: "操作",
-    dataIndex: "deleteAndAuth",
+    title: '是否有权限',
+    dataIndex: 'isAuth',
+    options: {
+      align: 'center',
+    },
+  },
+  {
+    title: '操作',
+    dataIndex: 'deleteAndAuth',
     options: {
       width: 60,
-      align: "center",
+      align: 'center',
     },
   },
-];
+]
