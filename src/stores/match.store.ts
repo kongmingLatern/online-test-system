@@ -88,6 +88,9 @@ export const useMatch = defineStore('match', {
           classIdList,
           taskId,
         })
+        if (res?.msg !== '') {
+          return res.msg
+        }
         return res.data
       } catch (error) {
         return '添加失败'
