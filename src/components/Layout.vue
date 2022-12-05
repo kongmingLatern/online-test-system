@@ -33,7 +33,7 @@
         </a-layout-content>
       </a-layout>
       <a-layout-footer style="text-align: center">
-        <Footer />
+        <!-- <Footer /> -->
       </a-layout-footer>
     </a-layout>
   </a-layout>
