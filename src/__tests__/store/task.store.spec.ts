@@ -1,7 +1,5 @@
 import { useTask } from '@/stores/task.store'
 import { setActivePinia, createPinia } from 'pinia'
-import { useBase } from '@/stores/base.store'
-import { resolveSoa } from 'dns'
 
 describe('Task Store', () => {
   beforeEach(() => {
