@@ -54,6 +54,7 @@
               >
                 进入考试
               </a-button>
+
               <a-button
                 v-if="isBase === 'true'"
                 type="primary"
@@ -87,43 +88,66 @@
           <div flex items="center" justify="center">
             <span>考试码：</span>
             <a-input
+              v-if="currentMatch.isStart === 0"
               v-model:value="taskPassword"
               w-40
               placeholder="请输入考试码"
             />
+            <a-input
+              v-if="currentMatch.isStart === 1"
+              v-model:value="taskPassword"
+              w-40
+              placeholder="请输入二次考试码"
+            />
           </div>
-          <p>
-            如由于自身操作不当导致系统故障，不予提供二次考试密码。
-          </p>
-          <p>
-            如系统发生意外，请联系监考老师，由监考老师确定为系统故障后，再由监考老师联系管理员提供二次考试密码并继续考试。
-          </p>
-          <a-radio text-lg font-semibold>
-            我已阅读上述准则，并且保证严格遵守
-          </a-radio>
-          <footer text-center mt-10>
-            <a-button
-              v-if="isBase === 'false'"
-              class="button-green"
-              h-15
-              w-60
-              rounded
-              @click="goTask(currentMatch.matchId)"
-            >
-              进入考试
-            </a-button>
-            <a-button
-              v-else
-              class="button-green"
-              h-15
-              w-60
-              rounded
-              @click="goTask(currentMatch.matchId)"
-            >
-              进入练习
-            </a-button>
-          </footer>
         </div>
+        <p>
+          如由于自身操作不当导致系统故障，不予提供二次考试密码。
+        </p>
+        <p>
+          如系统发生意外，请联系监考老师，由监考老师确定为系统故障后，再由监考老师联系管理员提供二次考试密码并继续考试。
+        </p>
+        <a-radio text-lg font-semibold>
+          我已阅读上述准则，并且保证严格遵守
+        </a-radio>
+        <footer text-center mt-10>
+          <a-button
+            v-if="
+              isBase === 'false' &&
+              currentMatch.isStart === 0
+            "
+            class="button-green"
+            h-15
+            w-60
+            rounded
+            @click="goTask(currentMatch.matchId)"
+          >
+            进入考试
+          </a-button>
+          <a-button
+            v-else-if="
+              isBase === 'false' &&
+              currentMatch.isStart === 1
+            "
+            type="danger"
+            h-15
+            w-60
+            rounded
+            @click="goTask(currentMatch.matchId)"
+          >
+            二次考试
+          </a-button>
+          <a-button
+            v-else
+            class="button-green"
+            h-15
+            w-60
+            rounded
+            @click="goTask(currentMatch.matchId)"
+          >
+            进入练习
+          </a-button>
+        </footer>
       </template>
     </Modal>
   </a-space>
@@ -133,6 +157,7 @@
 import router from '@/router'
 import { useMatch } from '@/stores/match.store'
 import Rules from '@/views/home/Rules.vue'
+import { message } from 'ant-design-vue'
 import { provide, reactive, ref } from 'vue'
 
 const props = defineProps<{
@@ -163,22 +188,27 @@ const showModal = matchId => {
 }
 const goTask = async matchId => {
   // NOTE:判断当前的考试码是否正确
-  const [res, num] = await store.startMatch(
+  const [res, num, msg] = await store.startMatch(
     matchId,
-    taskPassword.value
+    taskPassword.value,
+    !currentMatch.isStart
   )
+  if (msg === '密码错误') {
+    message.error(msg)
+    return
+  }
   // NOTE: 题目信息
   localStorage.setItem(
     'radioNumber',
-    num.questionCount.radio
+    num.questionCount?.radio
   )
   localStorage.setItem(
     'checkboxNumber',
-    num.questionCount.selected
+    num.questionCount?.selected
   )
   localStorage.setItem(
     'judgeNumber',
-    num.questionCount.judge
+    num.questionCount?.judge
   )
   // NOTE: 考试时间
   localStorage.setItem('limitTime', currentMatch.limitTime)
