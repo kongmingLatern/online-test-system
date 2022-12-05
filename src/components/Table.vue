@@ -85,7 +85,7 @@
           </a-button>
         </a-space>
       </template>
-      <templaet v-if="column.dataIndex === 'grade'">
+      <template v-if="column.dataIndex === 'grade'">
         <a-tag v-if="record.grade < 60" color="red" text-sm>
           {{ record.grade }}
         </a-tag>
@@ -96,7 +96,15 @@
         >
           {{ record.grade }}
         </a-tag>
-      </templaet>
+      </template>
+      <template v-if="column.dataIndex === 'allocation'">
+        <a-button
+          type="danger"
+          @click="allocationTask(record)"
+        >
+          分配考试
+        </a-button>
+      </template>
     </template>
   </a-table>
 </template>
@@ -121,6 +129,10 @@ const changePage = pagination => {
 
 const deleteItem = record => {
   removeItem(record)
+}
+
+const allocationTask = record => {
+  console.log(record)
 }
 
 // const resetItem = record => reset(record)
