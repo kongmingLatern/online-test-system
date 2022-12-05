@@ -133,8 +133,6 @@ const deleteItem = record => {
 }
 
 const allocationTask = record => {
-  console.log(allocation)
-
   allocation(record)
 }
 
