@@ -1,17 +1,19 @@
 <template>
-  <div v-for="(item, index) in data">
+  <div v-for="(item, index) in data" mb-3>
     <p :id="'question' + (index + 1)">
       {{ index + 1 }}.{{ item.questionList }}
     </p>
     <a-radio-group v-model:value="item.questionAnswer">
-      <a-radio
-        v-for="(list, index) in item.questionAnswerList"
-        :value="item.questionAnswerList[index]"
-        @change="handleClick(item, index)"
-      >
-        {{ String.fromCharCode(index + 65) }}.
-        {{ list }}
-      </a-radio>
+      <a-space flex="~ col">
+        <a-radio
+          v-for="(list, index) in item.questionAnswerList"
+          :value="item.questionAnswerList[index]"
+          @change="handleClick(item, index)"
+        >
+          {{ String.fromCharCode(index + 65) }}.
+          {{ list }}
+        </a-radio>
+      </a-space>
     </a-radio-group>
   </div>
 </template>
@@ -32,4 +34,12 @@ const handleClick = (item, index) => {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+:deep(.ant-radio-group) {
+  display: flex;
+  flex-direction: column;
+}
+:deep(.ant-space-align-center) {
+  align-items: start;
+}
+</style>
