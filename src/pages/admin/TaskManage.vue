@@ -17,29 +17,39 @@
 
       <!-- 内容 -->
       <template #main>
-        <Main data-test="taskMain" />
+        <Main data-test="taskMain" isModal>
+          <template #modal>
+            <FormItem sort="classList" />
+          </template>
+        </Main>
       </template>
     </Content>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, provide, reactive, ref } from "vue";
-import { getTasksByCurrentPage } from "../../api/request";
-import { getQuestionByCurrentPage } from "@/api/request";
-import type { Radio } from "@/utils";
+import {
+  computed,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+} from 'vue'
+import { getTasksByCurrentPage } from '../../api/request'
+import type { Radio } from '@/utils'
 
-let data = reactive<Radio[]>([]);
-const totalPage = ref<number>();
-const loading = ref<boolean>(false);
-const current = ref<number>(1);
-const pageSize = ref<number>(10);
+let data = reactive<Radio[]>([])
+const isShow = ref<boolean>(false)
+const totalPage = ref<number>()
+const loading = ref<boolean>(false)
+const current = ref<number>(1)
+const pageSize = ref<number>(10)
 
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,
   pageSize: pageSize.value,
-}));
+}))
 
 onMounted(async () => {
   await getTasksByCurrentPage(
@@ -48,12 +58,14 @@ onMounted(async () => {
     pageSize.value,
     totalPage,
     loading
-  );
-});
+  )
+})
 
-const changePage: (pagination: any) => Promise<void> = async (pagination) => {
-  pagination.current = pagination.current;
-  current.value = pagination.current;
+const changePage: (
+  pagination: any
+) => Promise<void> = async pagination => {
+  pagination.current = pagination.current
+  current.value = pagination.current
 
   getTasksByCurrentPage(
     data,
@@ -61,14 +73,22 @@ const changePage: (pagination: any) => Promise<void> = async (pagination) => {
     pageSize.value,
     totalPage,
     loading
-  );
-};
+  )
+}
 
-provide("columnSort", "taskInfo");
-provide("loading", loading);
-provide("data", data);
-provide("pagination", pagination);
-provide("change", changePage);
+const allocation = record => {
+  console.log(record)
+  isShow.value = true
+}
+
+provide('title', '分配考试')
+provide('isShow', isShow)
+provide('columnSort', 'taskInfo')
+provide('allocation', allocation)
+provide('loading', loading)
+provide('data', data)
+provide('pagination', pagination)
+provide('change', changePage)
 </script>
 
 <style scoped></style>
