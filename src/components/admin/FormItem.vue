@@ -26,7 +26,9 @@
           : null
       "
     >
-      <Checkbox v-if="item.type === 'list'" />
+      <a-form-item-rest v-if="item.type === 'list'">
+        <Checkbox @getClassId="getClassId" />
+      </a-form-item-rest>
       <Select
         v-if="item.type === 'select'"
         @change="getBaseId"
@@ -142,6 +144,11 @@ const addDomain = (key: string) => {
   })
 }
 
+const getClassId = (classIdList, taskId) => {
+  formState[props.sort].classIdList = classIdList
+  formState[props.sort].taskId = taskId
+}
+
 const getBaseId = (baseId: string) => {
   formState[props.sort].baseId = baseId
 }
@@ -164,6 +171,7 @@ const onFinish = (values: any) => {
         'questionAnswerList'
       )
   }
+  console.log(formState[props.sort])
   finish({
     ...formState[props.sort],
   })
