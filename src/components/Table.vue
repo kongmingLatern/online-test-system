@@ -62,13 +62,6 @@
       <template v-if="column.dataIndex === 'deleteAndAuth'">
         <a-space>
           <a-button type="danger" rounded>授权</a-button>
-          <a-button
-            type="danger"
-            rounded
-            @click="deleteItem(record)"
-          >
-            删除
-          </a-button>
         </a-space>
       </template>
       <template v-if="column.dataIndex === 'student'">
