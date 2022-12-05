@@ -37,6 +37,7 @@ import {
 } from 'vue'
 import { getTasksByCurrentPage } from '../../api/request'
 import type { Radio } from '@/utils'
+import { addClassList } from '@/api/match'
 
 let data = reactive<Radio[]>([])
 const isShow = ref<boolean>(false)
@@ -44,6 +45,7 @@ const totalPage = ref<number>()
 const loading = ref<boolean>(false)
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
+const taskId = ref<string>('')
 
 const pagination = computed(() => ({
   total: totalPage.value,
@@ -77,11 +79,14 @@ const changePage: (
 }
 
 const allocation = record => {
-  console.log(record)
+  // console.log(record)
+  taskId.value = record.taskId
   isShow.value = true
 }
 
 provide('title', '分配考试')
+provide('finish', addClassList)
+provide('taskId', taskId)
 provide('isShow', isShow)
 provide('columnSort', 'taskInfo')
 provide('allocation', allocation)
