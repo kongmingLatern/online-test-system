@@ -12,7 +12,7 @@
     </a-layout-content>
     <a-layout-footer>
       <slot name="footer">
-        <Footer />
+        <!-- <Footer /> -->
       </slot>
     </a-layout-footer>
   </a-layout>
