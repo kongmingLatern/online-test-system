@@ -38,7 +38,11 @@
       <user-outlined />
       <span>试题库管理</span>
     </a-menu-item>
-    <a-menu-item key="radio" data-test="radio" @click="goPath('/radioManage')">
+    <a-menu-item
+      key="radio"
+      data-test="radio"
+      @click="goPath('/radioManage')"
+    >
       <user-outlined />
       <span>单选题管理</span>
     </a-menu-item>
@@ -51,7 +55,11 @@
       <user-outlined />
       <span>多选题管理</span>
     </a-menu-item>
-    <a-menu-item key="judge" data-test="judge" @click="goPath('/judgeManage')">
+    <a-menu-item
+      key="judge"
+      data-test="judge"
+      @click="goPath('/judgeManage')"
+    >
       <user-outlined />
       <span>判断题管理</span>
     </a-menu-item>
@@ -63,7 +71,11 @@
     <template #title>
       <span>成绩管理</span>
     </template>
-    <a-menu-item key="grade" data-test="grade" @click="goPath('/gradeManage')">
+    <a-menu-item
+      key="grade"
+      data-test="grade"
+      @click="goPath('/gradeManage')"
+    >
       <user-outlined />
       <span>成绩管理</span>
     </a-menu-item>
@@ -106,13 +118,6 @@
     >
       查询考生密码
     </a-menu-item>
-    <a-menu-item
-      key="proctorManage"
-      data-test="proctorManage"
-      @click="goPath('/proctorManage')"
-    >
-      批准继续考试
-    </a-menu-item>
   </a-sub-menu>
   <a-sub-menu key="teacher" data-test="teacher">
     <template #icon>
@@ -132,12 +137,12 @@
 </template>
 
 <script setup lang="ts">
-import router from "@/router";
-import { UserOutlined } from "@ant-design/icons-vue";
+import router from '@/router'
+import { UserOutlined } from '@ant-design/icons-vue'
 
 const goPath = (path: string) => {
-  router.push("/admin" + path);
-};
+  router.push('/admin' + path)
+}
 </script>
 
 <style scoped></style>

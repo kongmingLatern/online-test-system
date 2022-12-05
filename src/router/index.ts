@@ -113,12 +113,6 @@ const router = createRouter({
             ),
         },
         {
-          path: 'proctorManage',
-          name: 'proctorManage',
-          component: () =>
-            import('@/pages/admin/ProctorManage.vue'),
-        },
-        {
           path: 'teacherManage',
           name: 'teacherManage',
           component: () =>
