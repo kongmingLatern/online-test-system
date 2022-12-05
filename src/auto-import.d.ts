@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     BreadCrumb: typeof import('./components/BreadCrumb.vue')['default']
     Card: typeof import('./components/Card.vue')['default']
     Carousel: typeof import('./components/Carousel.vue')['default']
+    Checkbox: typeof import('./components/Checkbox.vue')['default']
     Content: typeof import('./components/Content.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     Form: typeof import('./components/admin/Form.vue')['default']
