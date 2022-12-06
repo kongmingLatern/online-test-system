@@ -15,6 +15,8 @@ import type {
 } from '@/utils'
 import type { Ref } from 'vue'
 import { useBase } from '@/stores/base.store'
+import { message } from 'ant-design-vue'
+import { useSubject } from '@/stores/subject.store'
 // NOTE: 分页获取学生
 export async function getStudentDataByCurrentPage(
   data: Student[],
@@ -218,5 +220,17 @@ export async function getSelfGrade(data) {
     return data
   } catch (error) {
     return false
+  }
+}
+
+export async function getSubjectList(data) {
+  try {
+    const store = useSubject()
+    const [res, _] = await store.getSubjectList()
+    console.log(res)
+    Object.assign(data, res)
+    return res
+  } catch (e) {
+    message.error('获取列表失败')
   }
 }
