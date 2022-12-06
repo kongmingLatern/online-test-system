@@ -1,14 +1,16 @@
 import { defineStore } from 'pinia'
-import http from '../api/http'
+import http from '@/api/http'
 
 const getBasePagePath = '/base/page'
 const getBaseListPath = '/base/list'
 const removeBasePath = '/base/delete'
+const importPath = '/base/importBase'
 
 export const useBase = defineStore('base', {
   state: () => ({
     bases: [] as any[],
     baseList: [] as any[],
+    fileList: [] as any[],
   }),
 
   actions: {
@@ -76,6 +78,19 @@ export const useBase = defineStore('base', {
         return res.data
       } catch (e) {
         return '删除失败'
+      }
+    },
+    // NOTE: 导入题库
+    async importBase(values: any) {
+      try {
+        const res = await http.post(importPath, values, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        return res.data
+      } catch (e) {
+        return '导入失败'
       }
     },
   },
