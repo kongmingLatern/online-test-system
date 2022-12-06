@@ -1,44 +1,44 @@
 <template>
-  <a-form>
-    <a-form-item>
-      <a-upload
-        v-model:file-list="fileList"
-        name="file"
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        :headers="headers"
-        @change="handleChange"
-      >
-        <a-button>
-          <upload-outlined></upload-outlined>
-          导入信息
-        </a-button>
-        <span text-3 ml-3>文件支持 json，excel</span>
-      </a-upload>
-    </a-form-item>
-    <div text-right>
-      <a-button html-type="submit" class="button-green"> 导入 </a-button>
-    </div>
-  </a-form>
+  <FormItem :sort="sort">
+    <template #import>
+      <a-form-item>
+        <a-upload
+          v-model:file-list="fileList"
+          name="file"
+          :headers="headers"
+          :customRequest="handleCustomRequest"
+        >
+          <a-button>
+            <upload-outlined></upload-outlined>
+            导入信息
+          </a-button>
+          <span text-3 ml-3>文件支持 excel</span>
+        </a-upload>
+      </a-form-item>
+    </template>
+  </FormItem>
 </template>
 <script lang="ts" setup>
-import { message } from "ant-design-vue";
-import { UploadOutlined } from "@ant-design/icons-vue";
-import { ref } from "vue";
-import type { UploadChangeParam } from "ant-design-vue";
+import { UploadOutlined } from '@ant-design/icons-vue'
+import { reactive } from 'vue'
+import type { UploadChangeParam } from 'ant-design-vue'
+import { useBase } from '@/stores/base.store'
 
-const handleChange = (info: UploadChangeParam) => {
-  if (info.file.status !== "uploading") {
-    console.log(info.file, info.fileList);
-  }
-  if (info.file.status === "done") {
-    message.success(`${info.file.name} file uploaded successfully`);
-  } else if (info.file.status === "error") {
-    message.error(`${info.file.name} file upload failed.`);
-  }
-};
+defineProps<{
+  sort?: string
+}>()
+
+const fileList = reactive<UploadChangeParam['fileList']>([])
+
+const store = useBase()
+
+const handleCustomRequest = ({ file }) => {
+  Object.assign(fileList, file)
+  store.$state.fileList.length = 0
+  store.$state.fileList.push(file)
+  console.log('handleCustomRequest', file)
+}
 const headers = {
-  authorization: "authorization-text",
-};
-
-const fileList = ref([]);
+  authorization: 'authorization-text',
+}
 </script>
