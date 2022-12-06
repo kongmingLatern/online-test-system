@@ -1,15 +1,16 @@
 <template>
-  <Card
-    v-if="cardList.length > 0"
-    :cardList="cardList"
-    data-test="personal"
-    isBase="false"
-  />
-  <a-empty v-else>
-    <template #description>
-      <span>暂无考试</span>
-    </template>
-  </a-empty>
+  <div data-test="personal">
+    <Card
+      v-if="cardList.length > 0"
+      :cardList="cardList"
+      isBase="false"
+    />
+    <a-empty v-else>
+      <template #description>
+        <span>暂无考试</span>
+      </template>
+    </a-empty>
+  </div>
 </template>
 
 <script setup lang="ts">
