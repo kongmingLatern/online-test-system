@@ -9,11 +9,14 @@ const AntdIcons = {
 }
 
 const AntdComponents = {
+  'a-empty': mockComponent,
+  'a-form-item-rest': mockComponent,
   'a-carousel': mockComponent,
   'a-layout': mockComponent,
   'a-layout-sider': mockComponent,
   'a-layout-header': mockComponent,
   'a-layout-content': mockComponent,
+  'a-input-password': mockComponent,
   'a-layout-footer': mockComponent,
   'a-button': mockComponent,
   'a-card': mockComponent,
@@ -47,6 +50,9 @@ const AntdComponents = {
   'a-switch': mockComponent,
   'a-breadcrumb-item': mockComponent,
   'a-breadcrumb': mockComponent,
+  'a-list-item': mockComponent,
+  'a-list': mockComponent,
+  'a-form-item-rest': mockComponent,
 }
 
 const vueComponents = {
