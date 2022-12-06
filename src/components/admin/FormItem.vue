@@ -9,7 +9,6 @@
   >
     <a-form-item
       v-for="item in formArr"
-      :name="formState[item.name]"
       :label="item.label"
       :rules="
         item.type === 'text'
@@ -31,6 +30,7 @@
       </a-form-item-rest>
       <Select
         v-if="item.type === 'select'"
+        :type="sort"
         @change="getBaseId"
       />
       <a-radio-group
@@ -96,6 +96,9 @@
       </a-button>
     </div>
 
+    <!-- NOTE: 导入信息 -->
+    <slot name="import"></slot>
+
     <div text-right>
       <a-button class="button" html-type="submit" rounded>
         提交信息
@@ -105,11 +108,7 @@
 </template>
 <script lang="ts" setup>
 import { inject, reactive, ref, type Ref } from 'vue'
-import {
-  getFormItem,
-  getValueByObject,
-  reactiveToCommon,
-} from '@/utils'
+import { getFormItem, getValueByObject } from '@/utils'
 import { PlusOutlined } from '@ant-design/icons-vue'
 
 const props = defineProps<{
@@ -149,29 +148,32 @@ const getClassId = (classIdList, taskId) => {
   formState[props.sort].taskId = taskId
 }
 
-const getBaseId = (baseId: string) => {
-  formState[props.sort].baseId = baseId
+const getBaseId = (key: string, value: string) => {
+  formState[props.sort][key] = value
 }
 
 const onFinish = (values: any) => {
   console.log('Success:', values, value.value)
+  console.log(formState)
   isShow.value = false
 
   if (props.sort === 'question') {
     formState[props.sort].questionType = value.value
     console.log(formState)
-    formState[props.sort].questionCorrectList =
-      getValueByObject(
-        formState[props.sort],
-        'questionCorrectList'
-      )
-    formState[props.sort].questionAnswerList =
-      getValueByObject(
-        formState[props.sort],
-        'questionAnswerList'
-      )
+    if (formState[props.sort] !== null) {
+      formState[props.sort].questionCorrectList =
+        getValueByObject(
+          formState[props.sort],
+          'questionCorrectList'
+        )
+      formState[props.sort].questionAnswerList =
+        getValueByObject(
+          formState[props.sort],
+          'questionAnswerList'
+        )
+    }
   }
-  console.log(formState[props.sort])
+
   finish({
     ...formState[props.sort],
   })
