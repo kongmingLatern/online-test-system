@@ -12,59 +12,92 @@
           <template #breadcrumb>
             <BreadCrumb />
           </template>
+          <template #button>
+            <a-button
+              type="primary"
+              class="button-green"
+              @click="importBase"
+            >
+              导入题库
+            </a-button>
+          </template>
         </Nav>
       </template>
 
       <!-- 内容 -->
       <template #main>
-        <Main data-test="taskBaseMain" />
+        <Main data-test="taskBaseMain" isImport>
+          <template #import>
+            <ImportInfo sort="list" />
+          </template>
+        </Main>
       </template>
     </Content>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, provide, reactive, ref } from "vue";
-import { getBasesByCurrentPage } from "@/api/request";
-import type { Task } from "@/utils";
-let data = reactive<Task[]>([]);
-const totalPage = ref<number>();
-const current = ref<number>(1);
-const pageSize = ref<number>(10);
-const loading = ref<boolean>(false);
-const isShow = ref<boolean>(false);
-const impShow = ref<boolean>(false);
+import {
+  computed,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+} from 'vue'
+import { getBasesByCurrentPage } from '@/api/request'
+import type { Task } from '@/utils'
+import { finishForm } from '@/api/base'
+let data = reactive<Task[]>([])
+const totalPage = ref<number>()
+const current = ref<number>(1)
+const pageSize = ref<number>(10)
+const loading = ref<boolean>(false)
+const isShow = ref<boolean>(false)
+const impShow = ref<boolean>(false)
 
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,
   pageSize: pageSize.value,
-}));
+}))
 
 onMounted(async () => {
-  await getBasesByCurrentPage(data, 1, pageSize.value, totalPage, loading);
-});
+  await getBasesByCurrentPage(
+    data,
+    1,
+    pageSize.value,
+    totalPage,
+    loading
+  )
+})
 
-const changePage: (pagination: any) => Promise<void> = async (pagination) => {
-  pagination.current = pagination.current;
-  current.value = pagination.current;
-  data.length = 0;
+const changePage: (
+  pagination: any
+) => Promise<void> = async pagination => {
+  pagination.current = pagination.current
+  current.value = pagination.current
+  data.length = 0
   getBasesByCurrentPage(
     data,
     current.value,
     pageSize.value,
     totalPage,
     loading
-  );
-};
+  )
+}
 
-provide("isShow", isShow);
-provide("impShow", impShow);
-provide("columnSort", "task");
-provide("data", data);
-provide("loading", loading);
-provide("pagination", pagination);
-provide("change", changePage);
+const importBase = () => {
+  impShow.value = true
+}
+provide('isShow', isShow)
+provide('title', '导入试题')
+provide('impShow', impShow)
+provide('columnSort', 'task')
+provide('data', data)
+provide('loading', loading)
+provide('pagination', pagination)
+provide('finish', finishForm)
+provide('change', changePage)
 </script>
 
 <style scoped></style>
