@@ -52,7 +52,6 @@ const AntdComponents = {
   'a-breadcrumb': mockComponent,
   'a-list-item': mockComponent,
   'a-list': mockComponent,
-  'a-form-item-rest': mockComponent,
 }
 
 const vueComponents = {
