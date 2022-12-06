@@ -63,7 +63,7 @@ const handleCorrectList = (item, index) => {
 }
 
 nextTick(() => {
-  // disableContextMenu()
+  disableContextMenu()
 })
 
 mitt.on('finishTask', async matchId => {
