@@ -40,7 +40,7 @@ export const columns = [
     title: "操作",
     dataIndex: "delete",
     options: {
-      width: 60,
+      width: 100,
       align: "center",
     },
   },
