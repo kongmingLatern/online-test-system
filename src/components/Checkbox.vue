@@ -41,10 +41,7 @@ const emits = defineEmits<{
 
 onMounted(async () => {
   await getClassList(classList)
-  console.log(classList)
   setClassName(classList)
-  console.log(className)
-  // 根据 className 和 classList 中的值，设置 classIdList
 })
 
 const onCheckAllChange = (e: any) => {
