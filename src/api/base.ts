@@ -14,3 +14,13 @@ export const getBaseList = async (data: any[]) => {
     message.error(e)
   }
 }
+
+// NOTE: 导入题库
+export const finishForm = async (values: any) => {
+  const store = useBase()
+  const msg = await store.importBase({
+    ...values,
+    file: store.$state.fileList[0],
+  })
+  message.success(msg)
+}
