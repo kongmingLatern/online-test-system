@@ -1,5 +1,4 @@
 package com.cle.onlinetestsystem.controller;
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cle.onlinetestsystem.Utils.MyUtils;
@@ -12,7 +11,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -190,7 +188,7 @@ public class MatchController {
             return R.error("该考试不是你的考试");
         }
         if(task.getTaskTime().plusMinutes(task.getLimitTime()).isAfter(LocalDateTime.now())){
-            return R.error("考试已经过期。");
+            return R.error("考试还没开始。");
         }
         List<QuestionDto> questionList = matchService.startMatch(matchId,matchPassword);
         // 获取完立刻存入redis
@@ -272,7 +270,7 @@ public class MatchController {
             matchDto.setTaskStartToEnd(MyUtils.timeConversion(task.getTaskTime(),task.getLimitTime()));
             return matchDto;
         })
-//                .filter(matchDto -> matchDto.getTaskTime().plusMinutes(matchDto.getLimitTime()).isAfter(LocalDateTime.now()))
+                .filter(matchDto -> matchDto.getLimitTime()>0)
                 .collect(Collectors.toList());
         return R.success(matchDtoList);
     }
@@ -282,6 +280,7 @@ public class MatchController {
      * @param
      * @return
      */
+
     @GetMapping("/getSelfGrade")
     public R<List<MatchDto>> getSelfGrade(){
         LambdaQueryWrapper<Match> matchLambdaQueryWrapper = new LambdaQueryWrapper<>();

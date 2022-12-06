@@ -15,6 +15,8 @@ class MyRandomTest {
     private RedisScheduling redisScheduling;
 @Test
     public void test(){
-       redisScheduling.computeGradeFromRedis();
+       redisUtils.add("123",123);
+    Object o = redisUtils.get("123");
+    System.out.println(o);
 }
 }

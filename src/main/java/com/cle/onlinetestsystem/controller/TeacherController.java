@@ -69,6 +69,7 @@ public class TeacherController {
         teacherLambdaQueryWrapper.select(Teacher::getTeacherId,Teacher::getTeacherName);
         List<Teacher> list = teacherService.list(teacherLambdaQueryWrapper);
         return R.success(list);
-
     }
+
+
 }

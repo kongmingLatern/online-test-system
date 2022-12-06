@@ -65,9 +65,9 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionDao, Question> impl
         List<Question> radioCollect = radioSet.stream().map(integer -> radioList.get(integer)).collect(Collectors.toList());
         List<Question> selectedCollect = selectedSet.stream().map(integer -> selectedList.get(integer)).collect(Collectors.toList());
         List<Question> judgeCollect = judgeSet.stream().map(integer -> judgeList.get(integer)).collect(Collectors.toList());
-        radioCollect.forEach(item-> System.out.println(item));
-        selectedCollect.forEach(item-> System.out.println(item));
-        judgeCollect.forEach(item-> System.out.println(item));
+//        radioCollect.forEach(item-> System.out.println(item));
+////        selectedCollect.forEach(item-> System.out.println(item));
+////        judgeCollect.forEach(item-> System.out.println(item));
         radioList.addAll(selectedCollect);
         List<Question> questionList = new ArrayList<>();
         questionList.addAll(radioCollect);

@@ -44,7 +44,6 @@ public class BaseServiceImpl extends ServiceImpl<BaseDao, Base> implements BaseS
             questionService.saveBatch(MyUtils.RadioAndSelected(list, "Selected", baseId));
             list=EasyExcel.read(file.getInputStream()).sheet("判断题").doReadSync();
             questionService.saveBatch(MyUtils.Judge(list, baseId));
-
         }
         catch (Exception e) {
             transactionManager.rollback(status);
