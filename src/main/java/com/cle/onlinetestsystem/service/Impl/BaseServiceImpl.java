@@ -1,11 +1,13 @@
 package com.cle.onlinetestsystem.service.Impl;
 
 import com.alibaba.excel.EasyExcel;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cle.onlinetestsystem.Utils.MyUtils;
 import com.cle.onlinetestsystem.common.CustomException;
 import com.cle.onlinetestsystem.dao.BaseDao;
 import com.cle.onlinetestsystem.pojo.Base;
+import com.cle.onlinetestsystem.pojo.Question;
 import com.cle.onlinetestsystem.service.BaseService;
 import com.cle.onlinetestsystem.service.QuestionService;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -49,7 +51,15 @@ public class BaseServiceImpl extends ServiceImpl<BaseDao, Base> implements BaseS
             transactionManager.rollback(status);
             throw new CustomException("文件有误");
         }
-
     }
 
+
+    @Override
+    @Transactional
+    public void deleteBaseWithQuestion(Long baseId) {
+        this.removeById(baseId);
+        LambdaQueryWrapper<Question> questionLambdaUpdateWrapper = new LambdaQueryWrapper<>();
+        questionLambdaUpdateWrapper.eq(Question::getBaseId,baseId);
+        questionService.remove(questionLambdaUpdateWrapper);
+    }
 }

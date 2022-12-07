@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cle.onlinetestsystem.common.BaseContext;
 import com.cle.onlinetestsystem.dto.BaseDto;
-import com.cle.onlinetestsystem.pojo.*;
+import com.cle.onlinetestsystem.pojo.Base;
+import com.cle.onlinetestsystem.pojo.R;
+import com.cle.onlinetestsystem.pojo.Subject;
+import com.cle.onlinetestsystem.pojo.Teacher;
 import com.cle.onlinetestsystem.service.BaseService;
-import com.cle.onlinetestsystem.service.QuestionService;
 import com.cle.onlinetestsystem.service.SubjectService;
 import com.cle.onlinetestsystem.service.TeacherService;
 import lombok.AllArgsConstructor;
@@ -27,7 +29,6 @@ public class BaseController {
     private final BaseService baseService;
     private final SubjectService subjectService;
     private final TeacherService teacherService;
-    private final QuestionService questionService;
 
 
     /**
@@ -100,10 +101,7 @@ public class BaseController {
      */
     @DeleteMapping("/delete")
     public R<String> delete(Long baseId){
-        baseService.removeById(baseId);
-        LambdaQueryWrapper<Question> questionLambdaUpdateWrapper = new LambdaQueryWrapper<>();
-        questionLambdaUpdateWrapper.eq(Question::getBaseId,baseId);
-        questionService.remove(questionLambdaUpdateWrapper);
+        baseService.deleteBaseWithQuestion(baseId);
         return R.success("删除成功");
     }
 

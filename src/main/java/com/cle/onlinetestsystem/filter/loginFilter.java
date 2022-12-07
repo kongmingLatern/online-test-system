@@ -44,6 +44,9 @@ public class loginFilter implements Filter {
             chain.doFilter(request, response);
             return;
         }
+
+//        log.info(BaseContext.getCurrentId().toString());
+
 //        判断是否已经登录
 //        if(BaseContext.getCurrentId()==null){
 //            servletResponse.getWriter().write(JSON.toJSONString(R.error("No Login!!!")));
@@ -55,6 +58,7 @@ public class loginFilter implements Filter {
         {
             httpSession.invalidate();
         }
+
         loginMap.put(BaseContext.getCurrentId(),session);
         chain.doFilter(request, response);
 }
