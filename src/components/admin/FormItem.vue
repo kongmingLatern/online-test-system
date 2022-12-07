@@ -43,16 +43,20 @@
       </a-radio-group>
 
       <a-input
-        v-if="item.type === 'text'"
+        v-if="sort !== '' && item.type === 'text'"
         v-model:value="formState[sort][item.name]"
       />
       <a-input-number
-        v-else-if="item.type === 'number'"
+        v-else-if="sort !== '' && item.type === 'number'"
         v-model:value="formState[sort][item.name]"
       />
     </a-form-item>
 
-    <div v-if="formState[sort].questionAnswerList">
+    <div
+      v-if="
+        sort !== '' && formState[sort].questionAnswerList
+      "
+    >
       <p>选项：</p>
       <a-form-item
         v-for="answer in formState[sort].questionAnswerList"
@@ -73,7 +77,11 @@
         Add
       </a-button>
     </div>
-    <div v-if="formState[sort].questionCorrectList">
+    <div
+      v-if="
+        sort !== '' && formState[sort].questionCorrectList
+      "
+    >
       <p>答案：</p>
       <a-form-item
         v-for="answer in formState[sort]
@@ -107,12 +115,20 @@
   </a-form>
 </template>
 <script lang="ts" setup>
-import { inject, reactive, ref, type Ref } from 'vue'
+import {
+  inject,
+  reactive,
+  ref,
+  watchEffect,
+  type Ref,
+} from 'vue'
+import { useBase } from '../../stores/base.store';
 import { getFormItem, getValueByObject } from '@/utils'
 import { PlusOutlined } from '@ant-design/icons-vue'
 
 const props = defineProps<{
   sort: string
+  isUpload: boolean
 }>()
 
 const value = ref<number>(1)
@@ -124,9 +140,17 @@ const layout = {
 
 const isShow: Ref<boolean | undefined> = inject('isShow')!
 const finish: (values: any) => void = inject('finish')!
+let finishImport: () => void =
+  inject('import') ?? (() => {})
+const store = useBase()
+
+// if (props.isUpload) {
+//   finishImport = inject('import') ?? (() => {})
+// }
 
 const [formArr, form] = getFormItem(props.sort)
 const formState = reactive(form)
+console.log(formState)
 
 const validateMessages = {
   required: '${label} is required!',
@@ -174,9 +198,13 @@ const onFinish = (values: any) => {
     }
   }
 
-  finish({
-    ...formState[props.sort],
-  })
+  if (props.isUpload) {
+    finishImport(store.$state.fileList[0])
+  } else {
+    finish({
+      ...formState[props.sort],
+    })
+  }
 }
 </script>
 
