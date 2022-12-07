@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import http from '@/api/http'
+import { message } from 'ant-design-vue'
 
 const getMatchPasswordPagePath =
   '/match/getMatchPasswordPage'
@@ -88,10 +89,11 @@ export const useMatch = defineStore('match', {
           classIdList,
           taskId,
         })
-
-        return res.data
+        if (res.data.code === 1) {
+          message.success('分配考试成功')
+        }
       } catch (error) {
-        return '添加失败'
+        message.error('分配考试失败')
       }
     },
     // NOTE: 开始考试[包含二次，三次登录...]
@@ -111,7 +113,6 @@ export const useMatch = defineStore('match', {
               matchPassword,
             },
           })
-          console.log(res)
         } else {
           // NOTE: 二次+考试
           res = await http.get(getMatchPath, {

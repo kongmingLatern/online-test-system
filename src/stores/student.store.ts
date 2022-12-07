@@ -72,9 +72,11 @@ export const useStudent = defineStore('students', {
             },
           }
         )
-        return res.data
+        if (res.data.code === 1) {
+          message.success(res.data)
+        }
       } catch (e: any) {
-        message.error(e.message)
+        return e
       }
     },
   },

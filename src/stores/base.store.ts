@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import http from '@/api/http'
+import { message } from 'ant-design-vue'
 
 const getBasePagePath = '/base/page'
 const getBaseListPath = '/base/list'
@@ -88,9 +89,11 @@ export const useBase = defineStore('base', {
             'Content-Type': 'multipart/form-data',
           },
         })
-        return res.data
+        if (res.data.code === 1) {
+          message.success('导入成功')
+        }
       } catch (e) {
-        return '导入失败'
+        message.error('导入失败')
       }
     },
   },
