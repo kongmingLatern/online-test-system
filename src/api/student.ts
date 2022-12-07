@@ -24,6 +24,5 @@ export const finishForm = async (
 // NOTE: 导入学生
 export const finishImportForm = async file => {
   const store = useStudent()
-  const msg = await store.importStudent(file)
-  message.success(msg)
+  await store.importStudent(file)
 }
