@@ -15,6 +15,13 @@ export const getBaseList = async (data: any[]) => {
   }
 }
 
+// NOTE: 删除题库
+export const removeBase = async record => {
+  const store = useBase()
+  const res = await store.removeBase(record.baseId)
+  message.success(res)
+}
+
 // NOTE: 导入题库
 export const finishForm = async (values: any) => {
   const store = useBase()
