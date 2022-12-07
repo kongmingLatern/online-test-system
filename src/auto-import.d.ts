@@ -32,5 +32,6 @@ declare module '@vue/runtime-core' {
     Select: typeof import('./components/Select.vue')['default']
     SelectSubject: typeof import('./components/SelectSubject.vue')['default']
     Table: typeof import('./components/Table.vue')['default']
+    Upload: typeof import('./components/Upload.vue')['default']
   }
 }
