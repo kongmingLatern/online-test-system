@@ -71,5 +71,15 @@ public class TeacherController {
         return R.success(list);
     }
 
-
+    /**
+     * 教师授权
+     * @param teacher
+     * @return
+     */
+    @PutMapping("/auth")
+    public R<String> auth(@RequestBody Teacher teacher){
+        teacher.setIsAuth(1);
+        teacherService.updateById(teacher);
+        return R.success("授权成功");
+    }
 }

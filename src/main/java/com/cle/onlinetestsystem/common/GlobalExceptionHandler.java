@@ -27,4 +27,8 @@ public class GlobalExceptionHandler {
         }
         return R.error("未知错误");
     }
+    @ExceptionHandler(Exception.class)
+    public R<String> exception(Exception e){
+        return R.error("网络异常，请稍后再试");
+    }
 }

@@ -56,6 +56,7 @@ public class MatchServiceImpl extends ServiceImpl<MatchDao, Match> implements Ma
         }
         Task task = taskService.getById(match.getTaskId());
         //随机出题目
+        log.info(task.toString());
         List<QuestionDto> questionList = questionService.chooseQuestion(task.getBaseId(), task.getRadioNumber(), task.getSelectedNumber(), task.getJudgeNumber());
         //设置开考和二次密码
         match.setIsStart(1);

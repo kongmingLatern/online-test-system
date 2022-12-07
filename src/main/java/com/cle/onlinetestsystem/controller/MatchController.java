@@ -187,7 +187,7 @@ public class MatchController {
         if(!match.getStudentId().equals(BaseContext.getCurrentId())){
             return R.error("该考试不是你的考试");
         }
-        if(task.getTaskTime().plusMinutes(task.getLimitTime()).isAfter(LocalDateTime.now())){
+        if(task.getTaskTime().plusMinutes(task.getLimitTime()).isBefore(LocalDateTime.now())){
             return R.error("考试还没开始。");
         }
         List<QuestionDto> questionList = matchService.startMatch(matchId,matchPassword);

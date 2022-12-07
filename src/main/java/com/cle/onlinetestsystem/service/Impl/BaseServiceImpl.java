@@ -2,6 +2,7 @@ package com.cle.onlinetestsystem.service.Impl;
 
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cle.onlinetestsystem.Utils.MyUtils;
 import com.cle.onlinetestsystem.common.CustomException;
@@ -16,6 +17,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +37,13 @@ public class BaseServiceImpl extends ServiceImpl<BaseDao, Base> implements BaseS
 
     @Override
     @Transactional
-    public void baseAdd(MultipartFile file,Long baseId){
+    public void baseAdd(MultipartFile file, Base base){
+
+        this.save(base);
+        LambdaUpdateWrapper<Base> baseLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
+        baseLambdaUpdateWrapper.eq(Base::getBaseTitle,base.getBaseTitle());
+        Base one = this.getOne(baseLambdaUpdateWrapper);
+        Long baseId = one.getBaseId();
         List<Map<Integer,String>> list = null;
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
         TransactionStatus status = transactionManager.getTransaction(def);

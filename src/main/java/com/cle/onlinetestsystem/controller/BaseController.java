@@ -42,11 +42,11 @@ public class BaseController {
         base.setCreateUser(BaseContext.getCurrentId());
         base.setBaseTitle(baseTitle);
         base.setSubjectId(subjectId);
-        baseService.save(base);
-        LambdaUpdateWrapper<Base> baseLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
-        baseLambdaUpdateWrapper.eq(Base::getBaseTitle,baseTitle);
-        Base one = baseService.getOne(baseLambdaUpdateWrapper);
-        baseService.baseAdd(file,one.getBaseId());
+//        baseService.save(base);
+//        LambdaUpdateWrapper<Base> baseLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
+//        baseLambdaUpdateWrapper.eq(Base::getBaseTitle,baseTitle);
+//        Base one = baseService.getOne(baseLambdaUpdateWrapper);
+        baseService.baseAdd(file,base);
         return R.success("添加成功");
     }
 

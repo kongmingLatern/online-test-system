@@ -1,7 +1,9 @@
 package com.cle.onlinetestsystem.filter;
 
+import com.alibaba.fastjson2.JSON;
 import com.cle.onlinetestsystem.Utils.IpUtils;
 import com.cle.onlinetestsystem.common.BaseContext;
+import com.cle.onlinetestsystem.pojo.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
 
@@ -11,15 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebFilter(filterName = "loginFilter",urlPatterns = "/*")
 @Slf4j
 public class loginFilter implements Filter {
     //路径匹配器，支持通配符
     public static final AntPathMatcher PATH_MATCHER = new AntPathMatcher();
-    private static final Map<Long, HttpSession> loginMap = new HashMap<>();
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest servletRequest = (HttpServletRequest) request;
@@ -48,18 +47,10 @@ public class loginFilter implements Filter {
 //        log.info(BaseContext.getCurrentId().toString());
 
 //        判断是否已经登录
-//        if(BaseContext.getCurrentId()==null){
-//            servletResponse.getWriter().write(JSON.toJSONString(R.error("No Login!!!")));
-//            return;
-//        }
-        //判断是否重复登录
-        HttpSession httpSession=loginMap.get(BaseContext.getCurrentId());
-        if( session.equals(httpSession))
-        {
-            httpSession.invalidate();
+        if(BaseContext.getCurrentId()==null){
+            servletResponse.getWriter().write(JSON.toJSONString(R.error("No Login!!!")));
+            return;
         }
-
-        loginMap.put(BaseContext.getCurrentId(),session);
         chain.doFilter(request, response);
 }
 
