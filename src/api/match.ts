@@ -5,11 +5,13 @@ import { useMatch } from '../stores/match.store'
 export const addClassList = async (values: any) => {
   const store = useMatch()
   try {
-    const [res, _] = await store.addClassMatch(
+    const [code, data] = await store.addClassMatch(
       values.classIdList,
       values.taskId
     )
-    message.success('考试安排成功')
+    if (code === 1) {
+      message.success(data)
+    }
   } catch (e: any) {
     message.error(e)
   }

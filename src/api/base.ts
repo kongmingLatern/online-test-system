@@ -25,9 +25,9 @@ export const removeBase = async record => {
 // NOTE: 导入题库
 export const finishForm = async (values: any) => {
   const store = useBase()
-  const msg = await store.importBase({
+  await store.importBase({
     ...values,
     file: store.$state.fileList[0],
   })
-  message.success(msg)
+  // message.success(msg)
 }
