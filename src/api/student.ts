@@ -12,8 +12,18 @@ export const removeStudent = async (record: Student) => {
   router.go(0)
 }
 // NOTE: 添加学生(表单)
-export const finishForm = async (values: Student) => {
+export const finishForm = async (
+  values: Student,
+  isImport: boolean = false
+) => {
   const store = useStudent()
   const msg = await store.addStudent(values)
+  message.success(msg)
+}
+
+// NOTE: 导入学生
+export const finishImportForm = async file => {
+  const store = useStudent()
+  const msg = await store.importStudent(file)
   message.success(msg)
 }
