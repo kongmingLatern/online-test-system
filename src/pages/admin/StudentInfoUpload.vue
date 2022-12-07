@@ -51,7 +51,8 @@
             <FormItem sort="student" />
           </template>
           <template #import>
-            <ImportInfo />
+            <ImportInfo sort="" isUpload />
+            <!-- <Upload /> -->
           </template>
         </Main>
       </template>
@@ -66,9 +67,14 @@ import {
   provide,
   reactive,
   ref,
+  watchEffect,
 } from 'vue'
 import { getStudentDataByCurrentPage } from '@/api/request'
-import { finishForm, removeStudent } from '@/api/student'
+import {
+  finishForm,
+  finishImportForm,
+  removeStudent,
+} from '@/api/student'
 import type { Student } from '@/utils'
 let data = reactive<Student[]>([])
 const totalPage = ref<number>()
@@ -126,6 +132,7 @@ provide('loading', loading)
 provide('pagination', pagination)
 provide('change', changePage)
 provide('finish', finishForm)
+provide('import', finishImportForm)
 provide('removeItem', removeStudent)
 </script>
 
