@@ -46,7 +46,7 @@ import {
 } from 'vue'
 import { getBasesByCurrentPage } from '@/api/request'
 import type { Task } from '@/utils'
-import { finishForm } from '@/api/base'
+import { finishForm, removeBase } from '@/api/base'
 let data = reactive<Task[]>([])
 const totalPage = ref<number>()
 const current = ref<number>(1)
@@ -95,6 +95,7 @@ provide('impShow', impShow)
 provide('columnSort', 'task')
 provide('data', data)
 provide('loading', loading)
+provide('removeItem', removeBase)
 provide('pagination', pagination)
 provide('finish', finishForm)
 provide('change', changePage)
