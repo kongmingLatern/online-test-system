@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     Checkbox: typeof import('./components/Checkbox.vue')['default']
     Content: typeof import('./components/Content.vue')['default']
     copy: typeof import('./components/SelectSubject.vue')['default']
+    Drawer: typeof import('./components/Drawer.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     Form: typeof import('./components/admin/Form.vue')['default']
     FormItem: typeof import('./components/admin/FormItem.vue')['default']
