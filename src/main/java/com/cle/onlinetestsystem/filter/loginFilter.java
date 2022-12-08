@@ -1,9 +1,7 @@
 package com.cle.onlinetestsystem.filter;
 
-import com.alibaba.fastjson2.JSON;
 import com.cle.onlinetestsystem.Utils.IpUtils;
 import com.cle.onlinetestsystem.common.BaseContext;
-import com.cle.onlinetestsystem.pojo.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
 
@@ -47,10 +45,10 @@ public class loginFilter implements Filter {
 //        log.info(BaseContext.getCurrentId().toString());
 
 //        判断是否已经登录
-        if(BaseContext.getCurrentId()==null){
-            servletResponse.getWriter().write(JSON.toJSONString(R.error("No Login!!!")));
-            return;
-        }
+//        if(BaseContext.getCurrentId()==null){
+//            servletResponse.getWriter().write(JSON.toJSONString(R.error("No Login!!!")));
+//            return;
+//        }
         chain.doFilter(request, response);
 }
 

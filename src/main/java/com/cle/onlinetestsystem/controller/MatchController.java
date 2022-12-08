@@ -40,11 +40,9 @@ public class MatchController {
     public R<Page> getGrade(Integer page, Integer pageSize, String studentNo) {
         Page<Match> matchPage = new Page<>(page, pageSize);
         LambdaQueryWrapper<Match> matchLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        //没有结束的考试不查询成绩
-        matchLambdaQueryWrapper.eq(Match::getIsEnd, 1);
-        matchService.page(matchPage, matchLambdaQueryWrapper);
+        matchLambdaQueryWrapper.eq(Match::getIsEnd,1);
+        matchService.page(matchPage,matchLambdaQueryWrapper);
         Page<MatchDto> matchDtoPage = new Page<>();
-        BeanUtils.copyProperties(matchPage, matchDtoPage);
         List<Match> records = matchPage.getRecords();
         List<MatchDto> collect = records.parallelStream().map(match -> {
             MatchDto matchDto = new MatchDto();
@@ -70,14 +68,17 @@ public class MatchController {
             matchDto.setSubjectName(subject.getSubjectName());
             matchDto.setBaseTitle(base.getBaseTitle());
             matchDto.setGrade(match.getGrade());
+            matchDto.setTaskTime(task.getTaskTime());
+            matchDto.setLimitTime(task.getLimitTime());
             return matchDto;
-        }).filter(matchDto -> {
+        }).filter(matchDto -> {//过滤掉studentNo
             if (studentNo == null) {
                 return true;
             } else {
                 return matchDto.getStudentNo().contains(studentNo);
             }
         }).collect(Collectors.toList());
+        BeanUtils.copyProperties(matchPage, matchDtoPage);
         matchDtoPage.setRecords(collect);
         return R.success(matchDtoPage);
     }
@@ -93,7 +94,9 @@ public class MatchController {
     @GetMapping("/getMatchPasswordPage")
     public R<Page> getMatchPasswordPage(Integer page, Integer pageSize, String studentNo) {
         Page<Match> matchPage = new Page<>(page, pageSize);
-        matchService.page(matchPage);
+        LambdaQueryWrapper<Match> matchLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        matchLambdaQueryWrapper.eq(Match::getIsEnd,0);
+        matchService.page(matchPage,matchLambdaQueryWrapper);
         Page<MatchDto> matchDtoPage = new Page<>();
         BeanUtils.copyProperties(matchPage, matchDtoPage);
         List<Match> records = matchPage.getRecords();
@@ -118,6 +121,8 @@ public class MatchController {
             matchDto.setStudentName(student.getStudentName());
             matchDto.setSubjectName(subject.getSubjectName());
             matchDto.setTaskPassword(match.getMatchPassword());
+            matchDto.setTaskTime(task.getTaskTime());
+            matchDto.setLimitTime(task.getLimitTime());
              if (match.getIsStart() == 0) {
                 matchDto.setStatus("未开考");
             } else if (match.getIsStart() == 1) {
@@ -136,8 +141,7 @@ public class MatchController {
             } else {
                 return matchDto.getStudentNo().contains(studentNo);
             }
-        })
-                .collect(Collectors.toList());
+        }).collect(Collectors.toList());
         matchDtoPage.setRecords(collect);
         return R.success(matchDtoPage);
     }
