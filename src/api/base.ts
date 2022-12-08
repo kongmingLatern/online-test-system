@@ -1,5 +1,6 @@
 import { message } from 'ant-design-vue'
 import { useBase } from '../stores/base.store'
+import router from '../router'
 
 // NOTE:获取所有题库
 export const getBaseList = async (data: any[]) => {
@@ -18,8 +19,8 @@ export const getBaseList = async (data: any[]) => {
 // NOTE: 删除题库
 export const removeBase = async record => {
   const store = useBase()
-  const res = await store.removeBase(record.baseId)
-  message.success(res)
+  await store.removeBase(record.baseId)
+  router.go(0)
 }
 
 // NOTE: 导入题库
@@ -29,5 +30,5 @@ export const finishForm = async (values: any) => {
     ...values,
     file: store.$state.fileList[0],
   })
-  // message.success(msg)
+  router.go(0)
 }
