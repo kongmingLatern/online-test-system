@@ -1,11 +1,14 @@
 <template>
   <!-- NOTE: 考试准则 -->
-  <div overflow-hidden class="width-50">
+  <div overflow-hidden>
     <p font-bold text="center 2xl">考试准则</p>
     <slot name="matchInfo"></slot>
     <p>参加国家教育考试的考生须遵守以下规则：</p>
 
-    <p :class="isTruncate ? 'truncate' : null">
+    <p
+      :class="isTruncate ? 'truncate' : null"
+      sm="truncate"
+    >
       一、自觉服从监考员等考试工作人员管理，不得以任何理由妨碍监考员和考试工作人员履行职责，不得扰乱考场、考点的工作秩序。
     </p>
     <p :class="isTruncate ? 'truncate' : null">
@@ -25,12 +28,20 @@
 
 <script setup lang="ts">
 defineProps<{
-  isTruncate?: boolean;
-}>();
+  isTruncate?: boolean
+}>()
 </script>
 
 <style scoped>
-.width-50 {
-  width: 50%;
+@media screen and (max-width: 376px) {
+  p {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
 }
 </style>
