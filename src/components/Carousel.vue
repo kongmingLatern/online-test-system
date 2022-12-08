@@ -51,6 +51,27 @@ const onChange = (current: number) => {
 }
 </script>
 <style scoped>
+@media screen and (min-width: 600px) {
+  .ant-carousel {
+    height: 60vh;
+    line-height: 60vh;
+    overflow: hidden;
+  }
+  .ant-carousel .slick-slide {
+    text-align: center;
+    height: 60vh;
+    line-height: 60vh;
+    background: #364d79;
+    overflow: hidden;
+  }
+  :deep(.ant-carousel .slick-slider) {
+    height: 100%;
+  }
+  div > img {
+    width: 100%;
+    height: 60vh;
+  }
+}
 @media screen and (max-width: 376px) {
   .ant-carousel {
     height: 20vh;
@@ -59,8 +80,7 @@ const onChange = (current: number) => {
   }
   .ant-carousel .slick-slide {
     text-align: center;
-    height: 20vh;
-    line-height: 20vh;
+    height: 100%;
     background: #364d79;
     overflow: hidden;
   }
@@ -72,31 +92,10 @@ const onChange = (current: number) => {
     height: 100%;
   }
 }
-@media screen and (max-width: 1600px) {
-  .ant-carousel {
-    height: 60vh;
-    line-height: 60vh;
-    overflow: hidden;
-  }
-  .ant-carousel .slick-slide {
-    text-align: center;
-    height: 60vh;
-    line-height: 60vh;
-    background: #364d79;
-    overflow: hidden;
-  }
-  :deep(.ant-carousel .slick-slider) {
-    height: 100%;
-  }
-  div > img {
-    width: 100%;
-    height: 60vh;
-  }
-}
+
 .ant-carousel :deep(.slick-slide) {
   text-align: center;
-  height: 53vh;
-  line-height: 53vh;
+  height: 100%;
   background: #364d79;
   overflow: hidden;
 }
@@ -119,10 +118,10 @@ const onChange = (current: number) => {
 .ant-carousel :deep(.custom-slick-arrow:hover) {
   opacity: 0.5;
 }
-.ant-carousel {
+/* .ant-carousel {
   height: 50vh;
   margin-top: 10px;
-}
+} */
 /* img {
   width: 100%;
   height: 55vh;
