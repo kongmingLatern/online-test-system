@@ -3,7 +3,7 @@ export const columns = [
     title: '试卷编号',
     dataIndex: 'no',
     options: {
-      width: 90,
+      ellipsis: true,
       align: 'center',
     },
   },
@@ -12,6 +12,7 @@ export const columns = [
     dataIndex: 'taskName',
     options: {
       align: 'center',
+      ellipsis: true,
     },
   },
   {
@@ -19,6 +20,7 @@ export const columns = [
     dataIndex: 'taskStartToEnd',
     options: {
       align: 'center',
+      ellipsis: true,
     },
   },
   {
@@ -26,6 +28,7 @@ export const columns = [
     dataIndex: 'taskType',
     options: {
       align: 'center',
+      ellipsis: true,
     },
   },
   {
@@ -33,6 +36,7 @@ export const columns = [
     dataIndex: 'limitTime',
     options: {
       align: 'center',
+      ellipsis: true,
     },
   },
   {
@@ -40,14 +44,16 @@ export const columns = [
     dataIndex: 'taskPeople',
     options: {
       align: 'center',
+      ellipsis: true,
     },
   },
   {
     title: '操作',
     dataIndex: 'allocation',
     options: {
-      width: 30,
+      ellipsis: true,
       align: 'center',
+      fixed: 'right',
     },
   },
 ]

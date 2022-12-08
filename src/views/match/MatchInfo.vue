@@ -1,15 +1,12 @@
 <template>
   <div
     w-100
-    px-5
-    h-100vh
-    flex="~ wrap column"
+    flex="~ wrap col"
+    items="center"
+    class="match-container response"
     fixed
     right-0
     top-0
-    justify="center"
-    items="center"
-    class="match-container"
   >
     <!-- NOTE: 考生信息 -->
     <div flex="~ column" justify="center">
@@ -24,68 +21,78 @@
             "'"
           }}'
         </p>
+        <div text-center class="display">
+          <Drawer
+            :number="dataNumber"
+            @handleClick="handleClick"
+            @submit="finishTask"
+          />
+        </div>
+        <div text-center class="show">
+          <a-button
+            type="danger"
+            class="button-green"
+            w-50
+            rounded
+            @click="finishTask"
+          >
+            提交试卷
+          </a-button>
+        </div>
       </a-space>
     </div>
 
     <!-- NOTE: 题目总览 -->
-    <div>
-      <th>单选题</th>
-      <table w-50 h-auto text-center border>
-        <tr v-for="item in dataNumber.radio / 5">
-          <td v-for="list in 5">
-            <a-anchor :affix="false" @click="handleClick">
-              <a-anchor-link
-                :href="
-                  '#question' + ((item - 1) * 5 + list)
-                "
-                :title="(item - 1) * 5 + list"
-              />
-            </a-anchor>
-          </td>
-        </tr>
-      </table>
-      <th>多选题</th>
-      <table w-50 h-auto text-center border>
-        <tr v-for="item in dataNumber.checkbox / 5">
-          <td v-for="list in 5">
-            <a-anchor :affix="false" @click="handleClick">
-              <a-anchor-link
-                :href="
-                  '#checkbox' + ((item - 1) * 5 + list)
-                "
-                :title="(item - 1) * 5 + list"
-              />
-            </a-anchor>
-          </td>
-        </tr>
-      </table>
-      <th>判断题</th>
-      <table w-50 h-auto text-center border>
-        <tr v-for="item in dataNumber.judge / 5">
-          <td v-for="list in 5">
-            <a-anchor :affix="false" @click="handleClick">
-              <a-anchor-link
-                :href="'#judge' + ((item - 1) * 5 + list)"
-                :title="(item - 1) * 5 + list"
-              />
-            </a-anchor>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div text-center mt-10>
-      <a-button
-        type="danger"
-        class="button-green"
-        w-50
-        rounded
-        @click="finishTask"
-      >
-        提交试卷
-      </a-button>
-    </div>
+    <a-space direction="vertical">
+      <div class="show">
+        <th>单选题</th>
+        <table w-50 h-auto text-center border>
+          <tr v-for="item in dataNumber.radio / 5">
+            <td v-for="list in 5">
+              <a-anchor :affix="false" @click="handleClick">
+                <a-anchor-link
+                  :href="
+                    '#question' + ((item - 1) * 5 + list)
+                  "
+                  :title="(item - 1) * 5 + list"
+                />
+              </a-anchor>
+            </td>
+          </tr>
+        </table>
+        <th>多选题</th>
+        <table w-50 h-auto text-center border>
+          <tr v-for="item in dataNumber.checkbox / 5">
+            <td v-for="list in 5">
+              <a-anchor :affix="false" @click="handleClick">
+                <a-anchor-link
+                  :href="
+                    '#checkbox' + ((item - 1) * 5 + list)
+                  "
+                  :title="(item - 1) * 5 + list"
+                />
+              </a-anchor>
+            </td>
+          </tr>
+        </table>
+        <th>判断题</th>
+        <table w-50 h-auto text-center border>
+          <tr v-for="item in dataNumber.judge / 5">
+            <td v-for="list in 5">
+              <a-anchor :affix="false" @click="handleClick">
+                <a-anchor-link
+                  :href="'#judge' + ((item - 1) * 5 + list)"
+                  :title="(item - 1) * 5 + list"
+                />
+              </a-anchor>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </a-space>
   </div>
 </template>
+<script lang="ts"></script>
 
 <script setup lang="ts">
 import { UserOutlined } from '@ant-design/icons-vue'
@@ -148,7 +155,33 @@ const finishTask = () => {
 }
 </script>
 <style lang="scss" scoped>
-.match-container {
-  width: 20vw;
+.display {
+  display: none;
+}
+@media screen and (max-width: 1100px) {
+  .display {
+    display: block;
+  }
+  .show {
+    display: none;
+  }
+  .response {
+    width: 35vw;
+    top: 0;
+    right: 0;
+  }
+}
+@media screen and (max-width: 376px) {
+  .display {
+    display: block;
+  }
+  .show {
+    display: none;
+  }
+  .response {
+    width: 35vw;
+    top: 0;
+    right: 0;
+  }
 }
 </style>

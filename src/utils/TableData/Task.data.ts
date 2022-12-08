@@ -1,47 +1,51 @@
 export const columns = [
   {
-    title: "试卷编号",
-    dataIndex: "no",
-    options: {
-      width: 90,
-      align: "center",
-    },
-  },
-  {
-    title: "题库名称",
-    dataIndex: "baseTitle",
+    title: '试卷编号',
+    dataIndex: 'no',
     options: {
       ellipsis: true,
-      align: "center",
+      align: 'center',
     },
   },
   {
-    title: "所属科目",
-    dataIndex: "subjectName",
+    title: '题库名称',
+    dataIndex: 'baseTitle',
     options: {
-      align: "center",
+      ellipsis: true,
+      align: 'center',
     },
   },
   {
-    title: "出题老师",
-    dataIndex: "teacherName",
+    title: '所属科目',
+    dataIndex: 'subjectName',
     options: {
-      align: "center",
+      align: 'center',
+      ellipsis: true,
     },
   },
   {
-    title: "查看详情",
-    dataIndex: "detail",
+    title: '出题老师',
+    dataIndex: 'teacherName',
     options: {
-      align: "center",
+      align: 'center',
+      ellipsis: true,
     },
   },
   {
-    title: "操作",
-    dataIndex: "delete",
+    title: '查看详情',
+    dataIndex: 'detail',
     options: {
-      width: 100,
-      align: "center",
+      align: 'center',
+      ellipsis: true,
     },
   },
-];
+  {
+    title: '操作',
+    dataIndex: 'delete',
+    options: {
+      ellipsis: true,
+      align: 'center',
+      fixed: 'right',
+    },
+  },
+]

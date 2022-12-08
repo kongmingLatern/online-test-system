@@ -1,5 +1,7 @@
 <template>
-  <Table />
+  <div mt-5>
+    <Table />
+  </div>
 </template>
 
 <script setup lang="ts">

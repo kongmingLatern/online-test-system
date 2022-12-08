@@ -118,12 +118,4 @@ const onChange = (current: number) => {
 .ant-carousel :deep(.custom-slick-arrow:hover) {
   opacity: 0.5;
 }
-/* .ant-carousel {
-  height: 50vh;
-  margin-top: 10px;
-} */
-/* img {
-  width: 100%;
-  height: 55vh;
-} */
 </style>

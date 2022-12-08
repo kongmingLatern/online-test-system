@@ -6,6 +6,7 @@
     :pagination="pagination"
     :loading="loading"
     @change="changePage"
+    :scroll="{ x: '100%', y: '100%' }"
   >
     <template #bodyCell="{ column, text, record, index }">
       <template v-if="column.dataIndex === 'no'">

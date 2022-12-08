@@ -18,8 +18,11 @@
     <div
       color-white
       absolute
-      right-10
       top-0
+      right-0
+      sm:right-2
+      md:right-5
+      lg:right-10
       v-if="isShow === 'true'"
     >
       <user-outlined />

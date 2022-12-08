@@ -60,18 +60,12 @@ const handleCorrectList = (item, index) => {
   })
 }
 
-nextTick(() => {
-  disableContextMenu()
-})
+// nextTick(() => {
+//   disableContextMenu()
+// })
 
 mitt.on('finishTask', async matchId => {
-  console.log(questionList)
-
-  console.log('finishTask', questionList, matchId)
-  const grade = await store.submit(
-    matchId as string,
-    questionList
-  )
+  await store.submit(matchId as string, questionList)
   // message.success('交卷成功，您的分数为：' + grade)
   setTimeout(() => {
     router.push('/success')

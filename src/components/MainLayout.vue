@@ -3,7 +3,7 @@
     <a-layout-header flex>
       <Header isShow="true">
         <template #menu>
-          <Menu />
+          <Menu class="display" />
         </template>
       </Header>
     </a-layout-header>
@@ -22,16 +22,19 @@
 
 <style scoped>
 :deep(.ant-layout-content) {
-  width: 80vw;
+  width: 88vw;
   margin: 0 auto;
   overflow: hidden;
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (max-width: 450px) {
   :deep(.ant-layout-content) {
     width: 100vw;
     overflow: hidden;
     margin: 0 auto;
+  }
+  .display {
+    display: none;
   }
 }
 

@@ -2,13 +2,13 @@
   <a-space size="large" flex-wrap mt-5 data-test="card">
     <a-card
       hoverable
-      style="width: 450px"
+      class="card"
       v-for="item in cardList"
       :key="item"
-      flex="~"
-      items="center"
+      flex="~ col"
+      w-100
       p-5
-      rounded
+      rounded-t-lg
     >
       <template #cover>
         <img
@@ -16,7 +16,7 @@
           src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F17%2F20210717212914_0b500.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1672576474&t=cecdec9e79552d9992dd8410c0357866"
         />
       </template>
-      <a-card-meta pl-5>
+      <a-card-meta text-center mt-5>
         <template #title>
           <div text-center font-semibold text-xl>
             科目： {{ item.taskName }}
@@ -112,7 +112,6 @@
 import router from '@/router'
 import { useMatch } from '@/stores/match.store'
 import Rules from '@/views/home/Rules.vue'
-import { message } from 'ant-design-vue'
 import { provide, reactive, ref } from 'vue'
 
 const props = defineProps<{
@@ -178,6 +177,12 @@ provide('comShow', comShow)
 </script>
 
 <style scoped>
+@media screen and (max-width: 768px) {
+  .card {
+    width: auto;
+  }
+}
+
 :deep(.ant-card-cover) {
   flex: 1;
 }

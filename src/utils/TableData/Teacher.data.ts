@@ -4,6 +4,7 @@ export const columns = [
     dataIndex: 'no',
     options: {
       align: 'center',
+      ellipsis: true,
     },
   },
   {
@@ -11,6 +12,7 @@ export const columns = [
     dataIndex: 'teacherNo',
     options: {
       align: 'center',
+      ellipsis: true,
     },
   },
   {
@@ -18,6 +20,7 @@ export const columns = [
     dataIndex: 'teacherName',
     options: {
       align: 'center',
+      ellipsis: true,
     },
   },
   {
@@ -25,14 +28,16 @@ export const columns = [
     dataIndex: 'isAuth',
     options: {
       align: 'center',
+      ellipsis: true,
     },
   },
   {
     title: '操作',
     dataIndex: 'deleteAndAuth',
     options: {
-      width: 60,
       align: 'center',
+      ellipsis: true,
+      fixed: 'right',
     },
   },
 ]
