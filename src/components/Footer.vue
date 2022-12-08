@@ -1,11 +1,11 @@
 <template>
   <footer
     font-sans
-    absolute
-    bottom-0
+absolute
     left-0
     h-15
     lh-15
+    bottom-0
     text-sm
     text-center
     class="full"

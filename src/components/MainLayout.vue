@@ -22,7 +22,21 @@
 
 <style scoped>
 :deep(.ant-layout-content) {
-  width: 1400px;
+  width: 80vw;
   margin: 0 auto;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 376px) {
+  :deep(.ant-layout-content) {
+    width: 100vw;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+}
+
+:deep(.ant-layout-header) {
+  width: 100vw;
+  padding: unset;
 }
 </style>
