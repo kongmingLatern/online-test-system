@@ -43,6 +43,12 @@ export default defineConfig({
         'header-title':
           'color-white font-bold text-5 pl-10 ',
       },
+      theme: {
+        breakpoints: {
+          sm: '375px',
+          md: '768px',
+        },
+      },
     }),
     AutoImport({
       include: [
