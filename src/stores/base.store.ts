@@ -71,29 +71,35 @@ export const useBase = defineStore('base', {
     // NOTE: 删除题库
     async removeBase(baseId: string) {
       try {
-        const res = await http.delete(removeBasePath, {
+        const res: any = await http.delete(removeBasePath, {
           params: {
             baseId,
           },
         })
-        return res.data
+        if (res.code === 1) {
+          message.success('删除成功')
+        }
       } catch (e) {
-        return '删除失败'
+        // message.success('删除失败')
       }
     },
     // NOTE: 导入题库
     async importBase(values: any) {
       try {
-        const res = await http.post(importPath, values, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        if (res.data.code === 1) {
+        const res: any = await http.post(
+          importPath,
+          values,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        )
+        if (res.code === 1) {
           message.success('导入成功')
         }
       } catch (e) {
-        message.error('导入失败')
+        // message.error('导入失败')
       }
     },
   },
