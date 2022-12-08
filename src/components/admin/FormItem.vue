@@ -115,14 +115,8 @@
   </a-form>
 </template>
 <script lang="ts" setup>
-import {
-  inject,
-  reactive,
-  ref,
-  watchEffect,
-  type Ref,
-} from 'vue'
-import { useBase } from '../../stores/base.store';
+import { inject, reactive, ref, type Ref } from 'vue'
+import { useBase } from '../../stores/base.store'
 import { getFormItem, getValueByObject } from '@/utils'
 import { PlusOutlined } from '@ant-design/icons-vue'
 
@@ -139,18 +133,14 @@ const layout = {
 }
 
 const isShow: Ref<boolean | undefined> = inject('isShow')!
+const impShow: Ref<boolean | undefined> = inject('impShow')!
 const finish: (values: any) => void = inject('finish')!
-let finishImport: () => void =
+let finishImport: (file: File) => void =
   inject('import') ?? (() => {})
 const store = useBase()
 
-// if (props.isUpload) {
-//   finishImport = inject('import') ?? (() => {})
-// }
-
 const [formArr, form] = getFormItem(props.sort)
 const formState = reactive(form)
-console.log(formState)
 
 const validateMessages = {
   required: '${label} is required!',
@@ -179,7 +169,6 @@ const getBaseId = (key: string, value: string) => {
 const onFinish = (values: any) => {
   console.log('Success:', values, value.value)
   console.log(formState)
-  isShow.value = false
 
   if (props.sort === 'question') {
     formState[props.sort].questionType = value.value
@@ -205,6 +194,8 @@ const onFinish = (values: any) => {
       ...formState[props.sort],
     })
   }
+  isShow.value = false
+  impShow.value = false
 }
 </script>
 

@@ -11,12 +11,6 @@
       </template>
       首页
     </a-menu-item>
-    <a-menu-item key="task" @click="goRouter('/task')">
-      <template #icon>
-        <PaperClipOutlined />
-      </template>
-      试题库
-    </a-menu-item>
     <a-menu-item key="grade" @click="goRouter('/grade')">
       <template #icon>
         <FileSyncOutlined />
@@ -38,7 +32,6 @@
 import { ref } from 'vue'
 import {
   HomeOutlined,
-  PaperClipOutlined,
   FileSyncOutlined,
   UserOutlined,
 } from '@ant-design/icons-vue'

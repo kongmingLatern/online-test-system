@@ -35,6 +35,7 @@
 <script setup lang="ts">
 import router from '@/router'
 import { UserOutlined } from '@ant-design/icons-vue'
+import { message } from 'ant-design-vue'
 defineProps<{
   text?: string
   isTitle?: string
@@ -46,10 +47,11 @@ const username = localStorage.getItem('username')
 const exit = () => {
   localStorage.clear()
   router.push('/login')
+  message.success('退出成功')
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .ant-layout-header {
   position: relative;
 }
