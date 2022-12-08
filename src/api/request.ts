@@ -227,7 +227,6 @@ export async function getSubjectList(data) {
   try {
     const store = useSubject()
     const [res, _] = await store.getSubjectList()
-    console.log(res)
     Object.assign(data, res)
     return res
   } catch (e) {
