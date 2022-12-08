@@ -56,9 +56,7 @@ const judgeList = computed(() => {
 
 const handleCorrectList = (item, index) => {
   nextTick(() => {
-    // console.log(item)
     item.questionCorrectList = [item.questionAnswer]
-    // console.log(questionList)
   })
 }
 
@@ -74,14 +72,12 @@ mitt.on('finishTask', async matchId => {
     matchId as string,
     questionList
   )
-  message.success('交卷成功，您的分数为：' + grade)
+  // message.success('交卷成功，您的分数为：' + grade)
   setTimeout(() => {
     router.push('/success')
   }, 1000)
 })
 mitt.on('saveTask', async matchId => {
-  console.log(questionList)
-
   await store.saveMatch(matchId as string, questionList)
   message.success('自动保存成功')
 })
