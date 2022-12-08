@@ -1,3 +1,4 @@
+import { message } from 'ant-design-vue'
 import { defineStore } from 'pinia'
 import http from '../api/http'
 
@@ -56,13 +57,11 @@ export const useTask = defineStore('task', {
           '/task/add',
           values
         )
-        if (!res.msg) {
-          return res.data
-        } else {
-          return Promise.reject(res.msg)
+        if (res.code === 1) {
+          message.success('添加成功')
         }
       } catch (error) {
-        return error
+        message.success('添加失败')
       }
     },
   },

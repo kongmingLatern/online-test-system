@@ -8,7 +8,7 @@ export const columns = [
     },
   },
   {
-    title: '考试科目',
+    title: '考试名称',
     dataIndex: 'taskName',
     options: {
       align: 'center',

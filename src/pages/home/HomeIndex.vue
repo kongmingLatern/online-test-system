@@ -2,15 +2,15 @@
   <div data-test="homeIndex">
     <!-- NOTE: 轮播图 -->
     <Carousel />
-    <div flex="~" justify="around" p-5>
+    <div p-5>
       <Rules
         rounded
         hover="rounded-l-lg bg-red-800 color-white ease-out duration-500"
         class="small"
         p-5
       />
-      <!-- <Recent xs:w-xs sm:w-sm md:w-md lg:w-xl xl:w-2xl /> -->
     </div>
+    <Recent p-5 />
     <!-- <Footer /> -->
   </div>
 </template>

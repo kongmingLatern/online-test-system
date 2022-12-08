@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import http from '../api/http'
 
 import { Teacher } from '@/utils'
+import { message } from 'ant-design-vue'
 export const useTeacher = defineStore('teachers', {
   state: () => ({
     teacherData: [] as Teacher[],
@@ -37,10 +38,15 @@ export const useTeacher = defineStore('teachers', {
     },
     async addTeacher(values: Teacher) {
       try {
-        const res = await http.post('teacher/add', values)
-        return res.data
+        const res: any = await http.post(
+          'teacher/add',
+          values
+        )
+        if (res.code === 1) {
+          message.success('添加成功')
+        }
       } catch (error) {
-        return '添加失败'
+        message.success('添加失败')
       }
     },
   },
