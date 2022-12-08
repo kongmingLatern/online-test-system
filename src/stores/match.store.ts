@@ -85,11 +85,14 @@ export const useMatch = defineStore('match', {
       taskId: string
     ) {
       try {
-        const res = await http.post(addClassMatchPath, {
-          classIdList,
-          taskId,
-        })
-        if (res.data.code === 1) {
+        const res: any = await http.post(
+          addClassMatchPath,
+          {
+            classIdList,
+            taskId,
+          }
+        )
+        if (res.code === 1) {
           message.success('分配考试成功')
         }
       } catch (error) {
@@ -113,6 +116,9 @@ export const useMatch = defineStore('match', {
               matchPassword,
             },
           })
+          if (res.code === 1) {
+            message.success('开始考试')
+          }
         } else {
           // NOTE: 二次+考试
           res = await http.get(getMatchPath, {
@@ -145,10 +151,14 @@ export const useMatch = defineStore('match', {
     // NOTE: 提交试卷
     async submit(matchId: string, questionDtoList: any[]) {
       try {
-        const res = await http.post(submitPath, {
+        const res: any = await http.post(submitPath, {
           matchId,
           questionDtoList,
         })
+        if (res.code === 1) {
+          message.success('提交成功')
+          return res.data
+        }
         return res.data
       } catch (error) {
         return '系统发生错误'

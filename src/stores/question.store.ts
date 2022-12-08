@@ -1,16 +1,17 @@
-import { defineStore } from "pinia";
-import http from "../api/http";
-import Checkbox from "../utils/Task/Checkbox";
-import Judge from "../utils/Task/Judge";
-import Radio from "../utils/Task/Radio";
+import { message } from 'ant-design-vue'
+import { defineStore } from 'pinia'
+import http from '../api/http'
+import Checkbox from '../utils/Task/Checkbox'
+import Judge from '../utils/Task/Judge'
+import Radio from '../utils/Task/Radio'
 
-const requestPath = "/question/page";
+const requestPath = '/question/page'
 
-const addQuestionPath = "/question/add";
+const addQuestionPath = '/question/add'
 
 // type QuestionType = Radio[] | Checkbox[] | Judge[]
 
-export const useQuestion = defineStore("question", {
+export const useQuestion = defineStore('question', {
   state: () => ({
     question: [] as any[],
   }),
@@ -30,9 +31,9 @@ export const useQuestion = defineStore("question", {
             pageSize,
             questionType,
           },
-        });
-        this.question = [];
-        res.data.records.forEach((record) => {
+        })
+        this.question = []
+        res.data.records.forEach(record => {
           const {
             questionId,
             questionList,
@@ -40,7 +41,7 @@ export const useQuestion = defineStore("question", {
             questionCorrect,
             baseId,
             baseTitle,
-          } = record;
+          } = record
           if (questionType === 1) {
             this.question.push(
               new Radio(
@@ -51,7 +52,7 @@ export const useQuestion = defineStore("question", {
                 questionAnswer,
                 questionCorrect
               )
-            );
+            )
           } else if (questionType === 2) {
             this.question.push(
               new Checkbox(
@@ -62,7 +63,7 @@ export const useQuestion = defineStore("question", {
                 questionAnswer,
                 questionCorrect
               )
-            );
+            )
           } else if (questionType === 3) {
             this.question.push(
               new Judge(
@@ -72,35 +73,45 @@ export const useQuestion = defineStore("question", {
                 questionList,
                 questionCorrect
               )
-            );
+            )
           }
-        });
+        })
 
-        return [this.question, res.data.total];
+        return [this.question, res.data.total]
       } catch (error) {
         // 让表单组件显示错误
-        return [this.question, 0];
+        return [this.question, 0]
       }
     },
     async deleteQuestion(questionId: string) {
       try {
-        const res = await http.delete("/question/delete", {
-          params: {
-            questionId,
-          },
-        });
-        return res.data;
+        const res: any = await http.delete(
+          '/question/delete',
+          {
+            params: {
+              questionId,
+            },
+          }
+        )
+        if (res.code === 1) {
+          message.success('删除成功')
+        }
       } catch (e) {
-        return "删除失败";
+        message.error('删除失敗')
       }
     },
     async addQuestion(question: any) {
       try {
-        const res = await http.post(addQuestionPath, question);
-        return res.data;
+        const res: any = await http.post(
+          addQuestionPath,
+          question
+        )
+        if (res.code === 1) {
+          message.success('添加成功')
+        }
       } catch (e) {
-        return "添加失败";
+        message.success('添加失败')
       }
     },
   },
-});
+})

@@ -1,4 +1,5 @@
 import http from '@/api/http'
+import { message } from 'ant-design-vue'
 import { defineStore } from 'pinia'
 export const useLogin = defineStore('login', {
   state: () => ({
@@ -8,11 +9,15 @@ export const useLogin = defineStore('login', {
   actions: {
     async login(username: string, password: string) {
       try {
-        const res = await http.post('/login', {
+        const res: any = await http.post('/login', {
           username,
           password,
         })
-        return [res.data, true]
+        if (res.code === 1) {
+          message.success('登录成功')
+          return [res.data, true]
+        }
+        return [[] as any, false]
       } catch (error) {
         return [[], false]
       }

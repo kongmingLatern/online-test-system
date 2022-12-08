@@ -43,27 +43,37 @@ export const useStudent = defineStore('students', {
     },
     async addStudent(student: Student) {
       try {
-        const res = await http.post('student/add', student)
-        return res.data
+        const res: any = await http.post(
+          'student/add',
+          student
+        )
+        if (res.code === 1) {
+          message.success('添加成功')
+        }
       } catch (error) {
-        return '添加失败'
+        message.success('添加失败')
       }
     },
     async deleteStudent(studentId: string) {
       try {
-        const res = await http.delete('student/delete', {
-          params: {
-            studentId,
-          },
-        })
-        return res.data
+        const res: any = await http.delete(
+          'student/delete',
+          {
+            params: {
+              studentId,
+            },
+          }
+        )
+        if (res.code === 1) {
+          message.success('删除成功')
+        }
       } catch (error) {
-        return '删除失败'
+        message.error('删除失败')
       }
     },
     async importStudent(file: File) {
       try {
-        const res = await http.post(
+        const res: any = await http.post(
           'student/importStudent',
           { file },
           {
@@ -72,7 +82,7 @@ export const useStudent = defineStore('students', {
             },
           }
         )
-        if (res.data.code === 1) {
+        if (res.code === 1) {
           message.success(res.data)
         }
       } catch (e: any) {
