@@ -18,34 +18,16 @@
       </template>
       <a-card-meta pl-5>
         <template #title>
-          <div
-            v-if="isBase === 'true'"
-            text-center
-            font-semibold
-            text-xl
-          >
-            科目： {{ item.baseTitle }}
-          </div>
-          <div
-            v-if="isBase === 'false'"
-            text-center
-            font-semibold
-            text-xl
-          >
+          <div text-center font-semibold text-xl>
             科目： {{ item.taskName }}
           </div>
         </template>
         <template #description>
           <a-space direction="vertical" pt-3>
-            <p v-if="isBase === 'false'">
-              考试时间：{{ item.taskTime }}
-            </p>
-            <p v-if="isBase === 'false'">
-              限制时间：{{ item.limitTime }}分钟
-            </p>
+            <p>考试时间：{{ item.taskTime }}</p>
+            <p>限制时间：{{ item.limitTime }}分钟</p>
             <p text-center>
               <a-button
-                v-if="isBase === 'false'"
                 type="primary"
                 class="button-green"
                 w-60
@@ -54,23 +36,12 @@
               >
                 进入考试
               </a-button>
-
-              <a-button
-                v-if="isBase === 'true'"
-                type="primary"
-                class="button-green"
-                w-60
-                rounded="full"
-                @click="showModal(item.matchId)"
-              >
-                进入练习
-              </a-button>
             </p>
           </a-space>
         </template>
       </a-card-meta>
     </a-card>
-    <Modal width="100%" isMatch v-if="isBase === 'false'">
+    <Modal width="100%" isMatch>
       <template #modalContent>
         <Rules class="font" text="lg" px-10>
           <template #matchInfo>
@@ -112,10 +83,7 @@
         </a-radio>
         <footer text-center mt-10>
           <a-button
-            v-if="
-              isBase === 'false' &&
-              currentMatch.isStart === 0
-            "
+            v-if="currentMatch.isStart === 0"
             class="button-green"
             h-15
             w-60
@@ -125,10 +93,7 @@
             进入考试
           </a-button>
           <a-button
-            v-else-if="
-              isBase === 'false' &&
-              currentMatch.isStart === 1
-            "
+            v-else-if="currentMatch.isStart === 1"
             type="danger"
             h-15
             w-60
@@ -136,16 +101,6 @@
             @click="goTask(currentMatch.matchId)"
           >
             二次考试
-          </a-button>
-          <a-button
-            v-else
-            class="button-green"
-            h-15
-            w-60
-            rounded
-            @click="goTask(currentMatch.matchId)"
-          >
-            进入练习
           </a-button>
         </footer>
       </template>
@@ -162,7 +117,6 @@ import { provide, reactive, ref } from 'vue'
 
 const props = defineProps<{
   cardList?: any[]
-  isBase?: string
 }>()
 const comShow = ref<boolean>(false)
 const currentMatch = reactive<Record<string, any>>({})
@@ -194,7 +148,6 @@ const goTask = async matchId => {
     !currentMatch.isStart
   )
   if (msg === '密码错误') {
-    message.error(msg)
     return
   }
   // NOTE: 题目信息
