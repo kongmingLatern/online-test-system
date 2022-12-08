@@ -8,7 +8,12 @@
 
       <!-- 导航 -->
       <template #nav>
-        <Nav data-test="taskBaseNav">
+        <Nav
+          data-test="taskBaseNav"
+          flex
+          justify="between"
+          mb-2
+        >
           <template #breadcrumb>
             <BreadCrumb />
           </template>

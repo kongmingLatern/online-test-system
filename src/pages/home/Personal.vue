@@ -1,10 +1,6 @@
 <template>
   <div data-test="personal">
-    <Card
-      v-if="cardList.length > 0"
-      :cardList="cardList"
-      isBase="false"
-    />
+    <Card v-if="cardList.length > 0" :cardList="cardList" />
     <a-empty v-else>
       <template #description>
         <span>暂无考试</span>
@@ -20,7 +16,6 @@ import { onMounted, reactive } from 'vue'
 const cardList = reactive([])
 onMounted(async () => {
   getSelfMatch(cardList)
-  console.log(cardList)
 })
 </script>
 
