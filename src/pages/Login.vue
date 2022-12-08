@@ -10,119 +10,13 @@
     >
       在线考试系统
     </header>
-    <a-form
-      :model="formState"
-      name="normal_login"
-      class="login-form center"
-      @finish="onFinish"
-      @finishFailed="onFinishFailed"
-      data-test="login"
-      w-100
-      h-auto
-      z-10
-      bg-blue-800
-      p-5
-      rounded-bl-lg
-      text-center
-      font-sans
-    >
-      <h1 text-center font-bold color-white>登录</h1>
-      <a-form-item
-        name="username"
-        :rules="[
-          {
-            required: true,
-            message: '请输入你的学号',
-          },
-        ]"
-      >
-        <a-input
-          v-model:value="formState.username"
-          placeholder="请输入学号、教工号"
-        >
-          <template #prefix>
-            <UserOutlined class="site-form-item-icon" />
-          </template>
-        </a-input>
-      </a-form-item>
-
-      <a-form-item
-        name="password"
-        :rules="[
-          {
-            required: true,
-            message: '请输入密码',
-          },
-        ]"
-      >
-        <a-input-password
-          v-model:value="formState.password"
-          placeholder="请输入密码"
-        >
-          <template #prefix>
-            <LockOutlined class="site-form-item-icon" />
-          </template>
-        </a-input-password>
-      </a-form-item>
-
-      <a-form-item text-center>
-        <a-button
-          :disabled="disabled"
-          type="danger"
-          html-type="submit"
-          class="login-form-button"
-          w-75
-          rounded
-        >
-          登录
-        </a-button>
-      </a-form-item>
-    </a-form>
+    <div flex>
+      <Switch class="center" />
+    </div>
     <Footer />
   </div>
 </template>
-<script lang="ts" setup>
-import { reactive, computed } from 'vue'
-import {
-  UserOutlined,
-  LockOutlined,
-} from '@ant-design/icons-vue'
-import { useLogin } from '@/stores/login.store'
-import { message } from 'ant-design-vue'
-import router from '@/router'
-interface FormState {
-  username: string
-  password: string
-}
-const formState = reactive<FormState>({
-  username: '',
-  password: '',
-})
-const store = useLogin()
-const onFinish = async (values: any) => {
-  const { username, password } = values
-  const [res, isSuccess] = await store.login(
-    username,
-    password
-  )
-  if (isSuccess) {
-    message.success('登录成功')
-    store.setLocalStorage('username', res.username)
-    setTimeout(() => {
-      router.push('/home')
-    }, 1000)
-  } else {
-    message.error('登录失败')
-  }
-}
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo)
-}
-const disabled = computed(() => {
-  return !(formState.username && formState.password)
-})
-</script>
+<script lang="ts" setup></script>
 <style lang="scss" scoped>
 #components-form-demo-normal-login .login-form {
   max-width: 300px;
@@ -137,11 +31,8 @@ const disabled = computed(() => {
 .center {
   position: absolute;
   top: 50%;
-  left: 80%;
+  left: 50%;
   transform: translate(-50%, -50%);
-}
-:deep(.ant-input-affix-wrapper) {
-  width: 300px;
 }
 .img {
   width: 100%;
