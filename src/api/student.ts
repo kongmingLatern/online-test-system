@@ -7,22 +7,19 @@ import { message } from 'ant-design-vue'
 export const removeStudent = async (record: Student) => {
   const store = useStudent()
   const { studentId } = record
-  const res = await store.deleteStudent(studentId)
-  message.success(res)
+  store.deleteStudent(studentId)
   router.go(0)
 }
 // NOTE: 添加学生(表单)
-export const finishForm = async (
-  values: Student,
-  isImport: boolean = false
-) => {
+export const finishForm = async (values: Student) => {
   const store = useStudent()
-  const msg = await store.addStudent(values)
-  message.success(msg)
+  await store.addStudent(values)
+  router.go(0)
 }
 
 // NOTE: 导入学生
 export const finishImportForm = async file => {
   const store = useStudent()
   await store.importStudent(file)
+  router.go(0)
 }
