@@ -55,7 +55,7 @@ public class MatchScheduling {
      * 每天0点查询有无未考的考试，有就设置为已考
      */
     @Scheduled(cron ="0 0 0 * * ?")
-//    @Scheduled(fixedDelay = 1000)
+//    @Scheduled(fixedDelay = 5*60*1000)
     public void notExam(){
         List<Task> taskList = taskService.list();
         taskList.parallelStream().forEach(task -> {
@@ -69,7 +69,4 @@ public class MatchScheduling {
             });
         });
     }
-
-
-
 }

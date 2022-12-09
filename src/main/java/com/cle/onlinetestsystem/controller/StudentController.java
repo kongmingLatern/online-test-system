@@ -53,7 +53,9 @@ public class StudentController {
             clbumLambdaQueryWrapper.eq(Clbum::getClassId, student.getClassId());
             Clbum clbum = clbumService.getOne(clbumLambdaQueryWrapper);
             BeanUtils.copyProperties(student, studentDto);
-            studentDto.setClassNo(clbum.getClassNo());
+            if(clbum!=null) {
+                studentDto.setClassNo(clbum.getClassNo());
+            }
             return studentDto;
         }).collect(Collectors.toList());
         studentDtoPage.setRecords(collect);

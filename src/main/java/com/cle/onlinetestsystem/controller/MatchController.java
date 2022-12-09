@@ -71,7 +71,7 @@ public class MatchController {
             matchDto.setTaskTime(task.getTaskTime());
             matchDto.setLimitTime(task.getLimitTime());
             return matchDto;
-        }).filter(matchDto -> {//过滤掉studentNo
+        }).filter(matchDto -> {//过滤掉没有studentNo的
             if (studentNo == null) {
                 return true;
             } else {
@@ -90,12 +90,14 @@ public class MatchController {
      * @param pageSize
      * @param studentNo
      * @return
+     *
      */
     @GetMapping("/getMatchPasswordPage")
     public R<Page> getMatchPasswordPage(Integer page, Integer pageSize, String studentNo) {
         Page<Match> matchPage = new Page<>(page, pageSize);
         LambdaQueryWrapper<Match> matchLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        matchLambdaQueryWrapper.eq(Match::getIsEnd,0);
+        matchLambdaQueryWrapper.eq(Match::getIsEnd,0)
+                               .orderByDesc(Match::getIsStart);
         matchService.page(matchPage,matchLambdaQueryWrapper);
         Page<MatchDto> matchDtoPage = new Page<>();
         BeanUtils.copyProperties(matchPage, matchDtoPage);
