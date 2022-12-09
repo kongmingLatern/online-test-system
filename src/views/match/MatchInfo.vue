@@ -100,6 +100,7 @@ import { message, type AnchorProps } from 'ant-design-vue'
 import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import mitt from '@/utils/mitt'
 import { useRoute } from 'vue-router'
+import router from '@/router'
 const route = useRoute()
 
 const username = localStorage.getItem('username')
@@ -125,6 +126,7 @@ onMounted(() => {
       // 完成考试
       finishTask()
       message.success('考试时间到，已直接交卷')
+      router.push('/success')
     } else if (limitTime.value === 300) {
       message.warn('考试还有5分钟结束')
     }
