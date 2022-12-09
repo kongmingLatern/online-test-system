@@ -9,15 +9,7 @@
 import Login from '@/views/login/Login.vue'
 </script>
 
-<style>
-#app {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #eee;
-}
-
+<style scoped>
 .container {
   display: flex;
   flex-direction: column;
@@ -28,5 +20,4 @@ import Login from '@/views/login/Login.vue'
     0 6px 6px rgba(0, 0, 0, 0.23);
   border-radius: 10px;
 }
-
 </style>
