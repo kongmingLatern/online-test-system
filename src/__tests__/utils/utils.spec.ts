@@ -1,4 +1,4 @@
-import type { TableColumnsOptions } from "../../type";
+import type { TableColumnsOptions } from '../../type'
 import {
   Column,
   getValueByObject,
@@ -7,152 +7,166 @@ import {
   setData,
   setReactiveValue,
   Task,
-} from "@/utils";
-import { Student } from "@/utils";
-import { reactive } from "vue";
+} from '@/utils'
+import { Student } from '@/utils'
+import { reactive } from 'vue'
 
-describe("columns", () => {
-  let title: string;
-  let dataIndex: string;
-  let key: string;
-  let options: Partial<TableColumnsOptions>;
+describe('columns', () => {
+  let title: string
+  let dataIndex: string
+  let key: string
+  let options: Partial<TableColumnsOptions>
   beforeEach(() => {
-    title = "Name";
-    dataIndex = "name";
-    key = "name";
+    title = 'Name'
+    dataIndex = 'name'
+    key = 'name'
     options = {
       width: 80,
-    };
-  });
-  test("three params", () => {
-    const result = setColumn(title, dataIndex, key);
+    }
+  })
+  test('three params', () => {
+    const result = setColumn(title, dataIndex, key)
     expect(result).toEqual({
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    });
-  });
-  test("three + params", () => {
-    const result = setColumn(title, dataIndex, key, options);
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    })
+  })
+  test('three + params', () => {
+    const result = setColumn(title, dataIndex, key, options)
     expect(result).toEqual({
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
       width: 80,
-    });
-  });
+    })
+  })
 
-  test("arr columns", () => {
-    const titles: string[] = ["title1", "title2", "title3"];
-    const dataIndexs: string[] = ["dataIndex1", "dataIndex2", "dataIndex3"];
+  test('arr columns', () => {
+    const titles: string[] = ['title1', 'title2', 'title3']
+    const dataIndexs: string[] = [
+      'dataIndex1',
+      'dataIndex2',
+      'dataIndex3',
+    ]
     const arr = new Array(3).fill(0).map((_, index) => {
       return setColumn(
         titles[index],
         dataIndexs[index],
         titles[index],
         options
-      );
-    });
-    const result = setColumns(arr);
+      )
+    })
+    const result = setColumns(arr)
     expect(result).toEqual([
       {
-        title: "title1",
-        dataIndex: "dataIndex1",
-        key: "title1",
+        title: 'title1',
+        dataIndex: 'dataIndex1',
+        key: 'title1',
         width: 80,
       },
       {
-        title: "title2",
-        dataIndex: "dataIndex2",
-        key: "title2",
+        title: 'title2',
+        dataIndex: 'dataIndex2',
+        key: 'title2',
         width: 80,
       },
       {
-        title: "title3",
-        dataIndex: "dataIndex3",
-        key: "title3",
+        title: 'title3',
+        dataIndex: 'dataIndex3',
+        key: 'title3',
         width: 80,
       },
-    ]);
-  });
+    ])
+  })
 
-  test("class column", () => {
-    const column = new Column(title, dataIndex, key, options);
+  test('class column', () => {
+    const column = new Column(
+      title,
+      dataIndex,
+      key,
+      options
+    )
     expect(column).toEqual({
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
       width: 80,
-    });
-  });
+    })
+  })
 
-  test("arr class Column", () => {
+  test('arr class Column', () => {
     const arr = [
-      new Column("title1", "dataIndex1", "title1"),
-      new Column("title2", "dataIndex2", "title2"),
-      new Column("title3", "dataIndex3", "title3"),
-    ];
-    const result = setColumns(arr, options);
+      new Column('title1', 'dataIndex1', 'title1'),
+      new Column('title2', 'dataIndex2', 'title2'),
+      new Column('title3', 'dataIndex3', 'title3'),
+    ]
+    const result = setColumns(arr, options)
     expect(result).toEqual([
       {
-        title: "title1",
-        dataIndex: "dataIndex1",
-        key: "title1",
+        title: 'title1',
+        dataIndex: 'dataIndex1',
+        key: 'title1',
         width: 80,
       },
       {
-        title: "title2",
-        dataIndex: "dataIndex2",
-        key: "title2",
+        title: 'title2',
+        dataIndex: 'dataIndex2',
+        key: 'title2',
         width: 80,
       },
       {
-        title: "title3",
-        dataIndex: "dataIndex3",
-        key: "title3",
+        title: 'title3',
+        dataIndex: 'dataIndex3',
+        key: 'title3',
         width: 80,
       },
-    ]);
-  });
-});
-describe("class data about table", () => {
-  it("Student ", () => {
+    ])
+  })
+})
+describe('class data about table', () => {
+  it('Student ', () => {
     const arr = [
-      new Student("121", "1", "施颖杰", "0922201"),
-      new Student("122", "2", "施颖杰", "0922201"),
-      new Student("123", "3", "施颖杰", "0922201"),
-    ];
-    const result = setData(arr);
+      new Student('121', '1', '施颖杰', '0922201'),
+      new Student('122', '2', '施颖杰', '0922201'),
+      new Student('123', '3', '施颖杰', '0922201'),
+    ]
+    const result = setData(arr)
     expect(result).toEqual([
       {
         key: 0,
-        studentId: "121",
-        studentNo: "1",
-        studentName: "施颖杰",
-        classNo: "0922201",
+        studentId: '121',
+        studentNo: '1',
+        studentName: '施颖杰',
+        classNo: '0922201',
       },
       {
         key: 1,
-        studentId: "122",
-        studentNo: "2",
-        studentName: "施颖杰",
-        classNo: "0922201",
+        studentId: '122',
+        studentNo: '2',
+        studentName: '施颖杰',
+        classNo: '0922201',
       },
       {
         key: 2,
-        studentId: "123",
-        studentNo: "3",
-        studentName: "施颖杰",
-        classNo: "0922201",
+        studentId: '123',
+        studentNo: '3',
+        studentName: '施颖杰',
+        classNo: '0922201',
       },
-    ]);
-  });
+    ])
+  })
 
-  it("Task", () => {
+  it('Task', () => {
     const arr = new Array(3).fill(
-      new Task("马克思主义", "马克思主义与毛泽东思想", "孔祥琦", "孔祥琦")
-    );
-    const result = setData(arr);
+      new Task(
+        '马克思主义',
+        '马克思主义与毛泽东思想',
+        '孔祥琦',
+        '孔祥琦'
+      )
+    )
+    const result = setData(arr)
     expect(result).toMatchInlineSnapshot(`
       [
         {
@@ -183,88 +197,86 @@ describe("class data about table", () => {
           "teacherName": undefined,
         },
       ]
-    `);
-  });
-});
+    `)
+  })
+})
 
-describe("change reactive into common object", () => {
-  it("should return a common object", () => {
+describe('change reactive into common object', () => {
+  it('should return a common object', () => {
     const formState = reactive({
       questionCorrectList: [
         {
-          values: "123",
+          values: '123',
           key: Date.now(),
         },
         {
-          values: "123",
+          values: '123',
           key: Date.now(),
         },
         {
-          values: "123",
+          values: '123',
           key: Date.now(),
         },
       ],
       questionAnswerList: [
         {
-          values: "123",
+          values: '123',
           key: Date.now(),
         },
         {
-          values: "123",
+          values: '123',
           key: Date.now(),
         },
         {
-          values: "123",
+          values: '123',
           key: Date.now(),
         },
       ],
-    });
-    expect(getValueByObject(formState, "questionCorrectList")).toEqual([
-      "123",
-      "123",
-      "123",
-    ]);
-  });
-});
+    })
+    expect(
+      getValueByObject(formState, 'questionCorrectList')
+    ).toEqual(['123', '123', '123'])
+  })
+})
 
-describe("enhance reactive object", () => {
-  it.skip("shoule add a value param", () => {
+describe('enhance reactive object', () => {
+  it.skip('shoule add a value param', () => {
     const res = reactive([
       {
-        baseId: "1595984141143273474",
-        baseTitle: "123",
+        baseId: '1595984141143273474',
+        baseTitle: '123',
         createUser: null,
-        subjectName: "高数A",
-        teacherName: "沈金晶",
+        subjectName: '高数A',
+        teacherName: '沈金晶',
       },
       {
-        baseId: "1597624468123942913",
-        baseTitle: "高数",
+        baseId: '1597624468123942913',
+        baseTitle: '高数',
         createUser: null,
-        subjectName: "高数A",
-        teacherName: "沈金晶",
+        subjectName: '高数A',
+        teacherName: '沈金晶',
       },
-    ]);
-    expect(setReactiveValue(res)).toEqual(
+    ])
+    expect(setReactiveValue(res, 'baseTitle')).toEqual(
       reactive([
         {
-          baseId: "1595984141143273474",
-          baseTitle: "123",
+          baseId: '1595984141143273474',
+          baseTitle: '123',
           createUser: null,
-          subjectName: "高数A",
-          teacherName: "沈金晶",
+          subjectName: '高数A',
+          teacherName: '沈金晶',
           // 添加一行，value = baseTitle 对应的值就行
-          value: "123",
+          value: '123',
         },
         {
-          baseId: "1597624468123942913",
-          baseTitle: "高数",
+          baseId: '1597624468123942913',
+          baseTitle: '高数',
           createUser: null,
-          subjectName: "高数A",
-          teacherName: "沈金晶",
-          value: "高数",
+          subjectName: '高数A',
+          teacherName: '沈金晶',
+          value: '高数',
         },
       ])
-    );
-  });
-});
+    )
+  })
+})
