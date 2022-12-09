@@ -92,10 +92,18 @@ const onFinish = async (values: any) => {
     password
   )
   if (isSuccess) {
-    store.setLocalStorage('username', res.username)
-    setTimeout(() => {
-      router.push('/home')
-    }, 1000)
+    store.setLocalStorage('username', res.name)
+    store.setLocalStorage('identity', res.studentOrTeacher)
+    store.setLocalStorage('isAuth', res?.isAuth)
+    if (res.studentOrTeacher === 1 || res?.isAuth) {
+      setTimeout(() => {
+        router.push('/admin')
+      }, 1000)
+    } else {
+      setTimeout(() => {
+        router.push('/home')
+      }, 1000)
+    }
   } else {
     message.error('登录失败')
   }
