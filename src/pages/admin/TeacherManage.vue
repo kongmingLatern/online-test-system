@@ -12,10 +12,11 @@
           data-test="teacherNav"
           flex="~"
           justify="between"
+          items="center"
           mb-3
         >
           <template #breadcrumb>
-            <BreadCrumb />
+            <BreadCrumb :breadcrumb="breadcrumb" />
           </template>
           <template #button>
             <a-button
@@ -59,6 +60,17 @@ const loading = ref<boolean>(false)
 const current = ref<number>(1)
 const isShow = ref<boolean>(false)
 const pageSize = ref<number>(10)
+
+const breadcrumb = reactive([
+  {
+    name: '首页',
+    path: '/admin',
+  },
+  {
+    name: '教师管理',
+    path: '/admin/teacher',
+  },
+])
 
 const pagination = computed(() => ({
   total: totalPage.value,

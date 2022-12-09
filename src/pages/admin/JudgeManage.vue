@@ -8,9 +8,15 @@
 
       <!-- 导航 -->
       <template #nav>
-        <Nav data-test="judgeNav" flex="~" justify="between" mb-3>
+        <Nav
+          data-test="judgeNav"
+          flex="~"
+          justify="between"
+          items="center"
+          mb-3
+        >
           <template #breadcrumb>
-            <BreadCrumb />
+            <BreadCrumb :breadcrumb="breadcrumb" />
           </template>
           <template #button>
             <a-button
@@ -38,23 +44,51 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, provide, reactive, ref } from "vue";
-import { getQuestionByCurrentPage } from "@/api/request";
-import type { Judge } from "@/utils";
-import { finishQuestionForm, removeQuestion } from "@/api/question";
+import {
+  computed,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+} from 'vue'
+import { getQuestionByCurrentPage } from '@/api/request'
+import type { Judge } from '@/utils'
+import {
+  finishQuestionForm,
+  removeQuestion,
+} from '@/api/question'
 
-let data = reactive<Judge[]>([]);
-const totalPage = ref<number>();
-const loading = ref<boolean>(false);
-const current = ref<number>(1);
-const pageSize = ref<number>(10);
-const isShow = ref<boolean>(false);
+let data = reactive<Judge[]>([])
+const totalPage = ref<number>()
+const loading = ref<boolean>(false)
+const current = ref<number>(1)
+const pageSize = ref<number>(10)
+const isShow = ref<boolean>(false)
+
+const breadcrumb = reactive([
+  {
+    name: '试题库管理',
+    path: '/admin/baseManage',
+  },
+  {
+    name: '单选题管理',
+    path: '/admin/radioManage',
+  },
+  {
+    name: '多选题管理',
+    path: '/admin/checkboxManage',
+  },
+  {
+    name: '判断题管理',
+    path: '/admin/judgeManage',
+  },
+])
 
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,
   pageSize: pageSize.value,
-}));
+}))
 
 onMounted(async () => {
   await getQuestionByCurrentPage(
@@ -64,16 +98,18 @@ onMounted(async () => {
     totalPage,
     3,
     loading
-  );
-});
+  )
+})
 
 const addJudge = () => {
-  isShow.value = true;
-};
+  isShow.value = true
+}
 
-const changePage: (pagination: any) => Promise<void> = async (pagination) => {
-  pagination.current = pagination.current;
-  current.value = pagination.current;
+const changePage: (
+  pagination: any
+) => Promise<void> = async pagination => {
+  pagination.current = pagination.current
+  current.value = pagination.current
 
   getQuestionByCurrentPage(
     data,
@@ -82,20 +118,20 @@ const changePage: (pagination: any) => Promise<void> = async (pagination) => {
     totalPage,
     3,
     loading
-  );
-};
+  )
+}
 
-provide("columnSort", "judge");
-provide("title", "添加判断题");
-provide("isShow", isShow);
-provide("loading", loading);
-provide("data", data);
-provide("pagination", pagination);
-provide("change", changePage);
+provide('columnSort', 'judge')
+provide('title', '添加判断题')
+provide('isShow', isShow)
+provide('loading', loading)
+provide('data', data)
+provide('pagination', pagination)
+provide('change', changePage)
 
 // NOTE: 自定义事件
-provide("removeItem", removeQuestion);
-provide("finish", finishQuestionForm);
+provide('removeItem', removeQuestion)
+provide('finish', finishQuestionForm)
 </script>
 
 <style scoped></style>

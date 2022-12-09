@@ -16,10 +16,11 @@
           data-test="studentNav"
           flex="~"
           justify="between"
+          items="center"
           mb-3
         >
           <template #breadcrumb>
-            <BreadCrumb />
+            <BreadCrumb :breadcrumb="breadcrumb" />
           </template>
           <template #button>
             <a-space>
@@ -83,6 +84,17 @@ const pageSize = ref<number>(10)
 const loading = ref<boolean>(false)
 const isShow = ref<boolean>(false)
 const impShow = ref<boolean>(false)
+
+const breadcrumb = reactive([
+  {
+    name: '学生信息管理',
+    path: '/admin/studentInfoManage',
+  },
+  {
+    name: '学生信息上传',
+    path: '/admin/studentInfoUpload',
+  },
+])
 
 const pagination = computed(() => ({
   total: totalPage.value,

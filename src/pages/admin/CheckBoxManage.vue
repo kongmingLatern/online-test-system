@@ -12,10 +12,11 @@
           data-test="checkBoxNav"
           flex="~"
           justify="between"
+          items="center"
           mb-3
         >
           <template #breadcrumb>
-            <BreadCrumb />
+            <BreadCrumb :breadcrumb="breadcrumb" />
           </template>
           <template #button>
             <a-button
@@ -63,6 +64,26 @@ const loading = ref<boolean>(false)
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
 const isShow = ref<boolean>(false)
+
+const breadcrumb = reactive([
+  {
+    name: '试题库管理',
+    path: '/admin/baseManage',
+  },
+  {
+    name: '单选题管理',
+    path: '/admin/radioManage',
+  },
+  {
+    name: '判断题管理',
+    path: '/admin/judgeManage',
+  },
+  {
+    name: '多选题管理',
+    path: '/admin/checkboxManage',
+  },
+])
+
 const addCheckbox = () => {
   isShow.value = true
 }

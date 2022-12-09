@@ -9,7 +9,7 @@
       <template #nav>
         <Nav data-test="searchStudentPasswordNav">
           <template #breadcrumb>
-            <BreadCrumb />
+            <!-- <BreadCrumb /> -->
           </template>
         </Nav>
       </template>

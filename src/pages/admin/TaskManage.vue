@@ -8,9 +8,9 @@
 
       <!-- 导航 -->
       <template #nav>
-        <Nav data-test="taskNav">
+        <Nav data-test="taskNav" mb-2>
           <template #breadcrumb>
-            <BreadCrumb />
+            <BreadCrumb :breadcrumb="breadcrumb" />
           </template>
         </Nav>
       </template>
@@ -46,6 +46,17 @@ const loading = ref<boolean>(false)
 const current = ref<number>(1)
 const pageSize = ref<number>(10)
 const taskId = ref<string>('')
+
+const breadcrumb = reactive([
+  {
+    name: '试卷生成',
+    path: '/admin/taskGenerate',
+  },
+  {
+    name: '试卷管理',
+    path: '/admin/taskManage',
+  },
+])
 
 const pagination = computed(() => ({
   total: totalPage.value,

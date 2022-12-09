@@ -12,10 +12,11 @@
           data-test="taskBaseNav"
           flex
           justify="between"
+          items="center"
           mb-2
         >
           <template #breadcrumb>
-            <BreadCrumb />
+            <BreadCrumb :breadcrumb="breadcrumb" />
           </template>
           <template #button>
             <a-button
@@ -59,6 +60,25 @@ const pageSize = ref<number>(10)
 const loading = ref<boolean>(false)
 const isShow = ref<boolean>(false)
 const impShow = ref<boolean>(false)
+
+const breadcrumb = reactive([
+  {
+    name: '单选题管理',
+    path: '/admin/radioManage',
+  },
+  {
+    name: '多选题管理',
+    path: '/admin/checkboxManage',
+  },
+  {
+    name: '判断题管理',
+    path: '/admin/judgeManage',
+  },
+  {
+    name: '试题库管理',
+    path: '/admin/taskBaseManage',
+  },
+])
 
 const pagination = computed(() => ({
   total: totalPage.value,
