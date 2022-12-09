@@ -1,41 +1,39 @@
 <template>
-  <a-layout>
+  <a-layout overflow-hidden>
+    <a-layout-header
+      :style="{ padding: 0, position: 'relative' }"
+    >
+      <Header data-test="header" />
+    </a-layout-header>
     <a-layout>
-      <a-layout-header
-        :style="{ padding: 0, position: 'relative' }"
+      <a-layout-sider
+        breakpoint="lg"
+        collapsed-width="0"
+        @collapse="onCollapse"
+        @breakpoint="onBreakpoint"
       >
-        <Header data-test="header" />
-      </a-layout-header>
-      <a-layout>
-        <a-layout-sider
-          breakpoint="lg"
-          collapsed-width="0"
-          @collapse="onCollapse"
-          @breakpoint="onBreakpoint"
+        <a-menu
+          v-model:openKeys="state.openKeys"
+          v-model:selectedKeys="state.selectedKeys"
+          theme="dark"
+          mode="inline"
+          :inline-collapsed="state.collapsed"
+          @openChange="onOpenChange"
+          data-test="aside"
         >
-          <a-menu
-            v-model:openKeys="state.openKeys"
-            v-model:selectedKeys="state.selectedKeys"
-            theme="dark"
-            mode="inline"
-            :inline-collapsed="state.collapsed"
-            @openChange="onOpenChange"
-            data-test="aside"
-          >
-            <AdminAside />
-          </a-menu>
-        </a-layout-sider>
+          <AdminAside />
+        </a-menu>
+      </a-layout-sider>
 
-        <a-layout-content data-test="content">
-          <div p-5>
-            <router-view />
-          </div>
-        </a-layout-content>
-      </a-layout>
-      <a-layout-footer style="text-align: center">
-        <!-- <Footer /> -->
-      </a-layout-footer>
+      <a-layout-content data-test="content">
+        <div p-5>
+          <router-view />
+        </div>
+      </a-layout-content>
     </a-layout>
+    <a-layout-footer style="text-align: center">
+      <!-- <Footer /> -->
+    </a-layout-footer>
   </a-layout>
 </template>
 <script lang="ts" setup>
@@ -83,5 +81,8 @@ const onBreakpoint = (broken: boolean) => {
 
 [data-theme='dark'] .site-layout-sub-header-background {
   background: #141414;
+}
+.ant-layout {
+  overflow: hidden;
 }
 </style>

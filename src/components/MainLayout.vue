@@ -23,7 +23,7 @@
 <style scoped>
 :deep(.ant-layout-content) {
   width: 88vw;
-  margin: 0 auto;
+  margin: 8vh auto;
   overflow: hidden;
 }
 
@@ -41,5 +41,9 @@
 :deep(.ant-layout-header) {
   width: 100vw;
   padding: unset;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
 }
 </style>
