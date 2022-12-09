@@ -55,6 +55,7 @@ const onChange = (current: number) => {
   .ant-carousel {
     height: 60vh;
     line-height: 60vh;
+    margin-top: 8vh;
     overflow: hidden;
   }
   .ant-carousel .slick-slide {
@@ -76,6 +77,7 @@ const onChange = (current: number) => {
   .ant-carousel {
     height: 20vh;
     line-height: 20vh;
+    margin-top: 5vh;
     overflow: hidden;
   }
   .ant-carousel .slick-slide {
