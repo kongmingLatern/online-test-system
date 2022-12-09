@@ -36,6 +36,9 @@ export function disableContextMenu() {
     } else if (e.shiftKey && e.keyCode === 121) {
       e.preventDefault()
       e.stopPropagation()
+    } else if (e.key === 'F5') {
+      e.preventDefault()
+      e.stopPropagation()
     }
   })
 }
