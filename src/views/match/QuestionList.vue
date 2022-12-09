@@ -60,9 +60,9 @@ const handleCorrectList = (item, index) => {
   })
 }
 
-// nextTick(() => {
-//   disableContextMenu()
-// })
+nextTick(() => {
+  disableContextMenu()
+})
 
 mitt.on('finishTask', async matchId => {
   await store.submit(matchId as string, questionList)
