@@ -1,3 +1,4 @@
+import { message } from 'ant-design-vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -135,7 +136,42 @@ const router = createRouter({
       name: 'success',
       component: () => import('@/pages/common/Success.vue'),
     },
+    // 404
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'notFound',
+      component: () => import('@/pages/common/404.vue'),
+    },
   ],
 })
+
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') {
+    localStorage.clear()
+    next()
+  } else if (to.path.startsWith('/admin')) {
+    getPath(next)
+  } else {
+    getPath(next)
+  }
+})
+
+function getPath(next) {
+  const token = localStorage.getItem('identity')
+    ? Number.parseInt(
+        localStorage.getItem('identity') as string
+      )
+    : localStorage.getItem('isAuth') !== 'undefined'
+    ? 2
+    : null
+  console.log(token)
+  if (token === null || token === undefined) {
+    message.error('请先登录')
+    next('/login')
+  } else {
+    next()
+  }
+}
 
 export default router
