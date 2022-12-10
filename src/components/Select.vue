@@ -12,6 +12,7 @@
 import {
   getBasesByCurrentPage,
   getSubjectList,
+  getTeacherList,
 } from '@/api/request'
 import { setReactiveValue } from '@/utils'
 import { onMounted, reactive, ref, watchEffect } from 'vue'
@@ -21,7 +22,6 @@ const props = defineProps<{
 }>()
 const value = ref<Record<string, any>>({
   value: '',
-  // baseId: '',
 })
 value.value[props.type] = ''
 const totalPage = ref<number | undefined>()
@@ -56,6 +56,15 @@ onMounted(async () => {
       console.log(value)
       selectBaseId.value = value.value[0].subjectId
     }
+  } else if (props.type === 'teacherAdd') {
+    const res = await getTeacherList(options)
+    console.log(options)
+    console.log(res)
+    if (Array.isArray(res)) {
+      value.value = setReactiveValue(res, 'teacherName')
+      selectBaseId.value = value.value[0].teacherId
+      console.log(value, selectBaseId)
+    }
   }
 })
 
@@ -64,6 +73,8 @@ watchEffect(() => {
     emits('change', 'baseId', selectBaseId.value)
   } else if (props.type === 'list') {
     emits('change', 'subjectId', selectBaseId.value)
+  } else if (props.type === 'teacherAdd') {
+    emits('change', 'teacherId', selectBaseId.value)
   }
 })
 
@@ -75,6 +86,9 @@ const handleChange = value => {
   } else if (props.type === 'list') {
     const { subjectId } = value.option
     selectBaseId.value = subjectId
+  } else if (props.type === 'teacherAdd') {
+    const { teacherId } = value.option
+    selectBaseId.value = teacherId
   }
 }
 </script>
