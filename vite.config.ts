@@ -28,6 +28,7 @@ export default defineConfig({
   test: {
     ...vitestConfig,
   },
+  base: './',
   plugins: [
     vue(),
     vueJsx(),
