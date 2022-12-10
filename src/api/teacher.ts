@@ -11,7 +11,6 @@ export const finishForm = async (values: Teacher) => {
 
 export const finishAddForm = comShow => async values => {
   comShow.value = false
-  console.log(values)
   const store = useSubject()
   await store.addSubject(values)
   setTimeout(() => {
