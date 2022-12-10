@@ -6,6 +6,7 @@ import { message } from 'ant-design-vue'
 export const useTeacher = defineStore('teachers', {
   state: () => ({
     teacherData: [] as Teacher[],
+    teacherName: [] as any[],
   }),
 
   actions: {
@@ -47,6 +48,21 @@ export const useTeacher = defineStore('teachers', {
         }
       } catch (error) {
         message.success('添加失败')
+      }
+    },
+    async getTeacherList() {
+      try {
+        const res: Record<string, any> = await http.get(
+          'teacher/list'
+        )
+        if (res.code === 1) {
+          Object.assign(this.teacherName, {}, res.data)
+          return [this.teacherName, '获取成功']
+        } else {
+          return [[], '获取失败']
+        }
+      } catch (e) {
+        return [[], '获取失败']
       }
     },
   },

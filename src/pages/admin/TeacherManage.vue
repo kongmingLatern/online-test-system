@@ -19,22 +19,35 @@
             <BreadCrumb :breadcrumb="breadcrumb" />
           </template>
           <template #button>
-            <a-button
-              class="button-blue"
-              rounded
-              @click="addTeacher"
-            >
-              添加教师
-            </a-button>
+            <a-space>
+              <a-button
+                class="button-blue"
+                rounded
+                @click="addTeacher"
+              >
+                添加教师
+              </a-button>
+              <a-button
+                type="primary"
+                class="button-green"
+                rounded
+                @click="addSubject"
+              >
+                添加教学科目
+              </a-button>
+            </a-space>
           </template>
         </Nav>
       </template>
 
       <!-- 内容 -->
       <template #main>
-        <Main data-test="teacherMain" isModal>
+        <Main data-test="teacherMain" isModal isCommon>
           <template #modal>
             <FormItem sort="teacher" />
+          </template>
+          <template #common>
+            <FormItem sort="teacherAdd" isSelected />
           </template>
         </Main>
       </template>
@@ -52,11 +65,15 @@ import {
   reactive,
   ref,
 } from 'vue'
-import { finishForm } from '../../api/teacher'
+import {
+  finishAddForm,
+  finishForm,
+} from '../../api/teacher'
 
 let data = reactive<Teacher[]>([])
 const totalPage = ref<number>()
 const loading = ref<boolean>(false)
+const comShow = ref<boolean>(false)
 const current = ref<number>(1)
 const isShow = ref<boolean>(false)
 const pageSize = ref<number>(10)
@@ -107,14 +124,21 @@ const addTeacher = () => {
   isShow.value = true
 }
 
+const addSubject = async () => {
+  comShow.value = true
+}
+
 provide('columnSort', 'teacher')
 provide('finish', finishForm)
-provide('title', '添加教师')
+provide('title', '添加')
 provide('isShow', isShow)
+provide('comShow', comShow)
 provide('loading', loading)
 provide('data', data)
+provide('addItem', addSubject)
 provide('pagination', pagination)
 provide('change', changePage)
+provide('select', finishAddForm(comShow))
 </script>
 
 <style scoped></style>
