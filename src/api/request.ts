@@ -233,3 +233,14 @@ export async function getSubjectList(data) {
     message.error('获取列表失败')
   }
 }
+
+export async function getTeacherList(data) {
+  try {
+    const store = useTeacher()
+    const [res, _] = await store.getTeacherList()
+    Object.assign(data, res)
+    return res
+  } catch (e) {
+    message.error('获取列表失败')
+  }
+}
