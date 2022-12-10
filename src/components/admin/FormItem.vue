@@ -122,7 +122,8 @@ import { PlusOutlined } from '@ant-design/icons-vue'
 
 const props = defineProps<{
   sort: string
-  isUpload: boolean
+  isUpload?: boolean
+  isSelected?: boolean
 }>()
 
 const value = ref<number>(1)
@@ -134,9 +135,13 @@ const layout = {
 
 const isShow: Ref<boolean | undefined> = inject('isShow')!
 const impShow: Ref<boolean | undefined> = inject('impShow')!
+console.log(impShow)
+
 const finish: (values: any) => void = inject('finish')!
 let finishImport: (file: File) => void =
   inject('import') ?? (() => {})
+let finishAddForm: (file: File) => void =
+  inject('select') ?? (() => {})
 const store = useBase()
 
 const [formArr, form] = getFormItem(props.sort)
@@ -189,6 +194,8 @@ const onFinish = (values: any) => {
 
   if (props.isUpload) {
     finishImport(store.$state.fileList[0])
+  } else if (props.isSelected) {
+    finishAddForm({ ...formState[props.sort] })
   } else {
     finish({
       ...formState[props.sort],
