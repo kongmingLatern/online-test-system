@@ -68,7 +68,6 @@ import {
   provide,
   reactive,
   ref,
-  watchEffect,
 } from 'vue'
 import { getStudentDataByCurrentPage } from '@/api/request'
 import {
