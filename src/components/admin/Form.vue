@@ -1,5 +1,10 @@
 <template>
-  <h3 text-center font-semibold text-2xl data-test="taskGenerateMain">
+  <h3
+    text-center
+    font-semibold
+    text-2xl
+    data-test="taskGenerateMain"
+  >
     试卷生成
   </h3>
   <a-form
@@ -13,7 +18,9 @@
     items="center"
   >
     <div class="left">
-      <h4 text-center font-semibold text-lg mb-5>试题基本信息</h4>
+      <h4 text-center font-semibold text-lg mb-5>
+        试题基本信息
+      </h4>
       <!-- NOTE:SELECT 选择框 -->
       <a-form-item :name="['subjectName']" label="科目">
         <a-select
@@ -60,46 +67,60 @@
         label="限制提交时间"
         :rules="[{ type: 'number', min: 30, max: 300 }]"
       >
-        <a-input-number v-model:value="formState.limitTime" />
+        <a-input-number
+          v-model:value="formState.limitTime"
+        />
         <span text-sm w-10>分钟</span>
       </a-form-item>
     </div>
     <div class="right">
-      <h4 text-center font-semibold text-lg mb-5>题目分布信息</h4>
+      <h4 text-center font-semibold text-lg mb-5>
+        题目分布信息
+      </h4>
       <a-form-item
         :name="['radioNum']"
         label="单选题数量"
         :rules="[{ type: 'number', min: 1, max: 100 }]"
       >
-        <a-input-number v-model:value="formState.radioNumber" />
+        <a-input-number
+          v-model:value="formState.radioNumber"
+        />
       </a-form-item>
       <a-form-item
         :name="['radioScore']"
         label="单选题分值"
         :rules="[{ type: 'number', min: 1, max: 100 }]"
       >
-        <a-input-number v-model:value="formState.radioScore" />
+        <a-input-number
+          v-model:value="formState.radioScore"
+        />
       </a-form-item>
       <a-form-item
         :name="['selectedNumber']"
         label="多选题数量"
         :rules="[{ type: 'number', min: 1, max: 100 }]"
       >
-        <a-input-number v-model:value="formState.selectedNumber" />
+        <a-input-number
+          v-model:value="formState.selectedNumber"
+        />
       </a-form-item>
       <a-form-item
         :name="['selectedScore']"
         label="多选题分值"
         :rules="[{ type: 'number', min: 1, max: 100 }]"
       >
-        <a-input-number v-model:value="formState.selectedScore" />
+        <a-input-number
+          v-model:value="formState.selectedScore"
+        />
       </a-form-item>
       <a-form-item
         :name="['judgeNum']"
         label="判断题数量"
         :rules="[{ type: 'number', min: 1, max: 100 }]"
       >
-        <a-input-number v-model:value="formState.judgeNumber" />
+        <a-input-number
+          v-model:value="formState.judgeNumber"
+        />
       </a-form-item>
       <a-form-item
         :name="['judgeScore']"
@@ -107,7 +128,9 @@
         :rules="[{ type: 'number', min: 1, max: 100 }]"
         style="widht: 100px"
       >
-        <a-input-number v-model:value="formState.judgeScore" />
+        <a-input-number
+          v-model:value="formState.judgeScore"
+        />
       </a-form-item>
       <a-button
         type="linted"
@@ -124,31 +147,38 @@
   </a-form>
 </template>
 <script lang="ts" setup>
-import { generateTask } from "@/api/task";
-import { useBase } from "@/stores/base.store";
-import { useSubject } from "@/stores/subject.store";
-import { computed, onMounted, reactive, ref, watch, watchEffect } from "vue";
+import { generateTask } from '@/api/task'
+import { useBase } from '@/stores/base.store'
+import { useSubject } from '@/stores/subject.store'
+import {
+  computed,
+  onMounted,
+  reactive,
+  ref,
+  watch,
+} from 'vue'
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 20 },
-};
+}
 
 const validateMessages = {
-  required: "${label} is required!",
+  required: '${label} is required!',
   number: {
-    range: "${label} must be between ${min} and ${max}",
+    range: '${label} must be between ${min} and ${max}',
   },
-};
+}
 // NOTE: store
-const subjectStore = useSubject();
-const baseStore = useBase();
+const subjectStore = useSubject()
+const baseStore = useBase()
 
 // NOTE: data
-let subjectNames = reactive<any[]>([]);
-let baseTitle = reactive({});
-let firstSubjectName = ref<string>("");
-let secondBaseTitle = ref<string>("");
-const selectId = ref<string>("");
+let subjectNames = reactive<any[]>([])
+const data = reactive<any[]>([])
+let baseTitle = reactive({})
+let firstSubjectName = ref<string>('')
+let secondBaseTitle = ref<string>('')
+const selectId = ref<string>('')
 
 const formState = reactive({
   firstSubjectName,
@@ -156,83 +186,131 @@ const formState = reactive({
   baseTitle,
   baseId: selectId,
   secondBaseTitle,
-  taskName: "",
-  taskTerm: "",
-  taskType: "",
-  taskTime: "",
-  limitTime: "",
+  taskName: '',
+  taskTerm: '',
+  taskType: '',
+  taskTime: '',
+  limitTime: '',
   radioNumber: undefined,
   radioScore: undefined,
   selectedNumber: undefined,
   selectedScore: undefined,
   judgeNumber: undefined,
   judgeScore: undefined,
-});
+})
+
+async function init() {
+  const subjectId = await getSubjectInfo(data)
+  const [result, arr] = await getBaseInfo(subjectId)
+  selectId.value = result[0].baseId
+  baseTitle[firstSubjectName.value] = [...arr]
+  secondBaseTitle.value =
+    baseTitle[firstSubjectName.value][0].baseTitle
+}
+
+async function getSubjectInfo(data) {
+  const [res, _] = await subjectStore.getSubjectList()
+  Object.assign(data, {}, res)
+  const subjectId = ref<string>('')
+  if (Array.isArray(res)) {
+    res.forEach(item => {
+      subjectNames.push(item)
+    })
+  }
+  firstSubjectName.value = subjectNames[0].subjectName
+  subjectId.value = subjectNames[0].subjectId
+
+  return subjectId.value
+}
+
+async function getBaseInfo(subjectId) {
+  const arr = reactive<any[]>([])
+
+  // 继续请求
+  const [result, __] = await baseStore.getBaseList(
+    subjectId
+  )
+
+  if (Array.isArray(result)) {
+    result.forEach(item => {
+      arr.push(item)
+    })
+  }
+
+  return [result, arr]
+}
 
 onMounted(async () => {
-  const [res, _] = await subjectStore.getSubjectList();
-  const subjectId = ref<string>("");
-  const arr = reactive<any[]>([]);
-  if (Array.isArray(res)) {
-    res.forEach((item) => {
-      subjectNames.push(item);
-    });
-  }
-
-  firstSubjectName.value = subjectNames[0].subjectName;
-  // 继续请求
-  const [result, __] = await baseStore.getBaseList(subjectId.value);
-  if (Array.isArray(result)) {
-    result.forEach((item) => {
-      arr.push(item);
-    });
-  }
-  selectId.value = result[0].baseId;
-  baseTitle[firstSubjectName.value] = [...arr];
-  // console.log(baseTitle)
-
-  secondBaseTitle.value = baseTitle[firstSubjectName.value][0].baseTitle;
-  console.log(baseTitle[firstSubjectName.value][0].baseTitle);
-});
+  await init()
+})
 
 const baseTitles: any = computed(() => {
-  return Array.isArray(baseTitle[formState.firstSubjectName])
+  return Array.isArray(
+    baseTitle[formState.firstSubjectName]
+  )
     ? baseTitle[formState.firstSubjectName]
-    : [];
-});
+    : []
+})
 
 const firstOptions = computed(() =>
-  formState.subjectNames.map((name) => ({
+  formState.subjectNames.map(name => ({
     value: name.subjectName,
   }))
-);
+)
 
 const secondOptions = computed(() =>
-  baseTitles.value.map((item) => ({
+  baseTitles.value.map(item => ({
     value: item.baseTitle,
   }))
-);
+)
 
 watch(
   () => formState.secondBaseTitle,
-  (val) => {
+  val => {
     selectId.value = baseTitle[formState.firstSubjectName]
       ? baseTitle[formState.firstSubjectName].find(
-          (item) => item.baseTitle === val
+          item => item.baseTitle === val
         )?.baseId
-      : "";
+      : ''
   }
-);
+)
 
-watchEffect(() => {
-  console.log(baseTitle[formState.firstSubjectName]);
-  formState.secondBaseTitle = baseTitle[formState.firstSubjectName]
-    ? baseTitle[formState.firstSubjectName][0]?.baseTitle
-    : [];
-});
+watch(
+  () => formState.firstSubjectName,
+  async val => {
+    const [result, arr] = await getBaseInfo(
+      data.find(item => item.subjectName === val).subjectId
+    )
+
+    if (result.length > 0) {
+      selectId.value = result[0].baseId
+      baseTitle[firstSubjectName.value] =
+        arr.length === 0 ? [] : [...arr]
+
+      secondBaseTitle.value =
+        baseTitle[firstSubjectName.value][0]?.baseTitle
+    } else {
+      secondBaseTitle.value = ''
+    }
+  }
+)
+
+// watchEffect(async () => {
+// formState.secondBaseTitle = baseTitle[
+//   formState.firstSubjectName
+// ]
+//   ? baseTitle[formState.firstSubjectName][0]?.baseTitle
+//   : []
+
+// console.log(formState.firstSubjectName, baseTitle)
+
+// await getData(
+//   baseTitle[formState.firstSubjectName][0]?.baseId
+// )
+// })
 
 const onFinish = (values: any) => {
-  console.log("Success:", formState);
+  console.log('Success:', formState)
 
   generateTask({
     baseId: selectId.value,
@@ -247,8 +325,8 @@ const onFinish = (values: any) => {
     selectedScore: formState.selectedScore,
     judgeNumber: formState.judgeNumber,
     judgeScore: formState.judgeScore,
-  });
-};
+  })
+}
 </script>
 
 <style scoped>
