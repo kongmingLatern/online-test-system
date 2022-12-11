@@ -8,6 +8,11 @@ export const finishForm = async (values: Teacher) => {
   await store.addTeacher(values)
   // router.go(0)
 }
+export const authTeacher = async (values: Teacher) => {
+  const store = useTeacher()
+  await store.authTeacher(values.teacherId)
+  router.go(0)
+}
 
 export const finishAddForm = comShow => async values => {
   comShow.value = false

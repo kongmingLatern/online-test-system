@@ -68,6 +68,7 @@ import {
 import {
   finishAddForm,
   finishForm,
+  authTeacher,
 } from '../../api/teacher'
 
 let data = reactive<Teacher[]>([])
@@ -139,6 +140,7 @@ provide('addItem', addSubject)
 provide('pagination', pagination)
 provide('change', changePage)
 provide('select', finishAddForm(comShow))
+provide('authItem', authTeacher)
 </script>
 
 <style scoped></style>

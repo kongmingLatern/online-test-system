@@ -62,7 +62,13 @@
       </template>
       <template v-if="column.dataIndex === 'deleteAndAuth'">
         <a-space>
-          <a-button type="danger" rounded>授权</a-button>
+          <a-button
+            type="danger"
+            rounded
+            @click="authItem(record)"
+          >
+            授权
+          </a-button>
         </a-space>
       </template>
       <template v-if="column.dataIndex === 'student'">
@@ -113,6 +119,7 @@ const pagination = inject('pagination')
 const change: any = inject('change') ?? null
 const removeItem: any = inject('removeItem') ?? null
 const allocation: any = inject('allocation') ?? null
+const auth: any = inject('authItem') ?? null
 // const reset: any = inject('resetItem') ?? null
 
 const columns = getColumn(columnSort)
@@ -128,6 +135,10 @@ const deleteItem = record => {
 
 const allocationTask = record => {
   allocation(record)
+}
+
+const authItem = record => {
+  auth(record)
 }
 
 // const resetItem = record => reset(record)
