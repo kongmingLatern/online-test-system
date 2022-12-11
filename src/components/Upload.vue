@@ -17,9 +17,9 @@
 import { useBase } from '@/stores/base.store'
 import { UploadOutlined } from '@ant-design/icons-vue'
 import type { UploadChangeParam } from 'ant-design-vue'
-import { reactive } from 'vue'
+import { ref } from 'vue'
 
-const fileList = reactive<UploadChangeParam['fileList']>([])
+const fileList = ref<UploadChangeParam['fileList']>([])
 
 const store = useBase()
 
