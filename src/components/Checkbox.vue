@@ -49,6 +49,12 @@ const onCheckAllChange = (e: any) => {
     checkedList: e.target.checked ? className : [],
     indeterminate: false,
   })
+  // 获取全部
+  classList.forEach(item => {
+    classIdList.push(item.classId)
+  })
+
+  emits('getClassId', classIdList, taskId)
 }
 const onChange = e => {
   classIdList.length = 0
