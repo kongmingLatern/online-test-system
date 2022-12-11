@@ -122,7 +122,7 @@ provide('data', data)
 provide('loading', loading)
 provide('removeItem', removeBase)
 provide('pagination', pagination)
-provide('finish', finishForm)
+provide('finish', finishForm(loading))
 provide('change', changePage)
 </script>
 
