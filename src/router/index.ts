@@ -50,6 +50,17 @@ const router = createRouter({
       name: 'admin',
       redirect: '/admin/studentInfoUpload',
       component: () => import('@/components/Layout.vue'),
+      beforeEnter: (to, from, next) => {
+        const role = Number.parseInt(
+          localStorage.getItem('isAuth') as string
+        )
+        if (role === 1) {
+          next()
+        } else {
+          message.error('您没有权限访问此页面')
+          next('/home/index')
+        }
+      },
       children: [
         {
           path: 'studentInfoUpload',
@@ -150,28 +161,9 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
     localStorage.clear()
     next()
-  } else if (to.path.startsWith('/admin')) {
-    getPath(next)
-  } else {
-    getPath(next)
-  }
-})
-
-function getPath(next) {
-  const token = localStorage.getItem('identity')
-    ? Number.parseInt(
-        localStorage.getItem('identity') as string
-      )
-    : localStorage.getItem('isAuth') !== 'undefined'
-    ? 2
-    : null
-  console.log(token)
-  if (token === null || token === undefined) {
-    message.error('请先登录')
-    next('/login')
   } else {
     next()
   }
-}
+})
 
 export default router
