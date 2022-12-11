@@ -24,11 +24,15 @@ export const removeBase = async record => {
 }
 
 // NOTE: 导入题库
-export const finishForm = async (values: any) => {
-  const store = useBase()
-  await store.importBase({
-    ...values,
-    file: store.$state.fileList[0],
-  })
-  router.go(0)
-}
+export const finishForm =
+  isLoading => async (values: any) => {
+    isLoading.value = true
+    const store = useBase()
+
+    await store.importBase({
+      ...values,
+      file: store.$state.fileList[0],
+    })
+    isLoading.value = false
+    router.go(0)
+  }
