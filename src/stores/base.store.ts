@@ -62,8 +62,7 @@ export const useBase = defineStore('base', {
             subjectId,
           },
         })
-        Object.assign(this.baseList, {}, res.data)
-        return [this.baseList, '获取成功']
+        return [res.data, '获取成功']
       } catch (e) {
         return [this.baseList, '题库获取失败']
       }

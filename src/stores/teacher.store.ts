@@ -25,10 +25,20 @@ export const useTeacher = defineStore('teachers', {
         })
         this.teacherData = []
         res.data.records.forEach(record => {
-          const { teacherNo, teacherName, isAuth } = record
+          const {
+            teacherId,
+            teacherNo,
+            teacherName,
+            isAuth,
+          } = record
 
           this.teacherData.push(
-            new Teacher(teacherNo, teacherName, isAuth)
+            new Teacher(
+              teacherId,
+              teacherNo,
+              teacherName,
+              isAuth
+            )
           )
         })
         return [this.teacherData, res.data.total]
@@ -63,6 +73,18 @@ export const useTeacher = defineStore('teachers', {
         }
       } catch (e) {
         return [[], '获取失败']
+      }
+    },
+    async authTeacher(teacherId: string) {
+      try {
+        const res: any = await http.put('teacher/auth', {
+          teacherId,
+        })
+        if (res.code === 1) {
+          message.success('授权成功')
+        }
+      } catch (error) {
+        message.error('授权失败' + error)
       }
     },
   },
