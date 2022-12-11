@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const http = axios.create({
   baseURL: '/api',
-  timeout: 5000,
+  timeout: 20000,
 })
 http.interceptors.request.use(config => {
   return config
