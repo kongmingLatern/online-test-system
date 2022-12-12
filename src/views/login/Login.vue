@@ -60,6 +60,7 @@
         class="login-form-button"
         w-75
         rounded
+        :loading="loading"
       >
         登录
       </a-button>
@@ -68,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
+import { reactive, computed, ref } from 'vue'
 import {
   UserOutlined,
   LockOutlined,
@@ -84,9 +85,11 @@ const formState = reactive<FormState>({
   username: '',
   password: '',
 })
+const loading = ref<boolean>(false)
 const store = useLogin()
 const onFinish = async (values: any) => {
   const { username, password } = values
+  loading.value = true
   const [res, isSuccess] = await store.login(
     username,
     password
@@ -107,6 +110,7 @@ const onFinish = async (values: any) => {
   } else {
     message.error('登录失败')
   }
+  loading.value = false
 }
 
 const onFinishFailed = (errorInfo: any) => {
