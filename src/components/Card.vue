@@ -78,7 +78,11 @@
         <p>
           如系统发生意外，请联系监考老师，由监考老师确定为系统故障后，再由监考老师联系管理员提供二次考试密码并继续考试。
         </p>
-        <a-radio text-lg font-semibold>
+        <a-radio
+          v-model:checked="checked"
+          text-lg
+          font-semibold
+        >
           我已阅读上述准则，并且保证严格遵守
         </a-radio>
         <footer text-center mt-10>
@@ -113,6 +117,7 @@ import router from '@/router'
 import { useMatch } from '@/stores/match.store'
 import Rules from '@/views/home/Rules.vue'
 import { provide, reactive, ref } from 'vue'
+import { message } from 'ant-design-vue'
 
 const props = defineProps<{
   cardList?: any[]
@@ -120,6 +125,7 @@ const props = defineProps<{
 const comShow = ref<boolean>(false)
 const currentMatch = reactive<Record<string, any>>({})
 const taskPassword = ref<string>('')
+const checked = ref<boolean>(false)
 const store = useMatch()
 const showModal = matchId => {
   comShow.value = true
@@ -140,6 +146,10 @@ const showModal = matchId => {
   console.log(currentMatch)
 }
 const goTask = async matchId => {
+  if (checked.value === false) {
+    message.error('请阅读准则并且保证严格遵守')
+    return
+  }
   // NOTE:判断当前的考试码是否正确
   const [res, num, msg] = await store.startMatch(
     matchId,
