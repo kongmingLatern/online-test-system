@@ -16,6 +16,9 @@ http.interceptors.response.use(response => {
   const { code, msg } = response.data
   if (code === 0) {
     message.error(msg)
+    if (msg === 'NoLogin!!') {
+      window.location.href = '/login'
+    }
   }
 
   return response.data
