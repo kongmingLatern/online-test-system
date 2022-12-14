@@ -110,3 +110,17 @@
 ```
 
 ### 后端
+
+#### 数据库
+
+> online_test_syst.sql
+
+#### 修改 application.yml 文件
+
+```bash
+修改spring.datasource.druid.url&username&password为自己的数据库配置
+
+spring.redis为自己的redis配置
+```
+
+运行 OnlineTestSystemApplication
