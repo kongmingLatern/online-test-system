@@ -1,59 +1,76 @@
 # online-test-system
 
-This template should help get you started developing with Vue 3 in Vite.
+## 介绍
 
-## Recommended IDE Setup
+> 本系统是一个在线考试系统，主要功能有：考试、试卷管理、题库管理、用户管理、权限管理等。管理员和教师均可以发布试卷，学生可以参加考试。系统采用前后端分离的开发模式。
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 技术栈
 
-## Type Support for `.vue` Imports in TS
+### 前端
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- Vue3.2
+- TypeScript
+- Pinia
+- Antd
+- Vitest
+- Vite
+- Vue-Router
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+### 后端
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- SpringBoot
+- MyBatisPlus
+- Mysql
+- Redistemplate
+- Lombok
+- Easyexcel
+- Quartz
 
-## Customize configuration
+## 部署
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### 前端
 
-## Project Setup
+#### 1. 安装 node
 
-```sh
-npm install
+```bash
+    https://nodejs.org/en/
 ```
 
-### Compile and Hot-Reload for Development
+#### 2. 安装依赖
 
-```sh
-npm run dev
+```bash
+    npm i -g pnpm
+    pnpm install(Node版本需要>= 14.6.0)
 ```
 
-### Type-Check, Compile and Minify for Production
+#### 3. 启动服务
 
-```sh
-npm run build
+```bash
+    pnpm run dev
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+#### 4. 打包
 
-```sh
-npm run test:unit
+```bash
+    pnpm run build
 ```
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+#### 5. 代码检查
 
-```sh
-npm run build
-npm run test:e2e # or `npm run test:e2e:ci` for headless testing
+```bash
+    pnpm run lint
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+#### 6. 执行测试
 
-```sh
-npm run lint
+```bash
+    pnpm run test
 ```
+
+#### 7. 生成测试覆盖率
+
+```bash
+    pnpm run coverage
+```
+
+### 后端
