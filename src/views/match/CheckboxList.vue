@@ -10,7 +10,7 @@
       <a-checkbox
         v-for="(list, index) in item.questionAnswerList"
         :value="item.questionAnswerList[index]"
-        @change="handleClick"
+        @change="handleClick(item)"
       >
         {{ String.fromCharCode(index + 65) }}.
         {{ list }}
@@ -23,8 +23,12 @@
 const props = defineProps<{
   data: any[]
 }>()
-const handleClick = e => {
+const emits = defineEmits<{
+  (event: 'selected', ...args: any[]): void
+}>()
+const handleClick = item => {
   console.log(props.data)
+  emits('selected', item)
 }
 </script>
 

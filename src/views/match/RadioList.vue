@@ -27,7 +27,7 @@ const emits = defineEmits<{
 }>()
 
 const handleClick = (item, index) => {
-  console.log(props.data)
+  console.log(item)
   // item.questionCorrectList = [item.questionCorrectList]
   // console.log(item)
   emits('selected', item, index)

@@ -13,7 +13,10 @@
         @selected="handleCorrectList"
       />
       <p>二、多选题</p>
-      <CheckboxList :data="checkboxList" />
+      <CheckboxList
+        :data="checkboxList"
+        @selected="handleCorrectList"
+      />
       <p>三、判断题</p>
       <JudgeList
         :data="judgeList"
@@ -55,14 +58,25 @@ const judgeList = computed(() => {
 })
 
 const handleCorrectList = (item, index) => {
-  nextTick(() => {
-    item.questionCorrectList = [item.questionAnswer]
+  // 查询 item 处于数组中的位置
+  const indexInList = questionList.findIndex(
+    question => question.questionId === item.questionId
+  )
+  mitt.emit('selected', {
+    questionType: item.questionType,
+    index: indexInList + 1,
   })
+
+  if (item.questionType !== 2) {
+    nextTick(() => {
+      item.questionCorrectList = [item.questionAnswer]
+    })
+  }
 }
 
-nextTick(() => {
-  disableContextMenu()
-})
+// nextTick(() => {
+//   disableContextMenu()
+// })
 
 mitt.on('finishTask', async matchId => {
   await store.submit(matchId as string, questionList)

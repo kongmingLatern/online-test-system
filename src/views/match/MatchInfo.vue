@@ -47,14 +47,23 @@
       <div class="show">
         <th>单选题</th>
         <table w-50 h-auto text-center border>
-          <tr v-for="item in dataNumber.radio / 5">
-            <td v-for="list in 5">
-              <a-anchor :affix="false" @click="handleClick">
+          <tr v-for="item in dataNumber.radio / 5" h-10>
+            <td
+              v-for="list in 5"
+              w-10
+              :id="'radio' + ((item - 1) * 5 + list)"
+            >
+              <a-anchor
+                :affix="false"
+                @click="handleClick"
+                :get-current-anchor="null"
+              >
                 <a-anchor-link
                   :href="
                     '#question' + ((item - 1) * 5 + list)
                   "
                   :title="(item - 1) * 5 + list"
+                  ref="radio"
                 />
               </a-anchor>
             </td>
@@ -62,14 +71,23 @@
         </table>
         <th>多选题</th>
         <table w-50 h-auto text-center border>
-          <tr v-for="item in dataNumber.checkbox / 5">
-            <td v-for="list in 5">
-              <a-anchor :affix="false" @click="handleClick">
+          <tr v-for="item in dataNumber.checkbox / 5" h-10>
+            <td
+              v-for="list in 5"
+              w-10
+              :id="'checkbox1' + ((item - 1) * 5 + list)"
+            >
+              <a-anchor
+                :affix="false"
+                @click="handleClick"
+                :get-current-anchor="null"
+              >
                 <a-anchor-link
                   :href="
                     '#checkbox' + ((item - 1) * 5 + list)
                   "
                   :title="(item - 1) * 5 + list"
+                  ref="checkbox"
                 />
               </a-anchor>
             </td>
@@ -77,12 +95,21 @@
         </table>
         <th>判断题</th>
         <table w-50 h-auto text-center border>
-          <tr v-for="item in dataNumber.judge / 5">
-            <td v-for="list in 5">
-              <a-anchor :affix="false" @click="handleClick">
+          <tr v-for="item in dataNumber.judge / 5" h-10>
+            <td
+              v-for="list in 5"
+              w-10
+              :id="'judge1' + ((item - 1) * 5 + list)"
+            >
+              <a-anchor
+                :affix="false"
+                @click="handleClick"
+                :get-current-anchor="null"
+              >
                 <a-anchor-link
                   :href="'#judge' + ((item - 1) * 5 + list)"
                   :title="(item - 1) * 5 + list"
+                  ref="judge"
                 />
               </a-anchor>
             </td>
@@ -98,10 +125,14 @@
 import { UserOutlined } from '@ant-design/icons-vue'
 import { message, type AnchorProps } from 'ant-design-vue'
 import { onMounted, onUnmounted, reactive, ref } from 'vue'
-import mitt from '@/utils/mitt'
 import { useRoute } from 'vue-router'
+import mitt from '../../utils/mitt'
+import { Checkbox } from '../../utils/Task'
 import router from '@/router'
 const route = useRoute()
+const radio = ref(null)
+const checkbox = ref(null)
+const judge = ref(null)
 
 const username = localStorage.getItem('username')
 let limitTime = ref<number>(
@@ -143,7 +174,7 @@ let dataNumber = reactive({
   checkbox:
     Number.parseInt(
       localStorage.getItem('checkboxNumber') as string
-    ) ?? 0,
+    ) ?? 0, 
   judge:
     Number.parseInt(
       localStorage.getItem('judgeNumber') as string
@@ -155,6 +186,44 @@ const handleClick: AnchorProps['onClick'] = (e, link) => {
 const finishTask = () => {
   mitt.emit('finishTask', route.query.matchId)
 }
+
+mitt.on('selected', (item: any) => {
+  const type = item.questionType
+
+  let href: string = ''
+  if (type === 1) {
+    href = '#radio' + item.index
+  } else if (type === 2) {
+    href = '#checkbox1' + (item.index - dataNumber.radio)
+  } else if (type === 3) {
+    href =
+      '#judge1' +
+      (item.index - dataNumber.radio - dataNumber.checkbox)
+  }
+  console.log(href, type)
+
+  // NOTE: 通过 ref 获取到的是一个数组，需要遍历
+  // 查找指定节点
+  const dom: Record<string, any> = document.querySelector(
+    href
+  ) as any
+
+  if (dom) {
+    dom.style.backgroundColor = '#1890ff'
+    dom.style.color = 'white'
+    const dom1 =
+      dom?.lastElementChild?.lastElementChild
+        ?.lastElementChild?.lastElementChild
+    dom1.style.color = 'white'
+  }
+  // dom.classList.add('selected')
+
+  // .style.color = 'white'
+  console.log()
+
+  console.log(dom)
+  console.log(type, href)
+})
 </script>
 <style lang="scss" scoped>
 .display {
@@ -185,5 +254,22 @@ const finishTask = () => {
     top: 0;
     right: 0;
   }
+}
+.selected {
+  background-color: #1890ff;
+  color: #fff;
+}
+a {
+  color: #000;
+  display: inline;
+}
+:deep(.ant-anchor-link-active > .ant-anchor-link-title) {
+  color: unset;
+}
+:deep(.ant-anchor-link) {
+  padding: 0;
+}
+:deep(.ant-anchor-ink::before) {
+  background-color: unset;
 }
 </style>
