@@ -32,14 +32,6 @@ export const columns = [
     },
   },
   {
-    title: '查看详情',
-    dataIndex: 'detail',
-    options: {
-      align: 'center',
-      ellipsis: true,
-    },
-  },
-  {
     title: '操作',
     dataIndex: 'delete',
     options: {
