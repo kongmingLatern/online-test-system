@@ -81,11 +81,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        // target: 'http://10.16.20.4:8080', //实际请求地址
         target: 'http://localhost:8080', //实际请求地址
-        // target: 'http://10.12.146.67:8080', //实际请求地址
-        // target: 'http://10.15.12.84:8080', //实际请求地址
-
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, ''),
       },
