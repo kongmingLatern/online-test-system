@@ -73,9 +73,6 @@
       </template>
       <template v-if="column.dataIndex === 'student'">
         <a-space>
-          <a-button type="primary" rounded>
-            重置密码
-          </a-button>
           <a-button
             type="danger"
             rounded
