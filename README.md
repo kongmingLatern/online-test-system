@@ -66,44 +66,50 @@
 
 ### 前端
 
-#### 1. 安装 node
+#### 1. git clone
+
+```bash
+    git clone https://github.com/kongmingLatern/online-test-system.git
+```
+
+#### 2. 安装 node
 
 ```bash
     https://nodejs.org/en/
 ```
 
-#### 2. 安装依赖
+#### 3. 安装依赖
 
 ```bash
     npm i -g pnpm
     pnpm install(Node版本需要>= 14.6.0)
 ```
 
-#### 3. 启动服务
+#### 4. 启动服务
 
 ```bash
     pnpm run dev
 ```
 
-#### 4. 打包
+#### 5. 打包
 
 ```bash
     pnpm run build
 ```
 
-#### 5. 代码检查
+#### 6. 代码检查
 
 ```bash
     pnpm run lint
 ```
 
-#### 6. 执行测试
+#### 7. 执行测试
 
 ```bash
     pnpm run test
 ```
 
-#### 7. 生成测试覆盖率
+#### 8. 生成测试覆盖率
 
 ```bash
     pnpm run coverage
