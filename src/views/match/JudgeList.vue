@@ -28,7 +28,6 @@ const emits = defineEmits<{
 }>()
 
 const handleClick = (item, index) => {
-  console.log(props.data)
   emits('selected', item, index)
 }
 </script>

@@ -17,12 +17,6 @@
           <template #breadcrumb>
             <BreadCrumb :breadcrumb="breadcrumb" />
           </template>
-          <template #search>
-            <Search
-              text="请输入学号"
-              @search="searchStudent"
-            />
-          </template>
         </Nav>
       </template>
 

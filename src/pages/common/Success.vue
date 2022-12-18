@@ -23,7 +23,6 @@ onMounted(() => {
 })
 
 const exit = () => {
-  localStorage.clear()
   router.push('/home')
 }
 </script>

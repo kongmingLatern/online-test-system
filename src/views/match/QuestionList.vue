@@ -5,7 +5,7 @@
       data-test="questionList"
     >
       <h1 text-center>
-        常熟理工学院 XXX 学院 马克思主义思想道德期末考试试卷
+        {{ taskName }}
       </h1>
       <p>一、单选题</p>
       <RadioList
@@ -37,6 +37,7 @@ import { message } from 'ant-design-vue'
 import { disableContextMenu } from '../../utils/common'
 import router from '@/router'
 const store = useMatch()
+const taskName = localStorage.getItem('taskName')
 
 const questionList = reactive(
   JSON.parse(localStorage.getItem('match') as string)
@@ -74,9 +75,9 @@ const handleCorrectList = (item, index) => {
   }
 }
 
-// nextTick(() => {
-//   disableContextMenu()
-// })
+nextTick(() => {
+  disableContextMenu()
+})
 
 mitt.on('finishTask', async matchId => {
   await store.submit(matchId as string, questionList)

@@ -187,43 +187,43 @@ const finishTask = () => {
   mitt.emit('finishTask', route.query.matchId)
 }
 
-mitt.on('selected', (item: any) => {
-  const type = item.questionType
+// mitt.on('selected', (item: any) => {
+//   const type = item.questionType
 
-  let href: string = ''
-  if (type === 1) {
-    href = '#radio' + item.index
-  } else if (type === 2) {
-    href = '#checkbox1' + (item.index - dataNumber.radio)
-  } else if (type === 3) {
-    href =
-      '#judge1' +
-      (item.index - dataNumber.radio - dataNumber.checkbox)
-  }
-  console.log(href, type)
+//   let href: string = ''
+//   if (type === 1) {
+//     href = '#radio' + item.index
+//   } else if (type === 2) {
+//     href = '#checkbox1' + (item.index - dataNumber.radio)
+//   } else if (type === 3) {
+//     href =
+//       '#judge1' +
+//       (item.index - dataNumber.radio - dataNumber.checkbox)
+//   }
+//   console.log(href, type)
 
-  // NOTE: 通过 ref 获取到的是一个数组，需要遍历
-  // 查找指定节点
-  const dom: Record<string, any> = document.querySelector(
-    href
-  ) as any
+//   // NOTE: 通过 ref 获取到的是一个数组，需要遍历
+//   // 查找指定节点
+//   const dom: Record<string, any> = document.querySelector(
+//     href
+//   ) as any
 
-  if (dom) {
-    dom.style.backgroundColor = '#1890ff'
-    dom.style.color = 'white'
-    const dom1 =
-      dom?.lastElementChild?.lastElementChild
-        ?.lastElementChild?.lastElementChild
-    dom1.style.color = 'white'
-  }
-  // dom.classList.add('selected')
+//   if (dom) {
+//     dom.style.backgroundColor = '#1890ff'
+//     dom.style.color = 'white'
+//     const dom1 =
+//       dom?.lastElementChild?.lastElementChild
+//         ?.lastElementChild?.lastElementChild
+//     dom1.style.color = 'white'
+//   }
+//   // dom.classList.add('selected')
 
-  // .style.color = 'white'
-  console.log()
+//   // .style.color = 'white'
+//   console.log()
 
-  console.log(dom)
-  console.log(type, href)
-})
+//   console.log(dom)
+//   console.log(type, href)
+// })
 </script>
 <style lang="scss" scoped>
 .display {
