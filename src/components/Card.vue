@@ -174,6 +174,7 @@ const goTask = async matchId => {
   )
   // NOTE: 考试时间
   localStorage.setItem('limitTime', currentMatch.limitTime)
+  localStorage.setItem('taskName', currentMatch.taskName)
   localStorage.setItem('match', JSON.stringify(res))
   router.push({
     path: '/match',
