@@ -5,10 +5,7 @@
     <slot name="matchInfo"></slot>
     <p>参加国家教育考试的考生须遵守以下规则：</p>
 
-    <p
-      :class="isTruncate ? 'truncate' : null"
-      sm="truncate"
-    >
+    <p :class="isTruncate ? 'truncate' : null" sm="truncate">
       一、自觉服从监考员等考试工作人员管理，不得以任何理由妨碍监考员和考试工作人员履行职责，不得扰乱考场、考点的工作秩序。
     </p>
     <p :class="isTruncate ? 'truncate' : null">
@@ -28,8 +25,8 @@
 
 <script setup lang="ts">
 defineProps<{
-  isTruncate?: boolean
-}>()
+  isTruncate?: boolean;
+}>();
 </script>
 
 <style scoped>

@@ -1,4 +1,4 @@
-import { Student } from "../Student";
+import { Student } from '../Student';
 export default class Grade extends Student {
   public grade: number = 0;
   public subjectName: string;

@@ -1,13 +1,13 @@
-import { useQuestion } from "@/stores/question.store";
-import { setActivePinia, createPinia } from "pinia";
+import { useQuestion } from '@/stores/question.store';
+import { setActivePinia, createPinia } from 'pinia';
 
-describe("Checkbox Store", () => {
+describe('Checkbox Store', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });
 
   // NOTE: 测试接口 'question/page' 的数据'
-  it.skip("should return 5 record", async () => {
+  it.skip('should return 5 record', async () => {
     const store = useQuestion();
     await expect(store.getQuestionByCurrentPage(5, 63, 2)).resolves
       .toMatchInlineSnapshot(`

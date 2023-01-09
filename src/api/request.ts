@@ -1,9 +1,9 @@
-import { useStudent } from '@/stores/student.store'
-import { useQuestion } from '@/stores/question.store'
-import { useTask } from '@/stores/task.store'
-import { useMatch } from '@/stores/match.store'
-import { useGrade } from '@/stores/grade.store'
-import { useTeacher } from '@/stores/teacher.store'
+import { useStudent } from '@/stores/student.store';
+import { useQuestion } from '@/stores/question.store';
+import { useTask } from '@/stores/task.store';
+import { useMatch } from '@/stores/match.store';
+import { useGrade } from '@/stores/grade.store';
+import { useTeacher } from '@/stores/teacher.store';
 import type {
   Teacher,
   Match,
@@ -11,12 +11,12 @@ import type {
   Grade,
   Radio,
   Checkbox,
-  Judge,
-} from '@/utils'
-import type { Ref } from 'vue'
-import { useBase } from '@/stores/base.store'
-import { message } from 'ant-design-vue'
-import { useSubject } from '@/stores/subject.store'
+  Judge
+} from '@/utils';
+import type { Ref } from 'vue';
+import { useBase } from '@/stores/base.store';
+import { message } from 'ant-design-vue';
+import { useSubject } from '@/stores/subject.store';
 // NOTE: 分页获取学生
 export async function getStudentDataByCurrentPage(
   data: Student[],
@@ -26,21 +26,18 @@ export async function getStudentDataByCurrentPage(
   isLoading: Ref<boolean | undefined>
 ) {
   try {
-    const store = useStudent()
-    isLoading.value = true
-    const [res, total] = await store.getStudentsByPage(
-      pageSize,
-      currentPage
-    )
+    const store = useStudent();
+    isLoading.value = true;
+    const [res, total] = await store.getStudentsByPage(pageSize, currentPage);
 
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
 
-    totalPage.value = total
-    return data
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 // NOTE: 分页获取题目
@@ -53,21 +50,20 @@ export async function getQuestionByCurrentPage(
   isLoading: Ref<boolean | undefined>
 ) {
   try {
-    const store = useQuestion()
-    isLoading.value = true
-    const [res, total] =
-      await store.getQuestionByCurrentPage(
-        pageSize,
-        currentPage,
-        questionType
-      )
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
-    totalPage.value = total
-    return data
+    const store = useQuestion();
+    isLoading.value = true;
+    const [res, total] = await store.getQuestionByCurrentPage(
+      pageSize,
+      currentPage,
+      questionType
+    );
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 // NOTE: 分页获取成绩
@@ -80,20 +76,20 @@ export async function getGradeByCurrentPage(
   studentNo?
 ) {
   try {
-    const store = useGrade()
-    isLoading.value = true
+    const store = useGrade();
+    isLoading.value = true;
     const [res, total] = await store.getGradeByCurrentPage(
       pageSize,
       currentPage,
       studentNo
-    )
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
-    totalPage.value = total
-    return data
+    );
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 // NOTE: 分页获取教师
@@ -106,20 +102,20 @@ export async function getTeachersByCurrentPage(
   teacherNo?
 ) {
   try {
-    const store = useTeacher()
-    isLoading.value = true
+    const store = useTeacher();
+    isLoading.value = true;
     const [res, total] = await store.getTeachersByPage(
       pageSize,
       currentPage,
       teacherNo
-    )
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
-    totalPage.value = total
-    return data
+    );
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 // NOTE: 分页获取题库
@@ -132,20 +128,20 @@ export async function getBasesByCurrentPage(
   subjectId?
 ) {
   try {
-    const store = useBase()
-    isLoading.value = true
+    const store = useBase();
+    isLoading.value = true;
     const [res, total] = await store.getBasesByCurrentPage(
       pageSize,
       currentPage,
       subjectId
-    )
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
-    totalPage.value = total
-    return data
+    );
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 // NOTE: 分页获取考试
@@ -158,20 +154,20 @@ export async function getMatchsByCurrentPage(
   studentNo?
 ) {
   try {
-    const store = useMatch()
-    isLoading.value = true
+    const store = useMatch();
+    isLoading.value = true;
     const [res, total] = await store.getMatchsByPage(
       pageSize,
       currentPage,
       studentNo
-    )
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
-    totalPage.value = total
-    return data
+    );
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 // NOTE: 分页获取试卷
@@ -184,63 +180,63 @@ export async function getTasksByCurrentPage(
   taskName?: string
 ) {
   try {
-    const store = useTask()
-    isLoading.value = true
+    const store = useTask();
+    isLoading.value = true;
     const [res, total] = await store.getTasksByCurrentPage(
       pageSize,
       currentPage,
       taskName
-    )
-    data.length = 0
-    Object.assign(data, res)
-    isLoading.value = false
-    totalPage.value = total
-    return data
+    );
+    data.length = 0;
+    Object.assign(data, res);
+    isLoading.value = false;
+    totalPage.value = total;
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 
 export async function getSelfMatch(data) {
   try {
-    const store = useMatch()
-    const res = await store.getSelfMatch()
-    Object.assign(data, res)
-    return data
+    const store = useMatch();
+    const res = await store.getSelfMatch();
+    Object.assign(data, res);
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 
 export async function getSelfGrade(data) {
   try {
-    const store = useMatch()
-    const res = await store.getSelfGrade()
-    Object.assign(data, res)
-    return data
+    const store = useMatch();
+    const res = await store.getSelfGrade();
+    Object.assign(data, res);
+    return data;
   } catch (error) {
-    return false
+    return false;
   }
 }
 
 export async function getSubjectList(data) {
   try {
-    const store = useSubject()
-    const [res, _] = await store.getSubjectList()
-    Object.assign(data, res)
-    return res
+    const store = useSubject();
+    const [res, _] = await store.getSubjectList();
+    Object.assign(data, res);
+    return res;
   } catch (e) {
-    message.error('获取列表失败')
+    message.error('获取列表失败');
   }
 }
 
 export async function getTeacherList(data) {
   try {
-    const store = useTeacher()
-    const [res, _] = await store.getTeacherList()
-    Object.assign(data, res)
-    return res
+    const store = useTeacher();
+    const [res, _] = await store.getTeacherList();
+    Object.assign(data, res);
+    return res;
   } catch (e) {
-    message.error('获取列表失败')
+    message.error('获取列表失败');
   }
 }

@@ -1,8 +1,6 @@
 <template>
   <a-layout overflow-hidden>
-    <a-layout-header
-      :style="{ padding: 0, position: 'relative' }"
-    >
+    <a-layout-header :style="{ padding: 0, position: 'relative' }">
       <Header data-test="header" />
     </a-layout-header>
     <a-layout>
@@ -37,32 +35,32 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
-import { reactive, watch } from 'vue'
-import AdminAside from '@/components/admin/AdminAside.vue'
+import { reactive, watch } from 'vue';
+import AdminAside from '@/components/admin/AdminAside.vue';
 const state = reactive({
   collapsed: false,
   selectedKeys: ['studentInfoUpload'],
   openKeys: ['student'],
-  preOpenKeys: ['sub1'],
-})
+  preOpenKeys: ['sub1']
+});
 watch(
   () => state.openKeys,
   (_val, oldVal) => {
-    state.preOpenKeys = oldVal
+    state.preOpenKeys = oldVal;
   }
-)
+);
 
 const onCollapse = (collapsed: boolean, type: string) => {
-  console.log(collapsed, type)
-}
+  console.log(collapsed, type);
+};
 
 const onOpenChange = (openKeys: string[]) => {
-  console.log(openKeys)
-}
+  console.log(openKeys);
+};
 
 const onBreakpoint = (broken: boolean) => {
-  console.log(broken)
-}
+  console.log(broken);
+};
 </script>
 <style>
 #components-layout-demo-responsive .logo {

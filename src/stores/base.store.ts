@@ -1,57 +1,48 @@
-import { defineStore } from 'pinia'
-import http from '@/api/http'
-import { message } from 'ant-design-vue'
+import { defineStore } from 'pinia';
+import http from '@/api/http';
+import { message } from 'ant-design-vue';
 
-const getBasePagePath = '/base/page'
-const getBaseListPath = '/base/list'
-const removeBasePath = '/base/delete'
-const importPath = '/base/importBase'
+const getBasePagePath = '/base/page';
+const getBaseListPath = '/base/list';
+const removeBasePath = '/base/delete';
+const importPath = '/base/importBase';
 
 export const useBase = defineStore('base', {
   state: () => ({
     bases: [] as any[],
     baseList: [] as any[],
-    fileList: [] as any[],
+    fileList: [] as any[]
   }),
 
   actions: {
     // NOTE:分页获取题库
-    async getBasesByCurrentPage(
-      pageSize,
-      currentPage,
-      subjectId?
-    ) {
+    async getBasesByCurrentPage(pageSize, currentPage, subjectId?) {
       try {
         const res = await http.get(getBasePagePath, {
           params: {
             page: currentPage,
             pageSize,
-            subjectId,
-          },
-        })
-        this.bases = []
+            subjectId
+          }
+        });
+        this.bases = [];
 
-        res.data.records.forEach(record => {
-          const {
-            baseId,
-            subjectName,
-            teacherName,
-            createUser,
-            baseTitle,
-          } = record
+        res.data.records.forEach((record) => {
+          const { baseId, subjectName, teacherName, createUser, baseTitle } =
+            record;
           this.bases.push({
             baseId,
             baseTitle,
             subjectName,
             teacherName,
-            createUser,
-          })
-        })
+            createUser
+          });
+        });
 
-        return [this.bases, res.data.total]
+        return [this.bases, res.data.total];
       } catch (error) {
         // 让表单组件显示错误
-        return [this.baseList, 0]
+        return [this.baseList, 0];
       }
     },
     //NOTE: 获取所有题库列表
@@ -59,12 +50,12 @@ export const useBase = defineStore('base', {
       try {
         const res = await http.get(getBaseListPath, {
           params: {
-            subjectId,
-          },
-        })
-        return [res.data, '获取成功']
+            subjectId
+          }
+        });
+        return [res.data, '获取成功'];
       } catch (e) {
-        return [this.baseList, '题库获取失败']
+        return [this.baseList, '题库获取失败'];
       }
     },
     // NOTE: 删除题库
@@ -72,11 +63,11 @@ export const useBase = defineStore('base', {
       try {
         const res: any = await http.delete(removeBasePath, {
           params: {
-            baseId,
-          },
-        })
+            baseId
+          }
+        });
         if (res.code === 1) {
-          message.success('删除成功')
+          message.success('删除成功');
         }
       } catch (e) {
         // message.success('删除失败')
@@ -85,21 +76,17 @@ export const useBase = defineStore('base', {
     // NOTE: 导入题库
     async importBase(values: any) {
       try {
-        const res: any = await http.post(
-          importPath,
-          values,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
+        const res: any = await http.post(importPath, values, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
           }
-        )
+        });
         if (res.code === 1) {
-          message.success('导入成功')
+          message.success('导入成功');
         }
       } catch (e) {
         // message.error('导入失败')
       }
-    },
-  },
-})
+    }
+  }
+});

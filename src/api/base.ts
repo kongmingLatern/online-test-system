@@ -1,38 +1,37 @@
-import { message } from 'ant-design-vue'
-import { useBase } from '../stores/base.store'
-import router from '../router'
+import { message } from 'ant-design-vue';
+import { useBase } from '../stores/base.store';
+import router from '../router';
 
 // NOTE:获取所有题库
 export const getBaseList = async (data: any[]) => {
-  const store = useBase()
+  const store = useBase();
   try {
-    const [res, _] = await store.getBaseList()
+    const [res, _] = await store.getBaseList();
     if (Array.isArray(res)) {
-      Object.assign(data, {}, res)
+      Object.assign(data, {}, res);
     }
-    return data
+    return data;
   } catch (e: any) {
-    message.error(e)
+    message.error(e);
   }
-}
+};
 
 // NOTE: 删除题库
-export const removeBase = async record => {
-  const store = useBase()
-  await store.removeBase(record.baseId)
-  router.go(0)
-}
+export const removeBase = async (record) => {
+  const store = useBase();
+  await store.removeBase(record.baseId);
+  router.go(0);
+};
 
 // NOTE: 导入题库
-export const finishForm =
-  isLoading => async (values: any) => {
-    isLoading.value = true
-    const store = useBase()
+export const finishForm = (isLoading) => async (values: any) => {
+  isLoading.value = true;
+  const store = useBase();
 
-    await store.importBase({
-      ...values,
-      file: store.$state.fileList[0],
-    })
-    isLoading.value = false
-    router.go(0)
-  }
+  await store.importBase({
+    ...values,
+    file: store.$state.fileList[0]
+  });
+  isLoading.value = false;
+  router.go(0);
+};

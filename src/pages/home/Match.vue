@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import QuestionList from '@/views/match/QuestionList.vue'
-import MatchInfo from '@/views/match/MatchInfo.vue'
+import QuestionList from '@/views/match/QuestionList.vue';
+import MatchInfo from '@/views/match/MatchInfo.vue';
 </script>
 
 <style scoped></style>

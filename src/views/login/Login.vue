@@ -19,8 +19,8 @@
       :rules="[
         {
           required: true,
-          message: '请输入你的学号',
-        },
+          message: '请输入你的学号'
+        }
       ]"
     >
       <a-input
@@ -38,8 +38,8 @@
       :rules="[
         {
           required: true,
-          message: '请输入密码',
-        },
+          message: '请输入密码'
+        }
       ]"
     >
       <a-input-password
@@ -69,56 +69,50 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed, ref } from 'vue'
-import {
-  UserOutlined,
-  LockOutlined,
-} from '@ant-design/icons-vue'
-import { useLogin } from '@/stores/login.store'
-import { message } from 'ant-design-vue'
-import router from '@/router'
+import { reactive, computed, ref } from 'vue';
+import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
+import { useLogin } from '@/stores/login.store';
+import { message } from 'ant-design-vue';
+import router from '@/router';
 interface FormState {
-  username: string
-  password: string
+  username: string;
+  password: string;
 }
 const formState = reactive<FormState>({
   username: '',
-  password: '',
-})
-const loading = ref<boolean>(false)
-const store = useLogin()
+  password: ''
+});
+const loading = ref<boolean>(false);
+const store = useLogin();
 const onFinish = async (values: any) => {
-  const { username, password } = values
-  loading.value = true
-  const [res, isSuccess] = await store.login(
-    username,
-    password
-  )
+  const { username, password } = values;
+  loading.value = true;
+  const [res, isSuccess] = await store.login(username, password);
   if (isSuccess) {
-    store.setLocalStorage('username', res.name)
-    store.setLocalStorage('identity', res.studentOrTeacher)
-    store.setLocalStorage('isAuth', res?.isAuth)
+    store.setLocalStorage('username', res.name);
+    store.setLocalStorage('identity', res.studentOrTeacher);
+    store.setLocalStorage('isAuth', res?.isAuth);
     if (res.studentOrTeacher === 1 || res?.isAuth) {
       setTimeout(() => {
-        router.push('/admin')
-      }, 1000)
+        router.push('/admin');
+      }, 1000);
     } else {
       setTimeout(() => {
-        router.push('/home')
-      }, 1000)
+        router.push('/home');
+      }, 1000);
     }
   } else {
-    message.error('登录失败')
+    message.error('登录失败');
   }
-  loading.value = false
-}
+  loading.value = false;
+};
 
 const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo)
-}
+  console.log('Failed:', errorInfo);
+};
 const disabled = computed(() => {
-  return !(formState.username && formState.password)
-})
+  return !(formState.username && formState.password);
+});
 </script>
 
 <style scoped>
@@ -156,7 +150,6 @@ button {
 }
 
 button:hover {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
-    0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 </style>

@@ -9,7 +9,7 @@
 </template>
 <script lang="ts" setup>
 defineProps<{
-  sort?: string
-  isUpload?: boolean
-}>()
+  sort?: string;
+  isUpload?: boolean;
+}>();
 </script>

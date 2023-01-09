@@ -1,9 +1,7 @@
 <template>
   <a-list bordered :data-source="data" class="sm">
     <template #renderItem="{ item, index }">
-      <a-list-item
-        hover="bg-red-800 color-white ease-out duration-300"
-      >
+      <a-list-item hover="bg-red-800 color-white ease-out duration-300">
         <a-space>
           <span mr-2 text-sm>{{ index + 1 }}</span>
           <span>
@@ -25,14 +23,14 @@
 </template>
 
 <script setup lang="ts">
-import { getSelfMatch } from '@/api/request'
-import { onMounted, reactive } from 'vue'
+import { getSelfMatch } from '@/api/request';
+import { onMounted, reactive } from 'vue';
 
-const data: any[] = reactive([])
+const data: any[] = reactive([]);
 
 onMounted(async () => {
-  await getSelfMatch(data)
-})
+  await getSelfMatch(data);
+});
 </script>
 
 <style scoped>

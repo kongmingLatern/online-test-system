@@ -1,19 +1,16 @@
-import {
-  findComponent,
-  registGlobalComponent,
-} from '@/utils'
+import { findComponent, registGlobalComponent } from '@/utils';
 
-import Card from '@/components/Card.vue'
+import Card from '@/components/Card.vue';
 
-let wrapper
+let wrapper;
 
 beforeEach(() => {
-  wrapper = registGlobalComponent(Card)
-})
+  wrapper = registGlobalComponent(Card);
+});
 
 describe('Card shoule be existed', () => {
   it('shoule be exists', () => {
-    const card = findComponent(wrapper, 'card')
-    expect(card.exists()).toBeTruthy()
-  })
-})
+    const card = findComponent(wrapper, 'card');
+    expect(card.exists()).toBeTruthy();
+  });
+});

@@ -1,16 +1,16 @@
-import { setActivePinia, createPinia } from 'pinia'
-import { useLogin } from '@/stores/login.store'
+import { setActivePinia, createPinia } from 'pinia';
+import { useLogin } from '@/stores/login.store';
 
 describe('Login Store', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
-  })
+    setActivePinia(createPinia());
+  });
 
   // NOTE: 测试接口 '/login' 的数据'
   it.skip('return success', async () => {
-    const store = useLogin()
-    await expect(store.login('092220120', 'S092220120@'))
-      .resolves.toMatchInlineSnapshot(`
+    const store = useLogin();
+    await expect(store.login('092220120', 'S092220120@')).resolves
+      .toMatchInlineSnapshot(`
       [
         {
           "id": "1595242006005702658",
@@ -19,6 +19,6 @@ describe('Login Store', () => {
         },
         "登录成功",
       ]
-    `)
-  })
-})
+    `);
+  });
+});

@@ -1,22 +1,22 @@
 export default {
   checkboxName: {
-    name: "checkboxName",
-    type: "text",
-    label: "多选题名称",
+    name: 'checkboxName',
+    type: 'text',
+    label: '多选题名称'
   },
   checkboxAnswer: {
-    name: "checkboxAnswer",
-    type: "text",
-    label: "多选题答案",
+    name: 'checkboxAnswer',
+    type: 'text',
+    label: '多选题答案'
   },
   checkboxScore: {
-    name: "checkboxScore",
-    type: "number",
-    label: "多选题分数",
+    name: 'checkboxScore',
+    type: 'number',
+    label: '多选题分数'
   },
   baseTitle: {
-    name: "baseTitle",
-    type: "text",
-    label: "题库名称",
-  },
+    name: 'baseTitle',
+    type: 'text',
+    label: '题库名称'
+  }
 };

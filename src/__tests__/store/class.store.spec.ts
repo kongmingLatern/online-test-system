@@ -1,14 +1,13 @@
-import { createPinia, setActivePinia } from 'pinia'
-import { useClass } from '@/stores/class.store'
+import { createPinia, setActivePinia } from 'pinia';
+import { useClass } from '@/stores/class.store';
 
 describe('test class api', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
-  })
+    setActivePinia(createPinia());
+  });
   it.skip('should return obj', async () => {
-    const store = useClass()
-    await expect(store.getAllClass()).resolves
-      .toMatchInlineSnapshot(`
+    const store = useClass();
+    await expect(store.getAllClass()).resolves.toMatchInlineSnapshot(`
       [
         [
           {
@@ -50,6 +49,6 @@ describe('test class api', () => {
         ],
         "获取成功",
       ]
-    `)
-  })
-})
+    `);
+  });
+});

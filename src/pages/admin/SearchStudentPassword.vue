@@ -23,57 +23,43 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  onMounted,
-  provide,
-  reactive,
-  ref,
-} from 'vue'
-import type Match from '@/utils/Task/Match'
-import { getMatchsByCurrentPage } from '@/api/request'
+import { computed, onMounted, provide, reactive, ref } from 'vue';
+import type Match from '@/utils/Task/Match';
+import { getMatchsByCurrentPage } from '@/api/request';
 
-let data = reactive<Match[]>([])
-const totalPage = ref<number>()
-const current = ref<number>(1)
-const pageSize = ref<number>(10)
-const loading = ref<boolean>(false)
+let data = reactive<Match[]>([]);
+const totalPage = ref<number>();
+const current = ref<number>(1);
+const pageSize = ref<number>(10);
+const loading = ref<boolean>(false);
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,
-  pageSize: pageSize.value,
-}))
+  pageSize: pageSize.value
+}));
 
 onMounted(async () => {
-  await getMatchsByCurrentPage(
-    data,
-    1,
-    pageSize.value,
-    totalPage,
-    loading
-  )
-})
+  await getMatchsByCurrentPage(data, 1, pageSize.value, totalPage, loading);
+});
 
-const changePage: (
-  pagination: any
-) => Promise<void> = async pagination => {
-  pagination.current = pagination.current
-  current.value = pagination.current
-  data.length = 0
+const changePage: (pagination: any) => Promise<void> = async (pagination) => {
+  pagination.current = pagination.current;
+  current.value = pagination.current;
+  data.length = 0;
   getMatchsByCurrentPage(
     data,
     current.value,
     pageSize.value,
     totalPage,
     loading
-  )
-}
+  );
+};
 
-provide('columnSort', 'searchPassword')
-provide('data', data)
-provide('pagination', pagination)
-provide('loading', loading)
-provide('change', changePage)
+provide('columnSort', 'searchPassword');
+provide('data', data);
+provide('pagination', pagination);
+provide('loading', loading);
+provide('change', changePage);
 </script>
 
 <style scoped></style>

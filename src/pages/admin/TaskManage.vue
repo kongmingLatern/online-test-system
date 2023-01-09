@@ -28,41 +28,35 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  onMounted,
-  provide,
-  reactive,
-  ref,
-} from 'vue'
-import { getTasksByCurrentPage } from '../../api/request'
-import type { Radio } from '@/utils'
-import { addClassList } from '@/api/match'
+import { computed, onMounted, provide, reactive, ref } from 'vue';
+import { getTasksByCurrentPage } from '../../api/request';
+import type { Radio } from '@/utils';
+import { addClassList } from '@/api/match';
 
-let data = reactive<Radio[]>([])
-const isShow = ref<boolean>(false)
-const totalPage = ref<number>()
-const loading = ref<boolean>(false)
-const current = ref<number>(1)
-const pageSize = ref<number>(10)
-const taskId = ref<string>('')
+let data = reactive<Radio[]>([]);
+const isShow = ref<boolean>(false);
+const totalPage = ref<number>();
+const loading = ref<boolean>(false);
+const current = ref<number>(1);
+const pageSize = ref<number>(10);
+const taskId = ref<string>('');
 
 const breadcrumb = reactive([
   {
     name: '试卷生成',
-    path: '/admin/taskGenerate',
+    path: '/admin/taskGenerate'
   },
   {
     name: '试卷管理',
-    path: '/admin/taskManage',
-  },
-])
+    path: '/admin/taskManage'
+  }
+]);
 
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,
-  pageSize: pageSize.value,
-}))
+  pageSize: pageSize.value
+}));
 
 onMounted(async () => {
   await getTasksByCurrentPage(
@@ -71,14 +65,12 @@ onMounted(async () => {
     pageSize.value,
     totalPage,
     loading
-  )
-})
+  );
+});
 
-const changePage: (
-  pagination: any
-) => Promise<void> = async pagination => {
-  pagination.current = pagination.current
-  current.value = pagination.current
+const changePage: (pagination: any) => Promise<void> = async (pagination) => {
+  pagination.current = pagination.current;
+  current.value = pagination.current;
 
   getTasksByCurrentPage(
     data,
@@ -86,25 +78,25 @@ const changePage: (
     pageSize.value,
     totalPage,
     loading
-  )
-}
+  );
+};
 
-const allocation = record => {
+const allocation = (record) => {
   // console.log(record)
-  taskId.value = record.taskId
-  isShow.value = true
-}
+  taskId.value = record.taskId;
+  isShow.value = true;
+};
 
-provide('title', '分配考试')
-provide('finish', addClassList)
-provide('taskId', taskId)
-provide('isShow', isShow)
-provide('columnSort', 'taskInfo')
-provide('allocation', allocation)
-provide('loading', loading)
-provide('data', data)
-provide('pagination', pagination)
-provide('change', changePage)
+provide('title', '分配考试');
+provide('finish', addClassList);
+provide('taskId', taskId);
+provide('isShow', isShow);
+provide('columnSort', 'taskInfo');
+provide('allocation', allocation);
+provide('loading', loading);
+provide('data', data);
+provide('pagination', pagination);
+provide('change', changePage);
 </script>
 
 <style scoped></style>

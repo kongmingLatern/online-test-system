@@ -1,9 +1,9 @@
 export default class Task {
   public questionId: string;
-  public baseId: string = "";
-  public baseTitle: string = "";
-  public subjectName: string | undefined = "";
-  public teacherName: string | undefined = "";
+  public baseId: string = '';
+  public baseTitle: string = '';
+  public subjectName: string | undefined = '';
+  public teacherName: string | undefined = '';
   public createUser: string | undefined;
 
   constructor(

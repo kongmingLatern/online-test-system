@@ -20,11 +20,7 @@
           </template>
           <template #button>
             <a-space>
-              <a-button
-                class="button-blue"
-                rounded
-                @click="addTeacher"
-              >
+              <a-button class="button-blue" rounded @click="addTeacher">
                 添加教师
               </a-button>
               <a-button
@@ -56,45 +52,35 @@
 </template>
 
 <script setup lang="ts">
-import { getTeachersByCurrentPage } from '@/api/request'
-import type { Teacher } from '@/utils'
-import {
-  computed,
-  onMounted,
-  provide,
-  reactive,
-  ref,
-} from 'vue'
-import {
-  finishAddForm,
-  finishForm,
-  authTeacher,
-} from '../../api/teacher'
+import { getTeachersByCurrentPage } from '@/api/request';
+import type { Teacher } from '@/utils';
+import { computed, onMounted, provide, reactive, ref } from 'vue';
+import { finishAddForm, finishForm, authTeacher } from '../../api/teacher';
 
-let data = reactive<Teacher[]>([])
-const totalPage = ref<number>()
-const loading = ref<boolean>(false)
-const comShow = ref<boolean>(false)
-const current = ref<number>(1)
-const isShow = ref<boolean>(false)
-const pageSize = ref<number>(10)
+let data = reactive<Teacher[]>([]);
+const totalPage = ref<number>();
+const loading = ref<boolean>(false);
+const comShow = ref<boolean>(false);
+const current = ref<number>(1);
+const isShow = ref<boolean>(false);
+const pageSize = ref<number>(10);
 
 const breadcrumb = reactive([
   {
     name: '首页',
-    path: '/admin',
+    path: '/admin'
   },
   {
     name: '教师管理',
-    path: '/admin/teacher',
-  },
-])
+    path: '/admin/teacher'
+  }
+]);
 
 const pagination = computed(() => ({
   total: totalPage.value,
   current: current.value,
-  pageSize: pageSize.value,
-}))
+  pageSize: pageSize.value
+}));
 
 onMounted(async () => {
   await getTeachersByCurrentPage(
@@ -103,14 +89,12 @@ onMounted(async () => {
     pageSize.value,
     totalPage,
     loading
-  )
-})
+  );
+});
 
-const changePage: (
-  pagination: any
-) => Promise<void> = async pagination => {
-  pagination.current = pagination.current
-  current.value = pagination.current
+const changePage: (pagination: any) => Promise<void> = async (pagination) => {
+  pagination.current = pagination.current;
+  current.value = pagination.current;
 
   getTeachersByCurrentPage(
     data,
@@ -118,29 +102,29 @@ const changePage: (
     pageSize.value,
     totalPage,
     loading
-  )
-}
+  );
+};
 
 const addTeacher = () => {
-  isShow.value = true
-}
+  isShow.value = true;
+};
 
 const addSubject = async () => {
-  comShow.value = true
-}
+  comShow.value = true;
+};
 
-provide('columnSort', 'teacher')
-provide('finish', finishForm)
-provide('title', '添加')
-provide('isShow', isShow)
-provide('comShow', comShow)
-provide('loading', loading)
-provide('data', data)
-provide('addItem', addSubject)
-provide('pagination', pagination)
-provide('change', changePage)
-provide('select', finishAddForm(comShow))
-provide('authItem', authTeacher)
+provide('columnSort', 'teacher');
+provide('finish', finishForm);
+provide('title', '添加');
+provide('isShow', isShow);
+provide('comShow', comShow);
+provide('loading', loading);
+provide('data', data);
+provide('addItem', addSubject);
+provide('pagination', pagination);
+provide('change', changePage);
+provide('select', finishAddForm(comShow));
+provide('authItem', authTeacher);
 </script>
 
 <style scoped></style>

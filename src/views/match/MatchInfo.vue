@@ -47,9 +47,10 @@
       <div class="show">
         <th>单选题</th>
         <table w-50 h-auto text-center border>
-          <tr v-for="item in dataNumber.radio / 5" h-10>
+          <tr v-for="item in dataNumber.radio / 5" :key="item" h-10>
             <td
               v-for="list in 5"
+              :key="list"
               w-10
               :id="'radio' + ((item - 1) * 5 + list)"
             >
@@ -59,9 +60,7 @@
                 :get-current-anchor="null"
               >
                 <a-anchor-link
-                  :href="
-                    '#question' + ((item - 1) * 5 + list)
-                  "
+                  :href="'#question' + ((item - 1) * 5 + list)"
                   :title="(item - 1) * 5 + list"
                   ref="radio"
                 />
@@ -71,9 +70,10 @@
         </table>
         <th>多选题</th>
         <table w-50 h-auto text-center border>
-          <tr v-for="item in dataNumber.checkbox / 5" h-10>
+          <tr v-for="item in dataNumber.checkbox / 5" h-10 :key="item">
             <td
               v-for="list in 5"
+              :key="list"
               w-10
               :id="'checkbox1' + ((item - 1) * 5 + list)"
             >
@@ -83,9 +83,7 @@
                 :get-current-anchor="null"
               >
                 <a-anchor-link
-                  :href="
-                    '#checkbox' + ((item - 1) * 5 + list)
-                  "
+                  :href="'#checkbox' + ((item - 1) * 5 + list)"
                   :title="(item - 1) * 5 + list"
                   ref="checkbox"
                 />
@@ -95,9 +93,10 @@
         </table>
         <th>判断题</th>
         <table w-50 h-auto text-center border>
-          <tr v-for="item in dataNumber.judge / 5" h-10>
+          <tr v-for="item in dataNumber.judge / 5" :key="item" h-10>
             <td
               v-for="list in 5"
+              :key="list"
               w-10
               :id="'judge1' + ((item - 1) * 5 + list)"
             >
@@ -122,70 +121,57 @@
 <script lang="ts"></script>
 
 <script setup lang="ts">
-import { UserOutlined } from '@ant-design/icons-vue'
-import { message, type AnchorProps } from 'ant-design-vue'
-import { onMounted, onUnmounted, reactive, ref } from 'vue'
-import { useRoute } from 'vue-router'
-import mitt from '../../utils/mitt'
-import { Checkbox } from '../../utils/Task'
-import router from '@/router'
-const route = useRoute()
-const radio = ref(null)
-const checkbox = ref(null)
-const judge = ref(null)
+import { UserOutlined } from '@ant-design/icons-vue';
+import { message, type AnchorProps } from 'ant-design-vue';
+import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import mitt from '../../utils/mitt';
+import router from '@/router';
+const route = useRoute();
+const radio = ref(null);
+const checkbox = ref(null);
+const judge = ref(null);
 
-const username = localStorage.getItem('username')
+const username = localStorage.getItem('username');
 let limitTime = ref<number>(
-  Number.parseInt(
-    localStorage.getItem('limitTime') as string
-  ) *
-    60 *
-    1000 ?? 0
-)
-let timer
-let countTime = ref<number>(0)
+  Number.parseInt(localStorage.getItem('limitTime') as string) * 60 * 1000 ?? 0
+);
+let timer;
+let countTime = ref<number>(0);
 onMounted(() => {
   timer = setInterval(() => {
-    limitTime.value--
-    countTime.value++
+    limitTime.value--;
+    countTime.value++;
     if (countTime.value === 30) {
       // NOTE: 保存试卷
-      mitt.emit('saveTask', route.query.matchId)
-      countTime.value = 0
+      mitt.emit('saveTask', route.query.matchId);
+      countTime.value = 0;
     }
     if (limitTime.value === 0) {
       // 完成考试
-      finishTask()
-      message.success('考试时间到，已直接交卷')
-      router.push('/success')
+      finishTask();
+      message.success('考试时间到，已直接交卷');
+      router.push('/success');
     } else if (limitTime.value === 300) {
-      message.warn('考试还有5分钟结束')
+      message.warn('考试还有5分钟结束');
     }
-  }, 1000)
-})
+  }, 1000);
+});
 onUnmounted(() => {
-  clearInterval(timer)
-})
+  clearInterval(timer);
+});
 let dataNumber = reactive({
-  radio:
-    Number.parseInt(
-      localStorage.getItem('radioNumber') as string
-    ) ?? 0,
+  radio: Number.parseInt(localStorage.getItem('radioNumber') as string) ?? 0,
   checkbox:
-    Number.parseInt(
-      localStorage.getItem('checkboxNumber') as string
-    ) ?? 0, 
-  judge:
-    Number.parseInt(
-      localStorage.getItem('judgeNumber') as string
-    ) ?? 30,
-})
+    Number.parseInt(localStorage.getItem('checkboxNumber') as string) ?? 0,
+  judge: Number.parseInt(localStorage.getItem('judgeNumber') as string) ?? 30
+});
 const handleClick: AnchorProps['onClick'] = (e, link) => {
-  e.preventDefault()
-}
+  e.preventDefault();
+};
 const finishTask = () => {
-  mitt.emit('finishTask', route.query.matchId)
-}
+  mitt.emit('finishTask', route.query.matchId);
+};
 
 // mitt.on('selected', (item: any) => {
 //   const type = item.questionType

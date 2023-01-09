@@ -1,13 +1,13 @@
-import { setActivePinia, createPinia } from "pinia";
-import { useBase } from "@/stores/base.store";
+import { setActivePinia, createPinia } from 'pinia';
+import { useBase } from '@/stores/base.store';
 
-describe("Task Store", () => {
+describe('Task Store', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });
 
   // NOTE: 测试接口 'base/pages' 的数据'
-  it.skip("should return 1 record", async () => {
+  it.skip('should return 1 record', async () => {
     const store = useBase();
     await expect(store.getBasesByCurrentPage(1, 1)).resolves
       .toMatchInlineSnapshot(`
@@ -26,9 +26,9 @@ describe("Task Store", () => {
     `);
   });
   // NOTE: 测试接口 'base/list' 的数据'
-  it.skip("should return 1 record", async () => {
+  it.skip('should return 1 record', async () => {
     const store = useBase();
-    await expect(store.getBaseList("1595617742638100481")).resolves
+    await expect(store.getBaseList('1595617742638100481')).resolves
       .toMatchInlineSnapshot(`
       [
         [

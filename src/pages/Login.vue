@@ -1,13 +1,6 @@
 <template>
   <div class="img">
-    <header
-      text="center 2xl"
-      bg-red-800
-      color-white
-      h-15
-      lh-15
-      font-sans
-    >
+    <header text="center 2xl" bg-red-800 color-white h-15 lh-15 font-sans>
       在线考试系统
     </header>
     <div flex>
@@ -38,7 +31,7 @@
   width: 100%;
   height: 100vh;
   background-repeat: no-repeat;
-  background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.huanghelou.cc%2Fzb_users%2Fupload%2F2021%2F01%2F20210113094211_17550.png&refer=http%3A%2F%2Fwww.huanghelou.cc&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1672668087&t=f3d5a592b669e346159a31c725d8b7e0');
+  background-image: url('@/assets/1.jpg');
   background-size: cover;
 }
 </style>

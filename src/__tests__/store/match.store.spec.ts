@@ -1,16 +1,15 @@
-import { useMatch } from '@/stores/match.store'
-import { setActivePinia, createPinia } from 'pinia'
-import match from './match.json'
+import { useMatch } from '@/stores/match.store';
+import { setActivePinia, createPinia } from 'pinia';
+import match from './match.json';
 
 describe('Subject Store', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
-  })
+    setActivePinia(createPinia());
+  });
   // NOTE: 测试接口 'match/getMatchPasswordPage' 的数据'
   it.skip('should return 1 record', async () => {
-    const store = useMatch()
-    await expect(store.getMatchsByPage(1, 1)).resolves
-      .toMatchInlineSnapshot(`
+    const store = useMatch();
+    await expect(store.getMatchsByPage(1, 1)).resolves.toMatchInlineSnapshot(`
       [
         [
           {
@@ -26,23 +25,22 @@ describe('Subject Store', () => {
         ],
         17,
       ]
-    `)
-  })
+    `);
+  });
   // NOTE: 测试接口 'match/addClassMatch' 的数据'
   it.skip('should return 添加成功', async () => {
-    const store = useMatch()
-    const classIdList = ['1595242005816958978']
-    const taskId = '1596427549662015490'
+    const store = useMatch();
+    const classIdList = ['1595242005816958978'];
+    const taskId = '1596427549662015490';
     await expect(
       store.addClassMatch(classIdList, taskId)
-    ).resolves.toMatchInlineSnapshot('"添加成功"')
-  })
+    ).resolves.toMatchInlineSnapshot('"添加成功"');
+  });
   // NOTE: 测试接口 'match/startMatch'
   it.skip('shoule return 100 question', async () => {
-    const store = useMatch()
-    await expect(
-      store.startMatch('1599281038998163459', '123456')
-    ).resolves.toMatchInlineSnapshot(`
+    const store = useMatch();
+    await expect(store.startMatch('1599281038998163459', '123456')).resolves
+      .toMatchInlineSnapshot(`
       [
         [
           {
@@ -1124,7 +1122,7 @@ describe('Subject Store', () => {
           },
         },
       ]
-    `)
+    `);
     // await expect(
     //   store.startMatch('1597184056519331852', '123456')
     // ).resolves.toMatchInlineSnapshot(`
@@ -2203,10 +2201,10 @@ describe('Subject Store', () => {
     //     },
     //   ]
     // `)
-  })
+  });
   // NOTE: 测试接口 'match/saveMatch'
   it.skip('shoule save match', async () => {
-    const store = useMatch()
+    const store = useMatch();
 
     // NOTE: 保存试卷
     // await expect(
@@ -2216,6 +2214,6 @@ describe('Subject Store', () => {
     // NOTE: 提交试卷
     await expect(
       store.submit('1597184056519331852', match)
-    ).resolves.toMatchInlineSnapshot('1')
-  })
-})
+    ).resolves.toMatchInlineSnapshot('1');
+  });
+});

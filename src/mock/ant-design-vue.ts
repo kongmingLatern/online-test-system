@@ -1,12 +1,12 @@
 const mockComponent = {
-  template: '<div><slot></slot></div>',
-}
+  template: '<div><slot></slot></div>'
+};
 
 const AntdIcons = {
   'video-camera-outlined': mockComponent,
   'user-outlined': mockComponent,
-  'upload-outlined': mockComponent,
-}
+  'upload-outlined': mockComponent
+};
 
 const AntdComponents = {
   'a-empty': mockComponent,
@@ -51,21 +51,21 @@ const AntdComponents = {
   'a-breadcrumb-item': mockComponent,
   'a-breadcrumb': mockComponent,
   'a-list-item': mockComponent,
-  'a-list': mockComponent,
-}
+  'a-list': mockComponent
+};
 
 const vueComponents = {
   'router-link': mockComponent,
-  'router-view': mockComponent,
-}
+  'router-view': mockComponent
+};
 
 const customComponents = {
-  AdminAside: mockComponent,
-}
+  AdminAside: mockComponent
+};
 
 export const globalComponents = {
   ...AntdComponents,
   ...AntdIcons,
   ...customComponents,
-  ...vueComponents,
-}
+  ...vueComponents
+};

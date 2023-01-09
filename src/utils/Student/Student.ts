@@ -1,8 +1,8 @@
 export default class Student {
-  public studentId: string = "";
-  public studentNo: string = "";
-  public studentName: string = "";
-  public classNo: string = "";
+  public studentId: string = '';
+  public studentNo: string = '';
+  public studentName: string = '';
+  public classNo: string = '';
 
   constructor(
     studentId: string,

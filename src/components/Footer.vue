@@ -1,7 +1,7 @@
 <template>
   <footer
     font-sans
-absolute
+    absolute
     left-0
     h-15
     lh-15

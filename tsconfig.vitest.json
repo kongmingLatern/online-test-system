@@ -6,6 +6,7 @@
     "src/**/*.json",
     "src/**/*.store.spec.ts",
     "src/**/*.store.ts",
+    "src/**/*.vue",
     "src/**/*.ts"
   ],
   "compilerOptions": {

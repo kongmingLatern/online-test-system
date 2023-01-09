@@ -1,6 +1,6 @@
 <template>
   <a-breadcrumb data-test="breadcrumb">
-    <a-breadcrumb-item v-for="item in breadcrumb">
+    <a-breadcrumb-item v-for="item in breadcrumb" :key="item.name">
       <router-link :to="item.path">
         {{ item.name }}
       </router-link>
@@ -10,6 +10,6 @@
 
 <script lang="ts" setup>
 defineProps<{
-  breadcrumb?: { name: string; path: string }[]
-}>()
+  breadcrumb?: { name: string; path: string }[];
+}>();
 </script>

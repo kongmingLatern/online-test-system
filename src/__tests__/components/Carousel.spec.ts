@@ -1,19 +1,16 @@
-import {
-  findComponent,
-  registGlobalComponent,
-} from '@/utils'
+import { findComponent, registGlobalComponent } from '@/utils';
 
-import Carousel from '@/components/Carousel.vue'
+import Carousel from '@/components/Carousel.vue';
 
-let wrapper
+let wrapper;
 
 beforeEach(() => {
-  wrapper = registGlobalComponent(Carousel)
-})
+  wrapper = registGlobalComponent(Carousel);
+});
 
 describe('Card shoule be existed', () => {
   it('shoule be exists', () => {
-    const carousel = findComponent(wrapper, 'carousel')
-    expect(carousel.exists()).toBeTruthy()
-  })
-})
+    const carousel = findComponent(wrapper, 'carousel');
+    expect(carousel.exists()).toBeTruthy();
+  });
+});

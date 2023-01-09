@@ -1,4 +1,4 @@
-import type { UserConfig } from "vitest/config";
-export const vitestConfig: UserConfig["test"] = {
-  globals: true,
+import type { UserConfig } from 'vitest/config';
+export const vitestConfig: UserConfig['test'] = {
+  globals: true
 };

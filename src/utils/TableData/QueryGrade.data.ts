@@ -1,25 +1,25 @@
 const options = {
-  align: 'center',
-}
+  align: 'center'
+};
 export const columns = [
   {
     title: '科目',
     dataIndex: 'subjectName',
-    options,
+    options
   },
   {
     title: '考试名称',
     dataIndex: 'taskName',
-    options,
+    options
   },
   {
     title: '考试时间',
     dataIndex: 'taskStartToEnd',
-    options,
+    options
   },
   {
     title: '成绩',
     dataIndex: 'grade',
-    options,
-  },
-]
+    options
+  }
+];

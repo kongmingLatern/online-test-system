@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { reactive } from 'vue';
 
 export function setColumn(
   title: string,
@@ -10,81 +10,73 @@ export function setColumn(
     title,
     dataIndex: name,
     key,
-    ...options,
-  }
+    ...options
+  };
 }
 
 export function setColumns(
   arr: Array<any>,
   options?: Record<string, any>
 ): Record<string, any> {
-  const result: Array<Record<string, any>> = []
+  const result: Array<Record<string, any>> = [];
   arr.forEach((item: Record<string, any>) => {
     result.push({
       ...item,
-      ...options,
-    })
-  })
-  return result
+      ...options
+    });
+  });
+  return result;
 }
 
 export function setData(arr: any[]): any[] {
   return arr.map((item, index) => {
     return {
       key: index,
-      ...item,
-    }
-  })
+      ...item
+    };
+  });
 }
 
-export function reactiveToCommon(
-  arr: Record<string, any>
-): any[] {
-  const result: any[] = []
-  const target = arr.question
-  const { questionCorrectList, questionListAnswerList } =
-    target
+export function reactiveToCommon(arr: Record<string, any>): any[] {
+  const result: any[] = [];
+  const target = arr.question;
+  const { questionCorrectList, questionListAnswerList } = target;
   if (questionCorrectList) {
-    questionCorrectList.forEach(item => {
-      result.push(item.values)
-    })
+    questionCorrectList.forEach((item) => {
+      result.push(item.values);
+    });
   } else if (questionListAnswerList) {
-    questionListAnswerList.forEach(item => {
-      result.push(item.values)
-    })
+    questionListAnswerList.forEach((item) => {
+      result.push(item.values);
+    });
   }
-  return result
+  return result;
 }
 
-export function setReactiveValue(
-  arr: any[],
-  targetKey: string
-): any[] {
-  const result = reactive<any[]>([])
-  arr.forEach(obj => {
+export function setReactiveValue(arr: any[], targetKey: string): any[] {
+  const result = reactive<any[]>([]);
+  arr.forEach((obj) => {
     if (typeof obj === 'object') {
       for (const key in obj) {
-        if (
-          Object.prototype.hasOwnProperty.call(obj, key)
-        ) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
           if (key === targetKey) {
-            const element = obj[key]
-            obj.value = element
-            result.push(obj)
-            break
+            const element = obj[key];
+            obj.value = element;
+            result.push(obj);
+            break;
           }
         }
       }
     }
-  })
-  return result
+  });
+  return result;
 }
 
 export const getValueByObject = (formState, key) => {
-  const obj: any[] = []
-  const arr = formState[key]
-  arr.forEach(item => {
-    obj.push(item.values)
-  })
-  return obj
-}
+  const obj: any[] = [];
+  const arr = formState[key];
+  arr.forEach((item) => {
+    obj.push(item.values);
+  });
+  return obj;
+};

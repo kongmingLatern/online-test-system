@@ -5,7 +5,7 @@
 // let wrapper
 // beforeEach(() => {
 //   wrapper = registGlobalComponent(QuestionList, {
-    
+
 //   })
 // })
 // describe('it shoule be exist', () => {

@@ -14,24 +14,24 @@
 </template>
 
 <script setup lang="ts">
-import { useBase } from '@/stores/base.store'
-import { UploadOutlined } from '@ant-design/icons-vue'
-import type { UploadChangeParam } from 'ant-design-vue'
-import { ref } from 'vue'
+import { useBase } from '@/stores/base.store';
+import { UploadOutlined } from '@ant-design/icons-vue';
+import type { UploadChangeParam } from 'ant-design-vue';
+import { ref } from 'vue';
 
-const fileList = ref<UploadChangeParam['fileList']>([])
+const fileList = ref<UploadChangeParam['fileList']>([]);
 
-const store = useBase()
+const store = useBase();
 
 const handleCustomRequest = ({ file }) => {
-  Object.assign(fileList, file)
-  store.$state.fileList.length = 0
-  store.$state.fileList.push(file)
-  console.log('handleCustomRequest', file)
-}
+  Object.assign(fileList, file);
+  store.$state.fileList.length = 0;
+  store.$state.fileList.push(file);
+  console.log('handleCustomRequest', file);
+};
 const headers = {
-  authorization: 'authorization-text',
-}
+  authorization: 'authorization-text'
+};
 </script>
 
 <style scoped></style>

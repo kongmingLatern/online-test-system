@@ -1,3 +1,3 @@
-import Grade from "./Grade";
+import Grade from './Grade';
 
 export { Grade };

@@ -1,5 +1,5 @@
 export interface TableColumnsOptions {
   width: number;
   ellipsis: boolean;
-  align: "left" | "right" | "center";
+  align: 'left' | 'right' | 'center';
 }

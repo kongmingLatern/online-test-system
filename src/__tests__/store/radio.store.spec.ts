@@ -1,13 +1,13 @@
-import { useQuestion } from "@/stores/question.store";
-import { setActivePinia, createPinia } from "pinia";
+import { useQuestion } from '@/stores/question.store';
+import { setActivePinia, createPinia } from 'pinia';
 
-describe("Radio Store", () => {
+describe('Radio Store', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
   });
 
   // NOTE: 测试接口 'student/pages' 的数据'
-  it.skip("should return 8 record", async () => {
+  it.skip('should return 8 record', async () => {
     const store = useQuestion();
     await expect(store.getQuestionByCurrentPage(10, 63, 1)).resolves
       .toMatchInlineSnapshot(`

@@ -1,11 +1,11 @@
-import { Student } from '@/utils'
-import { message } from 'ant-design-vue'
-import { defineStore } from 'pinia'
-import http from '../api/http'
+import { Student } from '@/utils';
+import { message } from 'ant-design-vue';
+import { defineStore } from 'pinia';
+import http from '../api/http';
 
 export const useStudent = defineStore('students', {
   state: () => ({
-    studentData: [] as Student[],
+    studentData: [] as Student[]
   }),
 
   actions: {
@@ -15,60 +15,44 @@ export const useStudent = defineStore('students', {
         const res = await http.get('student/page', {
           params: {
             page: currentPage,
-            pageSize,
-          },
-        })
-        this.studentData = []
-        res.data.records.forEach(record => {
-          const {
-            studentId,
-            studentNo,
-            studentName,
-            classNo,
-          } = record
+            pageSize
+          }
+        });
+        this.studentData = [];
+        res.data.records.forEach((record) => {
+          const { studentId, studentNo, studentName, classNo } = record;
           this.studentData.push(
-            new Student(
-              studentId,
-              studentNo,
-              studentName,
-              classNo
-            )
-          )
-        })
-        return [this.studentData, res.data.total]
+            new Student(studentId, studentNo, studentName, classNo)
+          );
+        });
+        return [this.studentData, res.data.total];
       } catch (error) {
         // 让表单组件显示错误
-        return [this.studentData, 0]
+        return [this.studentData, 0];
       }
     },
     async addStudent(student: Student) {
       try {
-        const res: any = await http.post(
-          'student/add',
-          student
-        )
+        const res: any = await http.post('student/add', student);
         if (res.code === 1) {
-          message.success('添加成功')
+          message.success('添加成功');
         }
       } catch (error) {
-        message.success('添加失败')
+        message.success('添加失败');
       }
     },
     async deleteStudent(studentId: string) {
       try {
-        const res: any = await http.delete(
-          'student/delete',
-          {
-            params: {
-              studentId,
-            },
+        const res: any = await http.delete('student/delete', {
+          params: {
+            studentId
           }
-        )
+        });
         if (res.code === 1) {
-          message.success('删除成功')
+          message.success('删除成功');
         }
       } catch (error) {
-        message.error('删除失败')
+        message.error('删除失败');
       }
     },
     async importStudent(file: File) {
@@ -78,16 +62,16 @@ export const useStudent = defineStore('students', {
           { file },
           {
             headers: {
-              'Content-Type': 'multipart/form-data',
-            },
+              'Content-Type': 'multipart/form-data'
+            }
           }
-        )
+        );
         if (res.code === 1) {
-          message.success(res.data)
+          message.success(res.data);
         }
       } catch (e: any) {
-        return e
+        return e;
       }
-    },
-  },
-})
+    }
+  }
+});

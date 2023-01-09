@@ -1,12 +1,11 @@
 <template>
-  <div v-for="(item, index) in data" mb-3>
-    <p :id="'judge' + (index + 1)">
-      {{ index + 1 }}.{{ item.questionList }}
-    </p>
+  <div v-for="(item, index) in data" :key="item.questionId" mb-3>
+    <p :id="'judge' + (index + 1)">{{ index + 1 }}.{{ item.questionList }}</p>
     <a-radio-group v-model:value="item.questionAnswer">
       <a-space flex="~ col">
         <a-radio
           v-for="(list, index) in item.questionAnswerList"
+          :key="list + index"
           :value="item.questionAnswerList[index]"
           @change="handleClick(item, index)"
         >
@@ -20,16 +19,16 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  data: any[]
-}>()
+  data: any[];
+}>();
 
 const emits = defineEmits<{
-  (event: 'selected', ...args: any[]): void
-}>()
+  (event: 'selected', ...args: any[]): void;
+}>();
 
 const handleClick = (item, index) => {
-  emits('selected', item, index)
-}
+  emits('selected', item, index);
+};
 </script>
 
 <style scoped>

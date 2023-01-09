@@ -1,4 +1,4 @@
-import Task from "./Task";
+import Task from './Task';
 export default class Radio extends Task {
   public questionList: string;
   public questionAnswer: string[];

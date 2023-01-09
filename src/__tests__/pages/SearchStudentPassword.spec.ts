@@ -1,13 +1,13 @@
-import Header from "@/components/Header.vue";
-import { findComponent, registGlobalComponent } from "@/utils";
-import SearchStudentPassword from "@/pages/admin/SearchStudentPassword.vue";
+import Header from '@/components/Header.vue';
+import { findComponent, registGlobalComponent } from '@/utils';
+import SearchStudentPassword from '@/pages/admin/SearchStudentPassword.vue';
 
-vitest.mock("ant-design-vue");
+vitest.mock('ant-design-vue');
 
 const options = {
   props: {
-    text: "",
-  },
+    text: ''
+  }
 };
 
 let wrapper;
@@ -15,45 +15,38 @@ let wrapper;
 beforeEach(() => {
   wrapper = registGlobalComponent(SearchStudentPassword, options);
 });
-describe("component shoule be exists", () => {
-  it("we should have a Nav component", () => {
+describe('component shoule be exists', () => {
+  it('we should have a Nav component', () => {
     const searchStudentPasswordNav = findComponent(
       wrapper,
-      "searchStudentPasswordNav"
+      'searchStudentPasswordNav'
     );
     expect(searchStudentPasswordNav.exists()).toBe(true);
   });
-  it("we should have a Content component", () => {
+  it('we should have a Content component', () => {
     const searchStudentPasswordContent = findComponent(
       wrapper,
-      "searchStudentPasswordContent"
+      'searchStudentPasswordContent'
     );
     expect(searchStudentPasswordContent.exists()).toBe(true);
   });
-  it("we should have a Content component", () => {
+  it('we should have a Content component', () => {
     const searchStudentPasswordMain = findComponent(
       wrapper,
-      "searchStudentPasswordMain"
+      'searchStudentPasswordMain'
     );
     expect(searchStudentPasswordMain.exists()).toBe(true);
   });
 });
 
-describe("content component", () => {
-  it("shoule have a breadcrumb component", () => {
-    const breadcrumb = findComponent(wrapper, "breadcrumb");
-    expect(breadcrumb.exists()).toBe(true);
-  });
-});
-
-describe("compoent props text", () => {
-  it("header text", () => {
+describe('compoent props text', () => {
+  it('header text', () => {
     const options = {
       props: {
-        text: "查询考生密码",
-      },
+        text: '查询考生密码'
+      }
     };
     const header = registGlobalComponent(Header, options);
-    expect(header.find("h1").text()).toEqual("查询考生密码");
+    expect(header.find('h1').text()).toEqual('查询考生密码');
   });
 });

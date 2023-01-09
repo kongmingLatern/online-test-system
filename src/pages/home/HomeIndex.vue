@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import Rules from '@/views/home/Rules.vue'
-import Recent from '@/views/home/Recent.vue'
+import Rules from '@/views/home/Rules.vue';
+import Recent from '@/views/home/Recent.vue';
 </script>
 
 <style lang="scss" scoped>
