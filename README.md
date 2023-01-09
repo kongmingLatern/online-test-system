@@ -55,6 +55,7 @@
 - Prettier
 - Husky
 - CommitLint
+- Lint-staged
 
 ### 后端
 
